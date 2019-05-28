@@ -1,0 +1,29 @@
+language: php
+php:
+    - '7.2'
+before_install:
+    - if [ -d "./.idea" ]; then echo "Forbidden idea folder found ! Please, ignore them globaly..."; exit 2; fi
+    - if [ -d "./.env.local" ]; then echo "Forbidden configuration file found !"; exit 2; fi
+    - if [ -d "./vendor" ]; then echo "Forbidden external libs folder found !"; exit 2; fi
+    - if [ -d ".DS_Store" ]; then echo "Forbidden MacOS boring file found ! Please, ignore them globaly..."; exit 2; fi
+install:
+    - composer require squizlabs/php_codesniffer
+    - composer require phpstan/phpstan
+    #- composer require phpunit
+script:
+    - ./bin/phpcs
+    - ./bin/phpstan analyse src --level 5
+    #- ./bin/phpunit
+notifications:
+    email:
+        - mael@wildcodeschool.fr
+        - foucauld_gaudin_student2019@wilder.school
+        - jamal_labrhaila_student2019@wilder.school
+        - julien_beauhaire_student2019@wilder.school
+        - kevin_heitz_student2019@wilder.school
+        - nathalie_cortes_student2019@wilder.school
+        - thomas_rey_student2019@wilder.school
+branches:
+    only:
+        - master
+        - dev
