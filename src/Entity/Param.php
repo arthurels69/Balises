@@ -17,11 +17,13 @@ class Param
     private $id;
 
     /**
+     * Resale coefficient of tickets
      * @ORM\Column(type="float")
      */
     private $resaleCoeff;
 
     /**
+     * Redistributed coefficient for Balises
      * @ORM\Column(type="float")
      */
     private $redistributedCoeff;

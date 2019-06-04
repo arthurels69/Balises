@@ -24,12 +24,14 @@ class ShowDate
     private $date;
 
     /**
+     * Many to one relation to the show each date relates to
      * @ORM\ManyToOne(targetEntity="App\Entity\Show", inversedBy="showDates")
      * @ORM\JoinColumn(nullable=false)
      */
     private $show_id;
 
     /**
+     * Rate used if a date is concerned by a Balises offer
      * @ORM\OneToMany(targetEntity="App\Entity\ShowRate", mappedBy="showDate")
      */
     private $showRates;
