@@ -1,26 +1,24 @@
 @import "vars";
-@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap";
 
 html {
     height: 100%;
     width: 100%;
-    margin: 0;
+
 }
 
 body {
     height: 100%;
     width: 100%;
-    margin: 0;
+
     background-color: #FFEC02;
 }
 
-.container-fluid {
+.container-fluid{
     height: 100%;
-    width: 100%;
-    margin: 0;
 }
 
-a {
-}
+
+
 
 
