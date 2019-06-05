@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Theater{% endblock %}
+
+{% block body %}
+    <h1>Theater</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ theater.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ theater.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ theater.email }}</td>
+            </tr>
+            <tr>
+                <th>Address1</th>
+                <td>{{ theater.address1 }}</td>
+            </tr>
+            <tr>
+                <th>Address2</th>
+                <td>{{ theater.address2 }}</td>
+            </tr>
+            <tr>
+                <th>ZipCode</th>
+                <td>{{ theater.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ theater.city }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ theater.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>{{ theater.logo }}</td>
+            </tr>
+            <tr>
+                <th>Website</th>
+                <td>{{ theater.website }}</td>
+            </tr>
+            <tr>
+                <th>BaseRate</th>
+                <td>{{ theater.baseRate }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('theater_index') }}">back to list</a>
+
+    <a href="{{ path('theater_edit', {'id': theater.id}) }}">edit</a>
+
+    {{ include('theater/_delete_form.html.twig') }}
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -19,17 +20,28 @@ class Theater
     private $id;
 
     /**
+<<<<<<< Updated upstream
+=======
+     * Name of the theater
+     * @Assert\NotBlank()
+>>>>>>> Stashed changes
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+<<<<<<< Updated upstream
+=======
+     * Email of the theater
+     * @Assert\NotBlank()
+>>>>>>> Stashed changes
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
      * First address line, mandatory
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $address1;
@@ -46,6 +58,7 @@ class Theater
     private $zipCode;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $city;
