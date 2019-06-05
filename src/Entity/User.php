@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -17,41 +18,73 @@ class User
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Theater", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $login;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+    private $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $role = [];
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLogin(): ?Theater
+    public function getEmail(): ?string
     {
-        return $this->login;
+        return $this->email;
     }
 
-    public function setLogin(Theater $login): self
+    public function setEmail(string $email): self
     {
-        $this->login = $login;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->password;
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -61,15 +94,20 @@ class User
         return $this;
     }
 
-    public function getRole(): ?array
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
     {
-        return $this->role;
+        // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    public function setRole(array $role): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->role = $role;
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
