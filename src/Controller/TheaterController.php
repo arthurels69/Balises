@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 /**
  * @Route("/theater")
  */
@@ -26,16 +28,20 @@ class TheaterController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/new", name="theater_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
+
         $theater = new Theater();
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $theater->setuser($user);
             $entityManager->persist($theater);
             $entityManager->flush();
 

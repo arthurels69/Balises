@@ -90,6 +90,16 @@ class Theater
      */
     private $shows;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $long;
+
     public function __construct()
     {
         $this->shows = new ArrayCollection();

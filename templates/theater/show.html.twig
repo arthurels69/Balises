@@ -3,7 +3,7 @@
 {% block title %}Theater{% endblock %}
 
 {% block body %}
-    <h1>Theater</h1>
+    <h1>Visualisation d'un Théâtre</h1>
 
     <table class="table">
         <tbody>
@@ -54,9 +54,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('theater_index') }}">back to list</a>
+    <a href="{{ path('theater_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('theater_edit', {'id': theater.id}) }}">edit</a>
+    <a href="{{ path('theater_edit', {'id': theater.id}) }}">Modification</a>
 
     {{ include('theater/_delete_form.html.twig') }}
 {% endblock %}
