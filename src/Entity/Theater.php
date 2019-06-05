@@ -83,6 +83,11 @@ class Theater
      */
     private $shows;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="login", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->shows = new ArrayCollection();
@@ -239,6 +244,23 @@ class Theater
             if ($show->getTheater() === $this) {
                 $show->setTheater(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $user->getLogin()) {
+            $user->setLogin($this);
         }
 
         return $this;
