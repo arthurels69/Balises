@@ -20,21 +20,17 @@ class Theater
     private $id;
 
     /**
-<<<<<<< Updated upstream
-=======
      * Name of the theater
      * @Assert\NotBlank()
->>>>>>> Stashed changes
+
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-<<<<<<< Updated upstream
-=======
      * Email of the theater
      * @Assert\NotBlank()
->>>>>>> Stashed changes
+
      * @ORM\Column(type="string", length=255)
      */
     private $email;
