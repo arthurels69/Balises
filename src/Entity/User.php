@@ -22,6 +22,16 @@ class User
      */
     private $login;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $role = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +45,30 @@ class User
     public function setLogin(Theater $login): self
     {
         $this->login = $login;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRole(): ?array
+    {
+        return $this->role;
+    }
+
+    public function setRole(array $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
