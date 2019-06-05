@@ -15,10 +15,12 @@
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
+            {% if user.theaterName is  defined %}
+                <tr>
+                    <th>Nom du Théâtre</th>
+                    <td>{{ user.theaterName }}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>Password</th>
                 <td>{{ user.password }}</td>

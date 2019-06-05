@@ -23,6 +23,7 @@ class UserFixture extends Fixture
             $author = new User();
             $author->setEmail('theatre' . $i . '@theater.com');
             $author->setRoles(['ROLE_THEATER']);
+            $author->setTheaterName('Théâtre n' . $i);
             $author->setPassword($this->passwordEncoder->encodePassword(
                 $author,
                 'aze'
