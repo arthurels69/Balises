@@ -15,27 +15,9 @@
 <div class="row justify-content-center">
     <div class="col-9">
         <ul class="bxslider">
-            <li class="month-day"><div class="week">sábado</div><div class="day-month">22 set</div></li>
-            <li class="month-day"><div class="week">domingo</div><div class="day-month">23 set</div></li>
-            <li class="month-day"><div class="week">segunda</div><div class="day-month">24 set</div></li>
-            <li class="month-day"><div class="week">terça</div><div class="day-month">25 set</div></li>
-            <li class="month-day"><div class="week">quarta</div><div class="day-month">26 set</div></li>
-            <li class="month-day"><div class="week">quinta</div><div class="day-month">27 set</div></li>
-            <li class="month-day"><div class="week">sexta</div><div class="day-month">28 set</div></li>
-            <li class="month-day"><div class="week">sábado</div><div class="day-month">29 set</div></li>
-            <li class="month-day"><div class="week">domingo</div><div class="day-month">30 set</div></li>
-            <li class="month-day"><div class="week">segunda</div><div class="day-month">01 out</div></li>
-            <li class="month-day"><div class="week">terça</div><div class="day-month">02 out</div></li>
-            <li class="month-day"><div class="week">quarta</div><div class="day-month">03 out</div></li>
-            <li class="month-day"><div class="week">quinta</div><div class="day-month">04 out</div></li>
-            <li class="month-day"><div class="week">sexta</div><div class="day-month">05 out</div></li>
-            <li class="month-day"><div class="week">sábado</div><div class="day-month">06 out</div></li>
-            <li class="month-day active"><div class="week">domingo</div><div class="day-month">07 out</div></li>
-            <li class="month-day"><div class="week">segunda</div><div class="day-month">08 out</div></li>
-            <li class="month-day"><div class="week">terça</div><div class="day-month">09 out</div></li>
-            <li class="month-day"><div class="week">quarta</div><div class="day-month">10 out</div></li>
-            <li class="month-day"><div class="week">quinta</div><div class="day-month">11 out</div></li>
-            <li class="month-day"><div class="week">sexta</div><div class="day-month">12 out</div></li>
+            {% for oneDay in oneMoreDay %}
+            <li class="month-day"><div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div></li>
+            {% endfor %}
         </ul>
     </div>
 </div>
