@@ -1,5 +1,6 @@
 @import "vars";
 @import "~bootstrap";
+@import "calendar";
 
 html {
     height: 100%;
@@ -57,39 +58,3 @@ body {
     background-color: $black;
 }
 
-
-// Carousel with Date https://jsfiddle.net/w3a97zyh/
-
-.month-day {
-    border: 1px solid $black;
-    padding: 15px 5px;
-    margin: 1em;
-    text-align: center;
-    color: $black;
-    text-transform: uppercase;
-    line-height: 20px;
-    transition: 0.12s;
-    -moz-transition: 0.12s;
-    -o-transition: 0.12s;
-    -webkit-transition: 0.12s;
-    -ms-transition: 0.12s;
-    .week {
-        font-size: 14px;
-    }
-    .day-month {
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    &:hover, &.active {
-        background-color: #00aeef;
-        color: #fff;
-        cursor: pointer;
-    }
-}
-
-.bx-wrapper {
-    border: 0;
-    box-shadow: none;
-}
-// End carousel w/ date
