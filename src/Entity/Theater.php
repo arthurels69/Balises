@@ -19,13 +19,11 @@ class Theater
     private $id;
 
     /**
-     * Name of the theater
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * Email of the theater
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -43,50 +41,45 @@ class Theater
     private $address2;
 
     /**
-     * Zip code (aka code postal)
      * @ORM\Column(type="integer")
      */
     private $zipCode;
 
     /**
-     * City
      * @ORM\Column(type="string", length=255)
      */
     private $city;
 
     /**
-     * PhoneNumber
      * @ORM\Column(type="string", length=255)
      */
     private $phoneNumber;
 
     /**
-     * Logo
      * @ORM\Column(type="string", length=255)
      */
     private $logo;
 
     /**
-     * Website
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
 
     /**
-     * Base Rate
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Show", mappedBy="theater")
-     */
-    private $shows;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="login", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="theater", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Show", mappedBy="theater_id", orphanRemoval=true)
+     */
+    private $shows;
 
     public function __construct()
     {
@@ -211,9 +204,21 @@ class Theater
         return $this->baseRate;
     }
 
-    public function setBaseRate(float $baseRate): self
+    public function setBaseRate(?float $baseRate): self
     {
         $this->baseRate = $baseRate;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
@@ -230,7 +235,7 @@ class Theater
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
-            $show->setTheater($this);
+            $show->setTheaterId($this);
         }
 
         return $this;
@@ -241,26 +246,9 @@ class Theater
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
             // set the owning side to null (unless already changed)
-            if ($show->getTheater() === $this) {
-                $show->setTheater(null);
+            if ($show->getTheaterId() === $this) {
+                $show->setTheaterId(null);
             }
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $user->getLogin()) {
-            $user->setLogin($this);
         }
 
         return $this;
