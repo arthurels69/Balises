@@ -17,7 +17,8 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity="App\Entity\Theater", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $login;
 
@@ -27,21 +28,21 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="json")
      */
-    private $role;
+    private $role = [];
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLogin(): ?string
+    public function getLogin(): ?Theater
     {
         return $this->login;
     }
 
-    public function setLogin(string $login): self
+    public function setLogin(Theater $login): self
     {
         $this->login = $login;
 
@@ -60,12 +61,12 @@ class User
         return $this;
     }
 
-    public function getRole(): ?int
+    public function getRole(): ?array
     {
         return $this->role;
     }
 
-    public function setRole(int $role): self
+    public function setRole(array $role): self
     {
         $this->role = $role;
 
