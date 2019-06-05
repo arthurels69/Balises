@@ -6,14 +6,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-/** Controls the management of the Calendar Section
+/** Controls the Calendar Pages
  * Class CalendarController
  * @package App\Controller
  */
 class CalendarController extends AbstractController
 {
-    /**Displays the calendar and sends shows data
-     * @Route("/calendar", name="calendar_home", method={"GET"})
+     /**
+      * Displays the calendar and sends shows data
+      * @Route("/calendar", name="calendar_home", methods={"GET"})
      */
     public function calendarHome()
     {

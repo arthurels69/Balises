@@ -18,7 +18,11 @@ body {
     height: 100%;
 }
 
-
+// remove the color and link behavior from the calendar and map buttons on homepage
+.link-homepage{
+    text-decoration: none;
+    color: black;
+}
 
 
 
