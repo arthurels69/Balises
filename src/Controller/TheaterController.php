@@ -63,7 +63,7 @@ class TheaterController extends AbstractController
      */
     public function edit(Request $request, Theater $theater): Response
     {
-        $form = $this->createForm(Theater1Type::class, $theater);
+        $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
