@@ -1,4 +1,4 @@
 parameters:
-	ignoreErrors:
+    ignoreErrors:
     autoload_directories:
-        - %rootDir%/../../../src/Migrations
+    - %rootDir%/../../../src/Migrations
