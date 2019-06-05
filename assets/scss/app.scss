@@ -11,7 +11,7 @@ body {
     height: 100%;
     width: 100%;
 
-    background-color: #FFEC02;
+    background-color: $baliseYellow;
 }
 
 .container-fluid{
@@ -20,9 +20,25 @@ body {
 
 // remove the color and link behavior from the calendar and map buttons on homepage
 .link-homepage{
-    text-decoration: none;
-    color: black;
+    color: $black;
 }
 
+.link-homepage:hover{
+    color: lighten($black, 20);
+}
 
+// manage the design of the pulls of the top of calendar page
+.nav-pills-calendar{
+    background-color: $black;
+    color : white;
+}
 
+.nav-pills-calendar a{
+    background-color: $black;
+    color : yellow;
+}
+
+.nav-pills-calendar a:active{
+    background-color: lighten($black,20);
+    color : yellow;
+}
