@@ -19,67 +19,80 @@ class Show
     private $id;
 
     /**
+     * Name of the show
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * Description of the show
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
+     * Distribution of the show
      * @ORM\Column(type="text")
      */
     private $distribution;
 
     /**
+     * MandatoryInfos (aka Mentions Légales)
      * @ORM\Column(type="text", nullable=true)
      */
     private $mandatoryInfos;
 
     /**
+     * Visual for the show
      * @ORM\Column(type="string", length=255)
      */
     private $image;
 
     /**
+     * Photo credits for the show.
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photoCredits;
 
     /**
+     * Additional informations
      * @ORM\Column(type="text", nullable=true)
      */
     private $additionalInfos;
 
     /**
+     * Check if there's a Balises offer
      * @ORM\Column(type="boolean")
      */
     private $isBalise;
 
     /**
+     * Choice between reduced tickets and given tickets, if isBalise is true
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $offerType;
 
     /**
+     * Many to one relation with the theater the show is linked to
      * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
      * @ORM\JoinColumn(nullable=false)
      */
     private $theater;
 
     /**
+     * Link to the mapado page of the selected show
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mapadoLink;
 
     /**
+     * Base rate of the show to make calculations
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
 
     /**
+     * One to many relation to the many dates a show can have
      * @ORM\OneToMany(targetEntity="App\Entity\ShowDate", mappedBy="show_id", orphanRemoval=true)
      */
     private $showDates;

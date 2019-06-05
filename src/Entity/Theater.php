@@ -19,51 +19,61 @@ class Theater
     private $id;
 
     /**
+     * Name of the theater
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * Email of the theater
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * First address line, mandatory
      * @ORM\Column(type="string", length=255)
      */
     private $address1;
 
     /**
+     * 2nd address line, optional
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address2;
 
     /**
+     * Zip code (aka code postal)
      * @ORM\Column(type="integer")
      */
     private $zipCode;
 
     /**
+     * City
      * @ORM\Column(type="string", length=255)
      */
     private $city;
 
     /**
+     * PhoneNumber
      * @ORM\Column(type="string", length=255)
      */
     private $phoneNumber;
 
     /**
+     * Logo
      * @ORM\Column(type="string", length=255)
      */
     private $logo;
 
     /**
+     * Website
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
 
     /**
+     * Base Rate
      * @ORM\Column(type="float")
      */
     private $baseRate;
