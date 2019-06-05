@@ -30,7 +30,8 @@ class ShowRate
 
     /**
      * Many to one relation to a show date since a date can be concerned by the Balises offer and an other might not be.
-     * @ORM\ManyToOne(targetEntity="App\Entity\ShowDate", inversedBy="showRates")
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowDate", inversedBy="showRate", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $showDate;
 
@@ -39,12 +40,12 @@ class ShowRate
         return $this->id;
     }
 
-    public function getFreePlacesNumber(): ?int
+    public function getfreePlacesNumber(): ?int
     {
         return $this->freePlacesNumber;
     }
 
-    public function setFreePlacesNumber(?int $freePlacesNumber): self
+    public function setfreePlacesNumber(?int $freePlacesNumber): self
     {
         $this->freePlacesNumber = $freePlacesNumber;
 
@@ -68,7 +69,7 @@ class ShowRate
         return $this->showDate;
     }
 
-    public function setShowDate(?ShowDate $showDate): self
+    public function setShowDate(ShowDate $showDate): self
     {
         $this->showDate = $showDate;
 

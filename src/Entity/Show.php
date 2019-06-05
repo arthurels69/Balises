@@ -73,13 +73,6 @@ class Show
     private $offerType;
 
     /**
-     * Many to one relation with the theater the show is linked to
-     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $theater;
-
-    /**
      * Link to the mapado page of the selected show
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -92,8 +85,15 @@ class Show
     private $baseRate;
 
     /**
+     * Many to one relation with the theater the show is linked to
+     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $theater_id;
+
+    /**
      * One to many relation to the many dates a show can have
-     * @ORM\OneToMany(targetEntity="App\Entity\ShowDate", mappedBy="show_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ShowDate", mappedBy="showId")
      */
     private $showDates;
 
@@ -215,18 +215,6 @@ class Show
         return $this;
     }
 
-    public function getTheater(): ?Theater
-    {
-        return $this->theater;
-    }
-
-    public function setTheater(?Theater $theater): self
-    {
-        $this->theater = $theater;
-
-        return $this;
-    }
-
     public function getMapadoLink(): ?string
     {
         return $this->mapadoLink;
@@ -247,6 +235,18 @@ class Show
     public function setBaseRate(?float $baseRate): self
     {
         $this->baseRate = $baseRate;
+
+        return $this;
+    }
+
+    public function getTheaterId(): ?Theater
+    {
+        return $this->theater_id;
+    }
+
+    public function setTheaterId(?Theater $theater_id): self
+    {
+        $this->theater_id = $theater_id;
 
         return $this;
     }
