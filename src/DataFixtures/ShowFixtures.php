@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Show;
+use App\Entity\Spectacle;
 use App\Entity\ShowDate;
 use App\Entity\ShowRate;
 use App\Entity\Theater;
@@ -30,7 +30,7 @@ class ShowFixtures extends Fixture
 
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             $user = new User();
             $user->setEmail('theatre' . $i . '@theater.com');
             $user->setRoles(['ROLE_THEATER']);
@@ -61,7 +61,7 @@ class ShowFixtures extends Fixture
             $manager->persist($theater);
 
             for ($i = 0; $i < 5; $i++) {
-                $show = new Show();
+                $show = new Spectacle();
                 $show->setTitle($faker->sentence(4, true));
                 $show->setImage('https://via.placeholder.com/150');
                 $show->setAdditionalInfos($faker->text(240));
