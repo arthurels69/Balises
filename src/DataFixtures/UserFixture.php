@@ -18,7 +18,7 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Création de plusieurs utilisateurs de type “Theatre”
+        //Création de plusieurs utilisateurs de type “Theatre”
         for ($i = 1; $i <= 5; $i++) {
             $author = new User();
             $author->setEmail('theatre' . $i . '@theater.com');

@@ -91,7 +91,7 @@ class Theater
     private $shows;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float", nullable=true )
      */
     private $lat;
 

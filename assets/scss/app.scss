@@ -1,5 +1,6 @@
 @import "vars";
 @import "~bootstrap";
+@import "calendar";
 
 html {
     height: 100%;
@@ -11,14 +12,49 @@ body {
     height: 100%;
     width: 100%;
 
-    background-color: #FFEC02;
+    background-color: $baliseYellow;
 }
 
 .container-fluid{
     height: 100%;
 }
 
+// remove the color and link behavior from the calendar and map buttons on homepage
+.link-homepage{
+    color: $black;
+}
 
+.link-homepage:hover{
+    color: lighten($black, 20);
+}
 
+// manage the design of the pulls of the top of calendar page
+.nav-pills-calendar{
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: $black;
+    border-radius: 0.2em;
+}
 
+.nav-pills-calendar a{
+    background-color: $black;
+    color : $baliseYellow;
+}
+
+.nav-pills-calendar a:active{
+    background-color: lighten($black,20);
+    color : $baliseYellow;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: $baliseYellow;
+    color : $black;
+    border : 1px solid $black;
+}
+
+// manage the design of the event description in calendar
+
+//display-4 is the box containing the day figures
+.day-figure{
+    background-color: $black;
+}
 
