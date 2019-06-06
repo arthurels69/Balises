@@ -19,7 +19,7 @@ class ShowDate
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $dateShow;
 
     /**
      * Many to one relation to the show each date relates to
@@ -38,14 +38,14 @@ class ShowDate
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDateShow(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->dateShow;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDateShow(\DateTimeInterface $dateShow): self
     {
-        $this->date = $date;
+        $this->dateShow = $dateShow;
 
         return $this;
     }

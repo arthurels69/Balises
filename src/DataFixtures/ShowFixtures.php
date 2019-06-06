@@ -62,15 +62,15 @@ class ShowFixtures extends Fixture
 
             for ($i = 0; $i < 5; $i++) {
                 $show = new Show();
-                $show->setTitle($faker->sentence(6, true));
+                $show->setTitle($faker->sentence(4, true));
                 $show->setImage('https://via.placeholder.com/150');
-                $show->setAdditionalInfos($faker->text(300));
+                $show->setAdditionalInfos($faker->text(240));
                 $show->setBaseRate(25.00);
-                $show->setDescription($faker->text(300));
+                $show->setDescription($faker->text(240));
                 $show->setIsBalise(true);
                 $show->setDistribution($faker->lastName.' '.$faker->firstName.', '.$faker->lastName.' '
                     .$faker->firstName.', '.$faker->lastName.' '.$faker->firstName);
-                $show->setMandatoryInfos($faker->text(300));
+                $show->setMandatoryInfos($faker->text(240));
                 $show->setMapadoLink($faker->url);
                 $show->setPhotoCredits($faker->lastName.' '.$faker->firstName);
                 $show->setTheaterId($theater);
@@ -81,7 +81,7 @@ class ShowFixtures extends Fixture
 
 
                 $showDate = new ShowDate();
-                $showDate->setDate($faker->dateTimeBetween('now', '+ 3 months'));
+                $showDate->setDateShow($faker->dateTimeBetween('now', '+ 3 months'));
                 $showDate->setShowId($show);
                 $manager->persist($showDate);
                 $showRate = new ShowRate();
