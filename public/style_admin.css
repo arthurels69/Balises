@@ -1,5 +1,11 @@
+.body_admin{
+
+    background-color: #fff;
+}
+
+
 /**********************LEFT  Menu********************************************/
-.sidebar{ width:220px;  background-color:#000;transition: all 0.5s  ease-in-out; }
+ .sidebar{ width:220px;  background-color:#000;transition: all 0.5s  ease-in-out; }
 .bg-defoult{background-color:#222;}
 .sidebar ul{ list-style:none; margin:0px; padding:0px; }
 .sidebar li a,.sidebar li a.collapsed.active{ display:block; padding:8px 12px; color:#fff;border-left:0px solid #dedede;  text-decoration:none}
