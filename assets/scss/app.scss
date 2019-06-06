@@ -11,7 +11,7 @@ html {
 body {
     height: 100%;
     width: 100%;
-
+    margin: 0;
     background-color: $baliseYellow;
 }
 
@@ -37,24 +37,74 @@ body {
 }
 
 .nav-pills-calendar a{
-    background-color: $black;
-    color : $baliseYellow;
+  background-color: $black;
+  color : $baliseYellow;
 }
 
 .nav-pills-calendar a:active{
-    background-color: $lightblack;
-    color : $baliseYellow;
+  background-color: $lightblack;
+  color : $baliseYellow;
 }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    background-color: $baliseYellow;
-    color : $black;
-    border : 1px solid $black;
+  background-color: $baliseYellow;
+  color : $black;
+  border : 1px solid $black;
 }
 
 // manage the design of the event description in calendar
 
 //display-4 is the box containing the day figures
-.day-figure{
-    background-color: $black;
+.day-figure {
+  background-color: $black;
+}
+
+
+
+#map
+{
+    z-index: 0;
+}
+
+#selectplacetitle
+{
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    z-index: 1;
+    color: black;
+    font-size: 80px;
+}
+
+
+#selectplacetitle h1
+{
+    font-size: 80%;
+}
+
+#selectplacetitle span
+{
+    color: white;
+}
+
+#logoonmap
+{
+    position: absolute;
+    bottom: 40px;
+    right: 2px;
+    z-index: 1;
+    transform: scale(0.7, 0.7);
+}
+
+.popupCustom .leaflet-popup-tip,
+{
+    display: none;
+}
+
+.popupCustom .leaflet-popup-content-wrapper {
+    background: $black;
+    color: white;
+    height: 200px;
+    width: 400px;
+    font-size: 120%;
 }
 

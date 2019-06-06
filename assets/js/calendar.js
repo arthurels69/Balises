@@ -14,6 +14,7 @@ $(document).ready(function(){
         minSlides: 7,
         maxSlides: 7,
         speed: 800,
+        startSlide : 0,
         //startSlide: get_initialSlide($(this)),
         shrinkItems: false
     });

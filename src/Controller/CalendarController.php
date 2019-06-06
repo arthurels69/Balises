@@ -20,21 +20,22 @@ class CalendarController extends AbstractController
     public function calendarHome(Request $request)
     {
 
-		// array of Strings applied in the twig date_modify filter
-		$oneMoreDay = [];
-		for ($i = 0; $i < 14; $i++) {
-			$oneMoreDay[$i] = "+$i day";
-		}
+        // array of Strings applied in the twig date_modify filter
+        $oneMoreDay = [];
+        for ($i = 0; $i < 14; $i++) {
+            $oneMoreDay[$i] = "+$i day";
+        }
 
-		if($request->request->get('picked_date')){
 		// Date transmitted by the "rechercher par date" formular
-    	$pickedDate = $request->request->get('picked_date');
+        if ($request->request->get('picked_date')) {
 
-			return $this->render('Calendar/calendar.html.twig', [
-				'today' => $pickedDate,
-				'oneMoreDay' => $oneMoreDay
-				]);
-		}
+            $pickedDate = $request->request->get('picked_date');
+
+            return $this->render('Calendar/calendar.html.twig', [
+                'today' => $pickedDate,
+                'oneMoreDay' => $oneMoreDay
+                ]);
+        }
 
         $today = new \DateTime();
 

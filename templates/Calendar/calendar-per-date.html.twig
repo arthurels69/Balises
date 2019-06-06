@@ -26,6 +26,9 @@
     <div class="col-12">
         <ul class="bxslider">
             {% for oneDay in oneMoreDay %}
+                {% if today | date_modify(oneDay) == today %}
+                    <li class="month-day active"><div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div></li>
+                {% endif %}
             <li class="month-day"><div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div></li>
             {% endfor %}
         </ul>
