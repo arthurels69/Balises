@@ -18,6 +18,11 @@ security:
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path:   app_logout
 
             # activate different ways to authenticate
 
@@ -32,3 +37,9 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+          - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+    role_hierarchy:
+        ROLE_THEATER:    ROLE_USER
+        ROLE_ADMIN:      ROLE_ADMIN
