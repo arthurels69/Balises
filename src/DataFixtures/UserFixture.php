@@ -25,9 +25,9 @@ class UserFixture extends Fixture
             $author->setRoles(['ROLE_THEATER']);
             $author->setTheaterName('Théâtre n' . $i);
             $author->setPassword($this->passwordEncoder->encodePassword(
-            	$author,
+                $author,
                 'aze'
-           ));
+            ));
 
             $manager->persist($author);
         }
