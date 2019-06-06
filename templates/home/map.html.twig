@@ -24,6 +24,10 @@
     <div id="map">
         <!-- Ici s'affichera la carte -->
     </div>
+
+    <div id="div2" style="display:none;">Mon texte</div>
+
+
 {% endblock %}
 
 
@@ -72,8 +76,7 @@ window.onload = function(){
             "<p>"
             + adresses[adresse].zip_code + " " + adresses[adresse].city +
             "</p>"
-        )
-            .addTo(macarte);
+        ).addTo(macarte);
 
     }
 };
