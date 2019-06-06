@@ -49,7 +49,7 @@ class Theater
     private $address2;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $zipCode;
 
@@ -80,8 +80,8 @@ class Theater
     private $baseRate;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="theater", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="User", inversedBy="theater", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -91,14 +91,14 @@ class Theater
     private $shows;
 
     /**
-     * @ORM\Column(type="float", nullable=true )
+     * @ORM\Column(type="float", nullable=true)
      */
     private $lat;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $long;
+    private $longitude;
 
     public function __construct()
     {
@@ -269,6 +269,30 @@ class Theater
                 $show->setTheaterId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

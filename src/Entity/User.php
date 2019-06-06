@@ -51,6 +51,11 @@ class User implements UserInterface
      */
     private $confirm_password;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Theater", mappedBy="user")
+     */
+    private $theater;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,7 +105,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // guarantee every user at least has ROLE_THEATER
         $roles[] = 'ROLE_THEATER';
 
         return array_unique($roles);

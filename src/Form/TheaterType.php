@@ -30,24 +30,30 @@ class TheaterType extends AbstractType
             ->add('email', EmailType::class)
             ->add('address1', TextType::class)
             ->add('address2', TextType::class)
-            ->add('zipCode', IntegerType::class,
+            ->add(
+                'zipCode',
+                IntegerType::class,
                 ['constraints' =>
                     new Length(
-                    [
+                        [
                         'max' => 5,
                         'maxMessage' => 'code postal max 5 chiffres !'
-                    ]) ])
+                        ]
+                    ) ]
+            )
             ->add('city', TextType::class)
-            ->add('phoneNumber', TextType::class,
-
+            ->add(
+                'phoneNumber',
+                TextType::class,
                 ['attr' => ['placeholder' => 'XX.XX.XX.XX'],
                     'constraints' =>
                     new Regex(
                         [
                         'pattern' => '^0[1-68][0-9]{8}$',
                         'message' => 'format du téléphone : xx.xx.xx.xx'
-                        ])]
-                )
+                        ]
+                    )]
+            )
             ->add('logo')
             ->add('website', EmailType::class)
             ->add('baseRate', MoneyType::class)
