@@ -1,60 +1,62 @@
 {{ form_start(form) }}
+<div class = 'container'>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.name, 'Nom du Théâtre') }}
             {{ form_widget(form.name) }}
         </div>
-        <div class="col" >
+        <div class="col-sm-6" >
             {{ form_label(form.email, 'Courriel') }}
             {{ form_widget(form.email) }}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.address1, 'Adresse') }}
             {{ form_widget(form.address1) }}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.address2, 'Complément d\'Adresse') }}
             {{ form_widget(form.address2) }}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.zipCode, 'Code Postal') }}
             {{ form_widget(form.zipCode) }}
         </div>
 
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.city, 'Ville') }}
             {{ form_widget(form.city) }}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-4">
             {{ form_label(form.phoneNumber, 'Téléphone') }}
             {{ form_widget(form.phoneNumber) }}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.logo, 'Logo') }}
             {{ form_widget(form.logo) }}
         </div>
 
-        <div class="col">
+        <div class="col-sm-6">
             {{ form_label(form.website, 'Site Web') }}
             {{ form_widget(form.website) }}
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-3">
             {{ form_label(form.baseRate, 'Tarif de Base') }}
             {{ form_widget(form.baseRate) }}
         </div>
     </div>
 
     <button class="btn btn-secondary btn-sm">{{ button_label|default('Sauvegarde') }}</button>
+</div>
 {{ form_end(form) }}

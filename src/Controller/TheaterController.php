@@ -27,8 +27,10 @@ class TheaterController extends AbstractController
         ]);
     }
 
+
+    //* @IsGranted("ROLE_ADMIN")
     /**
-     * @IsGranted("ROLE_ADMIN")
+
      * @Route("/new", name="theater_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
