@@ -32,7 +32,7 @@ class ShowFixtures extends Fixture
             $user->setEmail('theatre' . $i . '@theater.com');
             $user->setRoles(['ROLE_THEATER']);
             $user->setTheaterName('Théâtre n' . $i);
-            $user->setPassword($this->encoder->encodePassword($user,'aze'));
+            $user->setPassword($this->encoder->encodePassword($user, 'aze'));
 
             $manager->persist($user);
 
@@ -90,7 +90,7 @@ class ShowFixtures extends Fixture
         $admin->setEmail('admin@balise.com');
         $admin->setTheaterName('balise');
         $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword($this->encoder->encodePassword($admin,'aze'));
+        $admin->setPassword($this->encoder->encodePassword($admin, 'aze'));
 
         $manager->persist($admin);
 
