@@ -12,8 +12,14 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class TheaterType extends AbstractType
 {
@@ -24,12 +30,27 @@ class TheaterType extends AbstractType
             ->add('email', EmailType::class)
             ->add('address1', TextType::class)
             ->add('address2', TextType::class)
-            ->add('zipCode')
+            ->add('zipCode', IntegerType::class,
+                ['constraints' =>
+                    new Length(
+                    [
+                        'max' => 5,
+                        'maxMessage' => 'code postal max 5 chiffres !'
+                    ]) ])
             ->add('city', TextType::class)
-            ->add('phoneNumber')
+            ->add('phoneNumber', TextType::class,
+
+                ['attr' => ['placeholder' => 'XX.XX.XX.XX'],
+                    'constraints' =>
+                    new Regex(
+                        [
+                        'pattern' => '^0[1-68][0-9]{8}$',
+                        'message' => 'format du téléphone : xx.xx.xx.xx'
+                        ])]
+                )
             ->add('logo')
-            ->add('website')
-            ->add('baseRate')
+            ->add('website', EmailType::class)
+            ->add('baseRate', MoneyType::class)
         ;
     }
 

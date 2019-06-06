@@ -56,6 +56,9 @@
             {{ form_widget(form.baseRate) }}
         </div>
     </div>
+    {% if form_errors(form) != '' %}
+        {{ form_errors(form) }}
+    {% endif %}
 
     <button class="btn btn-secondary btn-sm">{{ button_label|default('Sauvegarde') }}</button>
 </div>
