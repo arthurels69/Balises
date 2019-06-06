@@ -20,16 +20,16 @@ class UserFixture extends Fixture
     {
         // Création de plusieurs utilisateurs de type “Theatre”
         for ($i = 1; $i <= 5; $i++) {
-            $author = new User();
-            $author->setEmail('theatre' . $i . '@theater.com');
-            $author->setRoles(['ROLE_THEATER']);
-            $author->setTheaterName('Théâtre n' . $i);
-            $author->setPassword($this->passwordEncoder->encodePassword(
-                $author,
+            $user = new User();
+            $user->setEmail('theatre' . $i . '@theater.com');
+            $user->setRoles(['ROLE_THEATER']);
+            $user->setTheaterName('Théâtre n' . $i);
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
                 'aze'
             ));
 
-            $manager->persist($author);
+            $manager->persist($user);
         }
 
         // Création d’un utilisateur de type “admin”
