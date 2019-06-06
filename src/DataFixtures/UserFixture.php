@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Theater;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -30,6 +31,13 @@ class UserFixture extends Fixture
             ));
 
             $manager->persist($user);
+
+            $theater = new Theater();
+            $theater->setEmail($user->getEmail());
+            $theater->setName($user->getTheaterName());
+            $theater->setUser($user);
+
+            $manager->persist($theater);
         }
 
         // Création d’un utilisateur de type “admin”

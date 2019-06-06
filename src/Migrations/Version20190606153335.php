@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190606152648 extends AbstractMigration
+final class Version20190606153335 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -25,43 +25,36 @@ final class Version20190606152648 extends AbstractMigration
                 ->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE param (id INT AUTO_INCREMENT 
-NOT NULL, resale_coeff DOUBLE PRECISION NOT NULL, redistributed_coeff 
-DOUBLE PRECISION NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER 
-SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE theater (id INT AUTO_INCREMENT 
-NOT NULL, user_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, email 
-VARCHAR(255) NOT NULL, address1 VARCHAR(255) DEFAULT NULL, address2 
-VARCHAR(255) DEFAULT NULL, zip_code INT DEFAULT NULL, city VARCHAR(255) 
-DEFAULT NULL, phone_number VARCHAR(255) DEFAULT NULL, logo 
-VARCHAR(255) DEFAULT NULL, website VARCHAR(255) DEFAULT NULL, base_rate 
-DOUBLE PRECISION DEFAULT NULL, lat DOUBLE PRECISION 
-DEFAULT NULL, longitude DOUBLE PRECISION DEFAULT NULL, UNIQUE INDEX UNIQ_46DD8154A76ED395 (user_id), 
-PRIMARY KEY(id)) DEFAULT 
-CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE show_rate (id INT AUTO_INCREMENT 
-NOT NULL, show_date_id INT NOT NULL, free_places_number INT DEFAULT NULL, discounted_rate I
-NT DEFAULT NULL, UNIQUE INDEX UNIQ_31BE9FADFC51B88 (show_date_id), PRIMARY KEY(id)) 
+NOT NULL, resale_coeff DOUBLE PRECISION NOT NULL, redistributed_coeff DOUBLE 
+PRECISION NOT NULL, PRIMARY KEY(id)) 
 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email 
-VARCHAR(180) NOT NULL, theater_name VARCHAR(180) DEFAULT NULL, roles JSON NOT NULL, password 
-VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) 
-DEFAULT CHARACTER SET utf8mb4 
+        $this->addSql('CREATE TABLE theater (id INT AUTO_INCREMENT 
+NOT NULL, user_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) 
+NOT NULL, address1 VARCHAR(255) 
+DEFAULT NULL, address2 VARCHAR(255) DEFAULT NULL, zip_code 
+INT DEFAULT NULL, city VARCHAR(255) DEFAULT NULL, phone_number VARCHAR(255) DEFAULT 
+NULL, logo VARCHAR(255) DEFAULT NULL, website VARCHAR(255) DEFAULT NULL, base_rate 
+DOUBLE PRECISION DEFAULT NULL, lat DOUBLE PRECISION DEFAULT NULL, longitude DOUBLE PRECISION 
+DEFAULT NULL, UNIQUE INDEX UNIQ_46DD8154A76ED395 (user_id), 
+PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE show_rate (id INT AUTO_INCREMENT NOT NULL, show_date_id 
+INT NOT NULL, free_places_number INT DEFAULT NULL, discounted_rate INT DEFAULT NULL, 
+UNIQUE INDEX UNIQ_31BE9FADFC51B88 (show_date_id), PRIMARY KEY(id)) 
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) 
+NOT NULL, theater_name VARCHAR(180) DEFAULT NULL, roles JSON NOT NULL, password VARCHAR(255) 
+NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 
 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE show_date (id INT AUTO_INCREMENT NOT 
-NULL, show_id_id INT DEFAULT NULL, date DATETIME NOT NULL, INDEX IDX_7669E1B97DF5FA8B (show_id_id), 
-PRIMARY KEY(id)) DEFAULT 
-CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE `show` (id INT AUTO_INCREMENT NOT 
-NULL, theater_id_id INT NOT NULL, title VARCHAR(255) NOT NULL, description LONGTEXT 
-NOT NULL, distribution LONGTEXT NOT NULL, mandatory_infos LONGTEXT DEFAULT NULL, image 
-VARCHAR(255) NOT NULL, photo_credits VARCHAR(255) 
-DEFAULT NULL, additional_infos LONGTEXT DEFAULT NULL, is_balise TINYINT(1) NOT NULL, offer_type 
-SMALLINT DEFAULT NULL, mapado_link 
-VARCHAR(255) 
-DEFAULT NULL, base_rate DOUBLE 
-PRECISION DEFAULT NULL, INDEX IDX_320ED9014ECC313E (theater_id_id), PRIMARY KEY(id)) 
-DEFAULT CHARACTER SET utf8mb4 
-COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE show_date (id INT AUTO_INCREMENT NOT NULL, show_id_id 
+INT DEFAULT NULL, date DATETIME NOT NULL, INDEX IDX_7669E1B97DF5FA8B (show_id_id), PRIMARY KEY(id)) 
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE `show` (id INT AUTO_INCREMENT NOT NULL, theater_id_id 
+INT NOT NULL, title VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, distribution LONGTEXT 
+NOT NULL, mandatory_infos LONGTEXT DEFAULT NULL, image VARCHAR(255) NOT NULL, photo_credits 
+VARCHAR(255) DEFAULT NULL, additional_infos LONGTEXT DEFAULT NULL, is_balise TINYINT(1) 
+NOT NULL, offer_type SMALLINT DEFAULT NULL, mapado_link VARCHAR(255) DEFAULT NULL, base_rate 
+DOUBLE PRECISION DEFAULT NULL, INDEX IDX_320ED9014ECC313E (theater_id_id), PRIMARY KEY(id)) 
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE theater ADD CONSTRAINT FK_46DD8154A76ED395 
 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE show_rate ADD CONSTRAINT FK_31BE9FADFC51B88 
