@@ -25,9 +25,6 @@ class ShowFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
-        $showRate = new ShowRate();
-
-
         $faker = Faker\Factory::create('fr_FR');
 
         for ($i = 0; $i < 40; $i++) {
@@ -35,10 +32,7 @@ class ShowFixtures extends Fixture
             $user->setEmail('theatre' . $i . '@theater.com');
             $user->setRoles(['ROLE_THEATER']);
             $user->setTheaterName('Théâtre n' . $i);
-            $user->setPassword($this->encoder->encodePassword(
-                $user,
-                'aze'
-            ));
+            $user->setPassword($this->encoder->encodePassword($user,'aze'));
 
             $manager->persist($user);
 
@@ -60,7 +54,7 @@ class ShowFixtures extends Fixture
 
             $manager->persist($theater);
 
-            for ($i = 0; $i < 5; $i++) {
+            for ($j = 0; $j < 5; $j++) {
                 $show = new Spectacle();
                 $show->setTitle($faker->sentence(4, true));
                 $show->setImage('https://via.placeholder.com/150');
@@ -96,10 +90,7 @@ class ShowFixtures extends Fixture
         $admin->setEmail('admin@balise.com');
         $admin->setTheaterName('balise');
         $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword($this->encoder->encodePassword(
-            $admin,
-            'aze'
-        ));
+        $admin->setPassword($this->encoder->encodePassword($admin,'aze'));
 
         $manager->persist($admin);
 
