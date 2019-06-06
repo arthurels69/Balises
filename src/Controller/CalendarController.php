@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /** Controls the Calendar Pages
@@ -16,18 +17,26 @@ class CalendarController extends AbstractController
       * Displays the calendar and sends shows data
       * @Route("/calendar", name="calendar_home", methods={"GET", "POST"})
      */
-    public function calendarHome()
+    public function calendarHome(Request $request)
     {
 
+		// array of Strings applied in the twig date_modify filter
+		$oneMoreDay = [];
+		for ($i = 0; $i < 14; $i++) {
+			$oneMoreDay[$i] = "+$i day";
+		}
+
+		if($request->request->get('picked_date')){
+		// Date transmitted by the "rechercher par date" formular
+    	$pickedDate = $request->request->get('picked_date');
+
+			return $this->render('Calendar/calendar.html.twig', [
+				'today' => $pickedDate,
+				'oneMoreDay' => $oneMoreDay
+				]);
+		}
 
         $today = new \DateTime();
-
-        $oneMoreDay = [];
-        /* returns an array of Strings used in template and applied in the date_modify filter
-         in the calendar carousel loop to add 1 more day at each loop. */
-        for ($i = 0; $i < 14; $i++) {
-            $oneMoreDay[$i] = "+$i day";
-        }
 
         return $this->render('Calendar/calendar.html.twig', [
             'today' => $today,

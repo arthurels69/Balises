@@ -25,7 +25,7 @@ body {
 }
 
 .link-homepage:hover{
-    color: lighten($black, 20);
+    color: $lightblack;
 }
 
 // manage the design of the pulls of the top of calendar page
@@ -42,7 +42,7 @@ body {
 }
 
 .nav-pills-calendar a:active{
-    background-color: lighten($black,20);
+    background-color: $lightblack;
     color : $baliseYellow;
 }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
