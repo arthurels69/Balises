@@ -27,7 +27,7 @@
         <ul class="bxslider">
             {% for oneDay in oneMoreDay %}
 
-           <a href="{{ path('calendar_home', {"day" : today | date_modify(oneDay) | date('Y-m-d')}) }}">
+           <a href="{{ path('calendar_select_day', {"day" : today | date_modify(oneDay) | date('Y-m-d')}) }}">
                <li class="month-day">
                    <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
                </li>
