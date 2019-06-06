@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Theater;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -40,14 +41,25 @@ class UserController extends AbstractController
     public function new(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
+        $theater = new Theater();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Haschage Password
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
 
+            // Set ROLE_THEATER for every new users
+            $user->setRoles(['ROLE_THEATER']);
+
             $manager->persist($user);
+
+            $theater->setEmail($user->getEmail());
+            $theater->setName($user->getTheaterName());
+            $theater->setUser($user);
+
+            $manager->persist($theater);
             $manager->flush();
 
             return $this->redirectToRoute('user_index');
@@ -56,6 +68,7 @@ class UserController extends AbstractController
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'theater' => $theater
         ]);
     }
 

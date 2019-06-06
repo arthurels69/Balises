@@ -28,8 +28,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=180)
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="string", length=180, nullable=true)
      */
     private $theaterName;
 
@@ -50,6 +49,11 @@ class User implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="pas le même mdp")
      */
     private $confirm_password;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Theater", mappedBy="user")
+     */
+    private $theater;
 
     public function getId(): ?int
     {
@@ -100,7 +104,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // guarantee every user at least has ROLE_THEATER
         $roles[] = 'ROLE_THEATER';
 
         return array_unique($roles);
