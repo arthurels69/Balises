@@ -31,20 +31,20 @@ class UserController extends AbstractController
     public function new(Request $request): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        // $form = $this->createForm(UserType::class, $user);
+        // $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $entityManager = $this->getDoctrine()->getManager();
+        //     $entityManager->persist($user);
+        //     $entityManager->flush();
 
-            return $this->redirectToRoute('user_index');
-        }
+        //     return $this->redirectToRoute('user_index');
+        // }
 
         return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
+            //'user' => $user,
+            //'form' => $form->createView(),
         ]);
     }
 
