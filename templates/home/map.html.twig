@@ -22,10 +22,21 @@
 
 {% block body %}
     <div id="map">
-        <!-- Ici s'affichera la carte -->
     </div>
 
-    <div id="div2" style="display:none;">Mon texte</div>
+    <div id="selectplacetitle">
+        <h1>SÉLÉCTIONNER</h1>
+        <h1> VOTRE <span>LIEU</span></h1>
+    </div>
+
+    <div id="logoonmap">
+        <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
+    </div>
+
+
+
+
+
 
 
 {% endblock %}
@@ -62,21 +73,29 @@ window.onload = function(){
     initMap();
 
     var adresses = {
-        "Wild Code School" : {"lat" : 45.7463, "lon" : 4.8269, "address1" : "17 rue Delandine", "zip_code" : "69002", "city" : "LYON"},
-        "Julien BEAUHAIRE" : {"lat" : 45.7777, "lon" : 4.7635, "address1" : "8 chemin des Bruyères", "zip_code" : "69130", "city" : "ECULLY"}
+        "Wild Code School" : {"lat" : 45.7463, "lon" : 4.8269, "address1" : "17 rue Delandine", "zip_code" : "69002", "city" : "LYON", "photo" : "https://wildcodeschool.fr/wp-content/uploads/2017/02/logo_orange_small.jpg"},
+        "Julien BEAUHAIRE" : {"lat" : 45.7777, "lon" : 4.7635, "address1" : "8 chemin des Bruyères", "zip_code" : "69130", "city" : "ECULLY", "photo" : "https://www.myatlas.xyz/gallery/2000/5948fe0288280c9a29cj.jpg?1"}
     };
 
 
 
+    // specify popup options
+    var customOptions =
+        {
+            'maxWidth': '400',
+            'width': '200',
+            'className' : 'popupCustom'
+        }
+
+
     // Parcours de la liste des adresses et affichage popup
     for (adresse in adresses) {
-        var marker = L.marker([adresses[adresse].lat, adresses[adresse].lon]).bindPopup(
-            "<h5>"+adresse+"</h5> <p>"
-            + adresses[adresse].address1 + "</p>"+
-            "<p>"
-            + adresses[adresse].zip_code + " " + adresses[adresse].city +
-            "</p>"
-        ).addTo(macarte);
+        // create popup contents
+        var customPopup = "<b>" + adresse + "</b><br/><img src='"+ adresses[adresse].photo +"' alt='maptime logo gif' width='50px'/>";
+        var marker = L.marker([adresses[adresse].lat, adresses[adresse].lon]).addTo(macarte);
+
+        // bind the custom popup
+        marker.bindPopup(customPopup,customOptions);
 
     }
 };

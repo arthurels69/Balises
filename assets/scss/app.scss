@@ -11,7 +11,7 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: #FFEC02;
+    background-color: $baliseYellow;
 }
 
 .container-fluid {
@@ -23,6 +23,50 @@ body {
 a {
 }
 
+#map
+{
+    z-index: 0;
+}
+
+#selectplacetitle
+{
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    z-index: 1;
+    color: black;
+    font-size: 80px;
+}
 
 
+#selectplacetitle h1
+{
+    font-size: 80%;
+}
 
+#selectplacetitle span
+{
+    color: white;
+}
+
+#logoonmap
+{
+    position: absolute;
+    bottom: 40px;
+    right: 2px;
+    z-index: 1;
+    transform: scale(0.7, 0.7);
+}
+
+.popupCustom .leaflet-popup-tip,
+{
+    display: none;
+}
+
+.popupCustom .leaflet-popup-content-wrapper {
+    background: $black;
+    color: white;
+    height: 200px;
+    width: 400px;
+    font-size: 120%;
+}
