@@ -50,12 +50,12 @@ class ShowDate
         return $this;
     }
 
-    public function getShowId(): Spectacle
+    public function getShowId(): ?Spectacle
     {
         return $this->showId;
     }
 
-    public function setShowId(Spectacle $showId): self
+    public function setShowId(?Spectacle $showId): self
     {
         $this->showId = $showId;
 

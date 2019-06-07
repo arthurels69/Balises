@@ -45,20 +45,7 @@ class TheaterType extends AbstractType
             ->add(
                 'phoneNumber',
                 TextType::class,
-                ['attr' => ['placeholder' => 'XX.XX.XX.XX'],
-                    'constraints' =>
-                    new Regex(
-                        [
-                        'pattern' => '/^\(0\)[0-9]*$',
-                        'message' => 'format du téléphone : xx.xx.xx.xx'
-                        ]
-                    ),
-                    new Length(
-                        [
-                            'max' => 8,
-                            'maxMessage' => 'Téléphone max 8 chiffres !'
-                        ]
-                    )]
+                ['attr' => ['placeholder' => 'XX.XX.XX.XX']]
             )
             ->add('logo')
             ->add('website')
