@@ -22,19 +22,35 @@ class ShowDateRepository extends ServiceEntityRepository
     // /**
     //  * @return ShowDate[] Returns an array of ShowDate objects
     //  */
-    /*
-    public function findByExampleField($value)
+	/*
+    public function findByDate($dateShow)
     {
+
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere(Date_format(s.dateShow, "%Y-%m-%d") = ':val')
+            ->setParameter('val', $date)
             ->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+	*/
+	public function findByDate($dateShow, $dateShowPlusOne): array
+	{
+		$entityManager = $this->getEntityManager();
+
+		$query = $entityManager->createQuery(
+			'SELECT s.id
+        FROM App\Entity\ShowDate s
+        WHERE s.dateShow >= :start AND s.dateShow < :end
+        ORDER BY s.id ASC')
+			->setParameter('start', $dateShow)
+			->setParameter('end', $dateShowPlusOne);
+
+		// returns an array of Product objects
+		return $query->execute();
+	}
 
     /*
     public function findOneBySomeField($value): ?ShowDate

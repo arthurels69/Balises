@@ -29,7 +29,7 @@ class ShowDate
 
     /**
      * Rate used if a date is concerned by a Balises offer
-     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="show_date", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="showDate", cascade={"persist", "remove"})
      */
     private $showRate;
 
