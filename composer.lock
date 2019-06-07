@@ -3646,8 +3646,7 @@
             "time": "2016-02-11T07:05:27+00:00"
         },
         {
-=======
->>>>>>> US_CalendarBasics
+
             "name": "seld/jsonlint",
             "version": "1.7.1",
             "source": {
