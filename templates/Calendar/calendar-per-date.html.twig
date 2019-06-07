@@ -11,7 +11,7 @@
                 <button class="btn-success btn d-inline-block" type="submit" value="{{ today | date ('m-d-Y') }}" id="example-date-input">Rechercher par date</button>
             </div>
                 <div class="col-12 m-2">
-                <input class="form-control" type="date" value="" id="example-date-input">
+                <input class="form-control" type="date" name ="picked_date" value="" id="example-date-input">
             </div>
 
 
@@ -26,7 +26,13 @@
     <div class="col-12">
         <ul class="bxslider">
             {% for oneDay in oneMoreDay %}
-            <li class="month-day"><div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div></li>
+
+           <a href="{{ path('calendar_select_day', {"day" : today | date_modify(oneDay) | date('Y-m-d')}) }}">
+               <li class="month-day">
+                   <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+               </li>
+           </a>
+
             {% endfor %}
         </ul>
     </div>
