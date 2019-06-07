@@ -9,15 +9,104 @@
     <style>
       body { margin:0; padding:0; }
       #map { position:absolute; top:0; bottom:0; width:100%; }
+/*
+ * These CSS rules affect the tooltips within maps with the custom-popup
+ * class. See the full CSS for all customizable options:
+ * https://github.com/mapbox/mapbox.js/blob/001754177f3985c0e6b4a26e3c869b0c66162c99/theme/style.css#L321-L366
+ */
+.custom-popup .leaflet-popup-content-wrapper {
+  background:#2c3e50;
+  color:#fff;
+  font-size:16px;
+  line-height:24px;
+  }
+.custom-popup .leaflet-popup-content-wrapper a {
+  color:rgba(255,255,255,0.5);
+  }
+.custom-popup .leaflet-popup-tip-container {
+  width:30px;
+  height:15px;
+  }
+.custom-popup .leaflet-popup-tip {
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:15px solid #2c3e50;
+  }
     </style>
 {% endblock %}
 
 
 
 {% block body %}
-    <div id="map">
-        <!-- Ici s'affichera la carte -->
+    <div class="custom-popup" id="map">
     </div>
+
+    <div id="selectplacetitle">
+        <h1>SÉLÉCTIONNER</h1>
+        <h1> VOTRE <span>LIEU</span></h1>
+    </div>
+
+    <div id="logoonmap">
+        <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
+    </div>
+
+
+
+    <!-- Info Bulle -->
+
+    {# <div class="bulleInfo" id="bulleInfo">
+        <div class="container-fluid">
+            <div class="row bulleinfo">
+
+                <div class="col-5">
+                    <div class="jumbotron bulleInfo1">
+                        <h1 class="display-4">WILD CODE SCHOOL</h1>
+                        <p class="lead">17, rue Delandine</p>
+                        <p class="lead">69000 LYON</p>
+                        <hr class="my-4">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="bulleInfo2">
+
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="jumbotron bulleInfo3">
+                        <h1 class="display-4">Hello, world!</h1>
+                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <hr class="my-4">
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="bulleInfo4">
+
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="bulleInfo5">
+
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="jumbotron bulleInfo6">
+                        <h1 class="display-4">Hello, world!</h1>
+                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <hr class="my-4">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> #}
+
+
+
 {% endblock %}
 
 
@@ -30,43 +119,90 @@
     // On initialise la latitude et la longitude de Lyon (centre de la carte)
     let lat = 45.75;
     let lon = 4.85;
-    let zoom = 14; // Zoom de la carte par défaut
+    let zoom = 13; // Zoom de la carte par défaut
 
 
-    var geojsonFeature = {
-    "type": "Feature",
-    "properties": {
-        "name": "Coors Field",
-        "amenity": "Baseball Stadium",
-        "popupContent": "This is where the Rockies play!"
-    },
-    "geometry": {
-        "type": "Point",
-        "coordinates": [4.8269599999999855, 45.7463]
-    },
-    "properties": {
-      'marker-color': '#3bb2d0',
-      'marker-size': 'large',
-      'marker-symbol': 'rocket'
-    }
-};
+
 
     // Fonction d'initialisation de la carte
-    //function initMap() {
+    // function initMap() {
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
         var map = L.mapbox.map('map')
             .setView([lat, lon], zoom)
             .addLayer(L.mapbox.styleLayer('mapbox://styles/balises/cjwkqf7kr2woy1cqtbxg92srx'))
-        var myLayer = L.mapbox.featureLayer().setGeoJSON(geojsonFeature).addTo(map);
-        mapGeo.scrollWheelZoom.disable();
-    //}
-
-    //window.onload = function(){
-    // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
-        //initMap();
+    // }
 
 
-    //};
+
+    // window.onload = function()
+    // {
+    //     initMap();
+
+        // var customOptions =
+        // {
+        //     'maxWidth': '800px',
+        //     'width': '800px',
+        //     'className' : 'popupCustom'
+        // }
+
+
+        // var elements = document.getElementById("bulleInfo");
+        //
+        //
+        var myLayer = L.mapbox.featureLayer()
+            .addTo(map);
+
+        var geojsonFeature = {
+            "type": "Feature",
+            "properties": {
+                "title": "Wild",
+                "description": "17 rue Delandine",
+                "image": 'https://farm9.staticflickr.com/8604/15769066303_3e4dcce464_n.jpg',
+                "icon": {
+                    "iconUrl": 'https://www.mapbox.com/mapbox.js/assets/images/astronaut1.png',
+                    "iconSize": [50, 50], // size of the icon
+                    "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                    "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                    "className": 'dot'
+                }
+
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [4.8269599999999855, 45.7463]
+            }
+
+        };
+
+        myLayer.on('layeradd', function(e) {
+            var marker = e.layer,
+                feature = marker.feature;
+            marker.setIcon(L.icon(feature.properties.icon));
+
+        //     var customOptions =
+        // {
+        //     'maxWidth': '800px',
+        //     'width': '800px',
+        //     'className' : 'popupCustom'
+        // }
+
+            var content = '<p><strong>' + feature.properties.title + '</strong></p><img src="' + feature.properties.image + '" alt="">';
+
+
+            marker.bindPopup(content);
+        });
+        myLayer.setGeoJSON(geojsonFeature);
+        // map.scrollWheelZoom.disable();
+
+
+
+
+    // };
+
+
+
+
+
 
 
 
