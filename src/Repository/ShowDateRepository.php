@@ -22,7 +22,7 @@ class ShowDateRepository extends ServiceEntityRepository
     // /**
     //  * @return ShowDate[] Returns an array of ShowDate objects
     //  */
-	/*
+    /*
     public function findByDate($dateShow)
     {
 
@@ -35,22 +35,23 @@ class ShowDateRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-	*/
-	public function findByDate($dateShow, $dateShowPlusOne): array
-	{
-		$entityManager = $this->getEntityManager();
+    */
+    public function findByDate($dateShow, $dateShowPlusOne): array
+    {
+        $entityManager = $this->getEntityManager();
 
-		$query = $entityManager->createQuery(
-			'SELECT s.id
+        $query = $entityManager->createQuery(
+            'SELECT s.id
         FROM App\Entity\ShowDate s
         WHERE s.dateShow >= :start AND s.dateShow < :end
-        ORDER BY s.id ASC')
-			->setParameter('start', $dateShow)
-			->setParameter('end', $dateShowPlusOne);
+        ORDER BY s.id ASC'
+        )
+            ->setParameter('start', $dateShow)
+            ->setParameter('end', $dateShowPlusOne);
 
-		// returns an array of Product objects
-		return $query->execute();
-	}
+        // returns an array of Product objects
+        return $query->execute();
+    }
 
     /*
     public function findOneBySomeField($value): ?ShowDate

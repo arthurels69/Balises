@@ -34,7 +34,7 @@ class SpectacleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-	*/
+    */
 
     /*
     public function findOneBySomeField($value): ?spectacle
