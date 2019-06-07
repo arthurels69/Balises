@@ -10,7 +10,11 @@ html {
 body {
     height: 100%;
     width: 100%;
+<<<<<<< HEAD
 
+=======
+    margin: 0;
+>>>>>>> d2c33b120143080ba8a462b1c8d91db36646797e
     background-color: $baliseYellow;
 }
 
@@ -23,6 +27,7 @@ body {
     color: $black;
 }
 
+<<<<<<< HEAD
 .link-homepage:hover{
     color: lighten($black, 20);
 }
@@ -55,4 +60,52 @@ body {
 //display-4 is the box containing the day figures
 .day-figure{
     background-color: $black;
+=======
+#map
+{
+    z-index: 0;
+}
+
+#selectplacetitle
+{
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    z-index: 1;
+    color: black;
+    font-size: 80px;
+}
+
+
+#selectplacetitle h1
+{
+    font-size: 80%;
+}
+
+#selectplacetitle span
+{
+    color: white;
+}
+
+#logoonmap
+{
+    position: absolute;
+    bottom: 40px;
+    right: 2px;
+    z-index: 1;
+    transform: scale(0.7, 0.7);
+}
+
+.popupCustom .leaflet-popup-tip,
+{
+    display: none;
+}
+
+.popupCustom .leaflet-popup-content-wrapper {
+    background: $black;
+    color: white;
+    height: 200px;
+    width: 400px;
+    font-size: 120%;
+>>>>>>> d2c33b120143080ba8a462b1c8d91db36646797e
 }
