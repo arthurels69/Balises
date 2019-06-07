@@ -56,6 +56,22 @@ class User implements UserInterface
      */
     private $theater;
 
+    /**
+     * @return mixed
+     */
+    public function getTheater()
+    {
+        return $this->theater;
+    }
+
+    /**
+     * @param mixed $theater
+     */
+    public function setTheater($theater): void
+    {
+        $this->theater = $theater;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

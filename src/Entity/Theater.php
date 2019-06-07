@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -49,6 +51,10 @@ class Theater
     private $address2;
 
     /**
+     * @Assert\Length (
+     *      max = 5,
+     *      maxMessage = "code postal 5 chiffres maximum"
+     * )
      * @ORM\Column(type="integer", nullable=true)
      */
     private $zipCode;
@@ -59,7 +65,13 @@ class Theater
      */
     private $city;
 
+
+    //pattern="/^\(0\)[0-9]*$",
     /**
+     * @Assert\Regex(
+     *     pattern="(0|(\\+33)|(0033))[1-9][0-9]{8}"
+     * )
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phoneNumber;
@@ -86,7 +98,7 @@ class Theater
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Show", mappedBy="theater_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
      */
     private $shows;
 
@@ -243,14 +255,14 @@ class Theater
     }
 
     /**
-     * @return Collection|Show[]
+     * @return Collection|Spectacle[]
      */
     public function getShows(): Collection
     {
         return $this->shows;
     }
 
-    public function addShow(Show $show): self
+    public function addShow(Spectacle $show): self
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
@@ -260,7 +272,7 @@ class Theater
         return $this;
     }
 
-    public function removeShow(Show $show): self
+    public function removeShow(Spectacle $show): self
     {
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);

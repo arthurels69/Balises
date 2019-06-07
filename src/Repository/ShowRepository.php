@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Show;
+use App\Entity\Spectacle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Show|null find($id, $lockMode = null, $lockVersion = null)
- * @method Show|null findOneBy(array $criteria, array $orderBy = null)
- * @method Show[]    findAll()
- * @method Show[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method spectacle|null find($id, $lockMode = null, $lockVersion = null)
+ * @method spectacle|null findOneBy(array $criteria, array $orderBy = null)
+ * @method spectacle[]    findAll()
+ * @method spectacle[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ShowRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Show::class);
+        parent::__construct($registry, Spectacle::class);
     }
 
     // /**
-    //  * @return Show[] Returns an array of Show objects
+    //  * @return Spectacle[] Returns an array of spectacle objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ShowRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Show
+    public function findOneBySomeField($value): ?spectacle
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
