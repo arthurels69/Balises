@@ -42,7 +42,7 @@ class TheaterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user = $this->getUser();
+            $user =  $this->getUser();
             $theater->setuser($user);
             $entityManager->persist($theater);
             $entityManager->flush();

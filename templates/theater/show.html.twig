@@ -24,7 +24,7 @@
                 <td>{{ theater.address1 }}</td>
             </tr>
             <tr>
-                <th>Complémznt Adresse</th>
+                <th>Complément Adresse</th>
                 <td>{{ theater.address2 }}</td>
             </tr>
             <tr>
@@ -64,7 +64,6 @@
 
     <a href="{{ path('theater_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('theater_edit', {'id': theater.id}) }}">Modification</a>
 
-    {{ include('theater/_delete_form.html.twig') }}
+
 {% endblock %}

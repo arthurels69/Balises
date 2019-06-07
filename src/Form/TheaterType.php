@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -30,23 +30,9 @@ class TheaterType extends AbstractType
             ->add('email', EmailType::class)
             ->add('address1', TextType::class)
             ->add('address2', TextType::class, ['required'=>false])
-            ->add(
-                'zipCode',
-                IntegerType::class,
-                ['constraints' =>
-                    new Length(
-                        [
-                        'max' => 5,
-                        'maxMessage' => 'code postal max 5 chiffres !'
-                        ]
-                    ) ]
-            )
+            ->add('zipCode', TextType::class)
             ->add('city', TextType::class)
-            ->add(
-                'phoneNumber',
-                TextType::class,
-                ['attr' => ['placeholder' => 'XX.XX.XX.XX']]
-            )
+            ->add('phoneNumber', TelType::class)
             ->add('logo')
             ->add('website')
             ->add('baseRate', MoneyType::class, ['required'=>false])
