@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
     "content-hash": "a3c59411075f69204586ad65432e94dd",
-=======
+
     "content-hash": "bd336f1edb6a37300d3a39efff75d38b",
->>>>>>> US_CalendarBasics
+
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
