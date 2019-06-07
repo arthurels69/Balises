@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -19,18 +20,25 @@ class Theater
     private $id;
 
     /**
+     * Name of the theater
+     * @Assert\NotBlank()
+
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * Email of the theater
+     * @Assert\NotBlank()
+
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
      * First address line, mandatory
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address1;
 
@@ -41,22 +49,23 @@ class Theater
     private $address2;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
 
@@ -71,15 +80,25 @@ class Theater
     private $baseRate;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="theater", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="User", inversedBy="theater", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Show", mappedBy="theater_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
      */
     private $shows;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
 
     public function __construct()
     {
@@ -224,14 +243,14 @@ class Theater
     }
 
     /**
-     * @return Collection|Show[]
+     * @return Collection|Spectacle[]
      */
     public function getShows(): Collection
     {
         return $this->shows;
     }
 
-    public function addShow(Show $show): self
+    public function addShow(Spectacle $show): self
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
@@ -241,7 +260,7 @@ class Theater
         return $this;
     }
 
-    public function removeShow(Show $show): self
+    public function removeShow(Spectacle $show): self
     {
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
@@ -250,6 +269,30 @@ class Theater
                 $show->setTheaterId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

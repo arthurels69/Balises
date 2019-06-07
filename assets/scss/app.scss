@@ -1,5 +1,6 @@
 @import "vars";
 @import "~bootstrap";
+@import "calendar";
 
 html {
     height: 100%;
@@ -23,7 +24,7 @@ body {
 }
 
 .link-homepage:hover{
-    color: lighten($black, 20);
+    color: $lightblack;
 }
 
 // manage the design of the pulls of the top of calendar page
@@ -35,26 +36,28 @@ body {
 }
 
 .nav-pills-calendar a{
-    background-color: $black;
-    color : $baliseYellow;
+  background-color: $black;
+  color : $baliseYellow;
 }
 
 .nav-pills-calendar a:active{
-    background-color: lighten($black,20);
-    color : $baliseYellow;
+  background-color: $lightblack;
+  color : $baliseYellow;
 }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    background-color: $baliseYellow;
-    color : $black;
-    border : 1px solid $black;
+  background-color: $baliseYellow;
+  color : $black;
+  border : 1px solid $black;
 }
 
 // manage the design of the event description in calendar
 
 //display-4 is the box containing the day figures
 .day-figure {
-    background-color: $black;
+  background-color: $black;
 }
+
+
 
 #map
 
