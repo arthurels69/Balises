@@ -23,7 +23,7 @@ class ShowDate
 
     /**
      * Many to one relation to the show each date relates to
-     * @ORM\ManyToOne(targetEntity="spectacle", inversedBy="showDates")
+     * @ORM\ManyToOne(targetEntity="Spectacle", inversedBy="showDates")
      */
     private $showId;
 
@@ -50,12 +50,12 @@ class ShowDate
         return $this;
     }
 
-    public function getShowId(): ?Spectacle
+    public function getShowId(): Spectacle
     {
         return $this->showId;
     }
 
-    public function setShowId(?Spectacle $showId): self
+    public function setShowId(Spectacle $showId): self
     {
         $this->showId = $showId;
 

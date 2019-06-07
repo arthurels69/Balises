@@ -7,12 +7,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method spectacle|null find($id, $lockMode = null, $lockVersion = null)
- * @method spectacle|null findOneBy(array $criteria, array $orderBy = null)
- * @method spectacle[]    findAll()
- * @method spectacle[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Spectacle|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Spectacle|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Spectacle[]    findAll()
+ * @method Spectacle[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ShowRepository extends ServiceEntityRepository
+class SpectacleRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -20,7 +20,7 @@ class ShowRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Spectacle[] Returns an array of spectacle objects
+    //  * @return spectacle[] Returns an array of spectacle objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ShowRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?spectacle
+    public function findOneBySomeField($value): ?Show
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
