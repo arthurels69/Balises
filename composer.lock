@@ -3558,7 +3558,6 @@
             "time": "2018-11-20T15:27:04+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "psr/simple-cache",
             "version": "1.0.1",
             "source": {
