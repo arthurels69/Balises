@@ -29,7 +29,7 @@ class TheaterType extends AbstractType
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('address1', TextType::class)
-            ->add('address2', TextType::class)
+            ->add('address2', TextType::class, ['required'=>false])
             ->add(
                 'zipCode',
                 IntegerType::class,
@@ -49,14 +49,20 @@ class TheaterType extends AbstractType
                     'constraints' =>
                     new Regex(
                         [
-                        'pattern' => '^0[1-68][0-9]{8}$',
+                        'pattern' => '/^\(0\)[0-9]*$',
                         'message' => 'format du téléphone : xx.xx.xx.xx'
+                        ]
+                    ),
+                    new Length(
+                        [
+                            'max' => 8,
+                            'maxMessage' => 'Téléphone max 8 chiffres !'
                         ]
                     )]
             )
             ->add('logo')
-            ->add('website', EmailType::class)
-            ->add('baseRate', MoneyType::class)
+            ->add('website')
+            ->add('baseRate', MoneyType::class, ['required'=>false])
         ;
     }
 
