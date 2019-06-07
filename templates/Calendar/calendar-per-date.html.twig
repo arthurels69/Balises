@@ -1,0 +1,60 @@
+
+
+<h1>Date sélectionnée</h1>
+<!-- https://bootsnipp.com/snippets/VgzeR -->
+<div class="row">
+    <div class="col-5">
+    <form method="post">
+
+        <div class="form-group row justify-content-center">
+            <div class="col-12 m-2">
+                <button class="btn-success btn d-inline-block" type="submit" value="{{ today | date ('m-d-Y') }}" id="example-date-input">Rechercher par date</button>
+            </div>
+                <div class="col-12 m-2">
+                <input class="form-control" type="date" name ="picked_date" value="" id="example-date-input">
+            </div>
+
+
+        </div>
+
+    </form>
+    </div>
+</div>
+
+<!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
+<div class="row justify-content-center">
+    <div class="col-12">
+        <ul class="bxslider">
+            {% for oneDay in oneMoreDay %}
+
+           <a href="{{ path('calendar_select_day', {"day" : today | date_modify(oneDay) | date('Y-m-d')}) }}">
+               <li class="month-day">
+                   <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+               </li>
+           </a>
+
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- below the display of spectacles. Same as the ones in search by theater. -->
+{% for spectacle in spectaclesOfTheDay%}
+<div class="row row-striped">
+    <div class="col-2 text-right">
+        <h1 class="display-4"><span class="badge badge-secondary day-figure"></span></h1>
+        <h2>OCT</h2>
+    </div>
+    <div class="col-10">
+        <h3 class="text-uppercase"><strong>{{ spectacle.title }}</strong></h3>
+        <ul class="list-inline">
+            <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> Monday</li>
+            <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
+            <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theaterId.name }}</li>
+        </ul>
+        <p>{{ spectacle.description }}</p>
+    </div>
+</div>
+{% endfor %}
+
+

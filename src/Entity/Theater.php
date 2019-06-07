@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -20,19 +21,24 @@ class Theater
 
     /**
      * Name of the theater
+     * @Assert\NotBlank()
+
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * Email of the theater
+     * @Assert\NotBlank()
+
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
      * First address line, mandatory
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address1;
 
@@ -43,45 +49,56 @@ class Theater
     private $address2;
 
     /**
-     * Zip code (aka code postal)
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $zipCode;
 
     /**
-     * City
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
-     * PhoneNumber
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phoneNumber;
 
     /**
-     * Logo
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
 
     /**
-     * Website
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
 
     /**
-     * Base Rate
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Show", mappedBy="theater")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="theater", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
      */
     private $shows;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
 
     public function __construct()
     {
@@ -206,40 +223,76 @@ class Theater
         return $this->baseRate;
     }
 
-    public function setBaseRate(float $baseRate): self
+    public function setBaseRate(?float $baseRate): self
     {
         $this->baseRate = $baseRate;
 
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     /**
-     * @return Collection|Show[]
+     * @return Collection|Spectacle[]
      */
     public function getShows(): Collection
     {
         return $this->shows;
     }
 
-    public function addShow(Show $show): self
+    public function addShow(Spectacle $show): self
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
-            $show->setTheater($this);
+            $show->setTheaterId($this);
         }
 
         return $this;
     }
 
-    public function removeShow(Show $show): self
+    public function removeShow(Spectacle $show): self
     {
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
             // set the owning side to null (unless already changed)
-            if ($show->getTheater() === $this) {
-                $show->setTheater(null);
+            if ($show->getTheaterId() === $this) {
+                $show->setTheaterId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

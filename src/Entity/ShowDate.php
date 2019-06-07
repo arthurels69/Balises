@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,81 +19,61 @@ class ShowDate
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $dateShow;
 
     /**
      * Many to one relation to the show each date relates to
-     * @ORM\ManyToOne(targetEntity="App\Entity\Show", inversedBy="showDates")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Spectacle", inversedBy="showDates")
      */
-    private $show_id;
+    private $showId;
 
     /**
      * Rate used if a date is concerned by a Balises offer
-     * @ORM\OneToMany(targetEntity="App\Entity\ShowRate", mappedBy="showDate")
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="showDate", cascade={"persist", "remove"})
      */
-    private $showRates;
-
-    public function __construct()
-    {
-        $this->showRates = new ArrayCollection();
-    }
+    private $showRate;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDateShow(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->dateShow;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDateShow(\DateTimeInterface $dateShow): self
     {
-        $this->date = $date;
+        $this->dateShow = $dateShow;
 
         return $this;
     }
 
-    public function getShowId(): ?Show
+    public function getShowId(): ?Spectacle
     {
-        return $this->show_id;
+        return $this->showId;
     }
 
-    public function setShowId(?Show $show_id): self
+    public function setShowId(?Spectacle $showId): self
     {
-        $this->show_id = $show_id;
+        $this->showId = $showId;
 
         return $this;
     }
 
-    /**
-     * @return Collection|ShowRate[]
-     */
-    public function getShowRates(): Collection
+    public function getShowRate(): ?ShowRate
     {
-        return $this->showRates;
+        return $this->showRate;
     }
 
-    public function addShowRate(ShowRate $showRate): self
+    public function setShowRate(ShowRate $showRate): self
     {
-        if (!$this->showRates->contains($showRate)) {
-            $this->showRates[] = $showRate;
+        $this->showRate = $showRate;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $showRate->getShowDate()) {
             $showRate->setShowDate($this);
-        }
-
-        return $this;
-    }
-
-    public function removeShowRate(ShowRate $showRate): self
-    {
-        if ($this->showRates->contains($showRate)) {
-            $this->showRates->removeElement($showRate);
-            // set the owning side to null (unless already changed)
-            if ($showRate->getShowDate() === $this) {
-                $showRate->setShowDate(null);
-            }
         }
 
         return $this;

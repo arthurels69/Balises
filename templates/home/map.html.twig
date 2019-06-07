@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}BALISES{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin="" />
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+
+    <style type="text/css">
+        #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+            height: 100%;
+        }
+
+    </style>
+{% endblock %}
+
+
+
+{% block body %}
+    <div id="map">
+    </div>
+
+    <div id="selectplacetitle">
+        <h1>SÉLÉCTIONNER</h1>
+        <h1> VOTRE <span>LIEU</span></h1>
+    </div>
+
+    <div id="logoonmap">
+        <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
+    </div>
+
+
+
+    <!-- Info Bulle -->
+
+    <div class="bulleInfo" id="bulleInfo">
+        <div class="container-fluid">
+            <div class="row bulleinfo">
+
+                <div class="col-5">
+                    <div class="jumbotron bulleInfo1">
+                        <h1 class="display-4">WILD CODE SCHOOL</h1>
+                        <p class="lead">17, rue Delandine</p>
+                        <p class="lead">69000 LYON</p>
+                        <hr class="my-4">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="bulleInfo2">
+
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="jumbotron bulleInfo3">
+                        <h1 class="display-4">Hello, world!</h1>
+                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <hr class="my-4">
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="bulleInfo4">
+
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="bulleInfo5">
+
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="jumbotron bulleInfo6">
+                        <h1 class="display-4">Hello, world!</h1>
+                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <hr class="my-4">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+crossorigin=""></script>
+
+    <script type="text/javascript">
+// On initialise la latitude et la longitude de Lyon (centre de la carte)
+let lat = 45.75;
+let lon = 4.85;
+let macarte = null;
+let zoom = 12; // Zoom de la carte par défaut
+
+// Fonction d'initialisation de la carte
+function initMap()
+{
+
+    var markers = []; // Nous initialisons la liste des marqueurs
+    // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+    macarte = L.map('map').setView([lat, lon], zoom);
+    // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        // Il est toujours bien de laisser le lien vers la source des données
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        minZoom: 1,
+        maxZoom: 20
+    }).addTo(macarte);
+}
+window.onload = function()
+{
+    // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+    initMap();
+
+    var adresses =
+        {
+        "Wild Code School" : {"lat" : 45.7463, "lon" : 4.8269, "address1" : "17 rue Delandine", "zip_code" : "69002", "city" : "LYON", "photo" : "https://wildcodeschool.fr/wp-content/uploads/2017/02/logo_orange_small.jpg"},
+        "Julien BEAUHAIRE" : {"lat" : 45.7777, "lon" : 4.7635, "address1" : "8 chemin des Bruyères", "zip_code" : "69130", "city" : "ECULLY", "photo" : "https://www.myatlas.xyz/gallery/2000/5948fe0288280c9a29cj.jpg?1"}
+        };
+
+
+
+    // specify popup options
+    var customOptions =
+        {
+            'maxWidth': '800px',
+            'width': '800px',
+            'className' : 'popupCustom'
+        }
+
+
+
+
+
+    // Parcours de la liste des adresses et affichage popup
+    for (adresse in adresses)
+    {
+        // create popup contents
+        var elements = document.getElementById("bulleInfo");
+
+        //var addressTheatre = document.getElementById("addressTheatre");
+        //addressTheatre.innerHTML=adresse;
+
+        //var customPopup = "<b>" + adresse + "</b><br/><img src='"+ adresses[adresse].photo +"' alt='maptime logo gif' width='50px'/>";
+        //var customPopup1 = "<b>" + [adresses[adresse].lat, adresses[adresse].lon] + "</b>";
+        var marker = L.marker([adresses[adresse].lat, adresses[adresse].lon]).addTo(macarte);
+        // bind the custom popup
+       marker.bindPopup(elements, customOptions);
+
+    }
+
+
+};
+</script>
+
+
+
+
+{% endblock %}
+
