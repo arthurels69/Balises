@@ -14,4 +14,12 @@ class MapController extends AbstractController
     {
         return $this->render('home/map.html.twig');
     }
+
+    /**
+     * @Route("/map2", name="map2")
+     */
+    public function map2()
+    {
+        return $this->render('home/map2.html.twig');
+    }
 }
