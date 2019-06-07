@@ -19,11 +19,11 @@ class SpectacleRepository extends ServiceEntityRepository
         parent::__construct($registry, Spectacle::class);
     }
 
-    // /**
-    //  * @return spectacle[] Returns an array of spectacle objects
-    //  */
+    /**
+    * @return spectacle[] Returns an array of spectacle objects
+    */
     /*
-    public function findByExampleField($value)
+    public function findAllByDate($value)
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
