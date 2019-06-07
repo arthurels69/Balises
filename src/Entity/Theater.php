@@ -86,7 +86,7 @@ class Theater
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="spectacle", mappedBy="theater_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
      */
     private $shows;
 
