@@ -86,7 +86,7 @@ class Theater
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="spectacle", mappedBy="theater_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
      */
     private $shows;
 
@@ -243,14 +243,14 @@ class Theater
     }
 
     /**
-     * @return Collection|spectacle[]
+     * @return Collection|Spectacle[]
      */
     public function getShows(): Collection
     {
         return $this->shows;
     }
 
-    public function addShow(spectacle $show): self
+    public function addShow(Spectacle $show): self
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
@@ -260,7 +260,7 @@ class Theater
         return $this;
     }
 
-    public function removeShow(spectacle $show): self
+    public function removeShow(Spectacle $show): self
     {
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
