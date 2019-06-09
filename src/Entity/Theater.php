@@ -51,7 +51,7 @@ class Theater
     private $address2;
 
     /**
-     * @Assert\Regex(
+     * @Assert\Regex("/^[0-9]{5}$/")
      * @Assert\Length (
      *      max = 5,
      *      maxMessage = "code postal 5 chiffres maximum"
