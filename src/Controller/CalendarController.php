@@ -64,8 +64,8 @@ class CalendarController extends AbstractController
     public function calendarSelectedDay(Request $request)
     {
 
-		//Retrieves the date passed in URI.
-		$selectedDay = substr($request->getUri(), -10);
+        //Retrieves the date passed in URI.
+        $selectedDay = substr($request->getUri(), -10);
         // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
             $selectedDateForm = $request->request->get('picked_date');
@@ -77,16 +77,14 @@ class CalendarController extends AbstractController
                 // array of Strings applied in the twig date_modify filter to increment days in the calendar carousel
                 'oneMoreDay' => $this->calendarService->addMoreDays()
             ]);
-		}
-
+        } elseif (!empty($selectedDay)) {
             //If a date is passed in URI (selected on the carousel calendar)
-         elseif (!empty($selectedDay)) {
             return $this->render('Calendar/calendar.html.twig', [
-                'today' => $selectedDay,
-                // Array of spectacle object taking place on the selected day
-                'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
-                // array of Strings applied in the twig date_modify filter to increment days in the calendar carousel
-                'oneMoreDay' => $this->calendarService->addMoreDays()
+               'today' => $selectedDay,
+               // Array of spectacle object taking place on the selected day
+               'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
+               // array of Strings applied in the twig date_modify filter to increment days in the calendar carousel
+               'oneMoreDay' => $this->calendarService->addMoreDays()
             ]);
         }
     }
