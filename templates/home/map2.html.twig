@@ -53,8 +53,8 @@
                 <div class="col-5">
                     <div class="jumbotron bulleInfo1">
                         <h1 class="display-4">{{ theater.name }}</h1>
-                        <p class="lead">17, rue Delandine</p>
-                        <p class="lead">69000 LYON</p>
+                        <p class="lead">{{ theater.address1 }}</p>
+                        <p class="lead">{{ theater.zipcode }} {{ theater.city }}</p>
                         <hr class="my-4">
                     </div>
                 </div>
@@ -120,12 +120,12 @@
 
 
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
-        var map = L.mapbox.map('map')
+        let map = L.mapbox.map('map')
             .setView([lat, lon], zoom)
             .addLayer(L.mapbox.styleLayer('mapbox://styles/balises/cjwkqf7kr2woy1cqtbxg92srx'))
 
 
-        var customOptions =
+        let customOptions =
             {
                 'maxWidth': '800px',
                 'width': '800px',
@@ -133,7 +133,7 @@
             }
 
         // Récupération coordonnées GPS dans tableau JS :
-        var pointers =
+        let pointers =
             [
                 {% for theater in theaters %}
                 {
@@ -145,16 +145,16 @@
             ];
 
 
-        for (var i = 0; i < pointers.length; i++)
+        for (let i = 0; i < pointers.length; i++)
 
         {
-            var latitude = pointers[i].lat;
-            var longitude = pointers[i].long;
-            var pointerId = pointers[i].id;
-            var elements = document.getElementById('theater'+ pointerId);
+            let latitude = pointers[i].lat;
+            let longitude = pointers[i].long;
+            let pointerId = pointers[i].id;
+            let elements = document.getElementById('theater'+ pointerId);
 
 
-            var marker = L.marker([latitude, longitude]).addTo(map);
+            let marker = L.marker([latitude, longitude]).addTo(map);
 
 
             // bind the custom popup
