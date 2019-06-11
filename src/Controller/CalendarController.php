@@ -80,7 +80,7 @@ class CalendarController extends AbstractController
             ]);
         } elseif (!empty($selectedDay)) {
             //If a date is passed in URI (selected on the carousel calendar)
-			dump($this->calendarService->selectSpectaclesOfTheDay($selectedDay));
+
             return $this->render('Calendar/calendar.html.twig', [
                'today' => $selectedDay,
                // Array of spectacle object taking place on the selected day
