@@ -66,7 +66,8 @@ class CalendarController extends AbstractController
 
         //Retrieves the date passed in URI.
         $selectedDay = substr($request->getUri(), -10);
-        // Date transmitted by the "rechercher par date" formular
+
+        //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
             $selectedDateForm = $request->request->get('picked_date');
 
@@ -79,6 +80,7 @@ class CalendarController extends AbstractController
             ]);
         } elseif (!empty($selectedDay)) {
             //If a date is passed in URI (selected on the carousel calendar)
+
             return $this->render('Calendar/calendar.html.twig', [
                'today' => $selectedDay,
                // Array of spectacle object taking place on the selected day

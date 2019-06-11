@@ -20,10 +20,10 @@ $(document).ready(function(){
     });
 });
 
-function get_initialSlide(el){
+/*function get_initialSlide(el){
     var initialSlide = $( ".month-day" ).index( el.find('.month-day.active') );
     return parseInt(initialSlide);
-}
+}*/
 
 ! function(t) {
     var e = {
