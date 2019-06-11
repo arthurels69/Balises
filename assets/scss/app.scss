@@ -102,18 +102,21 @@ body {
 }
 
 .popupCustom .leaflet-popup-content-wrapper {
-    background-color: rgba(0,0,0,0);
+    box-shadow : none;
+    background: none;
     color: white;
     height: 800px;
     width: 800px;
-  //  position: relative;
 }
 
 
 .bulleInfo
 {
-    background-color: rgba(0,0,0,0);
     font-size: x-small;
+    background: none;
+    display: none;
+    z-index: 2;
+
 }
 
 .bulleInfo1

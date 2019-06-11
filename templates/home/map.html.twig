@@ -23,21 +23,6 @@
 
 {% block body %}
 
-
-    <div id="map">
-    </div>
-
-    <div id="selectplacetitle">
-        <h1>SÉLÉCTIONNER</h1>
-        <h1> VOTRE <span>LIEU</span></h1>
-    </div>
-
-    <div id="logoonmap">
-        <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
-    </div>
-
-
-
     <!-- Info Bulle -->
 
     <div class="bulleInfo" id="bulleInfo">
@@ -90,6 +75,21 @@
             </div>
         </div>
     </div>
+    <div id="map">
+    </div>
+
+    <div id="selectplacetitle">
+        <h1>SÉLÉCTIONNER</h1>
+        <h1> VOTRE <span>LIEU</span></h1>
+    </div>
+
+    <div id="logoonmap">
+        <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
+    </div>
+
+
+
+
 
 
 
@@ -157,8 +157,17 @@ window.onload = function()
 
         // bind the custom popup
         marker.bindPopup(elements, customOptions);
+
+        marker.addEventListener("click",function () {
+            elements.style.display = "block";
+        });
     }
+
+
 };
+
+
+
 </script>
 
 {% endblock %}
