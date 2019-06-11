@@ -22,6 +22,8 @@
 
 
 {% block body %}
+
+
     <div id="map">
     </div>
 
@@ -105,7 +107,7 @@ crossorigin=""></script>
 let lat = 45.75;
 let lon = 4.85;
 let macarte = null;
-let zoom = 12; // Zoom de la carte par défaut
+let zoom = 14; // Zoom de la carte par défaut
 
 // Fonction d'initialisation de la carte
 function initMap()
@@ -127,49 +129,37 @@ window.onload = function()
     // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
     initMap();
 
-    var adresses =
-        {
-        "Wild Code School" : {"lat" : 45.7463, "lon" : 4.8269, "address1" : "17 rue Delandine", "zip_code" : "69002", "city" : "LYON", "photo" : "https://wildcodeschool.fr/wp-content/uploads/2017/02/logo_orange_small.jpg"},
-        "Julien BEAUHAIRE" : {"lat" : 45.7777, "lon" : 4.7635, "address1" : "8 chemin des Bruyères", "zip_code" : "69130", "city" : "ECULLY", "photo" : "https://www.myatlas.xyz/gallery/2000/5948fe0288280c9a29cj.jpg?1"}
-        };
-
-
-
     // specify popup options
     var customOptions =
         {
             'maxWidth': '800px',
             'width': '800px',
             'className' : 'popupCustom'
-        }
+        };
 
+    // Récupération coordonnées GPS dans tableau JS :
+    var pointers =
+        [
+            {% for theater in theaters %}
+                { lat : '{{ theater.lat }}', long : '{{ theater.longitude }}' },
+            {% endfor %}
+        ];
 
+    // Parcours de la liste des adresses, affichage pointer et popup
 
-
-
-    // Parcours de la liste des adresses et affichage popup
-    for (adresse in adresses)
+    for (var i = 0; i < pointers.length; i++)
     {
-        // create popup contents
+        var latitude = pointers[i].lat;
+        var longitude = pointers[i].long;
         var elements = document.getElementById("bulleInfo");
 
-        //var addressTheatre = document.getElementById("addressTheatre");
-        //addressTheatre.innerHTML=adresse;
+        var marker = L.marker([latitude, longitude]).addTo(macarte);
 
-        //var customPopup = "<b>" + adresse + "</b><br/><img src='"+ adresses[adresse].photo +"' alt='maptime logo gif' width='50px'/>";
-        //var customPopup1 = "<b>" + [adresses[adresse].lat, adresses[adresse].lon] + "</b>";
-        var marker = L.marker([adresses[adresse].lat, adresses[adresse].lon]).addTo(macarte);
         // bind the custom popup
-       marker.bindPopup(elements, customOptions);
-
+        marker.bindPopup(elements, customOptions);
     }
-
-
 };
 </script>
-
-
-
 
 {% endblock %}
 
