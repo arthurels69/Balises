@@ -41,6 +41,7 @@ class UserController extends AbstractController
     public function new(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
+        // $theater = new Theater();
         $theater = new Theater();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -62,12 +63,12 @@ class UserController extends AbstractController
             $manager->persist($theater);
             $manager->flush();
 
-            return $this->redirectToRoute('user_index');
+             return $this->redirectToRoute('user_index');
         }
 
         return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
+            //'user' => $user,
+            //'form' => $form->createView(),
             'theater' => $theater
         ]);
     }
