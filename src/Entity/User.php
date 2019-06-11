@@ -28,7 +28,8 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=180, nullable=true)
+     * @ORM\Column(type="string", length=180)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $theaterName;
 

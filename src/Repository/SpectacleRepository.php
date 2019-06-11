@@ -37,7 +37,7 @@ class SpectacleRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?spectacle
+    public function findOneBySomeField($value): ?Show
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
