@@ -26,25 +26,33 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/theatre", name="user_theatre", methods={"GET"})
+     */
+    public function listTheatre(): Response
+    {
+        return $this->render('user/theatre.html.twig');
+    }
+
+    /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $user = new User();
-        // $form = $this->createForm(UserType::class, $user);
-        // $form->handleRequest($request);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     $entityManager->persist($user);
-        //     $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-        //     return $this->redirectToRoute('user_index');
-        // }
+            return $this->redirectToRoute('user_index');
+        }
 
         return $this->render('user/new.html.twig', [
-            //'user' => $user,
-            //'form' => $form->createView(),
+            'user' => $user,
+            'form' => $form->createView(),
         ]);
     }
 
