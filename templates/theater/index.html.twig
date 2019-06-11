@@ -11,16 +11,16 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Adresse 1</th>
-                <th>Adresse 2</th>
+                <th>Adresse </th>
+
                 <th>Code Postal</th>
                 <th>Ville</th>
                 <th>Téléphone</th>
                 <th>Logo</th>
                 <th>Website</th>
-                <th>Tarif de Base</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+                <th>Tarif Base</th>
+                <th>Latitude / Longitude</th>
+
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,16 +30,15 @@
                 <td>{{ theater.id }}</td>
                 <td>{{ theater.name }}</td>
                 <td>{{ theater.email }}</td>
-                <td>{{ theater.address1 }}</td>
-                <td>{{ theater.address2 }}</td>
+                <td>{{ theater.address1 }} {{ theater.address2 }}</td>
                 <td>{{ theater.zipCode }}</td>
                 <td>{{ theater.city }}</td>
                 <td>{{ theater.phoneNumber }}</td>
                 <td>{{ theater.logo }}</td>
                 <td>{{ theater.website }}</td>
                 <td>{{ theater.baseRate }}</td>
-                <td>{{ theater.lat }}</td>
-                <td>{{ theater.longitude }}</td>
+                <td>{{ theater.lat }}  /
+                {{ theater.longitude }}</td>
                 <td>
                     <a href="{{ path('theater_show', {'id': theater.id}) }}">Visualisation</a>
                     <a href="{{ path('theater_edit', {'id': theater.id}) }}">Modification</a>

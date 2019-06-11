@@ -69,7 +69,8 @@ class Theater
 
     //pattern="/(0|\+33)[1-9]( *[0-9]{2}){4}/"
     /**
-     * @Assert\Regex("/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/")
+     * @Assert\Regex("/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/",
+     *      message =" formats : +33 xx xx xx xx xx, +33xxxxxxxxxx, xxxxxxxxxx, xx-xx-xx-xx-xx")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phoneNumber;
