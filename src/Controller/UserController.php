@@ -31,6 +31,14 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/theatre", name="user_theatre", methods={"GET"})
+     */
+    public function listTheatre(): Response
+    {
+        return $this->render('user/theatre.html.twig');
+    }
+
+    /**
      * Create New user
      * @Route("/new", name="user_new", methods={"GET","POST"})
      * @param Request $request
@@ -41,7 +49,7 @@ class UserController extends AbstractController
     public function new(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
-        // $theater = new Theater();
+        $theater = new Theater();
         $theater = new Theater();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -67,8 +75,8 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/new.html.twig', [
-            //'user' => $user,
-            //'form' => $form->createView(),
+            'user' => $user,
+            'form' => $form->createView(),
             'theater' => $theater
         ]);
     }

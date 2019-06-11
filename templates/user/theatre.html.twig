@@ -1,0 +1,49 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Liste des Théâtres{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <link rel="stylesheet" href="/admin_style/admin_style_theatre/admin_style_theatre.css">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="row  custyle w-100  m-0">
+        <table class="table table-striped custab m-auto">
+            <thead>               
+                    <div class="d-flex w-100 justify-content-between">
+                        <span >Liste des Théâtres</span>
+                        <a href="#" class=" btn btn-info btn-xs pull-right mb-2 text-white"><b>+</b>Ajouter</a>
+                    </div>   
+                </tr>
+                <tr>
+                    <th class="col-md-1" >ID</th>
+                    <th class="col-md-4">Title</th>
+                    <th class="col-md-5">Parent ID</th>
+                    <th class="text-center col-md-2">Action</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>1</td>
+                <td>News</td>
+                <td>News Cate</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Products</td>
+                <td>Main Products</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Blogs</td>
+                <td>Parent Blogs</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}
