@@ -1,0 +1,42 @@
+/****************************user/index.html.twig***********************/
+
+.table_index{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin:0 auto;    
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    
+    }
+
+.table_index td,th{
+    text-align:center;
+}
+
+.table_index:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+
+.pull-right:hover,.btn-xs:hover,.btn-xs{
+    color:white !important;
+}
+
+.titre_index{
+    font-size:1.5em;
+    margin-left: 5px;
+}
+
+.head_index{
+    position:relative;
+}
+
+.head_fixe_index{
+    position: fixed;
+    left:0;
+
+}
+
+
+
+
