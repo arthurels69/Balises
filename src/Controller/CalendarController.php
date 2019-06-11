@@ -55,7 +55,7 @@ class CalendarController extends AbstractController
     }
 
     /**
-     * Display the calendar with the selected data as input.
+     * Display the calendar with the selected date as input.
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -63,29 +63,30 @@ class CalendarController extends AbstractController
      */
     public function calendarSelectedDay(Request $request)
     {
+
         //Retrieves the date passed in URI.
         $selectedDay = substr($request->getUri(), -10);
 
-        // Date transmitted by the "rechercher par date" formular
+        //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
-            $selectedDate = $request->request->get('picked_date');
+            $selectedDateForm = $request->request->get('picked_date');
 
             return $this->render('Calendar/calendar.html.twig', [
-                'today' => $selectedDate,
+                'today' => $selectedDateForm,
                 // Array of spectacle object taking place on the selected day
-                'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDate),
+                'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDateForm),
                 // array of Strings applied in the twig date_modify filter to increment days in the calendar carousel
                 'oneMoreDay' => $this->calendarService->addMoreDays()
             ]);
-
-            //If a date is passed in URI (selected on the carousel calendar)
         } elseif (!empty($selectedDay)) {
+            //If a date is passed in URI (selected on the carousel calendar)
+
             return $this->render('Calendar/calendar.html.twig', [
-                'today' => $selectedDay,
-                // Array of spectacle object taking place on the selected day
-                'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
-                // array of Strings applied in the twig date_modify filter to increment days in the calendar carousel
-                'oneMoreDay' => $this->calendarService->addMoreDays()
+               'today' => $selectedDay,
+               // Array of spectacle object taking place on the selected day
+               'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
+               // array of Strings applied in the twig date_modify filter to increment days in the calendar carousel
+               'oneMoreDay' => $this->calendarService->addMoreDays()
             ]);
         }
     }

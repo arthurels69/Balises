@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "87f2ff649b52bc34ba8fe076d1b57be4",
+    "content-hash": "b436e6e59f37b92797efab9c7009de07",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
@@ -2279,6 +2279,59 @@
             "time": "2019-01-14T23:55:14+00:00"
         },
         {
+            "name": "mapado/rest-client-sdk",
+            "version": "v0.30.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mapado/rest-client-sdk.git",
+                "reference": "d218542fb28ae50d8e022e5fe6202e955e1d726b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mapado/rest-client-sdk/zipball/d218542fb28ae50d8e022e5fe6202e955e1d726b",
+                "reference": "d218542fb28ae50d8e022e5fe6202e955e1d726b",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "^1.2",
+                "guzzlehttp/guzzle": "^6.2.2",
+                "ocramius/proxy-manager": "^2.0",
+                "php": "^7.1",
+                "psr/cache": "^1.0",
+                "symfony/http-foundation": "^2.7 || ^3.3 || ^4.0"
+            },
+            "require-dev": {
+                "atoum/atoum": "^3.0.0",
+                "atoum/config-extension": "dev-patch-1 as 0.3.1",
+                "mapado/php-cs-fixer-config": "^2.1",
+                "misd/phone-number-bundle": "^1.1",
+                "phpstan/phpstan": "^0.11.1",
+                "symfony/cache": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mapado\\RestClientSdk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julien Deniau",
+                    "email": "julien.deniau@gmail.com"
+                },
+                {
+                    "name": "Dimitri Allegoet",
+                    "email": "dallegoet@gmail.com"
+                }
+            ],
+            "description": "Rest Client SDK for hydra API",
+            "time": "2019-01-31T15:04:28+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.24.0",
             "source": {
@@ -3669,54 +3722,6 @@
                 "psr-3"
             ],
             "time": "2018-11-20T15:27:04+00:00"
-        },
-        {
-            "name": "psr/simple-cache",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\SimpleCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for simple caching",
-            "keywords": [
-                "cache",
-                "caching",
-                "psr",
-                "psr-16",
-                "simple-cache"
-            ],
-            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -8100,6 +8105,54 @@
                 "productivity"
             ],
             "time": "2018-07-27T15:41:37+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "symfony/debug-bundle",

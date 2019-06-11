@@ -42,7 +42,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Length(min="8", minMessage="Trop court")
+     * @Assert\Length(min="3", minMessage="Trop court")
      */
     private $password;
 
