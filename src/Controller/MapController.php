@@ -10,17 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MapController extends AbstractController
 {
-    /**
-     * @Route("/map", name="map")
-     * @param TheaterRepository $theaterRepository
-     * @return Response
-     */
-    public function index(TheaterRepository $theaterRepository): Response
-    {
-        return $this->render('home/map.html.twig', [
-            'theaters' => $theaterRepository->findAll(),
-        ]);
-    }
+
 
 
 
