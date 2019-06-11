@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Theater{% endblock %}
+
+{% block body %}
+    <h1>Visualisation d'un Théâtre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ theater.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ theater.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ theater.email }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ theater.address1 }}</td>
+            </tr>
+            <tr>
+                <th>Complément Adresse</th>
+                <td>{{ theater.address2 }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ theater.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ theater.city }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ theater.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>{{ theater.logo }}</td>
+            </tr>
+            <tr>
+                <th>Web Site</th>
+                <td>{{ theater.website }}</td>
+            </tr>
+            <tr>
+                <th>Tarif Base</th>
+                <td>{{ theater.baseRate }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ theater.baseRate }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ theater.baseRate }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('theater_index') }}">Retour à la liste</a>
+
+
+
+{% endblock %}

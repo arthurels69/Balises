@@ -6,7 +6,7 @@
     <div class="row h-100 w-100 justify-content-between">
 
         <div class="col-1 m-auto w-100">
-            <i class="fas fa-map-marked fa-10x m-auto"></i>
+            <a class="link-homepage" href="{{ path('map') }}"><i class="fas fa-map-marked fa-10x m-auto"></i></a>
         </div>
 
         <div class="col-1 m-auto">
@@ -14,9 +14,13 @@
         </div>
 
         <div class="col-1 m-auto">
-            <i class="fas fa-calendar-alt fa-10x"></i>
+            <a class="link-homepage" href="{{ path('calendar_home') }}"><i class="fas fa-calendar-alt fa-10x"></i></a>
         </div>
 
+    </div>
+
+    <div class="row w-100 justify-content-around">
+        <a class="btn btn-dark w-100" href="{{ path('app_login') }}">Login</a>
     </div>
 
 {% endblock %}

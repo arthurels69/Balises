@@ -1,24 +1,170 @@
 @import "vars";
 @import "~bootstrap";
+@import "calendar";
 
 html {
     height: 100%;
     width: 100%;
-
 }
 
 body {
     height: 100%;
     width: 100%;
-
-    background-color: #FFEC02;
+    margin: 0;
+    background-color: $baliseYellow;
 }
 
 .container-fluid{
     height: 100%;
 }
 
+// remove the color and link behavior from the calendar and map buttons on homepage
+.link-homepage{
+    color: $black;
+}
+
+.link-homepage:hover{
+    color: $lightblack;
+}
+
+// manage the design of the pulls of the top of calendar page
+.nav-pills-calendar{
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: $black;
+    border-radius: 0.2em;
+}
+
+.nav-pills-calendar a{
+  background-color: $black;
+  color : $baliseYellow;
+}
+
+.nav-pills-calendar a:active{
+  background-color: $lightblack;
+  color : $baliseYellow;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: $baliseYellow;
+  color : $black;
+  border : 1px solid $black;
+}
+
+// manage the design of the event description in calendar
+
+//display-4 is the box containing the day figures
+.day-figure {
+  background-color: $black;
+}
 
 
 
+#map
 
+{
+    z-index: 0;
+    width:100%;
+}
+
+#selectplacetitle
+{
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    z-index: 1;
+    color: black;
+    font-size: 80px;
+}
+
+
+#selectplacetitle h1
+{
+    font-size: 80%;
+}
+
+#selectplacetitle span
+{
+    color: white;
+}
+
+#logoonmap
+{
+    position: absolute;
+    bottom: 40px;
+    right: 2px;
+    z-index: 1;
+    transform: scale(0.7, 0.7);
+}
+
+.popupCustom .leaflet-popup-tip
+{
+    display: none;
+}
+
+.popupCustom .leaflet-popup-content-wrapper {
+    background-color: rgba(0,0,0,0);
+    color: white;
+    height: 800px;
+    width: 800px;
+  //  position: relative;
+}
+
+
+.bulleInfo
+{
+    background-color: rgba(0,0,0,0);
+    font-size: x-small;
+}
+
+.bulleInfo1
+{
+    background-color: black;
+    color: white;
+
+}
+
+.bulleInfo2
+{
+
+}
+
+.bulleInfo3
+{
+    background-color: black;
+    color: white;
+    height: 350px;
+    overflow: auto;
+}
+
+.bulleInfo4
+{
+
+}
+
+.bulleInfo5
+{
+
+}
+
+.bulleInfo6
+{
+    background-color: grey;
+    color: white;
+    height: 350px;
+    overflow: auto;
+}
+
+.bulleInfo1Photo
+{
+    max-width: 100%;
+}
+
+.jumbotron h1
+{
+    font-size: 20px;
+}
+
+.jumbotron p
+{
+    font-size: 15px;
+}

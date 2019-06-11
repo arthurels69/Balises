@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Theater;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
@@ -17,6 +20,8 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/", name="user_index", methods={"GET"})
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -34,18 +39,36 @@ class UserController extends AbstractController
     }
 
     /**
+     * Create New user
      * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
+        $theater = new Theater();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            // Haschage Password
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+
+            // Set ROLE_THEATER for every new users
+            $user->setRoles(['ROLE_THEATER']);
+
+            $manager->persist($user);
+
+            $theater->setEmail($user->getEmail());
+            $theater->setName($user->getTheaterName());
+            $theater->setUser($user);
+
+            $manager->persist($theater);
+            $manager->flush();
 
             return $this->redirectToRoute('user_index');
         }
@@ -53,11 +76,14 @@ class UserController extends AbstractController
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'theater' => $theater
         ]);
     }
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
+     * @param User $user
+     * @return Response
      */
     public function show(User $user): Response
     {
@@ -68,6 +94,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param User $user
+     * @return Response
      */
     public function edit(Request $request, User $user): Response
     {
@@ -90,6 +119,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param User $user
+     * @return Response
      */
     public function delete(Request $request, User $user): Response
     {

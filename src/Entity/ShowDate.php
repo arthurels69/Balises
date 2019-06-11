@@ -19,17 +19,17 @@ class ShowDate
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $dateShow;
 
     /**
      * Many to one relation to the show each date relates to
-     * @ORM\ManyToOne(targetEntity="App\Entity\Show", inversedBy="showDates")
+     * @ORM\ManyToOne(targetEntity="Spectacle", inversedBy="showDates")
      */
     private $showId;
 
     /**
      * Rate used if a date is concerned by a Balises offer
-     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="show_date", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="showDate", cascade={"persist", "remove"})
      */
     private $showRate;
 
@@ -38,24 +38,24 @@ class ShowDate
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDateShow(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->dateShow;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDateShow(\DateTimeInterface $dateShow): self
     {
-        $this->date = $date;
+        $this->dateShow = $dateShow;
 
         return $this;
     }
 
-    public function getShowId(): ?Show
+    public function getShowId(): ?Spectacle
     {
         return $this->showId;
     }
 
-    public function setShowId(?Show $showId): self
+    public function setShowId(?Spectacle $showId): self
     {
         $this->showId = $showId;
 

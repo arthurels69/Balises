@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Theater{% endblock %}
+
+{% block body %}
+    <h1>Modification d'un Théâtre</h1>
+
+    {{ include('theater/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
+
+    <a href="{{ path('theater_index') }}">Retour à la liste</a>
+
+    {{ include('theater/_delete_form.html.twig') }}
+{% endblock %}
