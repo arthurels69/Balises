@@ -44,13 +44,15 @@
 
     <!-- Info Bulle -->
 
-    <div class="bulleInfo" id="bulleInfo">
+    {% for theater in theaters %}
+
+    <div class="bulleInfo" id="theater{{ theater.id }}">
         <div class="container-fluid">
             <div class="row bulleinfo">
 
                 <div class="col-5">
                     <div class="jumbotron bulleInfo1">
-                        <h1 class="display-4">WILD CODE SCHOOL</h1>
+                        <h1 class="display-4">{{ theater.name }}</h1>
                         <p class="lead">17, rue Delandine</p>
                         <p class="lead">69000 LYON</p>
                         <hr class="my-4">
@@ -96,6 +98,10 @@
     </div>
 
 
+{% endfor %}
+
+
+
 
 {% endblock %}
 
@@ -130,24 +136,40 @@
         var pointers =
             [
                 {% for theater in theaters %}
-                { lat : '{{ theater.lat }}', long : '{{ theater.longitude }}' },
+                {
+                    lat : '{{ theater.lat }}',
+                    long : '{{ theater.longitude }}',
+                    id : '{{ theater.id }}',
+                },
                 {% endfor %}
             ];
 
+
         for (var i = 0; i < pointers.length; i++)
+
         {
             var latitude = pointers[i].lat;
             var longitude = pointers[i].long;
-            var elements = document.getElementById("bulleInfo");
+            var pointerId = pointers[i].id;
+            var elements = document.getElementById('theater'+ pointerId);
+
 
             var marker = L.marker([latitude, longitude]).addTo(map);
 
+
             // bind the custom popup
+
             marker.bindPopup(elements, customOptions);
-            marker.addEventListener("click",function () {
+
+
+            marker.addEventListener("click",function ()
+            {
                 elements.style.display = "block";
+
             });
+
         }
+
 
 
     </script>
