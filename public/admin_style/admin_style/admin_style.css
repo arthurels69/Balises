@@ -1,6 +1,6 @@
 /****************************user/index.html.twig***********************/
 
-.table_index{
+.table_user{
     border: 1px solid #ccc;
     padding: 5px;
     margin:0 auto;    
@@ -9,11 +9,11 @@
     
     }
 
-.table_index td,th{
+.table_user td,th{
     text-align:center;
 }
 
-.table_index:hover{
+.table_user:hover{
     box-shadow: 3px 3px 0px transparent;
     transition: 0.5s;
     }
@@ -22,21 +22,30 @@
     color:white !important;
 }
 
-.titre_index{
-    font-size:1.5em;
-    margin-left: 5px;
+.titre_user{
+    background-color:  #58d68d ;
+    border-radius: 10px 0px 0px 0px;      
 }
 
-.head_index{
-    position:relative;
+h4{
+    vertical-align: middle !important;
+    line-height: 40px;
+    height:50px;
+   
 }
 
-.head_fixe_index{
-    position: fixed;
-    left:0;
-
+.thead_user{
+position: sticky;
+top:130px;
+z-index:500;
+background-color: #F4F3EF;    
 }
 
-
+.titre_user{
+    position: sticky;
+    top:82px;
+    z-index:500;
+    
+}
 
 
