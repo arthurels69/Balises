@@ -6,6 +6,8 @@ namespace App\Controller;
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Service\CalendarService;
+use Mapado\RestClientSdk\SdkClient;
+use Mapado\RestClientSdk\Tests\Units\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +44,9 @@ class CalendarController extends AbstractController
      */
     public function calendarHome()
     {
+
+
+
         $today = new \DateTime();
         $todayString = $today->format("Y-m-d");
 

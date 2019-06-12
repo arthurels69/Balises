@@ -77,6 +77,8 @@ class TheaterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            //Bordel pour l'upload d'image
+
             return $this->redirectToRoute('theater_index', [
                 'id' => $theater->getId(),
             ]);
