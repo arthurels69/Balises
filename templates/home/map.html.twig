@@ -5,7 +5,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
           crossorigin="" />
 
@@ -23,12 +22,7 @@
 
 
 {% block body %}
-
-
-    {# {% for theater in theaters %}
-     {{ theater.city }}
-    {% endfor %} #}
-    <div class="popupCustom" id="map">
+    <div id="map">
     </div>
 
     <div id="selectplacetitle">
@@ -44,17 +38,15 @@
 
     <!-- Info Bulle -->
 
-    {% for theater in theaters %}
-
-    <div class="bulleInfo" id="theater{{ theater.id }}">
+    <div class="bulleInfo" id="bulleInfo">
         <div class="container-fluid">
             <div class="row bulleinfo">
 
                 <div class="col-5">
                     <div class="jumbotron bulleInfo1">
-                        <h1 class="display-4">{{ theater.name }}</h1>
-                        <p class="lead">{{ theater.address1 }}</p>
-                        <p class="lead">{{ theater.zipcode }} {{ theater.city }}</p>
+                        <h1 class="display-4">WILD CODE SCHOOL</h1>
+                        <p class="lead">17, rue Delandine</p>
+                        <p class="lead">69000 LYON</p>
                         <hr class="my-4">
                     </div>
                 </div>
@@ -98,10 +90,6 @@
     </div>
 
 
-{% endfor %}
-
-
-
 
 {% endblock %}
 
@@ -109,71 +97,51 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+crossorigin=""></script>
+    <script type="text/javascript">
+// On initialise la latitude et la longitude de Lyon (centre de la carte)
+let lat = 45.75;
+let lon = 4.85;
+let macarte = null;
+let zoom = 14; // Zoom de la carte par défaut
 
+// Fonction d'initialisation de la carte
+function initMap() {
+    // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+    macarte = L.map('map').setView([lat, lon], zoom);
+    // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        // Il est toujours bien de laisser le lien vers la source des données
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        minZoom: 1,
+        maxZoom: 20
+    }).addTo(macarte);
+}
+window.onload = function(){
+    // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+    initMap();
 
-    <script>
-        // On initialise la latitude et la longitude de Lyon (centre de la carte)
-        let lat = 45.75;
-        let lon = 4.85;
-        let zoom = 13; // Zoom de la carte par défaut
+    var adresses = {
+        "Wild Code School" : {"lat" : 45.7463, "lon" : 4.8269599999999855, "address" : "17 rue Delandine", "ZC" : "69002", "city" : "LYON"}
+    };
 
+    // Nous parcourons la liste des adresses
+    for (adresse in adresses) {
+        var marker = L.marker([adresses[adresse].lat, adresses[adresse].lon]).bindPopup(
+            "<h5>"+adresse+"</h5> <p>"
+            + adresses[adresse].address + "</p>"+
+            "<p>"
+            + adresses[adresse].ZC + " " + adresses[adresse].city +
+            "</p>"
+        )
+            .addTo(macarte);
+        // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
+        //marker.bindPopup(adresses[adresse].place).openPopup();
 
-        L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
-        let map = L.mapbox.map('map')
-            .setView([lat, lon], zoom)
-            .addLayer(L.mapbox.styleLayer('mapbox://styles/balises/cjwkqf7kr2woy1cqtbxg92srx'))
-
-
-        let customOptions =
-            {
-                'maxWidth': '800px',
-                'width': '800px',
-                'className' : 'popupCustom'
-            }
-
-        // Récupération coordonnées GPS dans tableau JS :
-        let pointers =
-            [
-                {% for theater in theaters %}
-                {
-                    lat : '{{ theater.lat }}',
-                    long : '{{ theater.longitude }}',
-                    id : '{{ theater.id }}',
-                },
-                {% endfor %}
-            ];
-
-
-        for (let i = 0; i < pointers.length; i++)
-
-        {
-            let latitude = pointers[i].lat;
-            let longitude = pointers[i].long;
-            let pointerId = pointers[i].id;
-            let elements = document.getElementById('theater'+ pointerId);
-
-
-            let marker = L.marker([latitude, longitude]).addTo(map);
-
-
-            // bind the custom popup
-
-            marker.bindPopup(elements, customOptions);
-
-
-            marker.addEventListener("click",function ()
-            {
-                elements.style.display = "block";
-
-            });
-
-        }
-
-
-
-    </script>
+    }
+};
+</script>
 
 
 {% endblock %}
-
