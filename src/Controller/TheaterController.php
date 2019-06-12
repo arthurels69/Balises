@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
@@ -69,7 +70,7 @@ class TheaterController extends AbstractController
     /**
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Theater $theater): Response
+    public function edit(Request $request, Theater $theater, UploadedFile $file): Response
     {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
@@ -78,6 +79,11 @@ class TheaterController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             //Bordel pour l'upload d'image
+
+			//$file = $theater->getLogo();
+
+			//$filename = $this->generate
+
 
             return $this->redirectToRoute('theater_index', [
                 'id' => $theater->getId(),
