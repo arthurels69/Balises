@@ -6,8 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\Regex;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -67,7 +66,7 @@ class Theater
     private $city;
 
 
-    //pattern="/(0|\+33)[1-9]( *[0-9]{2}){4}/"
+    //pattern="/(0|\+33)[1-9]( *[0-9]{2}){4}/"  /(0|\\+33|0033)[1-9][0-9]{8}/
     /**
      * @Assert\Regex("/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/",
      *      message =" formats : +33 xx xx xx xx xx, +33xxxxxxxxxx, xxxxxxxxxx, xx-xx-xx-xx-xx")
@@ -88,8 +87,11 @@ class Theater
      */
     private $website;
 
+
+    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/
     /**
-     * @Assert\Regex("/^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/")
+     *
+     * @Assert\Regex( "/^[1-9][0-9]*\.[0-9]{2}$/", message =" tarif non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
@@ -106,11 +108,13 @@ class Theater
     private $shows;
 
     /**
+     * @Assert\Regex("/^[1-9][0-9]*\.[0-9]{2}$/", message = "valeur non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $lat;
 
     /**
+     * @Assert\Regex("/^[1-9][0-9]*\.[0-9]{2}$/", message = "valeur non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
