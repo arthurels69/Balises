@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Theater;
 use App\Entity\User;
+use App\Service\TriService;
 use App\Form\UserType;
+use App\Entity\Theater;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -18,19 +19,23 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
-    /*
-     * @Route("/", name="user_index", methods={"GET"})
+    /**
+     *Create Index user
+     * @Route("/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(string $champ, string $sens, UserRepository $userRepository, TriService $tri): Response
     {
-
+        if($champ != ""){
+            $users = $tri->tri($champ, $sens);            
+        } else {
+            $users = $userRepository->findAll();
+        }       
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll()
+            'users' => $users            
         ]);
     }
-
     /**
      * Create New user
      * @Route("/new", name="user_new", methods={"GET","POST"})

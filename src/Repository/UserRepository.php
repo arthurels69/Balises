@@ -18,23 +18,21 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
-
-      // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function getOrderUsers($champ, $order)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        $field = 'user.' . $champ;
+        if ($champ == 'zipCode') {
+            $field = 'theater.' . $champ;
+        }
+
+        return $this->createQueryBuilder('user')
+            ->innerJoin('user.theater', 'theater')
+            ->orderBy($field, $order)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?User
