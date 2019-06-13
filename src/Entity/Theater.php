@@ -107,13 +107,11 @@ class Theater
     private $shows;
 
     /**
-     * @Assert\Regex("/^[1-9][0-9]*\.[0-9]{2}$/", message = "valeur non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $lat;
 
     /**
-     * @Assert\Regex("/^[1-9][0-9]*\.[0-9]{2}$/", message = "valeur non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
