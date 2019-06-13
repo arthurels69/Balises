@@ -28,13 +28,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=180)
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $theaterName;
-
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -87,22 +80,6 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTheaterName()
-    {
-        return $this->theaterName;
-    }
-
-    /**
-     * @param mixed $theaterName
-     */
-    public function setTheaterName($theaterName): void
-    {
-        $this->theaterName = $theaterName;
     }
 
     /**

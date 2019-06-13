@@ -33,14 +33,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/theatre", name="user_theatre", methods={"GET"})
-     */
-    public function listTheatre(): Response
-    {
-        return $this->render('user/theatre.html.twig');
-    }
-
-    /**
      * Create New user
      * @Route("/new", name="user_new", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
@@ -67,7 +59,6 @@ class UserController extends AbstractController
             $manager->persist($user);
 
             $theater->setEmail($user->getEmail());
-            $theater->setName($user->getTheaterName());
             $theater->setUser($user);
 
             $manager->persist($theater);
@@ -89,10 +80,11 @@ class UserController extends AbstractController
      * @param User $user
      * @return Response
      */
-    public function show(User $user): Response
+    public function show(User $user, Theater $theater): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'theater' => $theater
         ]);
     }
 
