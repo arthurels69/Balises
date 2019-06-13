@@ -75,7 +75,10 @@ class Theater
 
 
     /**
-     * @Assert\Regex("#https?://[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,4}(/\S*)?#")
+     * @Assert\File(mimeTypes={ "image/png",
+     *          "image/jpeg",
+     *          "image/jpg",
+     *          "image/gif" })
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
