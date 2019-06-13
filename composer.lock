@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cc28d448fbdb563fed19ce5106c3458",
+    "content-hash": "aa32cd08dcc4424e335b00c055dc3481",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
@@ -2266,6 +2266,53 @@
             ],
             "description": "Rest Client SDK for hydra API",
             "time": "2019-01-31T15:04:28+00:00"
+        },
+        {
+            "name": "mapado/rest-client-sdk-bundle",
+            "version": "v0.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mapado/rest-client-sdk-bundle.git",
+                "reference": "1d9ad827050bcdd132aa9afa736f23e84d289e38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mapado/rest-client-sdk-bundle/zipball/1d9ad827050bcdd132aa9afa736f23e84d289e38",
+                "reference": "1d9ad827050bcdd132aa9afa736f23e84d289e38",
+                "shasum": ""
+            },
+            "require": {
+                "mapado/rest-client-sdk": "^0.30",
+                "symfony/config": "^2.7 || ^3.0 || ^4.0",
+                "symfony/dependency-injection": "^2.7 || ^3.0 || ^4.0",
+                "symfony/http-kernel": "^2.7 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "atoum/atoum": "@stable",
+                "raulfraile/ladybug": "^1.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Mapado\\RestClientSdkBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julien Deniau",
+                    "email": "julien.deniau@gmail.com"
+                },
+                {
+                    "name": "Dimitri Allegoet",
+                    "email": "dallegoet@gmail.com"
+                }
+            ],
+            "description": "Rest Client SDK Bundle for hydra API",
+            "time": "2019-01-31T15:08:24+00:00"
         },
         {
             "name": "monolog/monolog",

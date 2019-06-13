@@ -15,6 +15,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('theaterName')
             ->add('password')
             ->add('confirm_password')
             ->add('theater', TheaterType::class)
