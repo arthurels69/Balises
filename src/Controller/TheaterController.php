@@ -6,19 +6,25 @@ use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/theater")
  */
 class TheaterController extends AbstractController
 {
-    /**
+
+	private $file;
+
+
+
+	/**
      * @Route("/", name="theater_index", methods={"GET"})
      */
     public function index(TheaterRepository $theaterRepository): Response
@@ -31,7 +37,6 @@ class TheaterController extends AbstractController
 
     //* @IsGranted("ROLE_ADMIN")
     /**
-
      * @Route("/new", name="theater_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -67,10 +72,15 @@ class TheaterController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Theater $theater, UploadedFile $file): Response
+	/**
+	 * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
+	 * @param Request $request
+	 * @param Theater $theater
+	 * @param TheaterRepository $theaterRepository
+	 * @param UploadedFile $file
+	 * @return Response
+	 */
+    public function edit(Request $request, Theater $theater, TheaterRepository $theaterRepository): Response
     {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
@@ -78,16 +88,26 @@ class TheaterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            //Bordel pour l'upload d'image
+			/** @var UploadedFile $file */
+			$file = $request->files->get('theater')['logo'];
 
-			//$file = $theater->getLogo();
+			$fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-			//$filename = $this->generate
+			try{
 
+				$file->move($this->getParameter('logo_directory'), $fileName);
 
-            return $this->redirectToRoute('theater_index', [
-                'id' => $theater->getId(),
-            ]);
+			}
+			catch (FileException $e) {
+				throw new FileException($e)
+			}
+
+			$theater->setLogo($fileName);
+
+			return $this->render('theater/index.html.twig', [
+				'theaters' => $theaterRepository->findAll()
+			]);
+           // return $this->redirectToRoute('theater_index');
         }
 
         return $this->render('theater/edit.html.twig', [
