@@ -1,0 +1,38 @@
+@import "vars";
+@import "~bootstrap";
+
+
+.hold::placeholder
+{
+  font-style: italic;
+  color : darkred;
+
+}
+
+.zipCode
+{
+  width: 100px;
+}
+.phone
+{
+  width: 150px;
+}
+
+.base
+{
+  width: 100px;
+}
+.latitude
+{
+  width: 100px;
+}
+.longitude
+{
+  width: 100px;
+}
+
+.espSaisie
+{
+  padding-bottom: 10px;
+}
+

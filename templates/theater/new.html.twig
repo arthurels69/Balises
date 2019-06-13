@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Theater{% endblock %}
+
+{% block body %}
+    <h1>Création d'un Théâtre</h1>
+
+    {{ include('theater/_form.html.twig') }}
+
+    <a href="{{ path('theater_index') }}">Retour à la liste</a>
+{% endblock %}
