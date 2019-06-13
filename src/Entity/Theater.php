@@ -75,11 +75,8 @@ class Theater
 
 
     /**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={ "image/png",
-     *          "image/jpeg",
-     *          "image/jpg",
-     *          "image/gif" })
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/png"})
      */
     private $logo;
 

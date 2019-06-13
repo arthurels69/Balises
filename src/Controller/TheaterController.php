@@ -13,18 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
 /**
  * @Route("/theater")
  */
 class TheaterController extends AbstractController
 {
 
-	private $file;
+    private $file;
 
 
 
-	/**
+    /**
      * @Route("/", name="theater_index", methods={"GET"})
      */
     public function index(TheaterRepository $theaterRepository): Response
@@ -72,48 +71,23 @@ class TheaterController extends AbstractController
         ]);
     }
 
-	/**
-	 * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
-	 * @param Request $request
-	 * @param Theater $theater
-	 * @param TheaterRepository $theaterRepository
-	 * @param UploadedFile $file
-	 * @return Response
-	 */
+    /**
+     * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Theater $theater
+     * @param TheaterRepository $theaterRepository
+     * @return Response
+     */
     public function edit(Request $request, Theater $theater, TheaterRepository $theaterRepository): Response
     {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-			/** @var UploadedFile $file */
-			$file = $request->files->get('theater')['logo'];
-
-			$fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-			try{
-
-				$file->move($this->getParameter('logo_directory'), $fileName);
-
-			}
-			catch (FileException $e) {
-				throw new FileException($e)
-			}
-
-			$theater->setLogo($fileName);
-
-			return $this->render('theater/index.html.twig', [
-				'theaters' => $theaterRepository->findAll()
-			]);
-           // return $this->redirectToRoute('theater_index');
+			$this->getDoctrine()->getManager()->flush();
+			$this->redirectToRoute('theater_index');
         }
 
-        return $this->render('theater/edit.html.twig', [
-            'theater' => $theater,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
