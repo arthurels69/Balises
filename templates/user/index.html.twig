@@ -1,37 +1,61 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+<div class="row  row_user w-100  m-0">
+        <table class="table table-striped table_user m-auto">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Nom du Théâtre</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.theaterName }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <thead class="thead_user"> 
+                    <div class="titre_user d-flex w-100 justify-content-between">
+                        <h4 class="my-0 mx-2" >Liste des Théâtres</h4>
+                        <a href="{{ path('user_new') }}" class=" btn btn-info  text-white"><b>+</b>Ajouter</a>
+                    </div> 
+                                    
+                    <tr>
+                        <th class="col-md-4" >
+                            <a href="/user/theaterName/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a> 
+                            <a href="/user/theaterName/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a> 
+                            Nom du Théâtre
+                        </th>
+                        <th class="col-md-3">
+                            <a href="/user/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a> 
+                            <a href="/user/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a> 
+                            Email
+                        </th>
+                        <th class="col-md-3">
+                            <a href="/user/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a> 
+                            <a href="/user/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a> 
+                            Code Postal
+                        </th>
+                        <th class="text-center col-md-4">Action</th>
+                    </tr>                
+            </thead>                  
+    
+            {% for user in users %}
+                <tr>                       
+                    {% if user.roles[0]!="ROLE_ADMIN" %}
+                        <td>{{ user.theaterName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.theater.zipCode }}</td>
+                        <td class="text-center">
+                            <a class='btn btn-info btn-xs' href="#">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Edit
+                            </a> 
+                            <a href="#" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Del
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}        
+        </table>
+    </div>    
 
-    <a href="{{ path('user_new') }}">Create new</a>
 {% endblock %}
+
+
+
+
