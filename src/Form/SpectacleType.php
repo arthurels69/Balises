@@ -33,6 +33,8 @@ class SpectacleType extends AbstractType
                 'entry_type' => ShowDateType::class,
                 'entry_options' => ['label' => false],
                 'allow_add'    => true,
+                'prototype' => true,
+                'by_reference' => false
             ]);
     }
 }
