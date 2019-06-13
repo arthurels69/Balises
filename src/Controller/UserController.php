@@ -27,13 +27,13 @@ class UserController extends AbstractController
      */
     public function index(string $champ, string $sens, UserRepository $userRepository, TriService $tri): Response
     {
-        if($champ != ""){
-            $users = $tri->tri($champ, $sens);            
+        if ($champ != "") {
+            $users = $tri->tri($champ, $sens);
         } else {
             $users = $userRepository->findAll();
-        }       
+        }
         return $this->render('user/index.html.twig', [
-            'users' => $users            
+            'users' => $users
         ]);
     }
     /**

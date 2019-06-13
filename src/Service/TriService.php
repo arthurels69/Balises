@@ -1,21 +1,24 @@
 <?php
 namespace App\Service;
+
 use App\Repository\UserRepository;
 
 /**
  * Classe pour trier un champ par ordre croissant ou decroissant
  */
-class TriService {
+class TriService
+{
 
-private $userRepository;
+    private $userRepository;
 
     /**
-     * Ce contructeur permet l'injection de dépendance 
+     * Ce contructeur permet l'injection de dépendance
      * de l'objet $userRepository pour le container du Service
      *
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository){
+    public function __construct(UserRepository $userRepository)
+    {
         $this->userRepository=$userRepository;
     }
 
@@ -27,14 +30,12 @@ private $userRepository;
       * @return array
       */
 
-    public function tri(String $champ,String $sens) :array
+    public function tri(String $champ, String $sens) :array
     {
         if ($sens == "up") {
             return $this->userRepository->getOrderUsers($champ, 'ASC');
-        }
-        else {
+        } else {
             return $this->userRepository->getOrderUsers($champ, 'DESC');
         }
     }
 }
-
