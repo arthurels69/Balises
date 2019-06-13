@@ -32,7 +32,7 @@
     </div>
 
     <div id="selectplacetitle">
-        <h1>SÉLÉCTIONNER</h1>
+        <h1>SÉLECTIONNER</h1>
         <h1> VOTRE <span>LIEU</span></h1>
     </div>
 
@@ -118,7 +118,6 @@
         let lon = 4.85;
         let zoom = 13; // Zoom de la carte par défaut
 
-
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
         let map = L.mapbox.map('map')
             .setView([lat, lon], zoom)
@@ -127,9 +126,9 @@
 
         let customOptions =
             {
-                'maxWidth': '800px',
-                'width': '800px',
-                'className' : 'popupCustom'
+                'maxWidth': '100%',
+                'width': '100%',
+                'className' : 'popupCustom',
             }
 
         // Récupération coordonnées GPS dans tableau JS :
@@ -152,7 +151,8 @@
             let longitude = pointers[i].long;
             let pointerId = pointers[i].id;
             let elements = document.getElementById('theater'+ pointerId);
-
+            let hideAction = document.getElementById('selectplacetitle');
+            hideAction.style.display = "block";
 
             let marker = L.marker([latitude, longitude]).addTo(map);
 
@@ -165,10 +165,22 @@
             marker.addEventListener("click",function ()
             {
                 elements.style.display = "block";
+                hideAction.style.display = "none";
+                map.setView([latitude, longitude], zoom);
 
             });
 
+
         }
+
+
+        map.addEventListener("click", function () {
+            let hideAction = document.getElementById('selectplacetitle');
+            hideAction.style.display = "block";
+            map.setView([lat, lon], zoom);
+
+
+        })
 
 
 
