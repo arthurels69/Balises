@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,31 +85,14 @@ class TheaterController extends AbstractController
      * @param Theater $theater
      * @return Response
      */
-    public function edit(Request $request, Theater $theater): Response
+    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
     {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $street = $theater->getAddress1();
-            $zipCode = $theater->getZipCode();
-            $city = $theater->getCity();
+            $theaterService->geocode($theater);
 
-            $address = $street . " " . $zipCode . " " . $city;
-
-            $client = new Client([
-                    'base_uri' => 'https://nominatim.openstreetmap.org/',
-                ]);
-
-            $response = $client->request('GET', 'search.php?q='
-                 . urlencode($address)
-                 . '&format=json');
-            $body = $response->getBody();
-            $obj = json_decode($body->getContents(), true);
-            $latitude = $obj[0]['lat'];
-            $longitude = $obj[0]['lon'];
-            $theater->setLongitude($longitude)
-                    ->setLat($latitude);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('theater_index', [
