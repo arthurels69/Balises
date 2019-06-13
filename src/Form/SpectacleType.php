@@ -20,7 +20,7 @@ class SpectacleType extends AbstractType
             ->add('photoCredits')
             ->add('additionalInfos')
             ->add('isBalise')
-            ->add('offerType')
+//            ->add('offerType')
             ->add('mapadoLink')
             ->add('baseRate');
     }
