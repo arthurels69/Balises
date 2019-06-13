@@ -19,6 +19,9 @@ class MapController extends AbstractController
      */
     public function map2(TheaterRepository $theaterRepository)
     {
+
+
+
         return $this->render('home/map2.html.twig', [
             'theaters' => $theaterRepository->findAll(),
         ]);
