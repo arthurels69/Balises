@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.distribution) }}
+    {{ form_row(form.mandatoryInfos) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.photoCredits) }}
+    {{ form_row(form.additionalInfos) }}
+    {{ form_row(form.isBalise) }}
+    {{ form_row(form.mapadoLink) }}
+    {{ form_row(form.baseRate) }}
+    {{ form_row(form.showDates.vars.prototype) }}
+
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

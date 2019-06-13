@@ -76,8 +76,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_THEATER")
      * @param User $user
+     * @param Theater $theater
      * @return Response
      */
     public function show(User $user, Theater $theater): Response
@@ -90,7 +91,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_THEATER")
      * @param Request $request
      * @param User $user
      * @return Response

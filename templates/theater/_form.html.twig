@@ -1,60 +1,73 @@
 {{ form_start(form) }}
 <div class = 'container'>
     <div class="row">
-        <div class="col-sm-6">
-            {{ form_label(formT.name, 'Nom du Théâtre') }}
+        <div class="col-sm-6 espSaisie">
+            {{ form_label(form.name, 'Nom du Théâtre') }}
             {{ form_widget(form.name) }}
         </div>
-        <div class="col-sm-6" >
-            {{ form_label(form.email, 'Courriel') }}
-            {{ form_widget(form.email, {'attr':{'placeholder': 'emai@emai.fr'}}) }}
-        </div>
+
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 espSaisie">
             {{ form_label(form.address1, 'Adresse') }}
             {{ form_widget(form.address1) }}
         </div>
-    </div>
-    <div class="row">
+
         <div class="col-sm-6">
             {{ form_label(form.address2, 'Complément d\'Adresse') }}
             {{ form_widget(form.address2) }}
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 espSaisie">
             {{ form_label(form.zipCode, 'Code Postal') }}
-            {{ form_widget(form.zipCode, {'attr':{'placeholder': '99999'}}) }}
+            {{ form_widget(form.zipCode, {'attr': {'class': 'hold zipCode','placeholder': '99999'}}) }}
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 espSaisie">
             {{ form_label(form.city, 'Ville') }}
             {{ form_widget(form.city) }}
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6 espSaisie">
             {{ form_label(form.phoneNumber, 'Téléphone') }}
-            {{ form_widget(form.phoneNumber) }}
+            {{ form_widget(form.phoneNumber, {'attr': {'class': 'phone hold','placeholder':
+                '+330102030405 +33 01 02 03 04 05  0102030405, 01-02-03-04-05'}}) }}
+            {{ form_help(form.phoneNumber) }}
+        </div>
+        <div class="col-sm-6" >
+            {{ form_label(form.email, 'Courriel') }}
+            {{ form_widget(form.email, {'attr':{'class': 'hold','placeholder': 'email@email.fr'}}) }}
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 espSaisie">
             {{ form_label(form.logo, 'Logo') }}
-            {{ form_widget(form.logo) }}
+            {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'commençant par http:// ou https://'}}) }}
+            {{ form_help(form.logo) }}
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 espSaisie">
             {{ form_label(form.website, 'Site Web') }}
-            {{ form_widget(form.website) }}
+            {{ form_widget(form.website, {'attr': {'class': 'hold','placeholder': 'commençant par http:// ou https://'}}) }}
+            {{ form_help(form.website) }}
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
-            {{ form_label(form.baseRate, 'Tarif de Base') }}
-            {{ form_widget(form.baseRate) }}
+        <div class="col-sm-4">
+            {{ form_label(form.lat, 'Latitude') }}
+            {{ form_widget(form.lat, {'attr': {'class': 'latitude hold','placeholder': '99999.99'}}) }}
         </div>
+        <div class="col-sm-2">
+            {{ form_label(form.longitude, 'Longitude') }}
+            {{ form_widget(form.longitude, {'attr': {'class': 'longitude hold','placeholder': '99999.99'}}) }}
+        </div>
+        <div class="col-sm-2">
+            {{ form_label(form.baseRate, 'Tarif de Base') }}
+            {{ form_widget(form.baseRate, {'attr': {'class': 'hold zipCode','placeholder': '99999.99'}}) }}
+        </div>
+
     </div>
     {% if form_errors(form) != '' %}
         {{ form_errors(form) }}

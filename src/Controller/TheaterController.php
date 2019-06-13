@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/theater")
+ * @isGranted("ROLE_THEATER")
  */
 class TheaterController extends AbstractController
 {
