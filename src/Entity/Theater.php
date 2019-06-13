@@ -75,10 +75,7 @@ class Theater
 
 
     /**
-     * @Assert\File(mimeTypes={ "image/png",
-     *          "image/jpeg",
-     *          "image/jpg",
-     *          "image/gif" })
+     * @Assert\File(mimeTypes={ "image/png"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
@@ -120,6 +117,11 @@ class Theater
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -314,6 +316,18 @@ class Theater
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

@@ -8,15 +8,11 @@
 
         <div class="col-sm-4 espSaisie">
             {{ form_label(form.logo, 'Logo') }}
-            {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'format : jpg, png, gif'}}) }}
+            {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'format : png'}}) }}
             {{ form_help(form.logo) }}
         </div>
-
-
-        <div class="col-sm-2 espSaisie">
-            <div class="file-loading">
-                <input id="picture" name="picture[]" type="file" multiple="multiple" class="file"  data-theme="fas">
-            </div>
+        <div class=""img_logo>
+            <img src="{{ asset('uploads/' ~ theater.logo) }}"></img>
         </div>
 
 
