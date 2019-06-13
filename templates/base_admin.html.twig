@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Admin Balise</title>
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+         
+        <link rel="stylesheet" href="/admin_style/admin_style_menu/admin_style_menu.css">
+        <link rel="stylesheet" href="/admin_style/admin_style/admin_style.css">
+    </head>
+
+    <body class="body_admin">
+            <div class="wrapper">
+                    <!-- Sidebar  -->
+                    <nav id="sidebar">
+                        <div class="sidebar-header">
+                            <img class="mr-4" src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="logo_admin" height=80 width=80>
+                            <img src="https://paradipport.gov.in/Admin/images/login.png" alt="logo_balises" height=70 width=70>
+                        </div>
+                        
+                        <ul class="list-unstyled components">                                    
+                            <li>
+                                <a href="#">Tableau de bord</a>
+                            </li>                             
+                            <li>
+                                <a href="{{ path('user_index') }}">Théâtre</a>
+                            </li>
+                            <li>
+                                <a href="#">Spectacles et Places</a>
+                            </li>            
+                             <li>
+                                <a href="#">Coefficients</a>
+                            </li>
+                        </ul>
+                    </nav>
+            
+                    <!-- Page Content  -->
+                    <div id="content">
+            
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+                            <div class="container-fluid">
+            
+                                <button type="button" id="sidebarCollapse" class="btn btn-info my-2">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Sidebar</span>
+                                </button>                   
+            
+                                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <i class="fas fa-align-justify"></i>
+                                </button>
+            
+                                
+                                <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarSupportedContent">
+                                    
+                                    <nav class="navbar1 navbar-light bg-light">
+                                        <form class="form-inline">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                            <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+                                        </form>
+                                    </nav>
+            
+                                    <button type="button" id="deconnexion" class="btn btn-danger  my-sm-2 d-block">
+                                        <span>Déconnexion</span>
+                                    </button>
+                                </div>           
+                            </div>
+                        </nav>
+            
+                        <div class="container-fluid content_admin">
+
+                            {% block body %}
+                            {% endblock %}
+                            
+                        </div><!-- fin content_admin -->
+                    </div>
+                </div>
+
+        
+           
+            
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+      
+    <script type="text/javascript" src="/admin_style/admin_style_menu/admin_style_menu.js"></script>
+                
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+       
+    {% endblock %}
+    </body>
+</html>
