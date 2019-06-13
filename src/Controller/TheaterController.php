@@ -84,10 +84,9 @@ class TheaterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-			$this->getDoctrine()->getManager()->flush();
-			$this->redirectToRoute('theater_index');
+            $this->getDoctrine()->getManager()->flush();
+            $this->redirectToRoute('theater_index');
         }
-
     }
 
     /**
