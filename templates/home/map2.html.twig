@@ -25,19 +25,22 @@
 {% block body %}
 
 
-    {# {% for theater in theaters %}
-     {{ theater.city }}
-    {% endfor %} #}
     <div class="popupCustom" id="map">
     </div>
 
+
+
     <div id="selectplacetitle">
-        <h1>SÉLÉCTIONNER</h1>
+
+
+        <img id="jumelles" style="max-width: 80px" src="https://img.icons8.com/metro/420/opera-glasses.png">
+
+        <h1>SÉLECTIONNER</h1>
         <h1> VOTRE <span>LIEU</span></h1>
     </div>
 
     <div id="logoonmap">
-        <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
+        <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
     </div>
 
 
@@ -52,10 +55,12 @@
 
                 <div class="col-5">
                     <div class="jumbotron bulleInfo1">
-                        <h1 class="display-4">{{ theater.name }}</h1>
+                        <img src="{{ theater.logo }}" style="max-width: 100%; padding-bottom: 5%">
+                        <br>
+                        <h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1>
                         <p class="lead">{{ theater.address1 }}</p>
                         <p class="lead">{{ theater.zipcode }} {{ theater.city }}</p>
-                        <hr class="my-4">
+                        <p class="lead">{{ theater.phoneNumber }}</p>
                     </div>
                 </div>
 
@@ -69,7 +74,7 @@
                     <div class="jumbotron bulleInfo3">
                         <h1 class="display-4">Hello, world!</h1>
                         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                        <hr class="my-4">
+
                     </div>
                 </div>
 
@@ -89,7 +94,7 @@
                     <div class="jumbotron bulleInfo6">
                         <h1 class="display-4">Hello, world!</h1>
                         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                        <hr class="my-4">
+
                     </div>
                 </div>
 
@@ -118,7 +123,6 @@
         let lon = 4.85;
         let zoom = 13; // Zoom de la carte par défaut
 
-
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
         let map = L.mapbox.map('map')
             .setView([lat, lon], zoom)
@@ -127,9 +131,9 @@
 
         let customOptions =
             {
-                'maxWidth': '800px',
-                'width': '800px',
-                'className' : 'popupCustom'
+                'maxWidth': '100%',
+                'width': '100%',
+                'className' : 'popupCustom',
             }
 
         // Récupération coordonnées GPS dans tableau JS :
@@ -152,7 +156,8 @@
             let longitude = pointers[i].long;
             let pointerId = pointers[i].id;
             let elements = document.getElementById('theater'+ pointerId);
-
+            let hideAction = document.getElementById('selectplacetitle');
+            hideAction.style.display = "block";
 
             let marker = L.marker([latitude, longitude]).addTo(map);
 
@@ -165,10 +170,31 @@
             marker.addEventListener("click",function ()
             {
                 elements.style.display = "block";
+                hideAction.style.display = "none";
+                map.setView([latitude, longitude]);
 
             });
 
+
         }
+
+
+        map.addEventListener("click", function ()
+        {
+            let hideAction = document.getElementById('selectplacetitle');
+            hideAction.style.display = "block";
+            map.setView([latitude, longitude]);
+
+
+        })
+        let clickontitle = document.getElementById('selectplacetitle');
+        clickontitle.addEventListener("click", function()
+        {
+            map.setView([lat, lon], zoom);
+        })
+
+
+
 
 
 

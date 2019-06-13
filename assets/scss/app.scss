@@ -70,22 +70,25 @@ body {
 #selectplacetitle
 {
     position: absolute;
-    top: 50%;
-    left: 2%;
+    top: 60%;
+    left: 7%;
     z-index: 1;
     color: black;
     font-size: 80px;
+
 }
 
 
 #selectplacetitle h1
 {
     font-size: 80%;
+    font-weight: bold;
 }
 
 #selectplacetitle span
 {
     color: white;
+    font-weight: bold;
 }
 
 #logoonmap
@@ -96,6 +99,8 @@ body {
     z-index: 1;
     transform: scale(0.7, 0.7);
 }
+
+
 
 .popupCustom .leaflet-popup-tip
 {
@@ -110,6 +115,10 @@ body {
     width: 800px;
 }
 
+.jumbotron
+{
+    padding: 2%;
+}
 
 .bulleInfo
 {
@@ -117,14 +126,17 @@ body {
     background: none;
     display: none;
     z-index: 2;
+    position: fixed;
+    bottom: -50%;
+
 
 }
 
 .bulleInfo1
 {
-    background-color: black;
+    margin-top: 50%;
+    background-color: grey;
     color: white;
-
 }
 
 .bulleInfo2
@@ -136,7 +148,7 @@ body {
 {
     background-color: black;
     color: white;
-    height: 350px;
+    height: 250px;
     overflow: auto;
 }
 
@@ -154,8 +166,9 @@ body {
 {
     background-color: grey;
     color: white;
-    height: 350px;
+    height: 250px;
     overflow: auto;
+    margin-top: -50%;
 }
 
 .bulleInfo1Photo
@@ -172,3 +185,5 @@ body {
 {
     font-size: 15px;
 }
+
+
