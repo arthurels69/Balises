@@ -84,7 +84,6 @@ class TheaterController extends AbstractController
      * @param Request $request
      * @param Theater $theater
      * @return Response
-     * @throws GuzzleException
      */
     public function edit(Request $request, Theater $theater): Response
     {
