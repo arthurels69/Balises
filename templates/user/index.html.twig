@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
 {% block body %}
+
+
     <h1>User index</h1>
 
     <table class="table">
@@ -10,7 +12,6 @@
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Nom du Théâtre</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,7 +20,6 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.theaterName }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>

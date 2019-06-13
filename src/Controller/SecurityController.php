@@ -23,7 +23,6 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        dump($this->getUser());
         if ($this->getUser() == 'ROLE_ADMIN') {
             $this->redirectToRoute('user_index');
         }
