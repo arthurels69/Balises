@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowDateRepository")
@@ -33,17 +36,22 @@ class ShowDate
      */
     private $showRate;
 
+    public function __construct()
+    {
+        $this->showRate = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateShow(): ?\DateTimeInterface
+    public function getDateShow(): ?DateTimeInterface
     {
         return $this->dateShow;
     }
 
-    public function setDateShow(\DateTimeInterface $dateShow): self
+    public function setDateShow(DateTimeInterface $dateShow): self
     {
         $this->dateShow = $dateShow;
 
@@ -62,7 +70,7 @@ class ShowDate
         return $this;
     }
 
-    public function getShowRate(): ?ShowRate
+    public function getShowRate(): ArrayCollection
     {
         return $this->showRate;
     }
@@ -77,5 +85,13 @@ class ShowDate
         }
 
         return $this;
+    }
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getDateShow()->format('d/m/Y');
     }
 }

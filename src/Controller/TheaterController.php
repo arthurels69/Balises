@@ -14,11 +14,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/theater")
+ * @isGranted("ROLE_THEATER")
  */
 class TheaterController extends AbstractController
 {
     /**
      * @Route("/", name="theater_index", methods={"GET"})
+     * @isGranted("ROLE_ADMIN")
+     * @param TheaterRepository $theaterRepository
+     * @return Response
      */
     public function index(TheaterRepository $theaterRepository): Response
     {
@@ -29,9 +33,11 @@ class TheaterController extends AbstractController
 
 
     //* @IsGranted("ROLE_ADMIN")
-    /**
 
+    /**
      * @Route("/new", name="theater_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -58,6 +64,8 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}", name="theater_show", methods={"GET"})
+     * @param Theater $theater
+     * @return Response
      */
     public function show(Theater $theater): Response
     {
@@ -68,6 +76,9 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Theater $theater
+     * @return Response
      */
     public function edit(Request $request, Theater $theater): Response
     {
@@ -90,6 +101,9 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}", name="theater_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Theater $theater
+     * @return Response
      */
     public function delete(Request $request, Theater $theater): Response
     {
