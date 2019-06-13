@@ -6,7 +6,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
           crossorigin="" />
 
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
@@ -44,15 +44,17 @@
 
     <!-- Info Bulle -->
 
-    <div class="bulleInfo" id="bulleInfo">
+    {% for theater in theaters %}
+
+    <div class="bulleInfo" id="theater{{ theater.id }}">
         <div class="container-fluid">
             <div class="row bulleinfo">
 
                 <div class="col-5">
                     <div class="jumbotron bulleInfo1">
-                        <h1 class="display-4">WILD CODE SCHOOL</h1>
-                        <p class="lead">17, rue Delandine</p>
-                        <p class="lead">69000 LYON</p>
+                        <h1 class="display-4">{{ theater.name }}</h1>
+                        <p class="lead">{{ theater.address1 }}</p>
+                        <p class="lead">{{ theater.zipcode }} {{ theater.city }}</p>
                         <hr class="my-4">
                     </div>
                 </div>
@@ -96,6 +98,10 @@
     </div>
 
 
+{% endfor %}
+
+
+
 
 {% endblock %}
 
@@ -107,89 +113,62 @@
 
 
     <script>
-    // On initialise la latitude et la longitude de Lyon (centre de la carte)
-    let lat = 45.75;
-    let lon = 4.85;
-    let zoom = 13; // Zoom de la carte par défaut
+        // On initialise la latitude et la longitude de Lyon (centre de la carte)
+        let lat = 45.75;
+        let lon = 4.85;
+        let zoom = 13; // Zoom de la carte par défaut
 
 
-
-
-    // Fonction d'initialisation de la carte
-    // function initMap() {
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
-        var map = L.mapbox.map('map')
+        let map = L.mapbox.map('map')
             .setView([lat, lon], zoom)
             .addLayer(L.mapbox.styleLayer('mapbox://styles/balises/cjwkqf7kr2woy1cqtbxg92srx'))
-    // }
 
 
-
-    // window.onload = function()
-    // {
-    //     initMap();
-
-        var elements = document.getElementById("bulleInfo");
-        //
-        //
-        var myLayer = L.mapbox.featureLayer()
-            .addTo(map);
-
-        var geojsonFeature = {
-            "type": "Feature",
-            "properties": {
-                "title": "Wild",
-                "description": "17 rue Delandine",
-                "image": 'https://farm9.staticflickr.com/8604/15769066303_3e4dcce464_n.jpg',
-                "icon": {
-                    "iconUrl": 'https://www.mapbox.com/mapbox.js/assets/images/astronaut1.png',
-                    "iconSize": [50, 50], // size of the icon
-                    "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                    "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                    "className": 'dot'
-                }
-
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [4.8269599999999855, 45.7463]
+        let customOptions =
+            {
+                'maxWidth': '800px',
+                'width': '800px',
+                'className' : 'popupCustom'
             }
 
-        };
+        // Récupération coordonnées GPS dans tableau JS :
+        let pointers =
+            [
+                {% for theater in theaters %}
+                {
+                    lat : '{{ theater.lat }}',
+                    long : '{{ theater.longitude }}',
+                    id : '{{ theater.id }}',
+                },
+                {% endfor %}
+            ];
 
-        myLayer.on('layeradd', function(e) {
-            var marker = e.layer,
-                feature = marker.feature;
-            marker.setIcon(L.icon(feature.properties.icon));
 
-        var customOptions =
+        for (let i = 0; i < pointers.length; i++)
+
         {
-            'maxWidth': '800px',
-            'width': '800px',
-            'className' : 'popupCustom'
-        }
-
-        var content = '<p><strong>' + feature.properties.title + '</strong></p><img src="' + feature.properties.image + '" alt="">';
+            let latitude = pointers[i].lat;
+            let longitude = pointers[i].long;
+            let pointerId = pointers[i].id;
+            let elements = document.getElementById('theater'+ pointerId);
 
 
+            let marker = L.marker([latitude, longitude]).addTo(map);
+
+
+            // bind the custom popup
 
             marker.bindPopup(elements, customOptions);
-        });
-        myLayer.setGeoJSON(geojsonFeature);
-        // map.scrollWheelZoom.disable();
 
 
+            marker.addEventListener("click",function ()
+            {
+                elements.style.display = "block";
 
+            });
 
-    // };
-
-
-
-
-
-
-
-
+        }
 
 
 
