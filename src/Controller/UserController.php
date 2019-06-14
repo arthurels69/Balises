@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Theater;
 use App\Entity\User;
 use App\Service\TriService;
 use App\Form\UserType;
-use App\Entity\Theater;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -22,6 +22,7 @@ class UserController extends AbstractController
 {
     /**
      *Create Index user
+     * @Route("/", name="user_index", methods={"GET"})
      * @Route("/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository

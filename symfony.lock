@@ -156,6 +156,9 @@
     "justinrainbow/json-schema": {
         "version": "5.2.8"
     },
+    "kartik-v/bootstrap-fileinput": {
+        "version": "v5.0.3"
+    },
     "mapado/rest-client-sdk": {
         "version": "v0.30.0"
     },

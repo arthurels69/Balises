@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -48,9 +50,6 @@ class TheaterController extends AbstractController
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user =  $this->getUser();
@@ -83,9 +82,10 @@ class TheaterController extends AbstractController
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Theater $theater
+     * @param TheaterRepository $theaterRepository
      * @return Response
      */
-    public function edit(Request $request, Theater $theater): Response
+    public function edit(Request $request, Theater $theater, TheaterRepository $theaterRepository): Response
     {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
