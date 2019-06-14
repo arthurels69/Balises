@@ -25,10 +25,10 @@
         </div>
 
     </div>
-
+    {% if not app.user %}
     <div class="row w-100 justify-content-around">
         <a class="btn btn-dark w-100" href="{{ path('app_login') }}">Login</a>
     </div>
-
+    {% endif %}
 {% endblock %}
 
