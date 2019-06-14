@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/theater")
+ * @isGranted("ROLE_THEATER")
  */
 class TheaterController extends AbstractController
 {
     /**
      * @Route("/", name="theater_index", methods={"GET"})
+     * @isGranted("ROLE_ADMIN")
+     * @param TheaterRepository $theaterRepository
+     * @return Response
      */
     public function index(TheaterRepository $theaterRepository): Response
     {
@@ -30,9 +35,11 @@ class TheaterController extends AbstractController
 
 
     //* @IsGranted("ROLE_ADMIN")
-    /**
 
+    /**
      * @Route("/new", name="theater_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -62,6 +69,8 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}", name="theater_show", methods={"GET"})
+     * @param Theater $theater
+     * @return Response
      */
     public function show(Theater $theater): Response
     {
@@ -72,32 +81,18 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Theater $theater
+     * @return Response
      */
-    public function edit(Request $request, Theater $theater): Response
+    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
     {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $street = $theater->getAddress1();
-            $zipCode = $theater->getZipCode();
-            $city = $theater->getCity();
+            $theaterService->geocode($theater);
 
-            $address = $street . " " . $zipCode . " " . $city;
-
-            $client = new Client([
-                    'base_uri' => 'https://nominatim.openstreetmap.org/',
-                ]);
-
-            $response = $client->request('GET', 'search.php?q='
-                 . urlencode($address)
-                 . '&format=json');
-            $body = $response->getBody();
-            $obj = json_decode($body->getContents(), true);
-            $latitude = $obj[0]['lat'];
-            $longitude = $obj[0]['lon'];
-            $theater->setLongitude($longitude)
-                    ->setLat($latitude);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('theater_index', [
@@ -113,6 +108,9 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}", name="theater_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Theater $theater
+     * @return Response
      */
     public function delete(Request $request, Theater $theater): Response
     {
