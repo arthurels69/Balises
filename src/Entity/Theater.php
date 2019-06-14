@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\Regex;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -67,7 +65,7 @@ class Theater
     private $city;
 
 
-    //pattern="/(0|\+33)[1-9]( *[0-9]{2}){4}/"
+    //pattern="/(0|\+33)[1-9]( *[0-9]{2}){4}/"  /(0|\\+33|0033)[1-9][0-9]{8}/
     /**
      * @Assert\Regex("/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/",
      *      message =" formats : +33 xx xx xx xx xx, +33xxxxxxxxxx, xxxxxxxxxx, xx-xx-xx-xx-xx")
@@ -77,7 +75,7 @@ class Theater
 
 
     /**
-     * @Assert\Regex("#https?://[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,4}(/\S*)?#")
+     * @Assert\File(mimeTypes={ "image/png"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
@@ -88,8 +86,11 @@ class Theater
      */
     private $website;
 
+
+    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/
     /**
-     * @Assert\Regex("/^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/")
+     *
+     * @Assert\Regex( "/^[1-9][0-9]*\.[0-9]{2}$/", message =" tarif non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
@@ -106,14 +107,21 @@ class Theater
     private $shows;
 
     /**
+     * @Assert\Regex("/^[1-9][0-9]*\.[0-9]{2}$/", message = "valeur non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $lat;
 
     /**
+     * @Assert\Regex("/^[1-9][0-9]*\.[0-9]{2}$/", message = "valeur non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -308,6 +316,18 @@ class Theater
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
