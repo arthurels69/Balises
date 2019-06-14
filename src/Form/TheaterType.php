@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Theater;
-use Symfony\Component\Finder\Comparator\NumberComparator;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -42,8 +43,9 @@ class TheaterType extends AbstractType
             )
             ->add(
                 'logo',
-                UrlType::class,
-                ['help' => 'ex : https:// ou http://']
+                FileType::class,
+                ['help' => 'fichier logo au format : jpg, png, gif',
+                    'data_class' => null]
             )
             ->add(
                 'website',
