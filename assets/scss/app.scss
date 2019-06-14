@@ -70,7 +70,7 @@ body {
 #selectplacetitle
 {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 2%;
     z-index: 1;
     color: black;
@@ -81,11 +81,13 @@ body {
 #selectplacetitle h1
 {
     font-size: 80%;
+    font-weight: bold;
 }
 
 #selectplacetitle span
 {
     color: white;
+    font-weight: bold;
 }
 
 #logoonmap
@@ -117,6 +119,9 @@ body {
     background: none;
     display: none;
     z-index: 2;
+    position: fixed;
+    bottom: -50%;
+
 
 }
 

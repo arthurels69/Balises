@@ -26,13 +26,15 @@ class SpectacleType extends AbstractType
             ->add('photoCredits')
             ->add('additionalInfos')
             ->add('isBalise')
-            ->add('offerType')
+//            ->add('offerType')
             ->add('mapadoLink')
             ->add('baseRate')
             ->add('showDates', CollectionType::class, [
                 'entry_type' => ShowDateType::class,
                 'entry_options' => ['label' => false],
                 'allow_add'    => true,
+                'prototype' => true,
+                'by_reference' => false
             ]);
     }
 }

@@ -16,7 +16,10 @@ class ShowDateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateShow', DateType::class)
+            ->add('dateShow', DateType::class, [
+                'widget' => 'choice',
+
+            ])
 //            ->add('showRate', CollectionType::class, [
 //                'entry_type' => ShowRate::class,
 //                'entry_options' => ['label' => false],
