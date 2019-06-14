@@ -14,11 +14,16 @@
 
     <div class="container-fluid">
 
+
             {% block body %}
 
             {% endblock %}
 
+
+            {% include 'navSocial.html.twig' %}
+
     </div>
+
         {% block javascripts %}
              {{ encore_entry_script_tags('app') }}
         {% endblock %}
