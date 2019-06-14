@@ -24,8 +24,7 @@ class UserRepository extends ServiceEntityRepository
         $field = 'user.' . $champ;
         if ($champ == 'zipCode') {
             $field = 'theater.' . $champ;
-        }
-        elseif ($champ == 'name') {
+        } elseif ($champ == 'name') {
             $field = 'theater.' . $champ;
         }
 
