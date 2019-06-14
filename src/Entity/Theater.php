@@ -75,7 +75,7 @@ class Theater
 
 
     /**
-     * @Assert\Regex("#https?://[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,4}(/\S*)?#")
+     * @Assert\File(mimeTypes={ "image/png"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
@@ -115,6 +115,12 @@ class Theater
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
+
+    /**
+     * @Assert\File(mimeTypes={ "image/png","image/jpg","image/gif"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -309,6 +315,18 @@ class Theater
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
