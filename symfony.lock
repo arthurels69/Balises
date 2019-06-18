@@ -165,6 +165,12 @@
     "kartik-v/bootstrap-fileinput": {
         "version": "v5.0.3"
     },
+    "league/oauth2-client": {
+        "version": "2.4.1"
+    },
+    "mapado/league-oauth2-provider": {
+        "version": "1.0-dev"
+    },
     "mapado/rest-client-sdk": {
         "version": "v0.30.0"
     },
