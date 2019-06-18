@@ -35,7 +35,7 @@
         }
 
         @keyframes move {
-            from { top: 200px;}
+            from { top: 300px;}
             to { top: 0;}
 
         }
@@ -47,9 +47,16 @@
             background-color: rgba(255, 236, 2, 0.85); /* L'opacite se regle ici */
         }
 
+        .LoginBtn
+        {
+            position: absolute;
+            bottom: 80px;
+        }
 
 
     </style>
+
+
 
 <div id="background_opacity"></div>
 
@@ -59,12 +66,12 @@
         <h1 style="text-align: center; font-size: 450%; font-weight: bold">ET SI VOUS RETOURNIEZ<p> AU THEATRE ?</h1>
     </div>
 
-    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; padding-bottom: 10%">
+    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: 7%">
         <a class="link-homepage" href="{{ path('map2') }}"><i class="fas fa-map-marked fa-10x m-auto"></i></a>
         <h1 style ="margin-top: 5%">A quel endroit ?</h1>
     </div>
 
-    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; padding-bottom: 10%">
+    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: 7%">
         <a class="link-homepage" href="{{ path('calendar_home') }}"><i class="fas fa-calendar-alt fa-10x"></i></a>
         <h1 style ="margin-top: 5%">A quel moment ?</h1>
     </div>
@@ -81,6 +88,11 @@
 
 
 
+
+{% endblock %}
+
+
+{% block javascripts %}
 
 {% endblock %}
 
