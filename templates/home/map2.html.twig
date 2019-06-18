@@ -13,13 +13,8 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
 
     <style type="text/css">
-
         #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
             height: 100%;
-        }
-        .sidenav
-        {
-            background: #FFEC02;
         }
 
     </style>
@@ -131,7 +126,7 @@
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
         let map = L.mapbox.map('map')
             .setView([lat, lon], zoom)
-            .addLayer(L.mapbox.styleLayer('mapbox://styles/balises/cjwkvbvvf0b7i1cr4s3z4aqxk'))
+            .addLayer(L.mapbox.styleLayer('mapbox://styles/balises/cjwkvbvvf0b7i1cr4s3z4aqxk'));
 
 
         let customOptions =
@@ -139,7 +134,7 @@
                 'maxWidth': '100%',
                 'width': '100%',
                 'className' : 'popupCustom',
-            }
+            };
 
         // Récupération coordonnées GPS dans tableau JS :
         let pointers =
@@ -191,7 +186,7 @@
             map.setView([latitude, longitude]);
 
 
-        })
+        });
         let clickontitle = document.getElementById('selectplacetitle');
         clickontitle.addEventListener("click", function()
         {
