@@ -1,27 +1,27 @@
 <?php
-//
-//namespace App\DataFixtures;
-//
-//use App\Entity\Spectacle;
-//use App\Entity\ShowDate;
-//use App\Entity\ShowRate;
-//use App\Entity\Theater;
-//use App\Entity\User;
-//use Doctrine\Bundle\FixturesBundle\Fixture;
-//use Doctrine\Common\Persistence\ObjectManager;
-//use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-//
-//class TheaterFixtures extends Fixture
-//{
-//    private $encoder;
-//
-//    public function __construct(UserPasswordEncoderInterface $encoder)
-//    {
-//        $this->encoder = $encoder;
-//    }
-//
-//    public function load(ObjectManager $manager)
-//    {
+
+namespace App\DataFixtures;
+
+use App\Entity\Spectacle;
+use App\Entity\ShowDate;
+use App\Entity\ShowRate;
+use App\Entity\Theater;
+use App\Entity\User;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+class TheaterFixtures extends Fixture
+{
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
+    public function load(ObjectManager $manager)
+    {
 //
 //        // Liste user à ajouter :
 //        $tab1 = array(
@@ -111,5 +111,5 @@
 //            }
 //        }
 //            $manager->flush();
-//    }
-//}
+    }
+}
