@@ -3,24 +3,96 @@
 
 {% block body %}
 
-    <div class="row h-100 w-100 justify-content-between">
+    <style>
 
-        <div class="col-1 m-auto w-100">
-            <a class="link-homepage" href="{{ path('map2') }}"><i class="fas fa-map-marked fa-10x m-auto"></i></a>
-        </div>
+        body
+        {
+            background-image: url({{ asset('/uploads/Balises_background.png') }});
 
-        <div class="col-1 m-auto">
-            <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
-        </div>
+            background-size: cover;
 
-        <div class="col-1 m-auto">
-            <a class="link-homepage" href="{{ path('calendar_home') }}"><i class="fas fa-calendar-alt fa-10x"></i></a>
-        </div>
+        }
 
+        .logoIndex, .sidenav, #logoonmap, .LoginBtn
+        {
+
+            animation:fadeIn 2s step-end;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+        }
+
+
+        #IndexTitle
+        {
+            animation: move 2s;
+        }
+
+        @keyframes move {
+            from { top: 300px;}
+            to { top: 0;}
+
+        }
+
+        #background_opacity {
+            position: fixed;
+            z-index: -10;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 236, 2, 0.85); /* L'opacite se regle ici */
+        }
+
+        .LoginBtn
+        {
+            position: absolute;
+            bottom: 80px;
+        }
+
+
+    </style>
+
+
+
+<div id="background_opacity"></div>
+
+<div class="row h-100 m-auto justify-content-between">
+
+    <div class="col-12" id="IndexTitle" style="padding-top: 7%">
+        <h1 style="text-align: center; font-size: 450%; font-weight: bold">ET SI VOUS RETOURNIEZ<p> AU THEATRE ?</h1>
     </div>
 
-    <div class="row w-100 justify-content-around">
-        <a class="btn btn-dark w-100" href="{{ path('app_login') }}">Login</a>
+    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: 7%">
+        <a class="link-homepage" href="{{ path('map2') }}"><i class="fas fa-map-marked fa-10x m-auto"></i></a>
+        <h1 style ="margin-top: 5%">A quel endroit ?</h1>
     </div>
+
+    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: 7%">
+        <a class="link-homepage" href="{{ path('calendar_home') }}"><i class="fas fa-calendar-alt fa-10x"></i></a>
+        <h1 style ="margin-top: 5%">A quel moment ?</h1>
+    </div>
+
+    <div id="logoonmap">
+        <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+    </div>
+
+    <div class="LoginBtn">
+        <a class="btn btn-dark" href="{{ path('app_login') }}">Login</a>
+    </div>
+
+</div>
+
+
+
 
 {% endblock %}
+
+
+{% block javascripts %}
+
+{% endblock %}
+

@@ -85,6 +85,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+  //      $id = $token->getUser()->getId();
         $roles = $token->getRoles();
         $rolesTab = array_map(function ($role) {
             return $role->getRole();
@@ -96,7 +97,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             $redirection = new RedirectResponse($this->urlGenerator->generate('user_index'));
         } else {
             // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
-            $redirection = new RedirectResponse($this->urlGenerator->generate('home'));
+            $redirection = new RedirectResponse($this->urlGenerator
+                                                     ->generate('theater_show', [
+//                                                         'id' => $id
+                                                     ]));
         }
 
         return $redirection;
