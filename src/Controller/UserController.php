@@ -65,7 +65,6 @@ class UserController extends AbstractController
             $user->setRoles(['ROLE_THEATER']);
 
             $manager->persist($user);
-            dump($request->request->get('user')['theater']['name']);
 
             $theater->setName($request->request->get('registration')['theater']['name']);
             $theater->setEmail($user->getEmail());
