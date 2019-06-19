@@ -30,7 +30,6 @@ class CalendarController extends AbstractController
      * @param CalendarService $calendarService
      * @param ShowDateRepository $showDateRepository
      * @param SpectacleRepository $spectacleRepository
-     * @param Request $request
      */
     public function __construct(
         CalendarService $calendarService,

@@ -24,13 +24,13 @@ class MapadoController extends AbstractController
 
 
         $token = $provider->getAccessToken('password', [
-            'scope' => 'ticketing:events:write',
+            'scope' => 'ticketing:events:read',
             'username' => 'wildcode@test.com',
             'password' => 'wildcode',
         ]);
 
-        $tokenForReal = $token->getToken();
-
+        $realToken = $token->getToken();
+		dump($realToken);
         //$provider->getAuthenticatedRequest('GET', '', '')
         dump($token->getValues());
 
