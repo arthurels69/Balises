@@ -165,8 +165,23 @@
     "kartik-v/bootstrap-fileinput": {
         "version": "v5.0.3"
     },
+    "league/oauth2-client": {
+        "version": "2.4.1"
+    },
+    "mapado/league-oauth2-provider": {
+        "version": "1.0-dev"
+    },
     "mapado/rest-client-sdk": {
         "version": "v0.30.0"
+    },
+    "mapado/rest-client-sdk-bundle": {
+        "version": "0.24",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.24",
+            "ref": "fd5db6d597999de66c8499f03f005b325de6debe"
+        }
     },
     "monolog/monolog": {
         "version": "1.24.0"
@@ -403,9 +418,6 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
-    },
-    "symfony/mime": {
-        "version": "v4.3.1"
     },
     "symfony/monolog-bridge": {
         "version": "v4.2.8"
