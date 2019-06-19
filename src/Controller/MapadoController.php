@@ -29,32 +29,32 @@ class MapadoController extends AbstractController
             'password' => 'wildcode',
         ]);
 
-		/*$baseURL = $provider->getBaseAccessTokenUrl([
-			'scope' => 'ticketing:events:read',
-			'username' => 'wildcode@test.com',
-			'password' => 'wildcode',
-		]); */
-		dump($provider->getAuthorizationUrl());
-		//dump($provider->getRequest('GET', 'https://ticketing.mapado.net/v1/ticketings??view=list'));
+        /*$baseURL = $provider->getBaseAccessTokenUrl([
+            'scope' => 'ticketing:events:read',
+            'username' => 'wildcode@test.com',
+            'password' => 'wildcode',
+        ]); */
+        dump($provider->getAuthorizationUrl());
+        //dump($provider->getRequest('GET', 'https://ticketing.mapado.net/v1/ticketings??view=list'));
 
-		$request = $provider->getAuthenticatedRequest('GET', 'https://api.mapado.net/v2/?fields=eventDateList', $token);
+        $request = $provider->getAuthenticatedRequest('GET', 'https://api.mapado.net/v2/?fields=eventDateList', $token);
 
-		dump($request);
-		dump($request->getBody());
-		//Returns a token (string)
-		$realToken = $token->getToken();
+        dump($request);
+        dump($request->getBody());
+        //Returns a token (string)
+        $realToken = $token->getToken();
         //dump($realToken);
 
         //$provider->getAuthenticatedRequest('GET', '', '')
 
-		//returns token type and given scope
+        //returns token type and given scope
         //dump($token->getValues());
 
-		//returns clients info
+        //returns clients info
         $client = $provider->getHttpClient();
-		dump($client);
+        dump($client);
 
-		$client->request('GET', 'https://ticketing.mapado.net/v1/?fields=eventDateList');
+        $client->request('GET', 'https://ticketing.mapado.net/v1/?fields=eventDateList');
 
         return $this->render('mapado/index.html.twig');
     }
