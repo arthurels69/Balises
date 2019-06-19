@@ -25,6 +25,8 @@ class MapController extends AbstractController
         ShowDateRepository $dateRepository
     ) {
 
+
+
         return $this->render('home/map2.html.twig', [
             'theaters' => $theaterRepository->findAll(),
             'spectacles' => $spectacleRepository->findAll(),
