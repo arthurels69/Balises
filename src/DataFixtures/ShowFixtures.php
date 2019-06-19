@@ -67,7 +67,7 @@ class ShowFixtures extends Fixture
                 $show->setMandatoryInfos($faker->text(240));
                 $show->setMapadoLink($faker->url);
                 $show->setPhotoCredits($faker->lastName.' '.$faker->firstName);
-                $show->setTheaterId($theater);
+                $show->setTheater($theater);
                 $show->setOfferType(1);
 
 

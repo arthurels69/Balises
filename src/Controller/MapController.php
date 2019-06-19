@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +18,14 @@ class MapController extends AbstractController
     /**
      * @Route("/map2", name="map2")
      */
-    public function map2(TheaterRepository $theaterRepository)
+    public function map2(TheaterRepository $theaterRepository, SpectacleRepository $spectacleRepository)
     {
 
 
 
         return $this->render('home/map2.html.twig', [
             'theaters' => $theaterRepository->findAll(),
+            'spectacles' => $spectacleRepository->findAll(),
         ]);
     }
 }
