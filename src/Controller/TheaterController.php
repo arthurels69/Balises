@@ -73,8 +73,9 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
+
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater,
+            'theater' => $theater
         ]);
     }
 
@@ -108,9 +109,18 @@ class TheaterController extends AbstractController
             }
             $theater->setLogo($fileName);
 
+            $file = $request->files->get('theater')['picture'];
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move($this->getParameter('logo_directory'), $fileName);
+            } catch (FileException $e) {
+                throw new FileException($e);
+            }
+            $theater->setPicture($fileName);
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('theater_index', [
+            return $this->redirectToRoute('theater_show', [
                 'id' => $theater->getId(),
             ]);
         }

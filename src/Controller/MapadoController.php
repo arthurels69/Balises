@@ -30,7 +30,7 @@ class MapadoController extends AbstractController
         ]);
 
         $realToken = $token->getToken();
-		dump($realToken);
+        dump($realToken);
         //$provider->getAuthenticatedRequest('GET', '', '')
         dump($token->getValues());
 
