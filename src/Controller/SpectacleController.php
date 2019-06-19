@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Spectacle;
+use App\Entity\Theater;
 use App\Form\SpectacleType;
 use App\Repository\SpectacleRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,18 +33,18 @@ class SpectacleController extends AbstractController
     /**
      * @Route("/new", name="spectacle_new", methods={"GET","POST"})
      * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ObjectManager $manager): Response
     {
         $spectacle = new Spectacle();
         $form = $this->createForm(SpectacleType::class, $spectacle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($spectacle);
-            $entityManager->flush();
+            $manager->persist($spectacle);
+            $manager->flush();
 
             return $this->redirectToRoute('spectacle_index');
         }

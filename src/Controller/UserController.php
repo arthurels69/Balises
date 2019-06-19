@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Theater;
 use App\Entity\User;
+use App\Form\RegistrationType;
 use App\Service\TriService;
 use App\Form\UserType;
-use App\Entity\Theater;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -22,7 +23,8 @@ class UserController extends AbstractController
 {
     /**
      *Create Index user
-     * @Route("/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+     * @Route("/index", name="user_index", methods={"GET"})
+     * @Route("/index/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
@@ -51,7 +53,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $theater = new Theater();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +65,9 @@ class UserController extends AbstractController
             $user->setRoles(['ROLE_THEATER']);
 
             $manager->persist($user);
+            dump($request->request->get('user')['theater']['name']);
 
+            $theater->setName($request->request->get('registration')['theater']['name']);
             $theater->setEmail($user->getEmail());
             $theater->setUser($user);
 
