@@ -31,14 +31,14 @@ class ShowFixtures extends Fixture
             $user = new User();
             $user->setEmail('theatre' . $i . '@theater.com');
             $user->setRoles(['ROLE_THEATER']);
-            $user->setTheaterName('Théâtre n' . $i);
+            //$user->setTheaterName('Théâtre n' . $i);
             $user->setPassword($this->encoder->encodePassword($user, 'aze'));
 
             $manager->persist($user);
 
             $theater = new Theater();
 
-            $theater->setName($user->getTheaterName());
+            //$theater->setName($user->getTheaterName());
             $theater->setEmail($user->getEmail());
             $theater->setAddress1($faker->address);
             $theater->setAddress2('');
@@ -67,7 +67,7 @@ class ShowFixtures extends Fixture
                 $show->setMandatoryInfos($faker->text(240));
                 $show->setMapadoLink($faker->url);
                 $show->setPhotoCredits($faker->lastName.' '.$faker->firstName);
-                $show->setTheaterId($theater);
+                $show->setTheater($theater);
                 $show->setOfferType(1);
 
 
@@ -88,7 +88,7 @@ class ShowFixtures extends Fixture
         // Création d’un utilisateur de type “admin”
         $admin = new User();
         $admin->setEmail('admin@balise.com');
-        $admin->setTheaterName('balise');
+        //$admin->setTheaterName('balise');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->encoder->encodePassword($admin, 'aze'));
 
