@@ -35,7 +35,7 @@
             {% for user in users %}
                 <tr>
                     {% if user.roles[0]!="ROLE_ADMIN" %}
-                        <td>{{ user.theaterName }}</td>
+                        <td>{{ user.theater.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.theater.zipCode }}</td>
                         <td class="text-center">
