@@ -75,6 +75,7 @@ class Theater
 
 
     /**
+     * @Assert\File(mimeTypes={ "image/png"})
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\File(mimeTypes={ "image/png"})
      */
@@ -102,7 +103,7 @@ class Theater
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater", orphanRemoval=true)
      */
     private $shows;
 
@@ -115,6 +116,12 @@ class Theater
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
+
+    /**
+     * @Assert\File(mimeTypes={ "image/png","image/jpg","image/gif"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -270,7 +277,7 @@ class Theater
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
-            $show->setTheaterId($this);
+            $show->setTheater($this);
         }
 
         return $this;
@@ -281,8 +288,8 @@ class Theater
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
             // set the owning side to null (unless already changed)
-            if ($show->getTheaterId() === $this) {
-                $show->setTheaterId(null);
+            if ($show->getTheater() === $this) {
+                $show->setTheater(null);
             }
         }
 
@@ -309,6 +316,18 @@ class Theater
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

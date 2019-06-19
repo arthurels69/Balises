@@ -23,6 +23,7 @@ class UserController extends AbstractController
     /**
      *Create Index user
      * @Route("/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+     * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
      */
