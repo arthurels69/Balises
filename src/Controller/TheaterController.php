@@ -51,9 +51,6 @@ class TheaterController extends AbstractController
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user =  $this->getUser();
@@ -77,8 +74,9 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
+
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater,
+            'theater' => $theater
         ]);
     }
 
@@ -86,6 +84,7 @@ class TheaterController extends AbstractController
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Theater $theater
+     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function edit(
@@ -111,7 +110,14 @@ class TheaterController extends AbstractController
             }
             $theater->setLogo($fileName);
 
-            $theaterService->geocode($theater);
+            $file = $request->files->get('theater')['picture'];
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move($this->getParameter('logo_directory'), $fileName);
+            } catch (FileException $e) {
+                throw new FileException($e);
+            }
+            $theater->setPicture($fileName);
 
             $this->getDoctrine()->getManager()->flush();
 
