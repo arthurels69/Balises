@@ -13,11 +13,7 @@
                     </div>
 
                     <tr>
-                        <th class="col-md-4" >
-                            <a href="/user/theaterName/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                            <a href="/user/theaterName/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
-                            Nom du Théâtre
-                        </th>
+
                         <th class="col-md-3">
                             <a href="/user/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
                             <a href="/user/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
@@ -35,7 +31,7 @@
             {% for user in users %}
                 <tr>
                     {% if user.roles[0]!="ROLE_ADMIN" %}
-                        <td>{{ user.theaterName }}</td>
+
                         <td>{{ user.email }}</td>
                         <td>{{ user.theater.zipCode }}</td>
                         <td class="text-center">
