@@ -12,7 +12,7 @@
                 <ul class="list-inline">
                     <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ today |date('D') }}</li>
                     <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ today |date('H:i') }} - {{ today |date_modify('+ 3 hours') |date('H:i') }}</li>
-                    <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theaterId.name }}</li>
+                    <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theater.name }}</li>
                 </ul>
                 <p>{{ spectacle.description }}</p>
             </div>

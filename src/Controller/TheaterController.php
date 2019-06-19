@@ -51,6 +51,9 @@ class TheaterController extends AbstractController
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user =  $this->getUser();
@@ -83,7 +86,6 @@ class TheaterController extends AbstractController
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Theater $theater
-     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function edit(
@@ -126,6 +128,8 @@ class TheaterController extends AbstractController
                 throw new FileException($e);
             }
             $theater->setLogo($fileName);
+
+            $theaterService->geocode($theater);
 
             $this->getDoctrine()->getManager()->flush();
 

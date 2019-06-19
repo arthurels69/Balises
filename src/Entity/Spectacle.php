@@ -89,7 +89,7 @@ class Spectacle
      * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $theater_id;
+    private $theater;
 
     /**
      * One to many relation to the many dates a show can have
@@ -239,14 +239,14 @@ class Spectacle
         return $this;
     }
 
-    public function getTheaterId(): ?Theater
+    public function getTheater(): ?Theater
     {
-        return $this->theater_id;
+        return $this->theater;
     }
 
-    public function setTheaterId(?Theater $theater_id): self
+    public function setTheater(?Theater $theater): self
     {
-        $this->theater_id = $theater_id;
+        $this->theater = $theater;
 
         return $this;
     }
