@@ -7,17 +7,12 @@
         </div>
 
         <div class="col-sm-4 espSaisie">
-
-            {{ form_row(form.logo) }}
-
+            {{ form_label(form.logo, 'Logo') }}
+            {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'format : png'}}) }}
+            {{ form_help(form.logo) }}
         </div>
-
-        <img src="{{ asset('uploads/logo/' ~ theater.logo) }}">
-        <!--
-        <div class="col-sm-2 espSaisie">
-            <div class="file-loading">
-                <input id="picture" name="picture[]" type="file" multiple="multiple" class="file"  data-theme="fas">
-            </div>
+        <div>
+            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
         </div>
         -->
 
@@ -62,9 +57,18 @@
             {{ form_widget(form.website, {'attr': {'class': 'hold','placeholder': 'commençant par http:// ou https://'}}) }}
             {{ form_help(form.website) }}
         </div>
+        <div class="col-sm-4 espSaisie">
+            {{ form_label(form.picture, 'Photo') }}
+            {{ form_widget(form.picture, {'attr': {'class': 'hold','placeholder': 'format : png,jpg'}}) }}
+            {{ form_help(form.picture) }}
+        </div>
+        <div>
+            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+        </div>
+
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             {{ form_label(form.lat, 'Latitude') }}
             {{ form_widget(form.lat, {'attr': {'class': 'latitude hold','placeholder': '99999.99'}}) }}
         </div>
