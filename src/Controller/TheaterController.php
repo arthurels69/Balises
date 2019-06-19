@@ -98,26 +98,8 @@ class TheaterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $street = $theater->getAddress1();
-            $zipCode = $theater->getZipCode();
-            $city = $theater->getCity();
-
-            $address = $street . " " . $zipCode . " " . $city;
             $theaterService->geocode($theater);
 
-            $client = new Client([
-                    'base_uri' => 'https://nominatim.openstreetmap.org/',
-                ]);
-
-            $response = $client->request('GET', 'search.php?q='
-                 . urlencode($address)
-                 . '&format=json');
-            $body = $response->getBody();
-            $obj = json_decode($body->getContents(), true);
-            $latitude = $obj[0]['lat'];
-            $longitude = $obj[0]['lon'];
-            $theater->setLongitude($longitude)
-                    ->setLat($latitude);
 
             /** @var UploadedFile $file */
             $file = $request->files->get('theater')['logo'];
