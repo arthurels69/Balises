@@ -1,12 +1,32 @@
 $(document).ready(function () {
-    $("#sidebar").mCustomScrollbar({
-        theme: "minimal"
-    });
+    $("#sidebar").mCustomScrollbar({theme: "minimal" });
 
     $('#sidebarCollapse').on('click', function () {
-        $('#sidebar,#content').toggleClass('active')
-        $('.navbar').toggleClass('active')                
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        $('#sidebar,#content').toggleClass('active');
+        $('.navbar').toggleClass('active');
+        $('#arrow').toggleClass('active');
+        $('.img_admin').toggleClass('active');
+        if($('#arrow').hasClass('fa-chevron-left')){ 
+         $('#arrow').removeClass('fa-chevron-left').addClass('fa-chevron-right');}
+        else{
+         $('#arrow').removeClass('fa-chevron-right').addClass('fa-chevron-left');
+         }               
+    });//click 
+    
+    //Sticky tableau avec largeur du bandeau 
+
+    $( window ).scroll(function() {        
+        let toto=$('.navbar').height();
+        console.log(toto);
+
+
+      });
+
+
+
+
+
+
+
+
     });
-});
