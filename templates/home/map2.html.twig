@@ -23,7 +23,6 @@
         }
 
 
-        // manage the map with title, logo, ...
 
         #map
 
@@ -117,11 +116,13 @@
             height: 250px;
             border-style: solid;
             border-color: black;
+            overflow: scroll;
 
         }
 
         /* width */
-        .bulleInfo3::-webkit-scrollbar {
+        .bulleInfo3::-webkit-scrollbar
+        {
             width: 20px;
         }
 
@@ -142,13 +143,25 @@
 
         }
 
-        .bulleInfo6
-        {
+        .bulleInfo6 {
             background-color: grey;
             color: white;
             height: 250px;
             overflow: auto;
             margin-top: -50%;
+            overflow: scroll;
+        }
+        /* width */
+        .bulleInfo6::-webkit-scrollbar
+        {
+            width: 20px;
+        }
+
+        /* Handle */
+        .bulleInfo6::-webkit-scrollbar-thumb {
+            background: yellow;
+            border-radius: 10px;
+        }
         }
 
         .bulleInfo1Photo
@@ -205,6 +218,8 @@
             <div class="container-fluid">
                 <div class="row bulleinfo">
 
+
+
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
                             <img src="{{ theater.logo }}" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%">
@@ -226,12 +241,13 @@
                     <div class="col-5">
                         <div class="jumbotron bulleInfo3">
                             <h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1>
+
                             <hr style="background-color : white; text-align : center; line-height: 1;";>
                             <h3 style="color : white; font-weight: bold" >CHOIX DE VOTRE SPECTACLE</h3>
 
                             {% for spectacle in spectacles %}
                                 {% if spectacle.theater == theater %}
-                                    <input type="checkbox" name="checkbox" id="checkbox">
+                                    <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">
                                     <label for="checkbox" style="font-size: 20px">{{ spectacle.title }}<img src="http://pngimg.com/uploads/plus/plus_PNG41.png" style="max-height: 10px"></label>
                                     <p style="margin-top: -2%">{{ spectacle.distribution }}</p>
 
@@ -255,18 +271,22 @@
                     </div>
 
                     <div class="col-5">
-                        <div class="jumbotron bulleInfo6">
-                            <h3 style="color : white; font-weight: bold" >SELECTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
+                        {% for show in theater.shows %}
+                            <div class="jumbotron bulleInfo6" id="{{ show.id }}" style="display: none">
 
-{#                            {% for showdate in showdates %}#}
-{#                                {% if showdate.showId == spectacle.theater %}#}
-{#                                    <ul>#}
-{#                                        <li class="lead">{{ showdate.dateShow }}</li>#}
-{#                                    </ul>#}
+                                <h3 style="color : white; font-weight: bold; margin-left: 3%; text-align:center;" >SÉLÉCTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
 
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-                        </div>
+
+                                 {% for showdate in show.showDates %}
+                                     <div>
+                                    <input type="radio" name="radio" id="radio">
+                                     <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
+                                     </div>
+                                {% endfor %}
+
+
+                            </div>
+                        {% endfor %}
                     </div>
 
                 </div>
@@ -289,6 +309,19 @@
 
 
     <script>
+        // Gestion des spectacles par théâtre
+        function showDates(showId) {
+            let currentShow = document.getElementsByClassName('currentShow');
+            if (currentShow.length === 1) {
+                currentShow[0].style.display = 'none';
+                currentShow[0].classList.remove('currentShow');
+            }
+
+            let showElt = document.getElementById(showId);
+            showElt.style.display = 'block';
+            showElt.classList.add('currentShow');
+        }
+
         // On initialise la latitude et la longitude de Lyon (centre de la carte)
         let lat = 45.75;
         let lon = 4.85;

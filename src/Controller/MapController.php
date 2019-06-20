@@ -13,9 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 class MapController extends AbstractController
 {
 
-
-
-
     /**
      * @Route("/map2", name="map2")
      */
@@ -24,7 +21,6 @@ class MapController extends AbstractController
         SpectacleRepository $spectacleRepository,
         ShowDateRepository $dateRepository
     ) {
-
         return $this->render('home/map2.html.twig', [
             'theaters' => $theaterRepository->findAll(),
             'spectacles' => $spectacleRepository->findAll(),
