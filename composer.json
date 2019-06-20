@@ -8,8 +8,6 @@
         "assoconnect/mapbox-token": "dev-master",
         "fzaninotto/faker": "^1.8",
         "guzzlehttp/guzzle": "^6.3",
-        "kartik-v/bootstrap-fileinput": "^5.0",
-        "league/oauth2-client": "^2.4",
         "mapado/league-oauth2-provider": "^1.0@dev",
         "mapado/rest-client-sdk": "^0.30.0",
         "mapado/rest-client-sdk-bundle": "^0.25.0",
