@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="/admin/admin_menu.css">
         <link rel="stylesheet" href="/admin/admin.css">
 
-        
+
     </head>
 
     <body class="body_admin">
@@ -41,10 +41,10 @@
                             <a id="sidebarCollapse" href="#">
                                 <i id="arrow" class="fas fa-chevron-left ml-3 " style="font-size:2rem;"></i>
                             </a>
-                           
-                        </div> 
-                                                
-                        <ul class="list-unstyled components navbar-primary-menu">                      
+
+                        </div>
+
+                        <ul class="list-unstyled components navbar-primary-menu">
 <!-- MENU DASHBOARD -->
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
@@ -52,7 +52,7 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            
+
 <!-- MENU THEATRE -->
                             <li class="nav-item ">
                                 <a class="nav-link" href="#">
@@ -60,7 +60,7 @@
                                     <span>Théâtre&nbsp;&nbsp; </span>
                                 </a>
                             </li>
-                             
+
 <!-- MENU SPECTACLE -->
                             <li class="nav-item ">
                                 <a class="nav-link" href="#">
@@ -68,7 +68,7 @@
                                     <span>Spectacles et Places</span>
                                 </a>
                             </li>
-                             
+
 <!-- MENU COEFFICIENT -->
                              <li class="nav-item ">
                                 <a class="nav-link" href="#">
@@ -81,14 +81,14 @@
             
 <!-- PAGE CONTENT -->
                     <div id="content">
-<!-- NAVBAR TOP PRINCIPAL -->                       
+<!-- NAVBAR TOP PRINCIPAL -->
                         <nav class="navbar navbar-expand-sm navbar-light bg-light m-0 p-0">
-<!-- BOUTON COLLAPSE HAMBURGER ASIDE -->                              
+<!-- BOUTON COLLAPSE HAMBURGER ASIDE -->
                             <button class="btn btn-dark d-inline-block d-sm-none m-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <i class="fas fa-align-justify"></i>
-                            </button>    
-                            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarSupportedContent">                           
-<!-- SEARCH -->                
+                            </button>
+                            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarSupportedContent">
+<!-- SEARCH -->
                                 <form class="d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search w-100">
                                     <div class="input-group ">
                                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -101,25 +101,25 @@
                                 </form>
 
 <!-- DECONNEXION -->            <nav>
-                                {% if app.user %}                                   
+                                {% if app.user %}
                                     <a href="{{ path('app_logout') }}" class="nav-link text-right">
                                         <button type="button" id="deconnexion" class="btn btn-danger  my-sm-2 d-block w-sm-100">
                                             <span>Déconnexion</span>
                                         </button>
-                                    </a>                                   
+                                    </a>
                                {% endif %}
                                 </nav>
                             </div> <!-- collapse navbar div   -->
                         </nav><!-- navbar navbar-expand-lg -->
- <!-- BLOCK BODY -->            
-                        <div class="container-fluid content_admin p-0">                          
+ <!-- BLOCK BODY -->
+                        <div class="container-fluid content_admin p-0">
 
                         {% block body %}
                         {% endblock %}
                             
                         </div><!-- fin content_admin -->
                     </div>
-                </div>               
+                </div>
             
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

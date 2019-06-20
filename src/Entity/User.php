@@ -45,7 +45,7 @@ class User implements UserInterface
     private $confirm_password;
 
     /**
-     * @ORM\OneToOne(targetEntity="Theater", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Theater", mappedBy="user", cascade={"persist", "remove"})
      */
     private $theater;
 
