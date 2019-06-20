@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Theater;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,7 +16,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('theaterName')
             ->add('password')
             ->add('confirm_password')
             ->add('theater', TheaterType::class)

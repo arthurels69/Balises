@@ -5,14 +5,15 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+use GuzzleHttp\Exception\GuzzleException;
 use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -22,11 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class TheaterController extends AbstractController
 {
-
-    private $file;
-
-
-
     /**
      * @Route("/", name="theater_index", methods={"GET"})
      * @isGranted("ROLE_ADMIN")
@@ -78,8 +74,9 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
+
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater,
+            'theater' => $theater
         ]);
     }
 
@@ -87,21 +84,18 @@ class TheaterController extends AbstractController
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Theater $theater
-     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function edit(
         Request $request,
         Theater $theater,
-        TheaterService $theaterService,
-        TheaterRepository $theaterRepository
+        TheaterService $theaterService
     ): Response {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $theaterService->geocode($theater);
-
 
             /** @var UploadedFile $file */
             $file = $request->files->get('theater')['logo'];
@@ -113,9 +107,26 @@ class TheaterController extends AbstractController
             }
             $theater->setLogo($fileName);
 
+            $file = $request->files->get('theater')['picture'];
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move($this->getParameter('logo_directory'), $fileName);
+            } catch (FileException $e) {
+                throw new FileException($e);
+            }
+            $theater->setPicture($fileName);
+
             $this->getDoctrine()->getManager()->flush();
-            $this->redirectToRoute('theater_index');
+
+            return $this->redirectToRoute('theater_show', [
+                'id' => $theater->getId(),
+            ]);
         }
+
+        return $this->render('theater/edit.html.twig', [
+            'theater' => $theater,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
