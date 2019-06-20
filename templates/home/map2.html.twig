@@ -17,12 +17,164 @@
             height: 100%;
         }
 
+        .sidenav
+        {
+            background-color: #FFEC02;
+        }
+
+
+        // manage the map with title, logo, ...
+
+        #map
+
+           {
+               z-index: 0;
+               width:100%;
+           }
+
+        #selectplacetitle
+        {
+            position: absolute;
+            top: 60%;
+            left: 7%;
+            z-index: 1;
+            color: black;
+            font-size: 80px;
+
+        }
+
+
+        #selectplacetitle h1
+        {
+            font-size: 80%;
+            font-weight: bold;
+        }
+
+        #selectplacetitle span
+        {
+            color: white;
+            font-weight: bold;
+        }
+
+        #logoonmap
+        {
+            position: absolute;
+            bottom: 40px;
+            right: 2px;
+            z-index: 1;
+            transform: scale(0.7, 0.7);
+        }
+
+
+
+        .popupCustom .leaflet-popup-tip
+        {
+            display: none;
+        }
+
+        .popupCustom .leaflet-popup-content-wrapper {
+            box-shadow : none;
+            background: none;
+            color: white;
+            height: 800px;
+            width: 1000px;
+        }
+
+        .jumbotron
+        {
+            padding: 2%;
+        }
+
+        .bulleInfo
+        {
+            font-size: x-small;
+            background: none;
+            display: none;
+            z-index: 2;
+            position: fixed;
+            bottom: -50%;
+
+
+        }
+
+        .bulleInfo1
+        {
+            margin-top: 50%;
+            background-color: grey;
+            color: white;
+        }
+
+        .bulleInfo2
+        {
+
+        }
+
+        .bulleInfo3
+        {
+            margin-top: 50%;
+            background-color: black;
+            color: white;
+            height: 250px;
+            border-style: solid;
+            border-color: black;
+
+        }
+
+        /* width */
+        .bulleInfo3::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        /* Handle */
+        .bulleInfo3::-webkit-scrollbar-thumb {
+            background: yellow;
+            border-radius: 10px;
+        }
+
+
+        .bulleInfo4
+        {
+
+        }
+
+        .bulleInfo5
+        {
+
+        }
+
+        .bulleInfo6
+        {
+            background-color: grey;
+            color: white;
+            height: 250px;
+            overflow: auto;
+            margin-top: -50%;
+        }
+
+        .bulleInfo1Photo
+        {
+            max-width: 100%;
+        }
+
+        .jumbotron h1
+        {
+            font-size: 20px;
+        }
+
+        .jumbotron p
+        {
+            font-size: 15px;
+        }
+
+
     </style>
 {% endblock %}
 
 
 
 {% block body %}
+
+
 
 
     <div class="popupCustom" id="map">
@@ -55,13 +207,14 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <img src="{{ theater.logo }}" style="max-width: 100%; padding-bottom: 5%">
+                            <img src="{{ theater.logo }}" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%">
                             <br>
-                            <h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1>
-                            <p class="lead">{{ theater.address1 }}</p>
-                            <p class="lead">{{ theater.zipcode }} {{ theater.city }}</p>
-                            <p class="lead">{{ theater.phoneNumber }}</p>
+                            <h1 style="color : Yellow; font-weight: bold; text-align: right" class="display-4">{{ theater.name }}</h1>
+                            <p class="lead" style="text-align: right">{{ theater.address1 }}</p>
+                            <p class="lead" style="text-align: right">{{ theater.zipcode }} {{ theater.city }}</p>
+                            <p class="lead" style="text-align: right">{{ theater.phoneNumber }}</p>
                         </div>
+                        <img src="{{ theater.picture }}" style="max-width: 50%; padding-bottom: 5%;float: right">
                     </div>
 
                     <div class="col-2">
@@ -72,8 +225,19 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo3">
-                            <h1 class="display-4">Hello, world!</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                            <h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1>
+                            <hr style="background-color : white; text-align : center; line-height: 1;";>
+                            <h3 style="color : white; font-weight: bold" >CHOIX DE VOTRE SPECTACLE</h3>
+
+                            {% for spectacle in spectacles %}
+                                {% if spectacle.theater == theater %}
+                                    <input type="checkbox" name="checkbox" id="checkbox">
+                                    <label for="checkbox" style="font-size: 20px">{{ spectacle.title }}<img src="http://pngimg.com/uploads/plus/plus_PNG41.png" style="max-height: 10px"></label>
+                                    <p style="margin-top: -2%">{{ spectacle.distribution }}</p>
+
+
+                                {% endif %}
+                            {% endfor %}
 
                         </div>
                     </div>
@@ -92,9 +256,16 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo6">
-                            <h1 class="display-4">Hello, world!</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                            <h3 style="color : white; font-weight: bold" >SELECTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
 
+{#                            {% for showdate in showdates %}#}
+{#                                {% if showdate.showId == spectacle.theater %}#}
+{#                                    <ul>#}
+{#                                        <li class="lead">{{ showdate.dateShow }}</li>#}
+{#                                    </ul>#}
+
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
                         </div>
                     </div>
 

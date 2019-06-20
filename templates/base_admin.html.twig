@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -21,8 +21,12 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
          
-        <link rel="stylesheet" href="/admin_style/admin_style_menu/admin_style_menu.css">
-        <link rel="stylesheet" href="/admin_style/admin_style/admin_style.css">
+
+        <!-- Style Admin -->
+        <link rel="stylesheet" href="/admin/admin_menu.css">
+        <link rel="stylesheet" href="/admin/admin.css">
+        <link rel="stylesheet" href="/assets/scss/admin.scss">
+
     </head>
 
     <body class="body_admin">
@@ -34,16 +38,16 @@
                             <img src="https://paradipport.gov.in/Admin/images/login.png" alt="logo_balises" height=70 width=70>
                         </div>
                         
-                        <ul class="list-unstyled components">                                    
+                        <ul class="list-unstyled components">
                             <li>
                                 <a href="#">Tableau de bord</a>
-                            </li>                             
+                            </li>
                             <li>
                                 <a href="{{ path('user_index') }}">Théâtre</a>
                             </li>
                             <li>
                                 <a href="#">Spectacles et Places</a>
-                            </li>            
+                            </li>
                              <li>
                                 <a href="#">Coefficients</a>
                             </li>

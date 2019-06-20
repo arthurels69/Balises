@@ -14,18 +14,18 @@
 
                     <tr>
                         <th class="col-md-4" >
-                            <a href="/user/theaterName/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                            <a href="/user/theaterName/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                            <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
+                            <a href="/user/index/name/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                             Nom du Théâtre
                         </th>
                         <th class="col-md-3">
-                            <a href="/user/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                            <a href="/user/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                            <a href="/user/index/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
+                            <a href="/user/index/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                             Email
                         </th>
                         <th class="col-md-3">
-                            <a href="/user/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                            <a href="/user/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                            <a href="/user/index/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
+                            <a href="/user/index/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                             Code Postal
                         </th>
                         <th class="text-center col-md-4">Action</th>
@@ -35,15 +35,19 @@
             {% for user in users %}
                 <tr>
                     {% if user.roles[0]!="ROLE_ADMIN" %}
-                        <td>{{ user.theaterName }}</td>
+                        <td>{{ user.theater.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.theater.zipCode }}</td>
                         <td class="text-center">
-                            <a class='btn btn-info btn-xs' href="#">
+                            <a class='btn btn-info btn-xs m-1' href="{{ path('theater_show', {'id': user.id}) }}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Show
+                            </a>
+                            <a class='btn btn-info btn-xs' href="{{ path('theater_edit', {'id': user.theater.id}) }}">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
                             </a>
-                            <a href="#" class="btn btn-danger btn-xs">
+                            <a href="{{ path('user_delete', {'id': user.theater.id}) }}" class="btn btn-danger btn-xs">
                                 <span class="glyphicon glyphicon-remove"></span>
                                 Del
                             </a>
