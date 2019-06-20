@@ -11,22 +11,13 @@ $(document).ready(function () {
         else{
          $('#arrow').removeClass('fa-chevron-right').addClass('fa-chevron-left');
          }               
-    });//click 
-    
-    //Sticky tableau avec largeur du bandeau 
-
-    $( window ).scroll(function() {        
-        let toto=$('.navbar').height();
-        console.log(toto);
+    });//click
 
 
-      });
+    // $('.tr_index').on('click', function () {
+    //     $('.table_user_show').toggleClass('active'); 
+        
+    // });//click
 
 
-
-
-
-
-
-
-    });
+});

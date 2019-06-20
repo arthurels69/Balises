@@ -1,4 +1,4 @@
-/****************************Card Table FindAll user/index.html.twig***********************/
+/****************************Liste des théâtres user/index.html.twig***********************/
 
 .card {
     width:1200px  !important;
@@ -17,13 +17,44 @@ thead{
     background-color: white !important;
 }
 
-table{
-    overflow-x: scroll;
-}
-
 .th_action{
     min-width:230px !important;
-
 }
+
+.table-hover tbody tr:hover td {
+    background-color: rgb(198, 218, 218);
+}
+
+.table_user_show{
+    display:none;   
+}
+
+.table_user_show.active{
+    display:block;    
+}
+
+th,td{
+    vertical-align: middle !important;    
+}
+
+
+
+/****************************Détail d'un théâtre user/show.html.twig***********************/
+
+.btn_show a{
+    margin-right:10px !important;
+}
+.card_show{
+    min-width: 500px !important;
+}
+
+.table_show tbody tr:hover td {
+    background-color: rgb(198, 218, 218);
+}
+
+.table_show tbody tr:hover th {
+    background-color: rgb(198, 218, 218);
+}
+
 
 
