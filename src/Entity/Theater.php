@@ -117,6 +117,7 @@ class Theater
     private $longitude;
 
     /**
+     * @Assert\File(mimeTypes={ "image/png","image/jpg","image/gif"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;

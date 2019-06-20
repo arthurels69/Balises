@@ -6,11 +6,11 @@
 <div class="card w-100">
     <div class="card-header d-flex w-100 justify-content-between">
         <h4 class="my-0 mx-2" >Liste des Théâtres</h4>
-        <a href="{{ path('user_new') }}" class="btn btn-info  text-white"><b>+</b>Ajouter</a>        
+        <a href="{{ path('user_new') }}" class="btn btn-info  text-white"><b>+</b>Ajouter</a>
     </div>
     <div class="card-body p-0">
             <table class="table table-striped table-bordered table-hover">
-                    <thead class="text-center"> 
+                    <thead class="text-center">
                             <tr >
                                 <th class="col-3" >
                                     <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
@@ -30,16 +30,16 @@
                                 <th class="th_action text-center">Action</th>
                             </tr>
                     </thead>
-        
+
                     {% for user in users %}
-                     
-                        <tr class="tr_index">                           
+
+                        <tr class="tr_index">
                             {% if user.roles[0]!="ROLE_ADMIN" %}
                                    <td class="text-center">{{ user.theater.name }}</td>
                                    <td class="text-center">{{ user.email }}</td>
                                    <td class="text-center">{{ user.theater.zipCode }}</td>
                                 </a>
-                                
+
                                 <td class="text-center">
                                     <a class='btn btn-info btn-xs m-1' href="{{ path('user_show', {'id': user.id}) }}">
                                         <span class="glyphicon glyphicon-edit"></span>
@@ -51,13 +51,13 @@
                                     </a>
                                     <a href="#" class="btn btn-danger btn-xs">
                                         <span class="glyphicon glyphicon-remove"></span>
-                                        Del                                   
+                                        Del
                                 </td>
                             {% endif %}
                         </tr>
                     {% endfor %}
-                    
-                </table>      
+
+                </table>
     </div>{# Card body #}
   </div>{# Card #}
 {% endblock %}
