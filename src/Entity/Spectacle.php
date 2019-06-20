@@ -89,7 +89,9 @@ class Spectacle
 
     /**
      * Many to one relation with the theater the show is linked to
-     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
+
+     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows", cascade={"persist", "remove"})
+
      * @ORM\JoinColumn(nullable=false, name="theater_id_id")
      */
     private $theater;

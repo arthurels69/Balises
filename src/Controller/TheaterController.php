@@ -5,14 +5,20 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+
+
+use GuzzleHttp\Exception\GuzzleException;
+
 use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -83,14 +89,12 @@ class TheaterController extends AbstractController
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Theater $theater
-     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function edit(
         Request $request,
         Theater $theater,
-        TheaterService $theaterService,
-        TheaterRepository $theaterRepository
+        TheaterService $theaterService
     ): Response {
 
         $form = $this->createForm(TheaterType::class, $theater);
@@ -98,7 +102,6 @@ class TheaterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $theaterService->geocode($theater);
-
 
             /** @var UploadedFile $file */
             $file = $request->files->get('theater')['logo'];

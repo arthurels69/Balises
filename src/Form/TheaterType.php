@@ -61,8 +61,8 @@ class TheaterType extends AbstractType
                 'help' => 'ex : https:// ou http://']
             )
             ->add('baseRate', MoneyType::class, ['required'=>false])
-            ->add('lat', NumberType::class, ['required'=>false])
-            ->add('longitude', NumberType::class, ['required'=>false])
+            //->add('lat', NumberType::class, ['required'=>false])
+            //  ->add('longitude', NumberType::class, ['required'=>false])
         ;
     }
 
