@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use GuzzleHttp\Client;
+
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -92,6 +92,7 @@ class TheaterController extends AbstractController
         TheaterService $theaterService,
         TheaterRepository $theaterRepository
     ): Response {
+
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
@@ -101,6 +102,7 @@ class TheaterController extends AbstractController
 
             /** @var UploadedFile $file */
             $file = $request->files->get('theater')['logo'];
+
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             try {
                 $file->move($this->getParameter('logo_directory'), $fileName);
@@ -108,6 +110,7 @@ class TheaterController extends AbstractController
                 throw new FileException($e);
             }
             $theater->setLogo($fileName);
+
 
             $file = $request->files->get('theater')['picture'];
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
