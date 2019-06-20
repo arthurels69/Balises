@@ -32,7 +32,6 @@ class CalendarService
     public function selectSpectaclesOfTheDay($selectedDate) : array
     {
         $dateSpectacle = new \DateTime($selectedDate);
-
         $dateShowPlusOne = new \DateTime($selectedDate);
 
         $dateShowPlusOne->add(\DateInterval::createFromDateString('+1 day'));

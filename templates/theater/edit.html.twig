@@ -3,6 +3,12 @@
 {% block title %}Edit Theater{% endblock %}
 
 {% block body %}
+    <style>
+        .sidenav {
+            display: none;
+        }
+    </style>
+
     <h1>Modification d'un Théâtre</h1>
 
     {{ include('theater/_form.html.twig', {'button_label': 'Mise à Jour'}) }}

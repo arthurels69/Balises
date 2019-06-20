@@ -3,69 +3,87 @@
 {% block title %}Theater{% endblock %}
 
 {% block body %}
+    <style>
+        .sidenav {display: none;}
+    </style>
     <h1>Visualisation d'un Théâtre</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ theater.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ theater.name }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ theater.email }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ theater.address1 }}</td>
-            </tr>
-            <tr>
-                <th>Complément Adresse</th>
-                <td>{{ theater.address2 }}</td>
-            </tr>
-            <tr>
-                <th>Code Postal</th>
-                <td>{{ theater.zipCode }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ theater.city }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ theater.phoneNumber }}</td>
-            </tr>
-            <tr>
-                <th>Logo</th>
-                <td>{{ theater.logo }}</td>
-            </tr>
-            <tr>
-                <th>Web Site</th>
-                <td>{{ theater.website }}</td>
-            </tr>
-            <tr>
-                <th>Tarif Base</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-            <tr>
-                <th>Latitude</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-            <tr>
-                <th>Longitude</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class = 'container'>
+        <div class="row">
+            <div class="col-sm-6 espSaisie">
 
-    <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Create new Spectacle</button> </a>
+                {{ theater.name }}
+            </div>
 
-    <a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
+            <div>
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
+            </div>
 
 
+        </div>
+        <div class="row">
+            <div class="col-sm-6 espSaisie">
+
+                {{ theater.address1 }}
+            </div>
+
+            <div class="col-sm-6">
+
+                {{ theater.address2 }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 espSaisie">
+                {{ theater.zipCode }}
+
+            </div>
+
+            <div class="col-sm-6 espSaisie">
+                {{ theater.city }}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 espSaisie">
+
+                {{theater.phoneNumber }}
+            </div>
+            <div class="col-sm-6" >
+
+                {{ theater.email}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 espSaisie">
+                {{ theater.website }}
+            </div>
+
+            <div>
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">
+                {{ theater.lat }}
+
+            </div>
+            <div class="col-sm-2">
+                {{ theater.longitude }}
+
+            </div>
+            <div class="col-sm-2">
+                {{ theater.baseRate }}
+
+            </div>
+
+        </div>
+
+        <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Create new Spectacle</button> </a>
+
+        <!--<a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>-->
+
+    </div>
 
 {% endblock %}

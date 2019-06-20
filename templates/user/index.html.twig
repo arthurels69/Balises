@@ -13,11 +13,7 @@
                     </div>
 
                     <tr>
-                        <th class="col-md-4" >
-                            <a href="/user/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                            <a href="/user/name/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
-                            Nom du Théâtre
-                        </th>
+
                         <th class="col-md-3">
                             <a href="/user/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
                             <a href="/user/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
@@ -35,15 +31,11 @@
             {% for user in users %}
                 <tr>
                     {% if user.roles[0]!="ROLE_ADMIN" %}
-                        <td>{{ user.theater.name }}</td>
+
                         <td>{{ user.email }}</td>
                         <td>{{ user.theater.zipCode }}</td>
                         <td class="text-center">
-                            <a class='btn btn-info btn-xs m-1' href="{{ path('user_show', {'id': user.id}) }}">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                Show
-                            </a>
-                            <a class='btn btn-info btn-xs' href="{{ path('user_edit', {'id': user.id}) }}">
+                            <a class='btn btn-info btn-xs' href="#">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Edit
                             </a>
