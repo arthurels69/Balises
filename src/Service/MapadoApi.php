@@ -31,9 +31,9 @@ class MapadoApi
 
     public function createTicketing($uri, $body)
     {
-		return $this->sendRequest('POST', $uri, $body);
+        return $this->sendRequest('POST', $uri, $body);
 
-		//return $this->sendRequest('POST', $uri, json_encode($body));
+        //return $this->sendRequest('POST', $uri, json_encode($body));
     }
 
     private function sendRequest($method, $uri, $body = null)
