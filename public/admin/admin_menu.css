@@ -1,17 +1,15 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 .body_admin{
-
     background-color:#F4F3EF !important;
-    font-family: 'Poppins', sans-serif!important;
-   
+    font-family: 'Poppins', sans-serif!important;   
 }
 
 p {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     font-weight: 300;
-    line-height: 1.7em;
+    line-height: 1.7rem;
     color: #999;
 }
 
@@ -23,6 +21,8 @@ a:focus {
     transition: all 0.3s !important;
 }
 
+
+
 .navbar {
     padding: 15px 10px;
     background:#f4d942 !important;
@@ -33,10 +33,12 @@ a:focus {
     position: fixed;
     right:0;
     width: calc(100% - 250px);
+    z-index: 999;
 }
 
-.navbar.active{
-    width:100%;
+.navbar.active {
+    width:calc(100% - 115px) !important;
+    color:red !important;
 }
     
 
@@ -53,6 +55,9 @@ a:focus {
     margin: 40px 0;
 }
 
+.collapse.show nav a button{
+    width:100% !important;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -74,19 +79,35 @@ a:focus {
     transition: all 0.3s;
 }
 
-#sidebar.active {
-    margin-left: -250px;
+#sidebar.active {   
+    width:115px !important;
+    text-align: center !important;
+    margin-right: auto;
 }
 
-#sidebar .sidebar-header {
-    padding: 20px;
+.img_admin.active{    
+    display:none !important;
+    padding: 0px;
+}
+
+#arrow.active{
+    margin-right:15px;
+}
+
+#arrow{
+    margin-left:20px !important;
+}
+
+#sidebarCollapse{
+    outline-style:none;
+}
+
+#sidebar .sidebar-header {    
     background: #212120;
-    border-bottom:1px solid #F4F3EF;
-   
+    border-bottom:1px solid #F4F3EF;   
 }
 
-#sidebar ul.components {
-    
+#sidebar ul.components {    
     border-bottom: 1px solid #47748b;
 }
 
@@ -102,62 +123,14 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     display: block;
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5!important;
+    color: black !important;
     background: #fff!important;
 }
-
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
-}
-
-a[data-toggle="collapse"] {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
-
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
-}
-
-ul.CTAs {
-    padding: 20px;
-}
-
-ul.CTAs a {
-    text-align: center;
-    font-size: 0.9em !important;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-a.download {
-    background: #fff;
-    color: #7386D5;
-}
-
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
-
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -173,56 +146,12 @@ a.article:hover {
 }
 
 #content.active {
-    width: 100%;
+    width:calc(100% - 115px) !important;
 }
-
 
 .content_admin{
-    margin-top:80px;
+    margin-top:80px;    
 }
 
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
 
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-    #content {
-        width: 100%;
-    }
-    #content.active {
-        width: calc(100% - 250px);
-    }
-    #sidebarCollapse span {
-        display: none;
-    }
 
-    .navbar{
-        width: 100%;
-    }
-
-    .navbar.active{
-        width:calc(100% - 250px);
-    }
-}
-
-/* ---------------------------------------------------
-    TABLES
------------------------------------------------------ */
-
-.custab{
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin:0 auto;    
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-    }
-.custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-    }
