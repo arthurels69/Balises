@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <style>
+
+        body
+        {
+            background-image: url({{ asset('/uploads/Balises_background.png') }});
+
+            background-size: cover;
+
+        }
+
+
+
+        #background_opacity {
+            position: fixed;
+            z-index: -10;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 236, 2, 0.85); /* L'opacite se regle ici */
+        }
+
+
+
+        #logoonmap
+        {
+            position: absolute;
+            bottom: 10px;
+            right: 2px;
+            z-index: 1;
+            transform: scale(0.7, 0.7);
+        }
+
+
+    </style>
+
+
+
+    <div id="background_opacity"></div>
+
+    <div class="row h-100 m-auto justify-content-between">
+
+        <h1>Spectacle</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ spectacle.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ spectacle.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ spectacle.description }}</td>
+            </tr>
+            <tr>
+                <th>Distribution</th>
+                <td>{{ spectacle.distribution }}</td>
+            </tr>
+            <tr>
+                <th>MandatoryInfos</th>
+                <td>{{ spectacle.mandatoryInfos }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ spectacle.image }}</td>
+            </tr>
+            <tr>
+                <th>PhotoCredits</th>
+                <td>{{ spectacle.photoCredits }}</td>
+            </tr>
+            <tr>
+                <th>AdditionalInfos</th>
+                <td>{{ spectacle.additionalInfos }}</td>
+            </tr>
+            <tr>
+                <th>IsBalise</th>
+                <td>{{ spectacle.isBalise ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>OfferType</th>
+                <td>{{ spectacle.offerType }}</td>
+            </tr>
+            <tr>
+                <th>MapadoLink</th>
+                <td>{{ spectacle.mapadoLink }}</td>
+            </tr>
+            <tr>
+                <th>BaseRate</th>
+                <td>{{ spectacle.baseRate }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div id="logoonmap">
+            <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+        </div>
+
+
+
+    </div>
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+{% endblock %}
+

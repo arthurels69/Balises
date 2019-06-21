@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Spectacle;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
 use App\Repository\ShowDateRepository;
@@ -25,6 +26,18 @@ class MapController extends AbstractController
             'theaters' => $theaterRepository->findAll(),
             'spectacles' => $spectacleRepository->findAll(),
             'showdates' =>$dateRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/spectacle/{id}", name="detailSpectacle", methods={"GET"})
+     * @param Spectacle $spectacle
+     * @return Response
+     */
+    public function detailSpectacle(Spectacle $spectacle): Response
+    {
+        return $this->render('home/spectacle.html.twig', [
+            'spectacle' => $spectacle,
         ]);
     }
 }

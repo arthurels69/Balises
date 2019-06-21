@@ -248,12 +248,14 @@
                             {% for spectacle in spectacles %}
                                 {% if spectacle.theater == theater %}
                                     <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">
-                                    <label for="checkbox" style="font-size: 20px">{{ spectacle.title }}<img src="http://pngimg.com/uploads/plus/plus_PNG41.png" style="max-height: 10px"></label>
+                                    <label for="checkbox" style="font-size: 20px">{{ spectacle.title }}</label>
+                                    <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank">More info</a>
                                     <p style="margin-top: -2%">{{ spectacle.distribution }}</p>
 
 
                                 {% endif %}
                             {% endfor %}
+
 
                         </div>
                     </div>
@@ -283,10 +285,10 @@
                                      <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
                                      </div>
                                 {% endfor %}
-
-
+                                <a class="btn btn-dark" href="{{ path('home') }}">Commander</a>
                             </div>
                         {% endfor %}
+
                     </div>
 
                 </div>
