@@ -1,70 +1,53 @@
-<table class="table table_show table-striped table-bordered table-hover">
+<table class="table table_index_show">
         <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            {% if user.theaterName is  defined %}
-                <tr>
-                    <th>Nom du Théâtre</th>
-                    <td>{{ user.theaterName }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <th>Password</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ theater.id }}</td>
-            </tr>
+            
             <tr>
                 <th>Nom</th>
-                <td>{{ theater.name }}</td>
+                <td>{{ user.theater.name }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                <td>{{ theater.email }}</td>
+                <td>{{ user.theater.email }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
-                <td>{{ theater.address1 }}</td>
+                <td>{{ user.theater.address1 }}</td>
             </tr>
             <tr>
                 <th>Complément Adresse</th>
-                <td>{{ theater.address2 }}</td>
+                <td>{{ user.theater.address2 }}</td>
             </tr>
             <tr>
                 <th>Code Postal</th>
-                <td>{{ theater.zipCode }}</td>
+                <td>{{ user.theater.zipCode }}</td>
             </tr>
             <tr>
                 <th>Ville</th>
-                <td>{{ theater.city }}</td>
+                <td>{{ user.theater.city }}</td>
             </tr>
             <tr>
                 <th>Téléphone</th>
-                <td>{{ theater.phoneNumber }}</td>
+                <td>{{ user.theater.phoneNumber }}</td>
             </tr>
             <tr>
                 <th>Logo</th>
-                <td>{{ theater.logo }}</td>
+                <td>{{ user.theater.logo }}</td>
             </tr>
             <tr>
                 <th>Web Site</th>
-                <td>{{ theater.website }}</td>
+                <td>{{ user.theater.website }}</td>
             </tr>
             <tr>
                 <th>Tarif Base</th>
-                <td>{{ theater.baseRate }}</td>
+                <td>{{ user.theater.baseRate }}</td>
             </tr>
             <tr>
                 <th>Latitude</th>
-                <td>{{ theater.baseRate }}</td>
+                <td>{{ user.theater.baseRate }}</td>
             </tr>
             <tr>
                 <th>Longitude</th>
-                <td>{{ theater.baseRate }}</td>
+                <td>{{ user.theater.baseRate }}</td>
             </tr>
         </tbody>   
     </table>    
