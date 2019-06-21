@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationType;
 use App\Service\TriService;
 use App\Form\UserType;
 use App\Entity\Theater;
@@ -53,7 +54,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $theater = new Theater();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,6 +67,7 @@ class UserController extends AbstractController
 
             $manager->persist($user);
 
+            $theater->setName($request->request->get('registration')['theater']['name']);
             $theater->setEmail($user->getEmail());
             $theater->setUser($user);
 

@@ -1,4 +1,7 @@
 {{ form_start(form) }}
+<style>
+    .sidenav {display: none;}
+</style>
 <div class = 'container'>
     <div class="row">
         <div class="col-sm-6 espSaisie">
@@ -68,14 +71,14 @@
 
     </div>
     <div class="row">
-        <div class="col-sm-2">
+    {#    <div class="col-sm-2">
             {{ form_label(form.lat, 'Latitude') }}
             {{ form_widget(form.lat, {'attr': {'class': 'latitude hold','placeholder': '99999.99'}}) }}
         </div>
         <div class="col-sm-2">
             {{ form_label(form.longitude, 'Longitude') }}
             {{ form_widget(form.longitude, {'attr': {'class': 'longitude hold','placeholder': '99999.99'}}) }}
-        </div>
+        </div>#}
         <div class="col-sm-2">
             {{ form_label(form.baseRate, 'Tarif de Base') }}
             {{ form_widget(form.baseRate, {'attr': {'class': 'hold zipCode','placeholder': '99999.99'}}) }}
