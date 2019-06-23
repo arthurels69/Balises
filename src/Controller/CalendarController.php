@@ -11,6 +11,7 @@ use Mapado\RestClientSdk\Tests\Units\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -61,7 +62,8 @@ class CalendarController extends AbstractController
         return $this->render('Calendar/calendar.html.twig', [
             'today' => $todayString,
             'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
-            'oneMoreDay' => $this->calendarService->addMoreDays()
+            'oneMoreDay' => $this->calendarService->addMoreDays(),
+            'ajaxSpectacle' => 'aaa'
         ]);
     }
 
@@ -70,7 +72,7 @@ class CalendarController extends AbstractController
      * @param Request $request
      * @return ResponseAlias
      * @throws \Exception
-     * @Route("/calendar/{day}", name="calendar_select_day")
+     * @Route("/calendar/{day}", name="calendar_select_day", methods={"GET", "POST"})
      */
     public function calendarSelectedDay(Request $request)
     {
@@ -83,10 +85,35 @@ class CalendarController extends AbstractController
             $selectedDay = $request->request->get('picked_date');
         }
 
+
          return $this->render('Calendar/calendar.html.twig', [
                'today' => $selectedDay,
                'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
-               'oneMoreDay' => $this->calendarService->addMoreDays()
+               'oneMoreDay' => $this->calendarService->addMoreDays(),
+
             ]);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @Route("/calendar/{day}/async", name="async_calendar", methods={"GET", "POST"})
+     */
+    public function asyncDate(Request $request) :Response
+    {
+
+        //$selectedDay = new \DateTime("-3 days");
+        $selectedDay = $request->attributes->get('day');
+        //$selectedDay = substr($request->getUri(), -10);
+        //$selectedDayString = $selectedDay->format('Y-m-d');
+
+        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
+
+        $template = $this->render('Calendar/ajaxtest.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
+
+        return $this->json([
+            'newSpectacles' => $template
+        ]);
     }
 }
