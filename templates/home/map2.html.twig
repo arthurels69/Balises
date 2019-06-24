@@ -200,16 +200,12 @@
 
 
 
-    <div id="selectplacetitle">
-
-
+    <div id="selectplacetitle" style="display: block">
         <img id="jumelles" style="max-width: 80px" src="https://img.icons8.com/metro/420/opera-glasses.png">
-
-        <h1>SÉLECTIONNER</h1>
-        <h1> VOTRE <span>LIEU</span></h1>
-
-
+        <h1>SÉLECTIONNER<br>VOTRE <span>LIEU</span></h1>
     </div>
+
+
 
     <div id="logoonmap">
         <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
@@ -229,14 +225,14 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <img src="{{ theater.logo }}" style="max-height: 150px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%">
+                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ theater.logo }}" onclick="{{ theater.website }}" style="max-height: 150px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%"></a>
                             <br>
-                            <h1 style="color : Yellow; font-weight: bold; text-align: right" class="display-4">{{ theater.name }}</h1>
+                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; font-weight: bold; text-align: right" class="display-4">{{ theater.name }}</h1></a>
                             <p class="lead" style="text-align: right">{{ theater.address1 }}</p>
                             <p class="lead" style="text-align: right">{{ theater.zipcode }} {{ theater.city }}</p>
                             <p class="lead" style="text-align: right">{{ theater.phoneNumber }}</p>
                         </div>
-                        <img src="{{ theater.picture }}" style="max-width: 50%; padding-bottom: 5%;float: right">
+                        <a href="{{ theater.website }}" target="_blank" ><img src="{{ theater.picture }}" style="max-width: 50%; padding-bottom: 5%;float: right"></a>
                     </div>
 
                     <div class="col-2">
@@ -247,7 +243,7 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo3">
-                            <h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1>
+                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1></a>
 
                             <hr style="background-color : white; text-align : center; line-height: 1;";>
                             <h3 style="color : white; font-weight: bold" >CHOIX DE VOTRE SPECTACLE</h3>
@@ -363,7 +359,6 @@
 
 
         for (let i = 0; i < pointers.length; i++)
-
         {
             let latitude = pointers[i].lat;
             let longitude = pointers[i].long;
@@ -375,11 +370,8 @@
             let marker = L.marker([latitude, longitude]).addTo(map);
 
 
-            // bind the custom popup
-
+            // Ouvrir bulle info lorsque clic sur marker
             marker.bindPopup(elements, customOptions);
-
-
             marker.addEventListener("click",function ()
             {
                 elements.style.display = "block";
@@ -387,11 +379,9 @@
                 map.setView([latitude, longitude]);
 
             });
-
-
         }
 
-
+        // Cacher "Selectionner votre lieu" quand bulleInfo ouverte
         map.addEventListener("click", function ()
         {
             let hideAction = document.getElementById('selectplacetitle');
@@ -400,6 +390,7 @@
         });
 
 
+        // Recentrer carte quand clique sur titre
         let clickontitle = document.getElementById('selectplacetitle');
         clickontitle.addEventListener("click", function()
         {
@@ -407,23 +398,19 @@
         })
 
 
-        //InfoBulle "Recentrer la carte"
-        document.getElementById('selectplacetitle').onmouseover = function() {mouseOver()};
-        document.getElementById('selectplacetitle').onmouseout = function() {mouseOut()};
-
-        function mouseOver() {
-            document.getElementById("selectplacetitle").style.color = "#484848";
-        }
-
-        function mouseOut() {
-            document.getElementById("selectplacetitle").style.color = "black";
-        }
-
-
-
-
-
-
+        // Info Text "Recentrer la carte"
+        let maintitle = "SÉLECTIONNER<br>VOTRE <span>LIEU</span>";
+        let secondTitle = "CENTRER<br>LA CARTE";
+        clickontitle.addEventListener("mouseover", function()
+        {
+            this.children[0].style.visibility ="hidden";
+            this.children[1].innerHTML = secondTitle;
+        })
+        clickontitle.addEventListener("mouseout", function()
+        {
+            this.children[0].style.visibility ="visible";
+            this.children[1].innerHTML = maintitle;
+        })
 
     </script>
 
