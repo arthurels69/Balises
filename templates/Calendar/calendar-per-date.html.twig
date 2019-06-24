@@ -28,7 +28,7 @@
             <!-- display 3 days before the selected date in the calendar -->
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 3 days') | date
                 ('Y-m-d')}) }}')">
-                                <li class="month-day">
+                <li class="month-day">
                     <div class="week">{{ today | date_modify('- 3 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 3 days')  | date('d-M') }}</div>
                 </li>
@@ -129,8 +129,8 @@
 <script>
     function changeDate(date) {
         fetch(date)
-            .then(response => response.json())
-            .then(json =>  {
+            .then(response => response.text())
+            .then(text =>  {
                 let displaySpectacles = document.getElementById('display-spectacles');
                 let spectaclesNextDay = document.getElementById('spectaclesNextDay');
                 let newsspectacleDisplay = document.getElementById('newSpectacles');
@@ -138,22 +138,22 @@
                 displaySpectacles.remove();
                 spectaclesNextDay.innerHTML ='';
 
-                newsspectacleDisplay.innerHTML = json.newSpectacles.content;
+                newsspectacleDisplay.innerHTML = text;
             });
     }
 
     function nextDay(date) {
         fetch(date)
-            .then(response => response.json())
-            .then(json =>  {
+            .then(response => response.text())
+            .then(text =>  {
                 let spectaclesNextDay = document.getElementById('spectaclesNextDay');
                 console.log(spectaclesNextDay.innerHTML);
                 if(spectaclesNextDay.innerHTML !=null){
-                spectaclesNextDay.innerHTML = json.newSpectacles.content;
+                spectaclesNextDay.innerHTML = text;
                 }
                 else{
                     spectaclesNextDay.innerHTML = '';
-                    spectaclesNextDay.innerHTML = json.newSpectacles.content;
+                    spectaclesNextDay.innerHTML = text;
                 }
             });
     }

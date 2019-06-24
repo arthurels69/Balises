@@ -110,14 +110,9 @@ class CalendarController extends AbstractController
 
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
-        $template = $this->render('Calendar/ajaxSpectacles.html.twig', [
+        return $this->render('Calendar/ajaxSpectacles.html.twig', [
             'today' => $selectedDay,
             'spectaclesOfTheDay' => $newSpectacles
-        ]);
-
-        return $this->json([
-            'newSpectacles' => $template,
-            'selectedDay' => $selectedDay
         ]);
     }
 
@@ -135,11 +130,6 @@ class CalendarController extends AbstractController
 
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
-        $template = $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
-
-        return $this->json([
-            'newSpectacles' => $template,
-            'selectedDay' => $selectedDay
-        ]);
+		return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }
 }
