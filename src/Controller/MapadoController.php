@@ -1,61 +1,41 @@
 <?php
 
+
 namespace App\Controller;
 
-use Mapado\LeagueOAuth2Provider\Provider\MapadoOAuth2Provider;
-use Mapado\RestClientSdk\RestClient;
-use Mapado\RestClientSdk\SdkClient;
+use App\Service\MapadoApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use GuzzleHttp;
 
 class MapadoController extends AbstractController
 {
+
     /**
      * @Route("/mapado", name="mapado")
      */
-    public function index()
+    public function mapado()
     {
 
-        $provider = new MapadoOAuth2Provider([
-            'clientId' => '626_8zldy7pffu8s484scs0kcoskkws8okoo44w0oksgkcc4co44s',
-            'clientSecret' => '5edoxd1i800008wsg08oswsc44sgo8kk44ogw8oosswo8ckg08'
-        ]);
+        $mapadoRead = new MapadoApi('ticketing:events:read');
+
+        dump($mapadoRead->getTicketings());
 
 
-        $token = $provider->getAccessToken('password', [
-            'scope' => 'ticketing:events:read',
-            'username' => 'wildcode@test.com',
-            'password' => 'wildcode',
-        ]);
+        $mapadoWrite = new MapadoApi('ticketing:events:write');
 
-        /*$baseURL = $provider->getBaseAccessTokenUrl([
-            'scope' => 'ticketing:events:read',
-            'username' => 'wildcode@test.com',
-            'password' => 'wildcode',
-        ]); */
-        dump($provider->getAuthorizationUrl());
-        //dump($provider->getRequest('GET', 'https://ticketing.mapado.net/v1/ticketings??view=list'));
+        $payload = [
+        '@context' => '/v1/contexts/Ticketing',
+        '@id' => '/v1/ticketings',
+        '@type' => 'hydra:PagedCollection',
+        'title' => 'test',
+        'description' => 'test',
+        'place' => 'lyon'
+        ];
 
-        $request = $provider->getAuthenticatedRequest('GET', 'https://api.mapado.net/v2/?fields=eventDateList', $token);
+        $payloadJson = \GuzzleHttp\json_encode($payload);
+        dump($payloadJson);
 
-        dump($request);
-        dump($request->getBody());
-        //Returns a token (string)
-        $realToken = $token->getToken();
-        //dump($realToken);
-
-        //$provider->getAuthenticatedRequest('GET', '', '')
-
-        //returns token type and given scope
-        //dump($token->getValues());
-
-        //returns clients info
-        $client = $provider->getHttpClient();
-        dump($client);
-
-        $client->request('GET', 'https://ticketing.mapado.net/v1/?fields=eventDateList');
-
-        return $this->render('mapado/index.html.twig');
+        $result = $mapadoWrite->createTicketing('/v1/ticketings?timezone=Europe/Paris&wallet=1519', $payloadJson);
+        return $this->redirectToRoute("home");
     }
 }
