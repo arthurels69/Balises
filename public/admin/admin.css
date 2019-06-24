@@ -1,51 +1,137 @@
-/****************************user/index.html.twig***********************/
+/****************************Liste des théâtres user/index.html.twig***********************/
 
-.table_user{
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin:0 auto;    
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
+.card {
+    width:1200px  !important;
+    margin:auto;
+}
+
+.card-header{
+    top:69px;
+    position:sticky;
+    background-color: #F2F2F2;
+}
+
+thead{
+    top:128px;
+    position:sticky;
+    background-color: white !important;
+}
+
+.th_action{
+    min-width:230px !important;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: rgb(198, 218, 218);
+}
+
+.table_user_show{
+    display:none;   
+}
+
+.table_user_show.active{
+    display:block;    
+}
+
+th,td{
+    vertical-align: middle !important;    
+}
+
+
+
+/****************************Détail d'un théâtre user/show.html.twig***********************/
+
+.btn_show a{
+    margin-right:10px !important;
+}
+.card_show{
+    min-width: 500px !important;
+}
+
+.table_show tbody tr:hover td {
+    background-color: rgb(198, 218, 218);
+}
+
+.table_show tbody tr:hover th {
+    background-color: rgb(198, 218, 218);
     
-    }
-
-.table_user td,th{
-    text-align:center;
 }
 
-.table_user:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-    }
+/****************************LOGIN security/login.html.twig***********************/
 
-.pull-right:hover,.btn-xs:hover,.btn-xs{
-    color:white !important;
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
-
-.titre_user{
-    background-color:  #58d68d ;
-    border-radius: 10px 0px 0px 0px;      
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
 }
-
-h4{
-    vertical-align: middle !important;
-    line-height: 40px;
-    height:50px;
-   
+.form-signin .checkbox
+{
+    font-weight: normal;
 }
-
-.thead_user{
-position: sticky;
-top:130px;
-z-index:500;
-background-color: #F4F3EF;    
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-
-.titre_user{
-    position: sticky;
-    top:82px;
-    z-index:500;
-    
+.form-signin .form-control:focus
+{
+    z-index: 2;
 }
-
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
 

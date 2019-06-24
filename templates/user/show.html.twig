@@ -1,91 +1,90 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}User show{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            {% if user.theaterName is  defined %}
-                <tr>
-                    <th>Nom du Théâtre</th>
-                    <td>{{ user.theaterName }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <th>Password</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ theater.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ theater.name }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ theater.email }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ theater.address1 }}</td>
-            </tr>
-            <tr>
-                <th>Complément Adresse</th>
-                <td>{{ theater.address2 }}</td>
-            </tr>
-            <tr>
-                <th>Code Postal</th>
-                <td>{{ theater.zipCode }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ theater.city }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ theater.phoneNumber }}</td>
-            </tr>
-            <tr>
-                <th>Logo</th>
-                <td>{{ theater.logo }}</td>
-            </tr>
-            <tr>
-                <th>Web Site</th>
-                <td>{{ theater.website }}</td>
-            </tr>
-            <tr>
-                <th>Tarif Base</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-            <tr>
-                <th>Latitude</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-            <tr>
-                <th>Longitude</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="row justify-content-lg-around">
-        <div class="col-lg-3 offset-lg-1">
-            <a href="{{ path('user_edit', {'id': user.id}) }}"><button class="btn btn-dark">Edit</button> </a>
-        </div>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="col-lg-3">
-                <a href="{{ path('user_index') }}"><button class="btn btn-dark">List</button></a>
+    <div class="card_show w-100">
+        <div class="card-header titre_user row justify-content-center">
+            <h4 class="mb-3 mx-2 col-12" >Détail du Théâtre</h4>
+            <div class="btn_show d-flex col-12">
+                <a href="{{ path('user_edit', {'id': user.id}) }}"><button class="btn btn-info">Edit</button> </a>                
+                {% if is_granted('ROLE_ADMIN') %}                   
+                    <a href="{{ path('user_index') }}"><button class="btn btn-info">List</button></a>                  
+                    {{ include('user/_delete_form.html.twig') }}                    
+                {% endif %}
             </div>
-            <div class="col-lg-3">
-            {{ include('user/_delete_form.html.twig') }}
         </div>
-        {% endif %}
-    </div>
+        <div class="card-body p-0">
+                <table class="table table_show table-striped table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        {% if user.theaterName is  defined %}
+                            <tr>
+                                <th>Nom du Théâtre</th>
+                                <td>{{ user.theaterName }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Password</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ theater.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ theater.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ theater.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ theater.address1 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Complément Adresse</th>
+                            <td>{{ theater.address2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Code Postal</th>
+                            <td>{{ theater.zipCode }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ville</th>
+                            <td>{{ theater.city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone</th>
+                            <td>{{ theater.phoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Logo</th>
+                            <td>{{ theater.logo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Web Site</th>
+                            <td>{{ theater.website }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tarif Base</th>
+                            <td>{{ theater.baseRate }}</td>
+                        </tr>
+                        <tr>
+                            <th>Latitude</th>
+                            <td>{{ theater.baseRate }}</td>
+                        </tr>
+                        <tr>
+                            <th>Longitude</th>
+                            <td>{{ theater.baseRate }}</td>
+                        </tr>
+                    </tbody>   
+                </table>      
+        </div>{# Card body #}
+    </div>{# Card #}   
 {% endblock %}

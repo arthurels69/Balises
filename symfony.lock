@@ -135,12 +135,6 @@
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
-    "giggsey/libphonenumber-for-php": {
-        "version": "8.10.13"
-    },
-    "giggsey/locale": {
-        "version": "1.7.1"
-    },
     "gitonomy/gitlib": {
         "version": "v1.0.4"
     },
@@ -161,9 +155,6 @@
     },
     "justinrainbow/json-schema": {
         "version": "5.2.8"
-    },
-    "kartik-v/bootstrap-fileinput": {
-        "version": "v5.0.3"
     },
     "league/oauth2-client": {
         "version": "2.4.1"

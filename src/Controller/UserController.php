@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Theater;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Service\TriService;
 use App\Form\UserType;
+use App\Entity\Theater;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -97,6 +97,7 @@ class UserController extends AbstractController
             'theater' => $theater
         ]);
     }
+
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
