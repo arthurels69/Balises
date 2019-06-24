@@ -22,9 +22,21 @@ class TheaterFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-//
+
+        $admin = new User();
+        $admin->setEmail('admin@balise.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->encoder->encodePassword($admin, 'aze'));
+
+        $manager->persist($admin);
+
+        $user = new User();
+        $user->setEmail('mailbidon@renaissance.com');
+
+        
 //        // Liste user à ajouter :
 //        $tab1 = array(
+
 //                'email' => "theatre@lelysee.com",
 //                'role' => array("[ROLE_THEATER]"),
 //                'password' => "aze");

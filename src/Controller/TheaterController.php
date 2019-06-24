@@ -23,52 +23,52 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class TheaterController extends AbstractController
 {
-    /**
-     * @Route("/", name="theater_index", methods={"GET"})
-     * @isGranted("ROLE_ADMIN")
-     * @param TheaterRepository $theaterRepository
-     * @return Response
-     */
-    public function index(TheaterRepository $theaterRepository): Response
-    {
-        return $this->render('theater/index.html.twig', [
-            'theaters' => $theaterRepository->findAll(),
-        ]);
-    }
+//    /**
+//     * @Route("/", name="theater_index", methods={"GET"})
+//     * @isGranted("ROLE_ADMIN")
+//     * @param TheaterRepository $theaterRepository
+//     * @return Response
+//     */
+//    public function index(TheaterRepository $theaterRepository): Response
+//    {
+//        return $this->render('theater/index.html.twig', [
+//            'theaters' => $theaterRepository->findAll(),
+//        ]);
+//    }
 
 
     //* @IsGranted("ROLE_ADMIN")
 
-    /**
-     * @Route("/new", name="theater_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response
-     */
-    public function new(Request $request): Response
-    {
-
-        $theater = new Theater();
-        $form = $this->createForm(TheaterType::class, $theater);
-        $form->handleRequest($request);
-
-
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $user =  $this->getUser();
-            $theater->setuser($user);
-            $entityManager->persist($theater);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('theater_index');
-        }
-
-        return $this->render('theater/new.html.twig', [
-            'theater' => $theater,
-            'form' => $form->createView(),
-        ]);
-    }
+//    /**
+//     * @Route("/new", name="theater_new", methods={"GET","POST"})
+//     * @param Request $request
+//     * @return Response
+//     */
+//    public function new(Request $request): Response
+//    {
+//
+//        $theater = new Theater();
+//        $form = $this->createForm(TheaterType::class, $theater);
+//        $form->handleRequest($request);
+//
+//
+//
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $user =  $this->getUser();
+//            $theater->setuser($user);
+//            $entityManager->persist($theater);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('theater_index');
+//        }
+//
+//        return $this->render('theater/new.html.twig', [
+//            'theater' => $theater,
+//            'form' => $form->createView(),
+//        ]);
+//    }
 
     /**
      * @Route("/{id}", name="theater_show", methods={"GET"})
@@ -88,12 +88,8 @@ class TheaterController extends AbstractController
      * @param Theater $theater
      * @return Response
      */
-    public function edit(
-        Request $request,
-        Theater $theater,
-        TheaterService $theaterService,
-        TheaterRepository $theaterRepository
-    ): Response {
+    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
+    {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
