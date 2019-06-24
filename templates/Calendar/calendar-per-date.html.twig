@@ -20,7 +20,7 @@
     </form>
     </div>
 </div>
-<div id="test"></div>
+
 <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
 <div class="row justify-content-center">
     <div class="col-12">
@@ -28,7 +28,7 @@
             <!-- display 3 days before the selected date in the calendar -->
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 3 days') | date
                 ('Y-m-d')}) }}')">
-                <li class="month-day">
+                <li class="month-day" onclick="active(-3)" id="day-3">
                     <div class="week">{{ today | date_modify('- 3 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 3 days')  | date('d-M') }}</div>
                 </li>
@@ -36,7 +36,7 @@
 
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 2 days') | date
                 ('Y-m-d')}) }}')">
-                <li class="month-day">
+                <li class="month-day" onclick="active(-2)" id="day-2">
                     <div class="week">{{ today | date_modify('- 2 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 2 days')  | date('d-M') }}</div>
                 </li>
@@ -44,7 +44,7 @@
 
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 1 days') | date
                 ('Y-m-d')}) }}')">
-                <li class="month-day">
+                <li class="month-day" onclick="active(-1)" id="day-1">
                     <div class="week">{{ today | date_modify('- 1 day') | date('D') }}</div><div class="day-month">{{ today | date_modify('- 1 day')  | date('d-M') }}</div>
                 </li>
             </a>
@@ -53,7 +53,7 @@
 
             <!-- display today's date and focus it with the active class -->
             <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
-                <li class="month-day active" id="active-day">
+                <li class="month-day active" onclick="active(0)" id="day0">
                     <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
                 </li>
 
@@ -62,7 +62,7 @@
            <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
            }) }}')">
 
-               <li class="month-day">
+               <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
                    <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
                </li>
 
@@ -157,6 +157,18 @@
                 }
             });
     }
-</script>
 
+
+    function active(clickedPill) {
+        let day=[];
+        for(let i = -3; i< {{ oneMoreDay |length  }}; i++) {
+
+            day[i] = document.getElementById('day'+i);
+            day[i].classList.remove('active');
+        }
+
+        day[clickedPill].classList.add('active');
+
+    }
+</script>
 {% endblock %}
