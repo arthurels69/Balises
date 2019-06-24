@@ -76,7 +76,6 @@ class Theater
 
 
     /**
-     * @Assert\File(mimeTypes={ "image/png"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
@@ -118,7 +117,6 @@ class Theater
     private $longitude;
 
     /**
-     * @Assert\File(mimeTypes={ "image/png","image/jpg","image/gif"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
@@ -222,9 +220,11 @@ class Theater
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo($logo): self
     {
-        $this->logo = $logo;
+        if ($logo) {
+            $this->logo = $logo;
+        }
 
         return $this;
     }
@@ -327,7 +327,9 @@ class Theater
 
     public function setPicture(?string $picture): self
     {
-        $this->picture = $picture;
+        if ($picture) {
+            $this->picture = $picture;
+        }
 
         return $this;
     }
