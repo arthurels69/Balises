@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\ShowDate;
+use App\Entity\ShowRate;
 use App\Entity\Spectacle;
 use App\Entity\Theater;
 use App\Form\SpectacleType;
@@ -64,6 +66,7 @@ class SpectacleController extends AbstractController
     {
         return $this->render('spectacle/show.html.twig', [
             'spectacle' => $spectacle,
+
         ]);
     }
 

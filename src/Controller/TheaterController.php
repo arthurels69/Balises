@@ -23,18 +23,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class TheaterController extends AbstractController
 {
-//    /**
-//     * @Route("/", name="theater_index", methods={"GET"})
-//     * @isGranted("ROLE_ADMIN")
-//     * @param TheaterRepository $theaterRepository
-//     * @return Response
-//     */
-//    public function index(TheaterRepository $theaterRepository): Response
-//    {
-//        return $this->render('theater/index.html.twig', [
-//            'theaters' => $theaterRepository->findAll(),
-//        ]);
-//    }
+    /**
+     * @Route("/", name="theater_index", methods={"GET"})
+     * @isGranted("ROLE_ADMIN")
+     * @param TheaterRepository $theaterRepository
+     * @return Response
+     */
+    public function index(TheaterRepository $theaterRepository): Response
+    {
+        return $this->render('theater/index.html.twig', [
+            'theaters' => $theaterRepository->findAll(),
+        ]);
+    }
 
 
     //* @IsGranted("ROLE_ADMIN")
