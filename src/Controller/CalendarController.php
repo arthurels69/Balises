@@ -110,10 +110,36 @@ class CalendarController extends AbstractController
 
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
-        $template = $this->render('Calendar/ajaxtest.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
+        $template = $this->render('Calendar/ajaxSpectacles.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $newSpectacles
+        ]);
 
         return $this->json([
-            'newSpectacles' => $template
+            'newSpectacles' => $template,
+            'selectedDay' => $selectedDay
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/calendar/{day}/asyncPlusOne", name="async_calendarPlusOne", methods={"GET", "POST"})
+     */
+    public function asyncPlusOne(Request $request) : Response
+    {
+        //$selectedDay = new \DateTime("-3 days");
+        $selectedDay = $request->attributes->get('day');
+        //$selectedDay = substr($request->getUri(), -10);
+        //$selectedDayString = $selectedDay->format('Y-m-d');
+
+        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
+
+        $template = $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
+
+        return $this->json([
+            'newSpectacles' => $template,
+            'selectedDay' => $selectedDay
         ]);
     }
 }

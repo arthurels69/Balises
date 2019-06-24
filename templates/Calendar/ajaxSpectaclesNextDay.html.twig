@@ -1,5 +1,10 @@
 <div id="display-spectacles">
+    <!-- below the display of spectacles. Same as the ones in search by theater. -->
+    {% if spectaclesOfTheDay is empty %}
 
+        <p>Pas de spectacles ce jour-là</p>
+
+    {% endif %}
     {% for spectacle in spectaclesOfTheDay%}
 
         <div class="row row-striped">

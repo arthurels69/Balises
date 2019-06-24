@@ -26,21 +26,24 @@
     <div class="col-12">
         <ul class="bxslider">
             <!-- display 3 days before the selected date in the calendar -->
-            <a onclick="changedate()">
+            <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 3 days') | date
+                ('Y-m-d')}) }}')">
                                 <li class="month-day">
                     <div class="week">{{ today | date_modify('- 3 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 3 days')  | date('d-M') }}</div>
                 </li>
             </a>
 
-            <a href="{{ path('calendar_select_day', {"day" : today | date_modify('- 2 days') | date('Y-m-d')}) }}">
+            <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 2 days') | date
+                ('Y-m-d')}) }}')">
                 <li class="month-day">
                     <div class="week">{{ today | date_modify('- 2 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 2 days')  | date('d-M') }}</div>
                 </li>
             </a>
 
-            <a href="{{ path('calendar_select_day', {"day" : today | date_modify('- 1 day') | date('Y-m-d')}) }}">
+            <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 1 days') | date
+                ('Y-m-d')}) }}')">
                 <li class="month-day">
                     <div class="week">{{ today | date_modify('- 1 day') | date('D') }}</div><div class="day-month">{{ today | date_modify('- 1 day')  | date('d-M') }}</div>
                 </li>
@@ -49,15 +52,15 @@
 
 
             <!-- display today's date and focus it with the active class -->
-            <a href="{{ path('calendar_select_day', {"day" : today | date('Y-m-d')}) }}">
-
+            <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
                 <li class="month-day active" id="active-day">
                     <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
                 </li>
 
             {% for oneDay in oneMoreDay %}
 
-           <a href="{{ path('calendar_select_day', {"day" : today | date_modify(oneDay) | date('Y-m-d')}) }}">
+           <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
+           }) }}')">
 
                <li class="month-day">
                    <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
@@ -70,17 +73,18 @@
     </div>
 </div>
 
-<!-- below the display of spectacles. Same as the ones in search by theater. -->
-{% if spectaclesOfTheDay is empty %}
 
-    <p>Pas de spectacles ce jour-là</p>
-
-{% endif %}
 
 <div id="newSpectacles">
 
 </div>
 <div id="display-spectacles">
+    <!-- below the display of spectacles. Same as the ones in search by theater. -->
+    {% if spectaclesOfTheDay is empty %}
+
+        <p>Pas de spectacles ce jour-là</p>
+
+    {% endif %}
     {% for spectacle in spectaclesOfTheDay%}
 
     <div class="row row-striped">
@@ -108,23 +112,51 @@
         </div>
     </div>
 
+
     {% endfor %}
+
+    <button class="btn btn-outline-secondary" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today | date_modify('+ 1 day') | date('Y-m-d')
+    }) }}')">Jour suivant</a>
 </div>
 
 
+<div id="spectaclesNextDay">
+
+</div>
+
 {% block javascripts %}
+
 <script>
-    function changedate() {
-        fetch('{{ path('async_calendar', {"day" : today | date_modify('- 3 days') | date
-            ('Y-m-d')}) }}')
+    function changeDate(date) {
+        fetch(date)
             .then(response => response.json())
             .then(json =>  {
                 let displaySpectacles = document.getElementById('display-spectacles');
+                let spectaclesNextDay = document.getElementById('spectaclesNextDay');
                 let newsspectacleDisplay = document.getElementById('newSpectacles');
+
                 displaySpectacles.remove();
+                spectaclesNextDay.innerHTML ='';
 
                 newsspectacleDisplay.innerHTML = json.newSpectacles.content;
             });
     }
+
+    function nextDay(date) {
+        fetch(date)
+            .then(response => response.json())
+            .then(json =>  {
+                let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+                console.log(spectaclesNextDay.innerHTML);
+                if(spectaclesNextDay.innerHTML !=null){
+                spectaclesNextDay.innerHTML = json.newSpectacles.content;
+                }
+                else{
+                    spectaclesNextDay.innerHTML = '';
+                    spectaclesNextDay.innerHTML = json.newSpectacles.content;
+                }
+            });
+    }
 </script>
+
 {% endblock %}
