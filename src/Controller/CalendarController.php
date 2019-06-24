@@ -97,7 +97,7 @@ class CalendarController extends AbstractController
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/calendar/{day}/async", name="async_calendar", methods={"GET", "POST"})
      */
     public function asyncDate(Request $request) :Response
@@ -130,6 +130,6 @@ class CalendarController extends AbstractController
 
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
-		return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
+        return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }
 }
