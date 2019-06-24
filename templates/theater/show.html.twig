@@ -1,10 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Theater{% endblock %}
 
 {% block body %}
+    <style>
+        .sidenav {display: none;}
+    </style>
     <h1>Visualisation d'un Théâtre</h1>
-
     <table class="table">
         <tbody>
             <tr>
@@ -52,20 +54,26 @@
                 <td>{{ theater.baseRate }}</td>
             </tr>
             <tr>
-                <th>Latitude</th>
+              {#  <th>Latitude</th>
                 <td>{{ theater.baseRate }}</td>
             </tr>
             <tr>
                 <th>Longitude</th>
                 <td>{{ theater.baseRate }}</td>
-            </tr>
+            </tr>#}
         </tbody>
     </table>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Create new Spectacle</button> </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-dark mb-5">Modification</button></a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
+        </div>
 
-    <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Create new Spectacle</button> </a>
-
-    <a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
-
-
+    </div>
 
 {% endblock %}

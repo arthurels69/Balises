@@ -87,10 +87,10 @@ class Theater
     private $website;
 
 
-    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/
+    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/  /^[0-9]{1,}(\.|)[0-9]{0,2}$/g    /^[1-9][0-9]*\.[0-9]{2}$/
     /**
      *
-     * @Assert\Regex( "/^[1-9][0-9]*\.[0-9]{2}$/", message =" tarif non valide")
+     * @Assert\Regex( "/^[0-9]{1,}(\.|)[0-9]{0,2}$/", message =" tarif non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;

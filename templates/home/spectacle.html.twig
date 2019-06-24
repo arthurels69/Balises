@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ spectacle.title }}{% endblock %}
 
 {% block body %}
 
@@ -40,69 +40,43 @@
 
     <div id="background_opacity"></div>
 
-    <div class="row h-100 m-auto justify-content-between">
+    <div class="row m-auto justify-content-between">
 
-        <h1>Spectacle</h1>
+        <div class="container-fluid">
+            <h1 style="text-align: center;font-size: 50px; margin-top: 3%; margin-bottom: 5%">{{ spectacle.title }}</h1>
 
-        <table class="table">
-            <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ spectacle.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ spectacle.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ spectacle.description }}</td>
-            </tr>
-            <tr>
-                <th>Distribution</th>
-                <td>{{ spectacle.distribution }}</td>
-            </tr>
-            <tr>
-                <th>MandatoryInfos</th>
-                <td>{{ spectacle.mandatoryInfos }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ spectacle.image }}</td>
-            </tr>
-            <tr>
-                <th>PhotoCredits</th>
-                <td>{{ spectacle.photoCredits }}</td>
-            </tr>
-            <tr>
-                <th>AdditionalInfos</th>
-                <td>{{ spectacle.additionalInfos }}</td>
-            </tr>
-            <tr>
-                <th>IsBalise</th>
-                <td>{{ spectacle.isBalise ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>OfferType</th>
-                <td>{{ spectacle.offerType }}</td>
-            </tr>
-            <tr>
-                <th>MapadoLink</th>
-                <td>{{ spectacle.mapadoLink }}</td>
-            </tr>
-            <tr>
-                <th>BaseRate</th>
-                <td>{{ spectacle.baseRate }}</td>
-            </tr>
-            </tbody>
-        </table>
+            <div class="row">
+                <div class="col-6" style="padding-left: 10%">
+                    <h2>Description :</h2>
+                    <p style="text-align: justify">{{ spectacle.description }}</p>
 
-        <div id="logoonmap">
-            <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
-        </div>
+                    <h2>Distribution :</h2>
+                    <p>{{ spectacle.distribution }}</p>
+                </div>
+                <div class="col-6" style="padding-right: 10%">
+                    <img src="{{ spectacle.image }}" alt="" style="max-width: 600px; border-radius: 10px">
+                    <p>Crédit photo : {{ spectacle.photoCredits }}</p>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-12" style="padding-left: 10%">
+                    <h2>Information complémentaire :</h2>
+                    <p style="text-align: justify; padding-right: 10%">{{ spectacle.mandatoryInfos }}</p>
+                </div>
 
+                <div class="col-12" style="padding-left: 10%">
+                    <input type="button" value="Commander" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width:200px; height: 50px; background-color: #171a1d; color: white; display: block; margin: auto; margin-top: 2%" OnClick="window.location.href="{{ spectacle.mapadoLink }}" />
+                </div>
+                <div class="col-12" style="padding-left: 10%">
+                    <a style="color: black; display: block; text-align: center" href="javascript:window.close();">Fermer la fenêtre</a>
+                </div>
+            </div>
 
+            <div id="logoonmap">
+                <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+            </div>
+       </div>
     </div>
 
 

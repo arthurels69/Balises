@@ -94,6 +94,7 @@
             bottom: -50%;
 
 
+
         }
 
         .bulleInfo1
@@ -101,6 +102,7 @@
             margin-top: 50%;
             background-color: grey;
             color: white;
+            border-radius: 10px;
         }
 
         .bulleInfo2
@@ -117,6 +119,7 @@
             border-style: solid;
             border-color: black;
             overflow: scroll;
+            border-radius: 10px;
 
         }
 
@@ -130,6 +133,7 @@
         .bulleInfo3::-webkit-scrollbar-thumb {
             background: yellow;
             border-radius: 10px;
+
         }
 
 
@@ -150,6 +154,7 @@
             overflow: auto;
             margin-top: -50%;
             overflow: scroll;
+            border-radius: 10px;
         }
         /* width */
         .bulleInfo6::-webkit-scrollbar
@@ -202,6 +207,8 @@
 
         <h1>SÉLECTIONNER</h1>
         <h1> VOTRE <span>LIEU</span></h1>
+
+
     </div>
 
     <div id="logoonmap">
@@ -222,7 +229,7 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <img src="{{ theater.logo }}" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%">
+                            <img src="{{ theater.logo }}" style="max-height: 150px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%">
                             <br>
                             <h1 style="color : Yellow; font-weight: bold; text-align: right" class="display-4">{{ theater.name }}</h1>
                             <p class="lead" style="text-align: right">{{ theater.address1 }}</p>
@@ -248,8 +255,7 @@
                             {% for spectacle in spectacles %}
                                 {% if spectacle.theater == theater %}
                                     <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">
-                                    <label for="checkbox" style="font-size: 20px">{{ spectacle.title }}</label>
-                                    <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank">More info</a>
+                                    <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank" for="checkbox" style="font-size: 20px; color: white">{{ spectacle.title }}</a>
                                     <p style="margin-top: -2%">{{ spectacle.distribution }}</p>
 
 
@@ -285,7 +291,7 @@
                                      <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
                                      </div>
                                 {% endfor %}
-                                <a class="btn btn-dark" href="{{ path('home') }}">Commander</a>
+                                <a class="btn btn-dark" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width:200px; background-color: #171a1d; color: white; display: block; margin: auto; margin-top: 2%" href="{{ path('home') }}">Commander</a>
                             </div>
                         {% endfor %}
 
@@ -294,6 +300,7 @@
                 </div>
             </div>
         </div>
+
 
 
     {% endfor %}
@@ -327,7 +334,7 @@
         // On initialise la latitude et la longitude de Lyon (centre de la carte)
         let lat = 45.75;
         let lon = 4.85;
-        let zoom = 13; // Zoom de la carte par défaut
+        let zoom = 12; // Zoom de la carte par défaut
 
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
         let map = L.mapbox.map('map')
@@ -390,14 +397,28 @@
             let hideAction = document.getElementById('selectplacetitle');
             hideAction.style.display = "block";
             map.setView([latitude, longitude]);
-
-
         });
+
+
         let clickontitle = document.getElementById('selectplacetitle');
         clickontitle.addEventListener("click", function()
         {
             map.setView([lat, lon], zoom);
         })
+
+
+        //InfoBulle "Recentrer la carte"
+        document.getElementById('selectplacetitle').onmouseover = function() {mouseOver()};
+        document.getElementById('selectplacetitle').onmouseout = function() {mouseOut()};
+
+        function mouseOver() {
+            document.getElementById("selectplacetitle").style.color = "#484848";
+        }
+
+        function mouseOut() {
+            document.getElementById("selectplacetitle").style.color = "black";
+        }
+
 
 
 

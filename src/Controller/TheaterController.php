@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+use GuzzleHttp\Exception\GuzzleException;
 use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -48,9 +51,6 @@ class TheaterController extends AbstractController
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user =  $this->getUser();
@@ -74,8 +74,9 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
+
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater,
+            'theater' => $theater
         ]);
     }
 
@@ -85,17 +86,39 @@ class TheaterController extends AbstractController
      * @param Theater $theater
      * @return Response
      */
-    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
-    {
+    public function edit(
+        Request $request,
+        Theater $theater,
+        TheaterService $theaterService
+    ): Response {
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $theaterService->geocode($theater);
 
+            /** @var UploadedFile $file */
+            $file = $request->files->get('theater')['logo'];
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move($this->getParameter('logo_directory'), $fileName);
+            } catch (FileException $e) {
+                throw new FileException($e);
+            }
+            $theater->setLogo($fileName);
+
+            $file = $request->files->get('theater')['picture'];
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move($this->getParameter('logo_directory'), $fileName);
+            } catch (FileException $e) {
+                throw new FileException($e);
+            }
+            $theater->setPicture($fileName);
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('theater_index', [
+            return $this->redirectToRoute('theater_show', [
                 'id' => $theater->getId(),
             ]);
         }
