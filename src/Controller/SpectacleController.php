@@ -6,6 +6,7 @@ use App\Entity\Spectacle;
 use App\Form\SpectacleType;
 use App\Repository\SpectacleRepository;
 use App\Entity\Theater;
+use App\Repository\TheaterRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -38,7 +39,7 @@ class SpectacleController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function new(Request $request, ObjectManager $manager): Response
+    public function new(Request $request, ObjectManager $manager, TheaterRepository $theaterRepository): Response
     {
         $spectacle = new Spectacle();
         $form = $this->createForm(SpectacleType::class, $spectacle);
@@ -60,9 +61,7 @@ class SpectacleController extends AbstractController
 
             $user = $this->getUser();
 
-            $theater = $this->getDoctrine()
-                ->getRepository(Theater::class)
-                ->findOneBy(array('user' => $user));
+            $theater = $theaterRepository->findOneBy(['user' => $user]);
 
 
             $spectacle->setTheater($theater);
