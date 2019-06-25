@@ -38,15 +38,11 @@ class CalendarService
         $end->add(\DateInterval::createFromDateString('+1 day'));
 
         //Returns  today' spectacles.
-        $idSpectaclesOfTheDay = $this->showDateRepository->findByDates($start, $end);
-        dump($start);
-        dump($idSpectaclesOfTheDay);
-        //Returns the content of today' sgit pectacles based on the IDs collected  above.
-        $spectaclesOfTheDay = [];
-        foreach ($idSpectaclesOfTheDay as $key => $value) {
-            //$spectaclesOfTheDay[$key] = $this->spectacleRepository->findByDatesX($value);
-        }
+        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);
 
+        //Returns the content of today' sgit pectacles based on the IDs collected  above.
+
+        dump($spectaclesOfTheDay);
 
         return $spectaclesOfTheDay;
     }

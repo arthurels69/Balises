@@ -103,12 +103,10 @@ class CalendarController extends AbstractController
     {
 
         $selectedDay = $request->attributes->get('day');
-        dump($selectedDay);
-        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
         return $this->render('Calendar/ajaxSpectacles.html.twig', [
             'today' => $selectedDay,
-            'spectaclesOfTheDay' => $newSpectacles
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay)
         ]);
     }
 
