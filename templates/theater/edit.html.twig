@@ -1,6 +1,6 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Edit Theater{% endblock %}
+{% block title %}Modification Théâtre{% endblock %}
 
 {% block body %}
     <style>
@@ -13,7 +13,18 @@
 
     {{ include('theater/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
 
-    <a href="{{ path('theater_index') }}">Retour à la liste</a>
+    <div class="row justify-content-sm-end">
+        {% if user.roles[0] == "ROLE_ADMIN" %}
+            <div class="col-sm-4">
+                {{ include('theater/_delete_form.html.twig') }}
+            </div>
+            <div class="col-sm-4">
 
-    {{ include('theater/_delete_form.html.twig') }}
+                <a href="{{ path('user_index',{'variable' : user.id} )}}"><button class="btn btn-secondary btn-sm">Retour Liste des Théâtres</button> </a>
+            </div>
+        {% endif %}
+    </div>
+
+
+
 {% endblock %}

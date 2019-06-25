@@ -5,17 +5,12 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
-
-
 use GuzzleHttp\Exception\GuzzleException;
-
 use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use GuzzleHttp\Client;
@@ -44,33 +39,36 @@ class TheaterController extends AbstractController
 
     //* @IsGranted("ROLE_ADMIN")
 
-    /**
-     * @Route("/new", name="theater_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response
-     */
-    public function new(Request $request): Response
-    {
-
-        $theater = new Theater();
-        $form = $this->createForm(TheaterType::class, $theater);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $user =  $this->getUser();
-            $theater->setuser($user);
-            $entityManager->persist($theater);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('theater_index');
-        }
-
-        return $this->render('theater/new.html.twig', [
-            'theater' => $theater,
-            'form' => $form->createView(),
-        ]);
-    }
+//    /**
+//     * @Route("/new", name="theater_new", methods={"GET","POST"})
+//     * @param Request $request
+//     * @return Response
+//     */
+//    public function new(Request $request): Response
+//    {
+//
+//        $theater = new Theater();
+//        $form = $this->createForm(TheaterType::class, $theater);
+//        $form->handleRequest($request);
+//
+//
+//
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $user =  $this->getUser();
+//            $theater->setuser($user);
+//            $entityManager->persist($theater);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('theater_index');
+//        }
+//
+//        return $this->render('theater/new.html.twig', [
+//            'theater' => $theater,
+//            'form' => $form->createView(),
+//        ]);
+//    }
 
     /**
      * @Route("/{id}", name="theater_show", methods={"GET"})
@@ -79,9 +77,10 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
-
+        $user =  $this->getUser();
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater
+            'theater' => $theater,
+            'user' => $user,
         ]);
     }
 
@@ -96,6 +95,8 @@ class TheaterController extends AbstractController
 
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
+        $user =  $this->getUser();
+        dump($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $theaterService->geocode($theater);
@@ -133,6 +134,7 @@ class TheaterController extends AbstractController
         return $this->render('theater/edit.html.twig', [
             'theater' => $theater,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 

@@ -101,7 +101,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         } else {
             // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
             $redirection = new RedirectResponse($this->urlGenerator
-
                                                      ->generate('theater_show', [
                                                          //'id' => $id
 

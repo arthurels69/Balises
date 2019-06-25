@@ -10,10 +10,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ theater.id }}</td>
-            </tr>
-            <tr>
                 <th>Nom</th>
                 <td>{{ theater.name }}</td>
             </tr>
@@ -64,15 +60,26 @@
         </tbody>
     </table>
     <div class="row justify-content-md-center">
-        <div class="col-md-4">
-            <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Nouveau Spectacle</button> </a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-dark mb-5">Modification</button></a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
-        </div>
+        {% if user.roles[0] == "ROLE_THEATER" %}
+            <div class="col-md-4">
+                <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Nouveau Spectacle</button> </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-dark mb-5">Modification</button></a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('spectacle_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
+            </div>
+        {% endif %}
+        {% if user.roles[0] == "ROLE_ADMIN" %}
+
+            <div class="col-md-4">
+                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-dark mb-5">Modification</button></a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
+            </div>
+        {% endif %}
 
     </div>
 
