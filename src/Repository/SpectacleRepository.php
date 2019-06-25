@@ -23,6 +23,7 @@ class SpectacleRepository extends ServiceEntityRepository
     public function findbyDates($dateShow, $dateShowPlusOne) : array
     {
         return $this->createQueryBuilder('s')
+            ->select()
             ->innerJoin('s.showDates', 'd')
             ->andWhere('d.dateShow > :val1')
             ->andWhere('d.dateShow < :val2')

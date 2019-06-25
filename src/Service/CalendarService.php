@@ -40,6 +40,10 @@ class CalendarService
         //Returns  today' spectacles.
         $spectaclesOfTheDay = $this->spectacleRepository->findByDates($dateSpectacle, $dateSpectaclePlusOne);
 
+
+
+
+
         return $spectaclesOfTheDay;
     }
 }
