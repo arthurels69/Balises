@@ -109,6 +109,19 @@ class SpectacleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $file */
+            $fileImage = $request->files->get('spectacle')['image'];
+            if ($fileImage) {
+                $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
+                try {
+                    $fileImage->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $spectacle->setImage($fileName);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('spectacle_index', [
