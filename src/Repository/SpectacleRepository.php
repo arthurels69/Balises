@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\ShowDate;
 use App\Entity\Spectacle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,6 +20,19 @@ class SpectacleRepository extends ServiceEntityRepository
         parent::__construct($registry, Spectacle::class);
     }
 
+    public function findbyDates($dateShow, $dateShowPlusOne) : array
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.showDates', 'd')
+            ->andWhere('d.dateShow > :val1')
+            ->andWhere('d.dateShow < :val2')
+            ->setParameter('val1', $dateShow)
+            ->setParameter('val2', $dateShowPlusOne)
+            ->orderBy('d.dateShow')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     /**
     * @return spectacle[] Returns an array of spectacle objects
     */
