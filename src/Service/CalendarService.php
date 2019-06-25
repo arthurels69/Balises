@@ -38,8 +38,13 @@ class CalendarService
         $dateSpectaclePlusOne->add(\DateInterval::createFromDateString('+1 day'));
 
         //Returns  today' spectacles.
-        $spectaclesOfTheDay = $this->showDateRepository->findByDate($dateSpectacle, $dateSpectaclePlusOne);
+        $idSpectaclesOfTheDay = $this->showDateRepository->findByDate($dateSpectacle, $dateSpectaclePlusOne);
 
+        //Returns the content of today' spectacles based on the IDs collected  above.
+        $spectaclesOfTheDay = [];
+        foreach ($idSpectaclesOfTheDay as $key => $value) {
+            $spectaclesOfTheDay[$key] = $this->spectacleRepository->find($value);
+        }
         return $spectaclesOfTheDay;
     }
 }
