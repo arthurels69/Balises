@@ -77,9 +77,10 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
-
+        $user =  $this->getUser();
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater
+            'theater' => $theater,
+            'user' => $user,
         ]);
     }
 
@@ -94,6 +95,8 @@ class TheaterController extends AbstractController
 
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
+        $user =  $this->getUser();
+        dump($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $theaterService->geocode($theater);
@@ -131,6 +134,7 @@ class TheaterController extends AbstractController
         return $this->render('theater/edit.html.twig', [
             'theater' => $theater,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 

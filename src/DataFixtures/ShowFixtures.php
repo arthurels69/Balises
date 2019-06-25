@@ -28,34 +28,8 @@ class ShowFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         for ($i = 0; $i < 40; $i++) {
-            { { { { { { { { { { { { { { { { { { { { { { { { { {
             $user = new User();
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
+
             $user->setEmail('theatre' . $i . '@theater.com');
             $user->setRoles(['ROLE_THEATER']);
            //$user->setTheaterName('Théâtre n' . $i);
