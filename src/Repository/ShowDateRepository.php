@@ -36,22 +36,6 @@ class ShowDateRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByDate($dateShow, $dateShowPlusOne): array
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT s.id
-        FROM App\Entity\ShowDate s
-        WHERE s.dateShow >= :start AND s.dateShow < :end
-        ORDER BY s.id ASC'
-        )
-            ->setParameter('start', $dateShow)
-            ->setParameter('end', $dateShowPlusOne);
-
-        // returns an array of Product objects
-        return $query->execute();
-    }
 
     /*
     public function findOneBySomeField($value): ?ShowDate
