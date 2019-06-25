@@ -201,7 +201,7 @@
 
 
     <div id="selectplacetitle" style="display: block">
-        <img id="jumelles" style="max-width: 80px" src="https://img.icons8.com/metro/420/opera-glasses.png">
+        <img id="jumelles" style="max-width: 80px" src="{{ asset('uploads/jumelles.png') }}">
         <h1>SÉLECTIONNER<br>VOTRE <span>LIEU</span></h1>
     </div>
 
@@ -400,7 +400,7 @@
 
         // Info Text "Recentrer la carte"
         let maintitle = "SÉLECTIONNER<br>VOTRE <span>LIEU</span>";
-        let secondTitle = "CENTRER<br>LA CARTE";
+        let secondTitle = "CENTRER<br>LA <span>CARTE</span>";
         clickontitle.addEventListener("mouseover", function()
         {
             this.children[0].style.visibility ="hidden";
