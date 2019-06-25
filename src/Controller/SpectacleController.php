@@ -49,6 +49,11 @@ class SpectacleController extends AbstractController
     public function new(Request $request, ObjectManager $manager, TheaterRepository $theaterRepository): Response
     {
         $spectacle = new Spectacle();
+
+        $user = $this->getUser();
+        $theater = $theaterRepository->findOneBy(['user' => $user]);
+
+        $spectacle ->setBaseRate($theater->getBaseRate());
         $form = $this->createForm(SpectacleType::class, $spectacle);
         $form->handleRequest($request);
 
@@ -65,10 +70,6 @@ class SpectacleController extends AbstractController
                 }
                 $spectacle->setImage($fileName);
             }
-
-            $user = $this->getUser();
-
-            $theater = $theaterRepository->findOneBy(['user' => $user]);
 
 
             $spectacle->setTheater($theater);
