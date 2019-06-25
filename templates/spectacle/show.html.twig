@@ -52,8 +52,12 @@
                 <td>{{ spectacle.baseRate }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ spectacle.showDates[0] }}</td>
+                <th>Dates</th>
+                <td>{% for date in spectacle.showDates %}
+                   <ul>
+                  <li>  {{ date.dateShow | date('d/m/Y - H : i') }} </li>
+                   </ul>
+                    {% endfor %}</td>
             </tr>
         </tbody>
     </table>

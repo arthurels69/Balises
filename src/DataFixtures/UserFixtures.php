@@ -196,7 +196,7 @@ class UserFixtures extends Fixture
 
         $manager->persist($show3);
 
-        for ($j = 0; $j < mt_rand(1, 5); $j++) {
+        for ($j = 0; $j < mt_rand(5, 10); $j++) {
             $showDate1 = new ShowDate();
             $showDate1->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
             $showDate1->setShowId($show1);
@@ -206,6 +206,30 @@ class UserFixtures extends Fixture
             $showRate1->setfreePlacesNumber(40);
             $showRate1->setShowDate($showDate1);
             $manager->persist($showRate1);
+        }
+
+        for ($j = 0; $j < mt_rand(4, 8); $j++) {
+            $showDate2 = new ShowDate();
+            $showDate2->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
+            $showDate2->setShowId($show2);
+            $manager->persist($showDate2);
+            $showRate2 = new ShowRate();
+            $showRate2->setDiscountedRate(2);
+            $showRate2->setfreePlacesNumber(50);
+            $showRate2->setShowDate($showDate2);
+            $manager->persist($showRate2);
+        }
+
+        for ($j = 0; $j < mt_rand(8, 15); $j++) {
+            $showDate3 = new ShowDate();
+            $showDate3->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
+            $showDate3->setShowId($show3);
+            $manager->persist($showDate3);
+            $showRate3 = new ShowRate();
+            $showRate3->setDiscountedRate(1);
+            $showRate3->setfreePlacesNumber(20);
+            $showRate3->setShowDate($showDate3);
+            $manager->persist($showRate3);
         }
         $manager->flush();
     }
