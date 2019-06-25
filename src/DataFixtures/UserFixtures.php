@@ -8,6 +8,7 @@ use App\Entity\Spectacle;
 use App\Entity\Theater;
 use App\Entity\User;
 use App\Service\TheaterService;
+use Faker;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -27,6 +28,8 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $faker = Faker\Factory::create('fr_FR');
+
         // Création de l'admin Balise
         $admin = new User();
         $admin->setEmail('admin@balise.com');
@@ -193,18 +196,17 @@ class UserFixtures extends Fixture
 
         $manager->persist($show3);
 
-        $showDate1 = new ShowDate();
-        $showDate1->setDateShow(new DateTime('2019-06-25T19:00:00'));
-
-        $showDate1->setShowId($show1);
-        $showRate1 = new ShowRate();
-        $showDate1->setShowRate($showRate1);
-        $manager->persist($showDate1);
-        $showRate1->setDiscountedRate(2);
-        $showRate1->setfreePlacesNumber(40);
-        $showRate1->setShowDate($showDate1);
-        $manager->persist($showRate1);
-
+        for ($j = 0; $j < mt_rand(1, 5); $j++) {
+            $showDate1 = new ShowDate();
+            $showDate1->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
+            $showDate1->setShowId($show1);
+            $manager->persist($showDate1);
+            $showRate1 = new ShowRate();
+            $showRate1->setDiscountedRate(2);
+            $showRate1->setfreePlacesNumber(40);
+            $showRate1->setShowDate($showDate1);
+            $manager->persist($showRate1);
+        }
         $manager->flush();
     }
 }
