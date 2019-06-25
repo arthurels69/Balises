@@ -58,8 +58,7 @@ class TheaterFixtures extends Fixture
 //                'zipcode' => "69600",
 //                'city' => "OULLINS",
 //                'phonenumber' => "04 72 39 74 91",
-//                'logo' => "https://www.theatrelarenaissance.com/wp-content/themes/
-//                renaissance/images/logo-la-renaissance-cercle.png",
+//                'logo' => "https://www.theatrelarenaissance.com/wp-content/themes/renaissance/images/logo-la-renaissance-cercle.png",
 //                'website' => "",
 //                'baserate' => "25.00",
 //                'lat' => "45.716693",
