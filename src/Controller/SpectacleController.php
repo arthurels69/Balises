@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Spectacle;
-use App\Entity\Theater;
 use App\Form\SpectacleType;
 use App\Repository\SpectacleRepository;
+use App\Entity\Theater;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +45,28 @@ class SpectacleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $file */
+            $fileImage = $request->files->get('spectacle')['image'];
+            if ($fileImage) {
+                $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
+                try {
+                    $fileImage->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $spectacle->setImage($fileName);
+            }
+
+            $user = $this->getUser();
+
+            $theater = $this->getDoctrine()
+                ->getRepository(Theater::class)
+                ->findOneBy(array('user' => $user));
+
+
+            $spectacle->setTheater($theater);
+
             $manager->persist($spectacle);
             $manager->flush();
 

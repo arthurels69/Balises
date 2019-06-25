@@ -55,7 +55,7 @@ class SpectacleType extends AbstractType
             ->add(
                 'additionalInfos',
                 TextareaType::class,
-                ['required'=>true]
+                ['required'=>false]
             )
             ->add('isBalise')
             ->add(

@@ -45,7 +45,6 @@ class Spectacle
 
     /**
      * Visual for the show
-     * @Assert\File(mimeTypes={ "image/png","image/jpg","image/gif"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -167,7 +166,9 @@ class Spectacle
 
     public function setImage(string $image): self
     {
-        $this->image = $image;
+        if ($image) {
+            $this->image = $image;
+        }
 
         return $this;
     }
