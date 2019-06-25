@@ -103,7 +103,7 @@ class CalendarController extends AbstractController
     {
 
         $selectedDay = $request->attributes->get('day');
-
+        dump($selectedDay);
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
         return $this->render('Calendar/ajaxSpectacles.html.twig', [
@@ -119,7 +119,6 @@ class CalendarController extends AbstractController
      */
     public function asyncPlusOne(Request $request) : Response
     {
-
         $selectedDay = $request->attributes->get('day');
 
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);

@@ -20,27 +20,23 @@ class ShowDateRepository extends ServiceEntityRepository
     }
 
 
-    public function findByDate($dateShow, $dateShowPlusOne): array
+    public function findByDates($start, $end): array
     {
-        $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery(
-            'SELECT s.id
-        FROM App\Entity\ShowDate s
-        WHERE s.dateShow >= :start AND s.dateShow < :end
-        ORDER BY s.id ASC'
-        )
-            ->setParameter('start', $dateShow)
-            ->setParameter('end', $dateShowPlusOne);
-
-        // returns an array of Product objects
-        return $query->execute();
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateShow >= :start')
+            ->andWhere('s.dateShow < :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getQuery()
+            ->getResult()
+            ;
     }
     // /**
     //  * @return ShowDate[] Returns an array of ShowDate objects
     //  */
-    /*
-    public function findByDate($dateShow)
+/*
+    public function findByDate($date)
     {
 
         return $this->createQueryBuilder('s')
@@ -52,7 +48,7 @@ class ShowDateRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+*/
 
     /*
     public function findOneBySomeField($value): ?ShowDate
