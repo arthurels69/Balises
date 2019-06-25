@@ -28,11 +28,18 @@ class SpectacleController extends AbstractController
      * @param SpectacleRepository $spectacleRepository
      * @return Response
      */
-    public function index(SpectacleRepository $spectacleRepository): Response
+    public function index(SpectacleRepository $spectacleRepository, TheaterRepository $theaterRepository): Response
     {
+        $user = $this->getUser();
+        $theater = $theaterRepository->findOneBy(['user' => $user]);
+        $spectacle = $spectacleRepository->findBy(['theater'=>$theater]);
+
+        return $this->render('spectacle/index.html.twig', [
+            'spectacles' => $spectacle ]);
+        /*
         return $this->render('spectacle/index.html.twig', [
             'spectacles' => $spectacleRepository->findAll(),
-        ]);
+        ]);*/
     }
 
     /**
@@ -105,6 +112,19 @@ class SpectacleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $file */
+            $fileImage = $request->files->get('spectacle')['image'];
+            if ($fileImage) {
+                $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
+                try {
+                    $fileImage->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $spectacle->setImage($fileName);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('spectacle_index', [
