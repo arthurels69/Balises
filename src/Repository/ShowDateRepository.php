@@ -19,6 +19,23 @@ class ShowDateRepository extends ServiceEntityRepository
         parent::__construct($registry, ShowDate::class);
     }
 
+
+    public function findByDate($dateShow, $dateShowPlusOne): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s.id
+        FROM App\Entity\ShowDate s
+        WHERE s.dateShow >= :start AND s.dateShow < :end
+        ORDER BY s.id ASC'
+        )
+            ->setParameter('start', $dateShow)
+            ->setParameter('end', $dateShowPlusOne);
+
+        // returns an array of Product objects
+        return $query->execute();
+    }
     // /**
     //  * @return ShowDate[] Returns an array of ShowDate objects
     //  */
