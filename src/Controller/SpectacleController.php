@@ -26,11 +26,18 @@ class SpectacleController extends AbstractController
      * @param SpectacleRepository $spectacleRepository
      * @return Response
      */
-    public function index(SpectacleRepository $spectacleRepository): Response
+    public function index(SpectacleRepository $spectacleRepository, TheaterRepository $theaterRepository): Response
     {
+        $user = $this->getUser();
+        $theater = $theaterRepository->findOneBy(['user' => $user]);
+        $spectacle = $spectacleRepository->findBy(['theater'=>$theater]);
+
+        return $this->render('spectacle/index.html.twig', [
+            'spectacles' => $spectacle ]);
+        /*
         return $this->render('spectacle/index.html.twig', [
             'spectacles' => $spectacleRepository->findAll(),
-        ]);
+        ]);*/
     }
 
     /**
