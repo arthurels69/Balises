@@ -42,8 +42,6 @@ class CalendarService
 
         //Returns the content of today' sgit pectacles based on the IDs collected  above.
 
-        dump($spectaclesOfTheDay);
-
         return $spectaclesOfTheDay;
     }
 }
