@@ -2,7 +2,7 @@
 
 .body_admin{
     background-color:#F4F3EF !important;
-    font-family: 'Poppins', sans-serif!important;   
+    font-family: 'Poppins', sans-serif!important;
 }
 
 p {
@@ -79,13 +79,13 @@ a:focus {
     transition: all 0.3s;
 }
 
-#sidebar.active {   
+#sidebar.active {
     width:115px !important;
     text-align: center !important;
     margin-right: auto;
 }
 
-.img_admin.active{    
+.img_admin.active{
     display:none !important;
     padding: 0px;
 }
@@ -102,12 +102,12 @@ a:focus {
     outline-style:none;
 }
 
-#sidebar .sidebar-header {    
+#sidebar .sidebar-header {
     background: #212120;
-    border-bottom:1px solid #F4F3EF;   
+    border-bottom:1px solid #F4F3EF;
 }
 
-#sidebar ul.components {    
+#sidebar ul.components {
     border-bottom: 1px solid #47748b;
 }
 
@@ -150,8 +150,24 @@ a:focus {
 }
 
 .content_admin{
-    margin-top:80px;    
+    margin-top:80px;
 }
 
 
 
+
+/* ---------------------------------------------------
+    TABLES
+----------------------------------------------------- */
+
+.custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin:0 auto;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }

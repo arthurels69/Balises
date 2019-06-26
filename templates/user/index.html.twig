@@ -3,7 +3,10 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-<div class="card w-100">
+
+<div class="row  row_user w-100  m-0">
+
+
     <div class="card-header d-flex w-100 justify-content-between">
         <h4 class="my-0 mx-2" >Liste des Théâtres</h4>
         <a href="{{ path('user_new') }}" class="btn btn-info  text-white"><b>+</b>Ajouter</a>
@@ -56,6 +59,7 @@
                             {% endif %}
                         </tr>
                     {% endfor %}
+
 
                 </table>
     </div>{# Card body #}

@@ -9,28 +9,26 @@
 
         <div class="row row-striped">
             <div class="col-2 text-right">
-                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{% for date in
-                            spectacle
-                            .showDates
-                        %}{{ date
-                        .dateShow | date('d') }} {% endfor %}</span></h1>
-                <h2 class="month-display">{% for date in spectacle.showDates  %}{{ date.dateShow | date('M')}} {%endfor %}</h2>
+                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
+                <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
             </div>
             <div class="col-10">
-                <h3 class="text-uppercase"><strong>{{ spectacle.title }}
+                <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
                     </strong></h3>
                 <ul class="list-inline">
-                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {% for date in spectacle
-                            .showDates %}{{ date
-                        .dateShow | date('D') }} {% endfor %}</li>
-                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {% for date in spectacle.showDates  %}{{ date
-                        .dateShow | date('d.m.Y à H:i') }} - {{ date.dateShow |date_modify('+ 3 hours') | date('H:i')}}
-                        {% endfor %} </li>
-                    <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theater.name }}</li>
+                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        {{ spectacle.dateShow | date('D') }}</li>
+                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
+                    </li>
+                    <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                        {{ spectacle.showId.theater.name }}</li>
                 </ul>
-                <p>{{ spectacle.description }}</p>
+                <p>{{ spectacle.showId.description }}</p>
             </div>
         </div>
 
+
     {% endfor %}
+
 </div>

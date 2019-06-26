@@ -105,27 +105,17 @@ class CalendarController extends AbstractController
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/calendar/{day}/async", name="async_calendar", methods={"GET", "POST"})
      */
     public function asyncDate(Request $request) :Response
     {
 
-        //$selectedDay = new \DateTime("-3 days");
         $selectedDay = $request->attributes->get('day');
-        //$selectedDay = substr($request->getUri(), -10);
-        //$selectedDayString = $selectedDay->format('Y-m-d');
 
-        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
-
-        $template = $this->render('Calendar/ajaxSpectacles.html.twig', [
+        return $this->render('Calendar/ajaxSpectacles.html.twig', [
             'today' => $selectedDay,
-            'spectaclesOfTheDay' => $newSpectacles
-        ]);
-
-        return $this->json([
-            'newSpectacles' => $template,
-            'selectedDay' => $selectedDay
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay)
         ]);
     }
 
@@ -136,31 +126,10 @@ class CalendarController extends AbstractController
      */
     public function asyncPlusOne(Request $request) : Response
     {
-        //$selectedDay = new \DateTime("-3 days");
         $selectedDay = $request->attributes->get('day');
-        //$selectedDay = substr($request->getUri(), -10);
-        //$selectedDayString = $selectedDay->format('Y-m-d');
 
         $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
 
-        $template = $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
-
-        return $this->json([
-            'newSpectacles' => $template,
-            'selectedDay' => $selectedDay
-        ]);
-    }
-
-
-    public function searchTheater(
-        TheaterRepository $theaterRepository,
-        SpectacleRepository $spectacleRepository,
-        ShowDateRepository $dateRepository
-    ) {
-        return $this->render('home/map2.html.twig', [
-            'theaters' => $theaterRepository->findAll(),
-            'spectacles' => $spectacleRepository->findAll(),
-            'showdates' =>$dateRepository->findAll(),
-        ]);
+        return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }
 }

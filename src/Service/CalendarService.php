@@ -31,18 +31,16 @@ class CalendarService
 
     public function selectSpectaclesOfTheDay($selectedDate) : array
     {
-        $dateSpectacle = new \DateTime($selectedDate);
-        $dateShowPlusOne = new \DateTime($selectedDate);
 
-        $dateShowPlusOne->add(\DateInterval::createFromDateString('+1 day'));
-        //Returns the id of today' spectacles.
-        $idSpectaclesOfTheDay = $this->showDateRepository->findByDate($dateSpectacle, $dateShowPlusOne);
+        $start = new \DateTime($selectedDate);
+        $end = new \DateTime($selectedDate);
 
-        //Returns the content of today' spectacles based on the IDs collected  above.
-        $spectaclesOfTheDay = [];
-        foreach ($idSpectaclesOfTheDay as $key => $value) {
-            $spectaclesOfTheDay[$key] = $this->spectacleRepository->find($value);
-        }
+        $end->add(\DateInterval::createFromDateString('+1 day'));
+
+        //Returns  today' spectacles.
+        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);
+
+        //Returns the content of today' sgit pectacles based on the IDs collected  above.
 
         return $spectaclesOfTheDay;
     }
