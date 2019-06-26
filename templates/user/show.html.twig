@@ -1,19 +1,22 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}User show{% endblock %}
+{% block title %}Admin détail Théâtre{% endblock %}
 
 {% block body %}
-    <div class="card_show w-100">
-        <div class="card-header titre_user row justify-content-center">
-            <h4 class="mb-3 mx-2 col-12" >Détail du Théâtre</h4>
-            <div class="btn_show d-flex col-12">
-                <a href="{{ path('user_edit', {'id': user.id}) }}"><button class="btn btn-info">Edit</button> </a>                
+    <div class="card container p-0  w-100">
+
+        <div class="card-header d-flex w-100 justify-content-between">
+            <h4 class="my-0 mx-2 pt-1" >Détail du Théâtre : {{ user.theater.name }}</h4>
+            <div class="btn_show_crud">
+                <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
                 {% if is_granted('ROLE_ADMIN') %}                   
-                    <a href="{{ path('user_index') }}"><button class="btn btn-info">List</button></a>                  
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info">Edit</a>                  
                     {{ include('user/_delete_form.html.twig') }}                    
                 {% endif %}
             </div>
         </div>
+
+
         <div class="card-body p-0">
                 <table class="table table_show table-striped table-bordered table-hover">
                     <tbody>

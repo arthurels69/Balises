@@ -1,19 +1,57 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Admin édition Théâtre{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="row justify-content-lg-around">
-        <div class="col-lg-3 offset-lg-1">
-            <a href="{{ path('user_index') }}"><button class="btn btn-dark mb-5">List</button></a>
-        </div>
-        <div class="col-lg-3">
-            {{ include('user/_delete_form.html.twig') }}
-        </div>
-        {% endif %}
-    </div>
+
+    <div class="card card-edit-new w-100 container p-0">
+
+            <div class="card-header d-flex w-100 justify-content-between">
+
+                <h4 class="my-0 mx-2 pt-1" >Edition du Théâtre : {{ user.theater.name }}</h4> 
+
+                <div class="btn_edit_new_crud">
+                   
+                    <a href="#" class="btn btn-success btn_save_edit">Save</a>
+                    <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('user_new') }}" class="btn btn-info">New</a>                                          
+                        {{ include('user/_delete_form.html.twig') }}                    
+                    {% endif %}
+                </div>
+            </div>
+    
+    
+            <div class="card-body p-3 ">
+                    <table class="table table_show table-striped table-bordered table-hover">
+                        <tbody>
+                                {{ include('user/_form.html.twig') }}
+                        </tbody>   
+                    </table>      
+            </div>{# Card body #}
+        </div>{# Card #}   
+
 {% endblock %}
 
+{% block javascripts %}
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+    $req=$.map($('input'),function(value,i){        
+    let req=value.attributes.required; 
+        if (typeof req != "undefined") {
+            console.log(req);
+            req.value="";
+        } else {} 
+    });
+
+    $('.btn_save_edit').on('click',function(e){
+        $('.btn_save_form').click();
+    });
+});
+
+</script>
+{% endblock %}

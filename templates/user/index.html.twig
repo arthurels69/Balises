@@ -1,18 +1,17 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Admin liste Théâtre{% endblock %}
 
 {% block body %}
 
-
-<div class="card w-100">
+<div class="card  container p-0 w-100">
     <div class="card-header d-flex w-100 justify-content-between">
-        <h4 class="my-0 mx-2" >Liste des Théâtres</h4>
+        <h4 class="my-0 mx-2 pt-1" >Liste des Théâtres</h4>
         <a href="{{ path('user_new') }}" class="btn btn-info  text-white"><b>+</b>Ajouter</a>
     </div>
     <div class="card-body p-0">
-            <table class="table table_user table-striped  table-hover">
-                    <thead class="text-center">
+            <table class="table table_user table-striped">
+                    <thead>
                         <tr>
                             <th class="col-3" >
                                 <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
@@ -24,7 +23,7 @@
                                 <a href="/user/index/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                                 Email
                             </th>
-                            <th class="col-3">
+                            <th class="col-3 text-center">
                                 <a href="/user/index/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
                                 <a href="/user/index/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                                 Code Postal
@@ -36,31 +35,27 @@
                     {% set i = 0 %}
                     {% for user in users %} 
 
-                        {% if i % 2 %}
-                        
+                        {% if i % 2 %}                        
                             <tr class="tr_index bg-white "> 
                         {% else %}
                             <tr class="tr_index "> 
                         {% endif %}                           
                             {% if user.roles[0] != "ROLE_ADMIN" %}
-                                <td class="text-center">{{ user.theater.name }}</td>
-                                <td class="text-center">{{ user.email }}</td>
-                                <td class="text-center">{{ user.theater.zipCode }}</td>
+                                <td class="td_name">{{ user.theater.name }}</td>
+                                <td class="td_email">{{ user.email }}</td>
+                                <td class=" text-center td_zipCode">{{ user.theater.zipCode }}</td>
                                 <td class="text-center">
-                                    <a class='btn btn-info btn-xs m-1' href="{{ path('theater_show', {'id': user.id}) }}">
-                                        <span class="glyphicon glyphicon-edit"></span>
+                                    <a class='btn btn-info btn-xs ' href="{{ path('user_show', {'id': user.id}) }}">
                                         Show
                                     </a>
-                                    <a class='btn btn-info btn-xs' href="{{ path('theater_edit', {'id': user.theater.id}) }}">
-                                        <span class="glyphicon glyphicon-edit"></span>
+                                    <a class='btn btn-info btn-xs' href="{{ path('user_edit', {'id': user.theater.id}) }}">
                                         Edit
                                     </a>
                                     <a href="{{ path('user_delete', {'id': user.theater.id}) }}" class="btn btn-danger btn-xs">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                        Del
+                                        Delete
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="tr_detail">
                                 <td  class="detail" colspan="4">
                                     {{ include ("user/index_show.html.twig") }}                                    
                                 </td>
@@ -78,15 +73,28 @@
 <script type="text/javascript">      
 $(document).ready(function () {
 
-    $('.tr_index').on('click',function () {
-        let tr_detail=$(this).next();
-        console.log(tr_detail.children());
+    $('.td_name,.td_email,.td_zipCode').on('click',function () {
+
+        let tr_detail=$(this).parent().next();
+
         tr_detail.children().toggleClass('active'); 
-        $(this).toggleClass('active');          
+
+        $(this).parent().toggleClass('active');
+
+        tr_detail.on('click',function(){
+
+            $(this).children().toggleClass('active');
+
+            //console.log($(this).children());
+
+            $(this).prev().toggleClass('active');        
+
+        });          
     });
 });
 </script>
 {% endblock %}
+
 
 
 
