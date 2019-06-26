@@ -62,22 +62,22 @@
     <div class="row justify-content-md-center">
         {% if user.roles[0] == "ROLE_THEATER" %}
             <div class="col-md-4">
-                <a href="{{ path('spectacle_new') }}"><button class="btn btn-dark mb-5">Nouveau Spectacle</button> </a>
+                <a href="{{ path('spectacle_new') }}"><button class="btn btn-secondary mb-5">Nouveau Spectacle</button> </a>
             </div>
             <div class="col-md-4">
-                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-dark mb-5">Modification</button></a>
+                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-secondary mb-5">Modification</button></a>
             </div>
             <div class="col-md-4">
-                <a href="{{ path('spectacle_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
+                <a href="{{ path('spectacle_index') }}"><button class="btn btn-secondary mb-5">Liste Spectacles</button> </a>
             </div>
         {% endif %}
         {% if user.roles[0] == "ROLE_ADMIN" %}
 
             <div class="col-md-4">
-                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-dark mb-5">Modification</button></a>
+                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-secondary mb-5">Modification</button></a>
             </div>
             <div class="col-md-4">
-                <a href="{{ path('theater_index') }}"><button class="btn btn-dark mb-5">Retour à la liste</button> </a>
+                <a href="{{ path('theater_index') }}"><button class="btn btn-secondary mb-5">Liste Théâtres</button> </a>
             </div>
         {% endif %}
 
