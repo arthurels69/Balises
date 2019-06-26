@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
+use App\Repository\TheaterRepository;
 use App\Service\CalendarService;
 use Mapado\RestClientSdk\SdkClient;
 use Mapado\RestClientSdk\Tests\Units\EntityRepository;
@@ -48,8 +49,12 @@ class CalendarController extends AbstractController
      *      name="calendar_home",
      *     methods={"GET", "POST"})
      */
-    public function calendarHome(Request $request)
-    {
+    public function calendarHome(
+        Request $request,
+        TheaterRepository $theaterRepository,
+        SpectacleRepository $spectacleRepository,
+        ShowDateRepository $dateRepository
+    ) {
 
         $today = new \DateTime();
         $todayString = $today->format("Y-m-d");
@@ -63,7 +68,10 @@ class CalendarController extends AbstractController
             'today' => $todayString,
             'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
             'oneMoreDay' => $this->calendarService->addMoreDays(),
-            'ajaxSpectacle' => 'aaa'
+            'ajaxSpectacle' => 'aaa',
+            'theaters' => $theaterRepository->findAll(),
+            'spectacles' => $spectacleRepository->findAll(),
+            'showdates' =>$dateRepository->findAll(),
         ]);
     }
 
@@ -140,6 +148,19 @@ class CalendarController extends AbstractController
         return $this->json([
             'newSpectacles' => $template,
             'selectedDay' => $selectedDay
+        ]);
+    }
+
+
+    public function searchTheater(
+        TheaterRepository $theaterRepository,
+        SpectacleRepository $spectacleRepository,
+        ShowDateRepository $dateRepository
+    ) {
+        return $this->render('home/map2.html.twig', [
+            'theaters' => $theaterRepository->findAll(),
+            'spectacles' => $spectacleRepository->findAll(),
+            'showdates' =>$dateRepository->findAll(),
         ]);
     }
 }
