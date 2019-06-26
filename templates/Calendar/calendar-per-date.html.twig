@@ -4,23 +4,21 @@
 <!-- https://bootsnipp.com/snippets/VgzeR -->
 <div class="row">
     <div class="col-5">
-    <form method="post" action="">
+        <form method="post" action="">
 
-        <div class="form-group row justify-content-center">
-            <div class="col-12 m-2">
-                <button class="btn-success btn d-inline-block" type="submit" id="example-date-input">Rechercher par date</button>
-            </div>
+            <div class="form-group row justify-content-center">
                 <div class="col-12 m-2">
-                <input class="form-control" type="date" name ="picked_date" id="example-date-input">
+                    <button class="btn-success btn d-inline-block" type="submit" id="example-date-input">Rechercher par date</button>
+                </div>
+                <div class="col-12 m-2">
+                    <input class="form-control" type="date" name ="picked_date" id="example-date-input">
+                </div>
             </div>
 
-
-        </div>
-
-    </form>
+        </form>
     </div>
 </div>
-<div id="test"></div>
+
 <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
 <div class="row justify-content-center">
     <div class="col-12">
@@ -28,7 +26,7 @@
             <!-- display 3 days before the selected date in the calendar -->
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 3 days') | date
                 ('Y-m-d')}) }}')">
-                                <li class="month-day">
+                <li class="month-day" onclick="active(-3)" id="day-3">
                     <div class="week">{{ today | date_modify('- 3 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 3 days')  | date('d-M') }}</div>
                 </li>
@@ -36,7 +34,7 @@
 
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 2 days') | date
                 ('Y-m-d')}) }}')">
-                <li class="month-day">
+                <li class="month-day" onclick="active(-2)" id="day-2">
                     <div class="week">{{ today | date_modify('- 2 days') | date('D') }}</div><div class="day-month">{{
                         today | date_modify('- 2 days')  | date('d-M') }}</div>
                 </li>
@@ -44,40 +42,40 @@
 
             <a onclick="changeDate('{{ path('async_calendar', {'day' :today | date_modify('- 1 days') | date
                 ('Y-m-d')}) }}')">
-                <li class="month-day">
+                <li class="month-day" onclick="active(-1)" id="day-1">
                     <div class="week">{{ today | date_modify('- 1 day') | date('D') }}</div><div class="day-month">{{ today | date_modify('- 1 day')  | date('d-M') }}</div>
                 </li>
             </a>
 
-
-
             <!-- display today's date and focus it with the active class -->
             <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
-                <li class="month-day active" id="active-day">
+                <li class="month-day active" onclick="active(0)" id="day0">
                     <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
                 </li>
 
-            {% for oneDay in oneMoreDay %}
+                {% for oneDay in oneMoreDay %}
 
-           <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
-           }) }}')">
+                    <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
+                    }) }}')">
 
-               <li class="month-day">
-                   <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
-               </li>
+                        <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
+                            <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+                        </li>
 
-           </a>
+                    </a>
 
-            {% endfor %}
+                {% endfor %}
         </ul>
     </div>
 </div>
 
 
-
+<!-- Div dedicated to ajax new spectacle -->
 <div id="newSpectacles">
 
 </div>
+
+
 <div id="display-spectacles">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
     {% if spectaclesOfTheDay is empty %}
@@ -87,27 +85,26 @@
     {% endif %}
     {% for spectacle in spectaclesOfTheDay%}
 
-    <div class="row row-striped">
-        <div class="col-2 text-right">
-            <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{% for date in
-                        spectacle.showDates %}{{ date.dateShow | date('d') }} {% endfor %}</span></h1>
-            <h2 class="month-display">{% for date in spectacle.showDates  %}{{ date.dateShow | date('M')}} {%endfor %}</h2>
-        </div>
-        <div class="col-10">
-            <h3 class="text-uppercase"><strong>{{ spectacle.title }}
+        <div class="row row-striped">
+            <div class="col-2 text-right">
+                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
+                <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
+            </div>
+            <div class="col-10">
+                <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
                     </strong></h3>
-            <ul class="list-inline">
-                <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {% for date in spectacle
-                        .showDates %}{{ date
-                    .dateShow | date('D') }} {% endfor %}</li>
-                <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {% for date in spectacle.showDates  %}{{ date
-                    .dateShow | date('d.m.Y à H:i') }} - {{ date.dateShow |date_modify('+ 3 hours') | date('H:i')}}
-                    {% endfor %} </li>
-                <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theater.name }}</li>
-            </ul>
-            <p>{{ spectacle.description }}</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        {{ spectacle.dateShow | date('D') }}</li>
+                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
+                        </li>
+                    <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                        {{ spectacle.showId.theater.name }}</li>
+                </ul>
+                <p>{{ spectacle.showId.description }}</p>
+            </div>
         </div>
-    </div>
 
 
     {% endfor %}
@@ -122,38 +119,5 @@
 </div>
 
 {% block javascripts %}
-
-<script>
-    function changeDate(date) {
-        fetch(date)
-            .then(response => response.json())
-            .then(json =>  {
-                let displaySpectacles = document.getElementById('display-spectacles');
-                let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-                let newsspectacleDisplay = document.getElementById('newSpectacles');
-
-                displaySpectacles.remove();
-                spectaclesNextDay.innerHTML ='';
-
-                newsspectacleDisplay.innerHTML = json.newSpectacles.content;
-            });
-    }
-
-    function nextDay(date) {
-        fetch(date)
-            .then(response => response.json())
-            .then(json =>  {
-                let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-                console.log(spectaclesNextDay.innerHTML);
-                if(spectaclesNextDay.innerHTML !=null){
-                spectaclesNextDay.innerHTML = json.newSpectacles.content;
-                }
-                else{
-                    spectaclesNextDay.innerHTML = '';
-                    spectaclesNextDay.innerHTML = json.newSpectacles.content;
-                }
-            });
-    }
-</script>
 
 {% endblock %}
