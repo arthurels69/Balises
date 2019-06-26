@@ -22,7 +22,12 @@ thead{
 /*****************************************************************************************/
 
 .th_action{
-    min-width:230px !important;
+    min-width:230px!important;
+}
+
+.btn_crud_index form{
+   
+    display:inline-block !important;
 }
 
 th,td{

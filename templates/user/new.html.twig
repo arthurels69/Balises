@@ -1,11 +1,45 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Admin Création Théâtre{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+<div class="card card-edit-new w-100 container p-0">
 
-    {{ include('user/_form.html.twig') }}
+    <div class="card-header d-flex w-100 justify-content-between">
 
-    <a href="{{ path('user_index') }}">back to list</a>
+        <h4 class="my-0 mx-2 pt-1" >Création d'un Théâtre </h4> 
+
+        <div class="btn_edit_new_crud">
+           
+            <a href="#" class="btn btn-success btn_save_edit">Save</a>
+            <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
+
+            
+        </div>
+    </div>
+
+
+    <div class="card-body p-3 ">
+            <table class="table table_show table-striped table-bordered table-hover">
+                <tbody>
+                        {{ include('user/_form.html.twig') }}
+                </tbody>   
+            </table>      
+    </div>{# Card body #}
+</div>{# Card #}   
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+$('.btn_save_edit').on('click',function(e){
+$('.btn_save_form').click();
+});
+});
+
+</script>
 {% endblock %}

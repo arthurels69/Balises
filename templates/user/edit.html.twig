@@ -1,6 +1,6 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Admin édition Théâtre{% endblock %}
+{% block title %}Admin Edition Théâtre{% endblock %}
 
 {% block body %}
 
@@ -38,15 +38,7 @@
 
 <script type="text/javascript">
 
-$(document).ready(function () {
-
-    $req=$.map($('input'),function(value,i){        
-    let req=value.attributes.required; 
-        if (typeof req != "undefined") {
-            console.log(req);
-            req.value="";
-        } else {} 
-    });
+$(document).ready(function () {    
 
     $('.btn_save_edit').on('click',function(e){
         $('.btn_save_form').click();
