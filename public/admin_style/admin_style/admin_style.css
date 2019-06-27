@@ -1,0 +1,51 @@
+/****************************user/index.html.twig***********************/
+
+.table_user{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin:0 auto;    
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    
+    }
+
+.table_user td,th{
+    text-align:center;
+}
+
+.table_user:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+
+.pull-right:hover,.btn-xs:hover,.btn-xs{
+    color:white !important;
+}
+
+.titre_user{
+    background-color:  #58d68d ;
+    border-radius: 10px 0px 0px 0px;      
+}
+
+h4{
+    vertical-align: middle !important;
+    line-height: 40px;
+    height:50px;
+   
+}
+
+.thead_user{
+position: sticky;
+top:130px;
+z-index:500;
+background-color: #F4F3EF;    
+}
+
+.titre_user{
+    position: sticky;
+    top:82px;
+    z-index:500;
+    
+}
+
+

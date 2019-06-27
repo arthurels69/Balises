@@ -1,17 +1,14 @@
 /****************************Liste des théâtres user/index.html.twig***********************/
 
-
 .card {
-    max-width:1000px  !important;
-    min-width:1000px  !important;
-    margin:auto !important;
-    box-shadow: 0px 0px 5px 2px #888888 !important;
+    width:1200px  !important;
+    margin:auto;
 }
 
 .card-header{
     top:69px;
     position:sticky;
-    background-color:   #d6dbdf  ;
+    background-color: #F2F2F2;
 }
 
 thead{
@@ -19,76 +16,48 @@ thead{
     position:sticky;
     background-color: white !important;
 }
-/*****************************************************************************************/
 
 .th_action{
-    min-width:230px!important;
+    min-width:230px !important;
 }
 
-.btn_crud_index form{
-   
-    display:inline-block !important;
+.table-hover tbody tr:hover td {
+    background-color: rgb(198, 218, 218);
+}
+
+.table_user_show{
+    display:none;
+}
+
+.table_user_show.active{
+    display:block;
 }
 
 th,td{
     vertical-align: middle !important;
-        
-}
-
-.tr_index.active{
-    background-color:  #ecd9b1  !important;
-    font-weight: bolder;
 }
 
 
-.table_user tbody .tr_index:hover  {
-    background-color: #ecd9b1 !important;
-    cursor:pointer;
-    font-weight: bolder;
-}
 
-/*Accordéon pour voir le détail d'un théatre avec js*/
-td.detail{
-    display:none;
-} 
-
-td.detail.active  {
-    display:table-cell;
-    padding-top: 0px;
-    background-color:  #ecd9b1  !important;      
-}
 /****************************Détail d'un théâtre user/show.html.twig***********************/
 
-.btn_show_crud form{
-    display:inline-block;
+.btn_show a{
+    margin-right:10px !important;
+}
+.card_show{
+    min-width: 500px !important;
 }
 
-/******Edition et Création d'un théâtre user/edit.html.twig user/new.html.twig ************/
-
-.btn_edit_new_crud form{
-    display:inline-block;
+.table_show tbody tr:hover td {
+    background-color: rgb(198, 218, 218);
 }
 
-.card-edit-new{
+.table_show tbody tr:hover th {
+    background-color: rgb(198, 218, 218);
 
 }
 
-.card-edit-new label{
-    font-weight: bold;
-}
-
-.card-edit-new legend,
-.card-edit-new label[for="user_theater_email"],
-.card-edit-new #user_theater_email{
-    display:none;
-}
-
-.card-edit-new .btn_save_form{
-    display:none;
-}
-
-
-/****************************LOGIN security/login.html.twig********************************/
+/****************************LOGIN security/login.html.twig***********************/
 
 .form-signin
 {
