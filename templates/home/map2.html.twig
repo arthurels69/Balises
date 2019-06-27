@@ -23,7 +23,6 @@
         }
 
 
-        // manage the map with title, logo, ...
 
         #map
 
@@ -95,13 +94,20 @@
             bottom: -50%;
 
 
+
         }
 
-        .bulleInfo1
+        .jumbotron.bulleInfo1
         {
             margin-top: 50%;
-            background-color: grey;
+            height: 205px;
+            background-color: rgba(0, 0, 0, 0);
+            /*background-color: grey;*/
+            background-image: url("{{ asset('uploads/ticket-balises.png') }}");
+            background-size: 100%;
             color: white;
+            border-radius: 10px;
+
         }
 
         .bulleInfo2
@@ -111,17 +117,21 @@
 
         .bulleInfo3
         {
-            margin-top: 50%;
+
             background-color: black;
             color: white;
             height: 250px;
             border-style: solid;
             border-color: black;
-
+            overflow: scroll;
+            border-radius: 10px;
+            margin-top: 30%;
+            font-size: 4px;
         }
 
         /* width */
-        .bulleInfo3::-webkit-scrollbar {
+        .bulleInfo3::-webkit-scrollbar
+        {
             width: 20px;
         }
 
@@ -129,6 +139,7 @@
         .bulleInfo3::-webkit-scrollbar-thumb {
             background: yellow;
             border-radius: 10px;
+
         }
 
 
@@ -142,13 +153,25 @@
 
         }
 
-        .bulleInfo6
-        {
+        .bulleInfo6 {
             background-color: grey;
             color: white;
             height: 250px;
-            overflow: auto;
-            margin-top: -50%;
+
+            overflow: scroll;
+            border-radius: 10px;
+        }
+        /* width */
+        .bulleInfo6::-webkit-scrollbar
+        {
+            width: 20px;
+        }
+
+        /* Handle */
+        .bulleInfo6::-webkit-scrollbar-thumb {
+            background: yellow;
+            border-radius: 10px;
+        }
         }
 
         .bulleInfo1Photo
@@ -182,14 +205,12 @@
 
 
 
-    <div id="selectplacetitle">
-
-
-        <img id="jumelles" style="max-width: 80px" src="https://img.icons8.com/metro/420/opera-glasses.png">
-
-        <h1>SÉLECTIONNER</h1>
-        <h1> VOTRE <span>LIEU</span></h1>
+    <div id="selectplacetitle" style="display: block">
+        <img id="jumelles" style="max-width: 80px" src="{{ asset('uploads/jumelles.png') }}">
+        <h1>SÉLECTIONNER<br>VOTRE <span>LIEU</span></h1>
     </div>
+
+
 
     <div id="logoonmap">
         <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
@@ -205,16 +226,15 @@
             <div class="container-fluid">
                 <div class="row bulleinfo">
 
+
+
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <img src="{{ theater.logo }}" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%">
-                            <br>
-                            <h1 style="color : Yellow; font-weight: bold; text-align: right" class="display-4">{{ theater.name }}</h1>
-                            <p class="lead" style="text-align: right">{{ theater.address1 }}</p>
-                            <p class="lead" style="text-align: right">{{ theater.zipcode }} {{ theater.city }}</p>
-                            <p class="lead" style="text-align: right">{{ theater.phoneNumber }}</p>
+                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.logo )}}" style="max-height: 100px; display: block; margin-left: auto; margin-right: 5%; padding-bottom: 5%"></a>
+                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 17px" class="display-4">{{ theater.name }}</h1></a>
+                            <p class="lead" style="text-align: right; margin-right: 10%">{{ theater.address1 }}<br>{{  theater.zipcode }} {{ theater.city }}<br>{{ theater.phoneNumber }}</p>
                         </div>
-                        <img src="{{ theater.picture }}" style="max-width: 50%; padding-bottom: 5%;float: right">
+
                     </div>
 
                     <div class="col-2">
@@ -225,26 +245,28 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo3">
-                            <h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1>
+                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1></a>
+
                             <hr style="background-color : white; text-align : center; line-height: 1;";>
                             <h3 style="color : white; font-weight: bold" >CHOIX DE VOTRE SPECTACLE</h3>
 
                             {% for spectacle in spectacles %}
                                 {% if spectacle.theater == theater %}
-                                    <input type="checkbox" name="checkbox" id="checkbox">
-                                    <label for="checkbox" style="font-size: 20px">{{ spectacle.title }}<img src="http://pngimg.com/uploads/plus/plus_PNG41.png" style="max-height: 10px"></label>
+                                    <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">
+                                    <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank" for="checkbox" style="font-size: 20px; color: white">{{ spectacle.title }}</a>
                                     <p style="margin-top: -2%">{{ spectacle.distribution }}</p>
 
 
                                 {% endif %}
                             {% endfor %}
 
+
                         </div>
                     </div>
 
                     <div class="col-5">
                         <div class="bulleInfo4">
-
+                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.picture )}}" style="width: 250px; padding-bottom: 5%;float: right"></a>
                         </div>
                     </div>
 
@@ -255,23 +277,28 @@
                     </div>
 
                     <div class="col-5">
-                        <div class="jumbotron bulleInfo6">
-                            <h3 style="color : white; font-weight: bold" >SELECTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
+                        {% for show in theater.shows %}
+                            <div class="jumbotron bulleInfo6" id="{{ show.id }}" style="display: none">
 
-{#                            {% for showdate in showdates %}#}
-{#                                {% if showdate.showId == spectacle.theater %}#}
-{#                                    <ul>#}
-{#                                        <li class="lead">{{ showdate.dateShow }}</li>#}
-{#                                    </ul>#}
+                                <h3 style="color : white; font-weight: bold; margin-left: 3%; text-align:center;" >SÉLÉCTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
 
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-                        </div>
+
+                                 {% for showdate in show.showDates %}
+                                     <div>
+                                    <input type="radio" name="radio" id="radio">
+                                     <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
+                                     </div>
+                                {% endfor %}
+                                <a class="btn btn-dark" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width:200px; background-color: #171a1d; color: white; display: block; margin: auto; margin-top: 2%" href="{{ path('home') }}">Commander</a>
+                            </div>
+                        {% endfor %}
+
                     </div>
 
                 </div>
             </div>
         </div>
+
 
 
     {% endfor %}
@@ -289,10 +316,23 @@
 
 
     <script>
+        // Gestion des spectacles par théâtre
+        function showDates(showId) {
+            let currentShow = document.getElementsByClassName('currentShow');
+            if (currentShow.length === 1) {
+                currentShow[0].style.display = 'none';
+                currentShow[0].classList.remove('currentShow');
+            }
+
+            let showElt = document.getElementById(showId);
+            showElt.style.display = 'block';
+            showElt.classList.add('currentShow');
+        }
+
         // On initialise la latitude et la longitude de Lyon (centre de la carte)
         let lat = 45.75;
         let lon = 4.85;
-        let zoom = 13; // Zoom de la carte par défaut
+        let zoom = 12; // Zoom de la carte par défaut
 
         L.mapbox.accessToken = 'pk.eyJ1IjoiYmFsaXNlcyIsImEiOiJjandqZThmaXIwZzF5NDhvNWE0eWhxbThjIn0.L-XJu_ElG2aGqQx4ZijbIg';
         let map = L.mapbox.map('map')
@@ -321,7 +361,6 @@
 
 
         for (let i = 0; i < pointers.length; i++)
-
         {
             let latitude = pointers[i].lat;
             let longitude = pointers[i].long;
@@ -333,11 +372,8 @@
             let marker = L.marker([latitude, longitude]).addTo(map);
 
 
-            // bind the custom popup
-
+            // Ouvrir bulle info lorsque clic sur marker
             marker.bindPopup(elements, customOptions);
-
-
             marker.addEventListener("click",function ()
             {
                 elements.style.display = "block";
@@ -345,19 +381,20 @@
                 map.setView([latitude, longitude]);
 
             });
-
-
         }
 
-
+        // Fermer bulle info quand clic sur map
         map.addEventListener("click", function ()
         {
             let hideAction = document.getElementById('selectplacetitle');
             hideAction.style.display = "block";
             map.setView([latitude, longitude]);
-
-
         });
+
+
+
+
+        // Recentrer carte quand clique sur titre
         let clickontitle = document.getElementById('selectplacetitle');
         clickontitle.addEventListener("click", function()
         {
@@ -365,9 +402,19 @@
         })
 
 
-
-
-
+        // Info Text "Recentrer la carte"
+        let maintitle = "SÉLECTIONNER<br>VOTRE <span>LIEU</span>";
+        let secondTitle = "CENTRER<br>LA <span>CARTE</span>";
+        clickontitle.addEventListener("mouseover", function()
+        {
+            this.children[0].style.visibility ="hidden";
+            this.children[1].innerHTML = secondTitle;
+        })
+        clickontitle.addEventListener("mouseout", function()
+        {
+            this.children[0].style.visibility ="visible";
+            this.children[1].innerHTML = maintitle;
+        })
 
     </script>
 

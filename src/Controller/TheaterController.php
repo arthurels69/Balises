@@ -39,33 +39,36 @@ class TheaterController extends AbstractController
 
     //* @IsGranted("ROLE_ADMIN")
 
-    /**
-     * @Route("/new", name="theater_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response
-     */
-    public function new(Request $request): Response
-    {
-
-        $theater = new Theater();
-        $form = $this->createForm(TheaterType::class, $theater);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $user =  $this->getUser();
-            $theater->setuser($user);
-            $entityManager->persist($theater);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('theater_index');
-        }
-
-        return $this->render('theater/new.html.twig', [
-            'theater' => $theater,
-            'form' => $form->createView(),
-        ]);
-    }
+//    /**
+//     * @Route("/new", name="theater_new", methods={"GET","POST"})
+//     * @param Request $request
+//     * @return Response
+//     */
+//    public function new(Request $request): Response
+//    {
+//
+//        $theater = new Theater();
+//        $form = $this->createForm(TheaterType::class, $theater);
+//        $form->handleRequest($request);
+//
+//
+//
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $user =  $this->getUser();
+//            $theater->setuser($user);
+//            $entityManager->persist($theater);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('theater_index');
+//        }
+//
+//        return $this->render('theater/new.html.twig', [
+//            'theater' => $theater,
+//            'form' => $form->createView(),
+//        ]);
+//    }
 
     /**
      * @Route("/{id}", name="theater_show", methods={"GET"})
@@ -74,9 +77,10 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
-
+        $user =  $this->getUser();
         return $this->render('theater/show.html.twig', [
-            'theater' => $theater
+            'theater' => $theater,
+            'user' => $user,
         ]);
     }
 
@@ -86,35 +90,39 @@ class TheaterController extends AbstractController
      * @param Theater $theater
      * @return Response
      */
-    public function edit(
-        Request $request,
-        Theater $theater,
-        TheaterService $theaterService
-    ): Response {
+    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
+    {
+
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
+        $user =  $this->getUser();
+        dump($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $theaterService->geocode($theater);
 
             /** @var UploadedFile $file */
-            $file = $request->files->get('theater')['logo'];
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            try {
-                $file->move($this->getParameter('logo_directory'), $fileName);
-            } catch (FileException $e) {
-                throw new FileException($e);
+            $fileLogo = $request->files->get('theater')['logo'];
+            if ($fileLogo) {
+                $fileName = md5(uniqid()) . '.' . $fileLogo->guessExtension();
+                try {
+                    $fileLogo->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $theater->setLogo($fileName);
             }
-            $theater->setLogo($fileName);
 
             $file = $request->files->get('theater')['picture'];
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            try {
-                $file->move($this->getParameter('logo_directory'), $fileName);
-            } catch (FileException $e) {
-                throw new FileException($e);
+            if ($file) {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                try {
+                    $file->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $theater->setPicture($fileName);
             }
-            $theater->setPicture($fileName);
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -126,6 +134,7 @@ class TheaterController extends AbstractController
         return $this->render('theater/edit.html.twig', [
             'theater' => $theater,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 

@@ -1,25 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Spectacle index{% endblock %}
+{% block title %}Liste des Spectacles{% endblock %}
 
 {% block body %}
-    <h1>Spectacle index</h1>
+    <style>
+        .sidenav {display: none;}
+    </style>
+    <h1>Liste des Spectacles</h1>
 
+    <a href="{{ path('spectacle_new') }}">Nouveau Spectacle</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
+                <th>Titre</th>
                 <th>Description</th>
                 <th>Distribution</th>
-                <th>MandatoryInfos</th>
+                <th>Informations Légales</th>
                 <th>Image</th>
-                <th>PhotoCredits</th>
-                <th>AdditionalInfos</th>
-                <th>IsBalise</th>
-                <th>OfferType</th>
-                <th>MapadoLink</th>
-                <th>BaseRate</th>
+                <th>Crédits Photos</th>
+                <th>Informations Complémentaires</th>
+                <th>Enregistrement Balises</th>
+                <th>Type Offre</th>
+                <th>Lien Mapado</th>
+                <th>Tarif Base</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -39,17 +43,16 @@
                 <td>{{ spectacle.mapadoLink }}</td>
                 <td>{{ spectacle.baseRate }}</td>
                 <td>
-                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}">show</a>
-                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">edit</a>
+                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}">Visualisation</a>
+                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">Modification</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="13">no records found</td>
+                <td colspan="13">Pas de Spectacles</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('spectacle_new') }}">Create new</a>
 {% endblock %}
