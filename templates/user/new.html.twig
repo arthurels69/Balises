@@ -7,14 +7,14 @@
 
     <div class="card-header d-flex w-100 justify-content-between">
 
-        <h4 class="my-0 mx-2 pt-1" >Création d'un Théâtre </h4> 
+        <h4 class="my-0 mx-2 pt-1" >Création d'un Théâtre </h4>
 
         <div class="btn_edit_new_crud">
-           
+
             <a href="#" class="btn btn-success btn_save_edit">Save</a>
             <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
 
-            
+
         </div>
     </div>
 
@@ -23,10 +23,10 @@
             <table class="table table_show table-striped table-bordered table-hover">
                 <tbody>
                         {{ include('user/_form.html.twig') }}
-                </tbody>   
-            </table>      
+                </tbody>
+            </table>
     </div>{# Card body #}
-</div>{# Card #}   
+</div>{# Card #}
 
 {% endblock %}
 

@@ -26,13 +26,13 @@ thead{
 }
 
 .btn_crud_index form{
-   
+
     display:inline-block !important;
 }
 
 th,td{
     vertical-align: middle !important;
-        
+
 }
 
 .tr_index.active{
@@ -50,12 +50,12 @@ th,td{
 /*Accordéon pour voir le détail d'un théatre avec js*/
 td.detail{
     display:none;
-} 
+}
 
 td.detail.active  {
     display:table-cell;
     padding-top: 0px;
-    background-color:  #ecd9b1  !important;      
+    background-color:  #ecd9b1  !important;
 }
 /****************************Détail d'un théâtre user/show.html.twig***********************/
 

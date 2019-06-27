@@ -8,29 +8,29 @@
 
             <div class="card-header d-flex w-100 justify-content-between">
 
-                <h4 class="my-0 mx-2 pt-1" >Edition du Théâtre : {{ user.theater.name }}</h4> 
+                <h4 class="my-0 mx-2 pt-1" >Edition du Théâtre : {{ user.theater.name }}</h4>
 
                 <div class="btn_edit_new_crud">
-                   
+
                     <a href="#" class="btn btn-success btn_save_edit">Save</a>
                     <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
 
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('user_new') }}" class="btn btn-info">New</a>                                          
-                        {{ include('user/_delete_form.html.twig') }}                    
+                        <a href="{{ path('user_new') }}" class="btn btn-info">New</a>
+                        {{ include('user/_delete_form.html.twig') }}
                     {% endif %}
                 </div>
             </div>
-    
-    
+
+
             <div class="card-body p-3 ">
                     <table class="table table_show table-striped table-bordered table-hover">
                         <tbody>
                                 {{ include('user/_form.html.twig') }}
-                        </tbody>   
-                    </table>      
+                        </tbody>
+                    </table>
             </div>{# Card body #}
-        </div>{# Card #}   
+        </div>{# Card #}
 
 {% endblock %}
 
@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 
-$(document).ready(function () {    
+$(document).ready(function () {
 
     $('.btn_save_edit').on('click',function(e){
         $('.btn_save_form').click();

@@ -9,8 +9,8 @@
             <h4 class="my-0 mx-2 pt-1" >Détail du Théâtre : {{ user.theater.name }}</h4>
             <div class="btn_show_crud">
                 <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
-                {% if is_granted('ROLE_ADMIN') %}                   
-                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info">Edit</a>                  
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info">Edit</a>
                     {{ include('user/_delete_form.html.twig') }}                    
                 {% endif %}
             </div>
