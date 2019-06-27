@@ -1,0 +1,168 @@
+/****************************Liste des théâtres user/index.html.twig***********************/
+
+
+.card {
+    max-width:1000px  !important;
+    min-width:1000px  !important;
+    margin:auto !important;
+    box-shadow: 0px 0px 5px 2px #888888 !important;
+}
+
+.card-header{
+    top:69px;
+    position:sticky;
+    background-color:   #d6dbdf  ;
+}
+
+thead{
+    top:128px;
+    position:sticky;
+    background-color: white !important;
+}
+/*****************************************************************************************/
+
+.th_action{
+    min-width:230px!important;
+}
+
+.btn_crud_index form{
+   
+    display:inline-block !important;
+}
+
+th,td{
+    vertical-align: middle !important;
+        
+}
+
+.tr_index.active{
+    background-color:  #ecd9b1  !important;
+    font-weight: bolder;
+}
+
+
+.table_user tbody .tr_index:hover  {
+    background-color: #ecd9b1 !important;
+    cursor:pointer;
+    font-weight: bolder;
+}
+
+/*Accordéon pour voir le détail d'un théatre avec js*/
+td.detail{
+    display:none;
+} 
+
+td.detail.active  {
+    display:table-cell;
+    padding-top: 0px;
+    background-color:  #ecd9b1  !important;      
+}
+/****************************Détail d'un théâtre user/show.html.twig***********************/
+
+.btn_show_crud form{
+    display:inline-block;
+}
+
+/******Edition et Création d'un théâtre user/edit.html.twig user/new.html.twig ************/
+
+.btn_edit_new_crud form{
+    display:inline-block;
+}
+
+.card-edit-new{
+
+}
+
+.card-edit-new label{
+    font-weight: bold;
+}
+
+.card-edit-new legend,
+.card-edit-new label[for="user_theater_email"],
+.card-edit-new #user_theater_email{
+    display:none;
+}
+
+.card-edit-new .btn_save_form{
+    display:none;
+}
+
+
+/****************************LOGIN security/login.html.twig********************************/
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+

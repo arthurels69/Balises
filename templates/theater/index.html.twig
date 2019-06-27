@@ -1,0 +1,57 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Theater index{% endblock %}
+
+{% block body %}
+
+
+    <h1>Liste des Théâtres</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Adresse </th>
+
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th>Téléphone</th>
+                <th>Logo</th>
+                <th>Website</th>
+                <th>Tarif Base</th>
+                <th>Latitude / Longitude</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for theater in theaters %}
+            <tr>
+                <td>{{ theater.id }}</td>
+                <td>{{ theater.name }}</td>
+                <td>{{ theater.email }}</td>
+                <td>{{ theater.address1 }} {{ theater.address2 }}</td>
+                <td>{{ theater.zipCode }}</td>
+                <td>{{ theater.city }}</td>
+                <td>{{ theater.phoneNumber }}</td>
+                <td>{{ theater.logo }}</td>
+                <td>{{ theater.website }}</td>
+                <td>{{ theater.baseRate }}</td>
+                <td>{{ theater.lat }}  /
+                {{ theater.longitude }}</td>
+                <td>
+                    <a href="{{ path('theater_show', {'id': theater.id}) }}">Visualisation</a>
+                    <a href="{{ path('theater_edit', {'id': theater.id}) }}">Modification</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">pas de Théâtres</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Spectacles{% endblock %}
+
+{% block body %}
+    <style>
+        .sidenav {display: none;}
+    </style>
+    <h1>Liste des Spectacles</h1>
+
+    <a href="{{ path('spectacle_new') }}">Nouveau Spectacle</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Distribution</th>
+                <th>Informations Légales</th>
+                <th>Image</th>
+                <th>Crédits Photos</th>
+                <th>Informations Complémentaires</th>
+                <th>Enregistrement Balises</th>
+                <th>Type Offre</th>
+                <th>Lien Mapado</th>
+                <th>Tarif Base</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for spectacle in spectacles %}
+            <tr>
+                <td>{{ spectacle.id }}</td>
+                <td>{{ spectacle.title }}</td>
+                <td>{{ spectacle.description }}</td>
+                <td>{{ spectacle.distribution }}</td>
+                <td>{{ spectacle.mandatoryInfos }}</td>
+                <td>{{ spectacle.image }}</td>
+                <td>{{ spectacle.photoCredits }}</td>
+                <td>{{ spectacle.additionalInfos }}</td>
+                <td>{{ spectacle.isBalise ? 'Yes' : 'No' }}</td>
+                <td>{{ spectacle.offerType }}</td>
+                <td>{{ spectacle.mapadoLink }}</td>
+                <td>{{ spectacle.baseRate }}</td>
+                <td>
+                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}">Visualisation</a>
+                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">Modification</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Pas de Spectacles</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+contact:
+  path:       /{_locale}/map2
+  controller: App\Controller\MapController::map2
+  requirements:
+    _locale: fr|en|de

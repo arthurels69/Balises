@@ -1,0 +1,35 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Modification Théâtre{% endblock %}
+
+{% block body %}
+    <style>
+        .sidenav {
+            display: none;
+        }
+    </style>
+
+    <h1>Modification d'un Théâtre</h1>
+
+    {{ include('theater/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
+
+    <div class="row justify-content-sm-end">
+        {% if user.roles[0] == "ROLE_ADMIN" %}
+            <div class="col-sm-4">
+                {{ include('theater/_delete_form.html.twig') }}
+            </div>
+            <div class="col-sm-4">
+
+                <a href="{{ path('user_index' )}}"><button class="btn btn-secondary mb-5">Retour Liste des Théâtres</button> </a>
+            </div>
+        {% endif %}
+        {% if user.roles[0] == "ROLE_THEATER" %}
+            <div class="col-sm-4">
+                <a href="{{ path('theater_show',{'id' : theater.id} )}}"><button class="btn btn-secondary mb-5">Retour</button> </a>
+            </div>
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

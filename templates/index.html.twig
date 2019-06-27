@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <style>
+
+        body
+        {
+            background-image: url({{ asset('/uploads/Balises_background.png') }});
+
+            background-size: cover;
+
+        }
+
+        .logoIndex, .sidenav, #logoonmap, .LoginBtn
+        {
+
+            animation:fadeIn 2s step-end;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+        }
+
+
+        #IndexTitle
+        {
+            animation: move 2s;
+        }
+
+        @keyframes move {
+            from { top: 300px;}
+            to { top: 0;}
+
+        }
+
+        #background_opacity {
+            position: fixed;
+            z-index: -10;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 236, 2, 0.85); /* L'opacite se regle ici */
+        }
+
+        .LoginBtn
+        {
+            position: absolute;
+            bottom: 80px;
+        }
+
+        #logoonmap
+        {
+            position: absolute;
+            bottom: 10px;
+            right: 2px;
+            z-index: 1;
+            transform: scale(0.7, 0.7);
+        }
+
+
+    </style>
+
+
+
+<div id="background_opacity"></div>
+
+<div class="row h-100 m-auto justify-content-between">
+
+    <div class="col-12" id="IndexTitle" style="padding-top: 7%">
+        <h1 style="text-align: center; font-size: 450%; font-weight: bold">ET SI VOUS RETOURNIEZ<p> AU THÉÂTRE ?</h1>
+    </div>
+
+    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: -3%">
+        <a href="{{ path('map2') }}"><img src="{{ asset('uploads/jumelles.png') }}" style="max-height: 250px"></a>
+        <h1 style ="margin-top: 5%">A quel endroit ?</h1>
+    </div>
+
+    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: -3%">
+        <a href="{{ path('calendar_home') }}""><img src="{{ asset('uploads/calendarindex.png') }}" style="max-height: 250px"></a>
+        <h1 style ="margin-top: 5%">A quel moment ?</h1>
+    </div>
+
+    <div id="logoonmap">
+        <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+    </div>
+
+    <div class="LoginBtn">
+        <a class="btn btn-dark" href="{{ path('app_login') }}">Login</a>
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+{% endblock %}
+

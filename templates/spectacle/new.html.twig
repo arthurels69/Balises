@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Spectacle{% endblock %}
+
+{% block body %}
+    <h1>Création Spectacle</h1>
+
+    {{ include('spectacle/_form.html.twig') }}
+
+    <a href="{{ path('spectacle_index') }}">Retour</a>
+
+{% endblock %}
+

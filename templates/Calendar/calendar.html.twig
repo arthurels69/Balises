@@ -1,0 +1,85 @@
+{% extends '/base.html.twig' %}
+
+{% block body %}
+
+    <div class="row justify-content-center">
+        <!-- Pills to select either a calendar per theater or per date from Bootstrap Website -->
+        <ul class="nav nav-pills flex-column flex-sm-row nav-pills-calendar col-12" id="pills-tab" role="tablist">
+            <li class="nav-item col-12 col-md-6">
+                <a class="flex-sm-fill text-sm-center nav-link nav-pills-calendar"id="pills-date-tab" data-toggle="pill"
+                   href="#pills-date" role="tab" aria-controls="pills-date" aria-selected="true">Recherche par date</a>
+            </li>
+            <li class="nav-item col-12 col-md-6">
+                <a class="flex-sm-fill text-sm-center nav-link nav-pills-calendar" id="pills-theater-tab" data-toggle="pill"
+                   href="#pills-theater" role="tab" aria-controls="pills-theater" aria-selected="false">Recherche par théatre</a>
+            </li>
+        </ul>
+
+        <div class="tab-content col-9" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="pills-date" role="tabpanel" aria-labelledby="pills-date-tab">
+                {% include '/Calendar/calendar-per-date.html.twig' %}
+            </div>
+
+            <div class="tab-pane fade" id="pills-theater" role="tabpanel" aria-labelledby="pills-theater-tab">
+
+                {% include '/Calendar/calendar-per-theater.html.twig' %}
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('calendar') }}
+    <script>
+    function changeDate(date) {
+    fetch(date)
+    .then(response => response.text())
+    .then(text =>  {
+    let displaySpectacles = document.getElementById('display-spectacles');
+    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+    let newsspectacleDisplay = document.getElementById('newSpectacles');
+
+    displaySpectacles.remove();
+    spectaclesNextDay.innerHTML ='';
+
+    newsspectacleDisplay.innerHTML = text;
+    });
+    }
+
+    function nextDay(date) {
+    fetch(date)
+    .then(response => response.text())
+    .then(text =>  {
+    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+    console.log(spectaclesNextDay.innerHTML);
+    if(spectaclesNextDay.innerHTML !=null){
+    spectaclesNextDay.innerHTML = text;
+    }
+    else{
+    spectaclesNextDay.innerHTML = '';
+    spectaclesNextDay.innerHTML = text;
+    }
+    });
+    }
+
+
+    function active(clickedPill) {
+    let day=[];
+    for(let i = -3; i< 14; i++) {
+
+    day[i] = document.getElementById('day'+i);
+    day[i].classList.remove('active');
+    }
+
+    day[clickedPill].classList.add('active');
+
+    }
+    </script>
+
+{% endblock %}
