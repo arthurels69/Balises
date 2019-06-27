@@ -11,7 +11,6 @@ use Mapado\RestClientSdk\Tests\Units\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -62,7 +61,7 @@ class CalendarController extends AbstractController
         return $this->render('Calendar/calendar.html.twig', [
             'today' => $todayString,
             'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
-            'oneMoreDay' => $this->calendarService->addMoreDays(),
+            'oneMoreDay' => $this->calendarService->addMoreDays()
         ]);
     }
 
@@ -71,7 +70,7 @@ class CalendarController extends AbstractController
      * @param Request $request
      * @return ResponseAlias
      * @throws \Exception
-     * @Route("/calendar/{day}", name="calendar_select_day", methods={"GET", "POST"})
+     * @Route("/calendar/{day}", name="calendar_select_day")
      */
     public function calendarSelectedDay(Request $request)
     {
@@ -84,43 +83,10 @@ class CalendarController extends AbstractController
             $selectedDay = $request->request->get('picked_date');
         }
 
-
          return $this->render('Calendar/calendar.html.twig', [
                'today' => $selectedDay,
                'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
-               'oneMoreDay' => $this->calendarService->addMoreDays(),
-
+               'oneMoreDay' => $this->calendarService->addMoreDays()
             ]);
-    }
-
-
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/calendar/{day}/async", name="async_calendar", methods={"GET", "POST"})
-     */
-    public function asyncDate(Request $request) :Response
-    {
-
-        $selectedDay = $request->attributes->get('day');
-
-        return $this->render('Calendar/ajaxSpectacles.html.twig', [
-            'today' => $selectedDay,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay)
-        ]);
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     * @Route("/calendar/{day}/asyncPlusOne", name="async_calendarPlusOne", methods={"GET", "POST"})
-     */
-    public function asyncPlusOne(Request $request) : Response
-    {
-        $selectedDay = $request->attributes->get('day');
-
-        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
-
-        return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }
 }

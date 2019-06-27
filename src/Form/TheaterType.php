@@ -44,17 +44,13 @@ class TheaterType extends AbstractType
             ->add(
                 'logo',
                 FileType::class,
-                ['required'=>false,
-                    'help' => 'fichier logo au format : png',
-                    'data_class' => null
-                ]
+                ['help' => 'fichier logo au format : png',
+                    'data_class' => null]
             )->add(
                 'picture',
                 FileType::class,
-                ['required'=>false,
-                    'help' => 'fichier photo au format : png, jpg',
-                    'data_class' => null
-                ]
+                ['help' => 'fichier photo au format : png, jpg',
+                    'data_class' => null]
             )
             ->add(
                 'website',

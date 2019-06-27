@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpectacleRepository")
@@ -45,7 +44,7 @@ class Spectacle
 
     /**
      * Visual for the show
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
@@ -81,16 +80,13 @@ class Spectacle
 
     /**
      * Base rate of the show to make calculations
-     * @Assert\Regex( "/^[0-9]{1,}(\.|)[0-9]{0,2}$/", message =" tarif non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
 
     /**
      * Many to one relation with the theater the show is linked to
-
-     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
-
+     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false, name="theater_id_id")
      */
     private $theater;
@@ -166,9 +162,7 @@ class Spectacle
 
     public function setImage(string $image): self
     {
-        if ($image) {
-            $this->image = $image;
-        }
+        $this->image = $image;
 
         return $this;
     }

@@ -85,15 +85,10 @@
         </div>
 
     </div>
-    <div class="row">
-        <br>
-        <div class="col-sm-4 espSaisie">
-            <button class="btn btn-secondary btn-sm">{{ button_label|default('Création') }}</button>
-        </div>
-    </div>
     {% if form_errors(form) != '' %}
         {{ form_errors(form) }}
     {% endif %}
 
+    <button class="btn btn-secondary btn-sm">{{ button_label|default('Création') }}</button>
 </div>
 {{ form_end(form) }}

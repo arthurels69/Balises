@@ -26,14 +26,12 @@ class MapadoApi
 
     public function getTicketings()
     {
-        return $this->sendRequest('GET', '/v1/ticketings?fields=@id,title,place,contract,city,wallet&itemsPerPage=15');
+        return $this->sendRequest('GET', '/v1/ticketings?fields=@id,title&itemsPerPage=10');
     }
 
     public function createTicketing($uri, $body)
     {
         return $this->sendRequest('POST', $uri, $body);
-
-        //return $this->sendRequest('POST', $uri, json_encode($body));
     }
 
     private function sendRequest($method, $uri, $body = null)

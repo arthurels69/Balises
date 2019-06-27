@@ -24,9 +24,19 @@
                             <th>Email</th>
                             <td>{{ user.email }}</td>
                         </tr>
+                        {% if user.theaterName is  defined %}
+                            <tr>
+                                <th>Nom du Théâtre</th>
+                                <td>{{ user.theaterName }}</td>
+                            </tr>
+                        {% endif %}
                         <tr>
                             <th>Password</th>
                             <td></td>
+                        </tr>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ theater.id }}</td>
                         </tr>
                         <tr>
                             <th>Nom</th>

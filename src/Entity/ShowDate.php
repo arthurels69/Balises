@@ -38,6 +38,7 @@ class ShowDate
 
     public function __construct()
     {
+        $this->showRate = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,7 +70,7 @@ class ShowDate
         return $this;
     }
 
-    public function getShowRate(): ?ShowRate
+    public function getShowRate(): ArrayCollection
     {
         return $this->showRate;
     }
