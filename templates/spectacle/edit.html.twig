@@ -3,11 +3,11 @@
 {% block title %}Modification Spectacle{% endblock %}
 
 {% block body %}
-    <h1>Edit Spectacle</h1>
+    <h1>Modification Spectacle</h1>
 
-    {{ include('spectacle/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('spectacle/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
 
-    <a href="{{ path('spectacle_index') }}">back to list</a>
+    <a href="{{ path('spectacle_index') }}">Retour</a>
 
     {{ include('spectacle/_delete_form.html.twig') }}
 {% endblock %}
