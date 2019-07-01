@@ -9,15 +9,16 @@
 }
 
 .card-header{
-    top:78px;
+    top:74px;
     position:sticky;
     background-color:   #d6dbdf  ;
+    z-index: 15;
     
 }
 
-thead{
-    top:150px;
-    position:sticky;
+.card-body table thead th{
+    top:140px !important;
+    position:sticky !important;
     background-color: white !important;
 }
 
@@ -95,7 +96,6 @@ td.detail.active  {
 .card-edit-new .btn_save_form{
     display:none;
 }
-
 
 /****************************LOGIN security/login.html.twig********************************/
 
