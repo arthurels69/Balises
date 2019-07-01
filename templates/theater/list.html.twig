@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des théâtres{% endblock %}
+
+{% block body %}
+
+<div class="body">
+    <div class="container">
+        <div class="row justify-content-around mt-4">
+            <h1>Théâtres Balises</h1>
+        </div>
+
+        <input type="text" id="searchBar" onkeyup="searchTheater()" placeholder="Trouvez votre théâtre..">
+
+        <div class="row justify-content-around mt-5" id="theaterList">
+            {% for theater in theaters %}
+                <li>
+                    <div class="card-transparent text-center" id="theater" style="width: 18rem;" >
+                        <a href="#"><img src="{{ theater.logo }}" class="card-img-top theaterLogos" alt="{{ theater.name }}"></a>
+                        <h4 class="mt-3">{{ theater.name }}</h4>
+                    </div>
+                </li>
+            {% endfor %}
+        </div>
+
+        <div class="row justify-content-around mt-4">
+            <h1>Théâtres de l'agglomération</h1>
+        </div>
+
+
+        <div id="background_opacity"></div>
+
+
+        <div id="logoBalises">
+            <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript">
+
+        function searchTheater() {
+
+              let input, filter, ul, li, h4, i, txtValue;
+              input = document.getElementById('searchBar');
+              filter = input.value.toUpperCase();
+              list = document.getElementById("theaterList");
+              li = list.getElementsByTagName('li');
+
+              for (i = 0; i < li.length; i++) {
+                h4 = li[i].getElementsByTagName("h4")[0];
+                txtValue = h4.textContent || h4.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  li[i].style.display = "";
+                } else {
+                  li[i].style.display = "none"; 
+                }
+              }
+            }
+
+        
+    </script>
+{% endblock %}
+
