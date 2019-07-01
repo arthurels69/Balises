@@ -88,7 +88,6 @@ class UserController extends AbstractController
      * @Route("/{id}", name="user_show", methods={"GET"})
      * @IsGranted("ROLE_THEATER")
      * @param User $user
-     * @param Theater $theater
      * @return Response
      */
     public function show(User $user): Response
