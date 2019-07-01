@@ -6,11 +6,24 @@
     <div class="card container p-0  w-100">
 
         <div class="card-header d-flex w-100 justify-content-between">
-            <h4 class="my-0 mx-2 pt-1" >Détail du Théâtre : {{ user.theater.name }}</h4>
+            
+            <h5 class="my-0 mx-2 py-2" >Détail : <span class="d-inline-block">{{ user.theater.name }}<span/></h5>
+
             <div class="btn_show_crud">
-                <a href="{{ path('user_index') }}" class="btn btn-info">List</a>
+
+                <a type="button" href="{{ path('user_index') }}"
+                    data-toggle="tooltip" data-placement="top"  title="List" 
+                    class="btn btn-info">
+                    <i class="far fa-list-alt"></i>
+                </a>
+
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info">Edit</a>
+
+                    <a type="button" href="{{ path('user_edit', {'id': user.id}) }}"
+                        data-toggle="tooltip" data-placement="top"  title="Edition" 
+                        class="btn btn-info"> <i class="fas fa-edit"></i>
+                    </a>
+
                     {{ include('user/_delete_form.html.twig') }}                    
                 {% endif %}
             </div>
@@ -24,10 +37,10 @@
                             <th>Email</th>
                             <td>{{ user.email }}</td>
                         </tr>
-                        {% if user.theaterName is  defined %}
+                        {% if user.theater.name is  defined %}
                             <tr>
                                 <th>Nom du Théâtre</th>
-                                <td>{{ user.theaterName }}</td>
+                                <td>{{ user.theater.name }}</td>
                             </tr>
                         {% endif %}
                         <tr>
@@ -36,55 +49,55 @@
                         </tr>
                         <tr>
                             <th>Id</th>
-                            <td>{{ theater.id }}</td>
+                            <td>{{ user.theater.id }}</td>
                         </tr>
                         <tr>
                             <th>Nom</th>
-                            <td>{{ theater.name }}</td>
+                            <td>{{ user.theater.name }}</td>
                         </tr>
                         <tr>
                             <th>Email</th>
-                            <td>{{ theater.email }}</td>
+                            <td>{{ user.theater.email }}</td>
                         </tr>
                         <tr>
                             <th>Adresse</th>
-                            <td>{{ theater.address1 }}</td>
+                            <td>{{ user.theater.address1 }}</td>
                         </tr>
                         <tr>
                             <th>Complément Adresse</th>
-                            <td>{{ theater.address2 }}</td>
+                            <td>{{ user.theater.address2 }}</td>
                         </tr>
                         <tr>
                             <th>Code Postal</th>
-                            <td>{{ theater.zipCode }}</td>
+                            <td>{{ user.theater.zipCode }}</td>
                         </tr>
                         <tr>
                             <th>Ville</th>
-                            <td>{{ theater.city }}</td>
+                            <td>{{ user.theater.city }}</td>
                         </tr>
                         <tr>
                             <th>Téléphone</th>
-                            <td>{{ theater.phoneNumber }}</td>
+                            <td>{{ user.theater.phoneNumber }}</td>
                         </tr>
                         <tr>
                             <th>Logo</th>
-                            <td>{{ theater.logo }}</td>
+                            <td>{{ user.theater.logo }}</td>
                         </tr>
                         <tr>
                             <th>Web Site</th>
-                            <td>{{ theater.website }}</td>
+                            <td>{{ user.theater.website }}</td>
                         </tr>
                         <tr>
                             <th>Tarif Base</th>
-                            <td>{{ theater.baseRate }}</td>
+                            <td>{{ user.theater.baseRate }}</td>
                         </tr>
                         <tr>
                             <th>Latitude</th>
-                            <td>{{ theater.baseRate }}</td>
+                            <td>{{ user.theater.baseRate }}</td>
                         </tr>
                         <tr>
                             <th>Longitude</th>
-                            <td>{{ theater.baseRate }}</td>
+                            <td>{{ user.theater.baseRate }}</td>
                         </tr>
                     </tbody>   
                 </table>      

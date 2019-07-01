@@ -91,11 +91,10 @@ class UserController extends AbstractController
      * @param Theater $theater
      * @return Response
      */
-    public function show(User $user, Theater $theater): Response
+    public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'theater' => $theater
         ]);
     }
 

@@ -6,27 +6,27 @@
 
 <div class="card  container p-0 w-100">
     <div class="card-header d-flex w-100 justify-content-between">
-        <h4 class="my-0 mx-2 pt-1" >Liste des Théâtres</h4>
-        <a href="{{ path('user_new') }}" class="btn btn-info  text-white"><b>+</b>Ajouter</a>
+        <h5 class="my-0 mx-2 py-2" >Liste des Théâtres</h5>
+        <a href="{{ path('user_new') }}" class="btn btn-info text-white"><b>+</b>Ajouter</a>
     </div>
     <div class="card-body p-0">
             <table class="table table_user table-striped">
                     <thead>
                         <tr>
-                            <th class="col-3" >
+                            <th style="width:300px;" >
                                 <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
                                 <a href="/user/index/name/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                                 Théâtre
                             </th>
-                            <th class="col-3">
+                            <th style="width:300px;">
                                 <a href="/user/index/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
                                 <a href="/user/index/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
                                 Email
                             </th>
-                            <th class="col-3 text-center">
+                            <th class="" style="width:200px;">
                                 <a href="/user/index/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
                                 <a href="/user/index/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
-                                Code Postal
+                                Postal
                             </th>
                             <th class="th_action text-center">Action</th>
                         </tr>
@@ -43,15 +43,21 @@
                             {% if user.roles[0] != "ROLE_ADMIN" %}
                                 <td class="td_name">{{ user.theater.name }}</td>
                                 <td class="td_email">{{ user.email }}</td>
-                                <td class=" text-center td_zipCode">{{ user.theater.zipCode }}</td>
+                                <td class=" td_zipCode">{{ user.theater.zipCode }}</td>
                                 <td class="text-center btn_crud_index">
-                                    <a class='btn btn-info btn-xs ' href="{{ path('user_show', {'id': user.id}) }}">
-                                        Show
+
+                                    <a type="button" class="btn  btn-info btn-xs" data-toggle="tooltip" title="Détail" 
+                                        href="{{ path('user_show', {'id': user.id}) }}">
+                                        <i class="far fa-eye"></i>
                                     </a>
-                                    <a class='btn btn-info btn-xs' href="{{ path('user_edit', {'id': user.theater.id}) }}">
-                                        Edit
+
+                                    <a type="button" class='btn btn-info btn-xs' data-toggle="tooltip" title="Edition" 
+                                        href="{{ path('user_edit', {'id': user.id}) }}">
+                                        <i class="fas fa-edit"></i>
                                     </a>
+
                                     {{ include('user/_delete_form.html.twig') }}
+
                                 </td>
                             </tr>
                             <tr class="tr_detail">

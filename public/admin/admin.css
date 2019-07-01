@@ -2,27 +2,39 @@
 
 
 .card {
-    max-width:1000px  !important;
-    min-width:1000px  !important;
+    max-width:900px  !important;
+    min-width:900px  !important;
     margin:auto !important;
     box-shadow: 0px 0px 5px 2px #888888 !important;
 }
 
 .card-header{
-    top:69px;
+    top:78px;
     position:sticky;
     background-color:   #d6dbdf  ;
+    
 }
 
 thead{
-    top:128px;
+    top:150px;
     position:sticky;
     background-color: white !important;
 }
+
+h5{   
+    width:600px;
+}
+
+h5 span{
+    width:450px;
+    word-wrap: break-word;
+}
+
+ 
 /*****************************************************************************************/
 
 .th_action{
-    min-width:230px!important;
+    min-width:190px!important;
 }
 
 .btn_crud_index form{
@@ -67,10 +79,7 @@ td.detail.active  {
 
 .btn_edit_new_crud form{
     display:inline-block;
-}
-
-.card-edit-new{
-
+    width:30px !important;
 }
 
 .card-edit-new label{
