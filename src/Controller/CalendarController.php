@@ -68,10 +68,6 @@ class CalendarController extends AbstractController
             'today' => $todayString,
             'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
             'oneMoreDay' => $this->calendarService->addMoreDays(),
-            'ajaxSpectacle' => 'aaa',
-            'theaters' => $theaterRepository->findAll(),
-            'spectacles' => $spectacleRepository->findAll(),
-            'showdates' =>$dateRepository->findAll(),
         ]);
     }
 
