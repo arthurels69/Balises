@@ -4,6 +4,7 @@ require('bootstrap/dist/js/bootstrap.js');
 require('jquery/dist/jquery.js');
 const $ = require('jquery');
 
+
 $(document).ready(function(){
     $('.bxslider').bxSlider({
         mode: 'horizontal',

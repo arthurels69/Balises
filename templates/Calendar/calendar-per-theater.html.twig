@@ -1,7 +1,8 @@
 
     <h1>Nom du Theatre</h1>
     <!-- https://bootsnipp.com/snippets/VgzeR -->
-    {% for spectacle in spectaclesOfTheDay%}
+    {% for spectacles in spectaclesOfTheDay%}
+        {% for spectacle in spectacles %}
         <div class="row row-striped">
             <div class="col-2 text-right">
                 <h1 class="display-4"><span class="badge badge-secondary day-figure">{{ today |date('d') }}</span></h1>
@@ -17,6 +18,7 @@
                 <p>{{ spectacle.description }}</p>
             </div>
         </div>
+        {% endfor %}
     {% endfor %}
 
 

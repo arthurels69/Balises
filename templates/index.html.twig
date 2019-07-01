@@ -53,6 +53,15 @@
             bottom: 80px;
         }
 
+        #logoonmap
+        {
+            position: absolute;
+            bottom: 10px;
+            right: 2px;
+            z-index: 1;
+            transform: scale(0.7, 0.7);
+        }
+
 
     </style>
 
@@ -63,16 +72,16 @@
 <div class="row h-100 m-auto justify-content-between">
 
     <div class="col-12" id="IndexTitle" style="padding-top: 7%">
-        <h1 style="text-align: center; font-size: 450%; font-weight: bold">ET SI VOUS RETOURNIEZ<p> AU THEATRE ?</h1>
+        <h1 style="text-align: center; font-size: 450%; font-weight: bold">ET SI VOUS RETOURNIEZ<p> AU THÉÂTRE ?</h1>
     </div>
 
-    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: 7%">
-        <a class="link-homepage" href="{{ path('map2') }}"><i class="fas fa-map-marked fa-10x m-auto"></i></a>
+    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: -3%">
+        <a href="{{ path('map2') }}"><img src="{{ asset('uploads/jumelles.png') }}" style="max-height: 250px"></a>
         <h1 style ="margin-top: 5%">A quel endroit ?</h1>
     </div>
 
-    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: 7%">
-        <a class="link-homepage" href="{{ path('calendar_home') }}"><i class="fas fa-calendar-alt fa-10x"></i></a>
+    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: -3%">
+        <a href="{{ path('calendar_home') }}""><img src="{{ asset('uploads/calendarindex.png') }}" style="max-height: 250px"></a>
         <h1 style ="margin-top: 5%">A quel moment ?</h1>
     </div>
 
