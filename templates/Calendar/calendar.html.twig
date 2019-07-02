@@ -46,9 +46,10 @@
     let newsspectacleDisplay = document.getElementById('newSpectacles');
 
     displaySpectacles.remove();
+
     spectaclesNextDay.innerHTML ='';
 
-    newsspectacleDisplay.innerHTML = text;
+    newSpectacles.innerHTML = text;
     });
     }
 
@@ -57,7 +58,7 @@
     .then(response => response.text())
     .then(text =>  {
     let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-    console.log(spectaclesNextDay.innerHTML);
+
     if(spectaclesNextDay.innerHTML !=null){
     spectaclesNextDay.innerHTML = text;
     }
@@ -71,7 +72,7 @@
 
     function active(clickedPill) {
     let day=[];
-    for(let i = -3; i< 14; i++) {
+    for(let i = 0; i< 14; i++) {
 
     day[i] = document.getElementById('day'+i);
     day[i].classList.remove('active');
@@ -80,6 +81,25 @@
     day[clickedPill].classList.add('active');
 
     }
-    </script>
 
+
+
+        (function() {
+            let datePickerButton = document.getElementById('datePicker');
+            let calendarDatePicker = document.getElementById('calendarDatePicker');
+            calendarDatePicker.className = 'd-none';
+            datePickerButton.addEventListener('click', function () {
+                if (calendarDatePicker.classList == 'd-none'){
+                    console.log('aaaaaaaaaaa');
+                    calendarDatePicker.classList.remove('d-none');
+                }
+                else{
+                    console.log('bbbbbbbbbbb');
+                    calendarDatePicker.className = 'd-none';
+
+                }
+            });
+        })();
+
+    </script>
 {% endblock %}

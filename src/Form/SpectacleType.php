@@ -57,7 +57,8 @@ class SpectacleType extends AbstractType
                 TextareaType::class,
                 ['required'=>false]
             )
-            ->add('isBalise')
+
+            ->add('isBalise', null, ['label'=>'Enregistrement Offres Balises'])
             ->add(
                 'offerType',
                 ChoiceType::class,

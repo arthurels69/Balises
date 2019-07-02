@@ -97,12 +97,17 @@
 
         }
 
-        .bulleInfo1
+        .jumbotron.bulleInfo1
         {
             margin-top: 50%;
-            background-color: grey;
+            height: 205px;
+            background-color: rgba(0, 0, 0, 0);
+            /*background-color: grey;*/
+            background-image: url("{{ asset('uploads/ticket-balises.png') }}");
+            background-size: 100%;
             color: white;
             border-radius: 10px;
+
         }
 
         .bulleInfo2
@@ -112,7 +117,7 @@
 
         .bulleInfo3
         {
-            margin-top: 50%;
+
             background-color: black;
             color: white;
             height: 250px;
@@ -120,7 +125,8 @@
             border-color: black;
             overflow: scroll;
             border-radius: 10px;
-
+            margin-top: 30%;
+            font-size: 4px;
         }
 
         /* width */
@@ -151,8 +157,7 @@
             background-color: grey;
             color: white;
             height: 250px;
-            overflow: auto;
-            margin-top: -50%;
+
             overflow: scroll;
             border-radius: 10px;
         }
@@ -225,14 +230,11 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ theater.logo }}" onclick="{{ theater.website }}" style="max-height: 150px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 5%"></a>
-                            <br>
-                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; font-weight: bold; text-align: right" class="display-4">{{ theater.name }}</h1></a>
-                            <p class="lead" style="text-align: right">{{ theater.address1 }}</p>
-                            <p class="lead" style="text-align: right">{{ theater.zipcode }} {{ theater.city }}</p>
-                            <p class="lead" style="text-align: right">{{ theater.phoneNumber }}</p>
+                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.logo )}}" style="max-height: 100px; display: block; margin-left: auto; margin-right: 5%; padding-bottom: 5%"></a>
+                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 17px" class="display-4">{{ theater.name }}</h1></a>
+                            <p class="lead" style="text-align: right; margin-right: 10%">{{ theater.address1 }}<br>{{  theater.zipcode }} {{ theater.city }}<br>{{ theater.phoneNumber }}</p>
                         </div>
-                        <a href="{{ theater.website }}" target="_blank" ><img src="{{ theater.picture }}" style="max-width: 50%; padding-bottom: 5%;float: right"></a>
+
                     </div>
 
                     <div class="col-2">
@@ -264,7 +266,7 @@
 
                     <div class="col-5">
                         <div class="bulleInfo4">
-
+                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.picture )}}" style="width: 250px; padding-bottom: 5%;float: right"></a>
                         </div>
                     </div>
 
@@ -381,13 +383,15 @@
             });
         }
 
-        // Cacher "Selectionner votre lieu" quand bulleInfo ouverte
+        // Fermer bulle info quand clic sur map
         map.addEventListener("click", function ()
         {
             let hideAction = document.getElementById('selectplacetitle');
             hideAction.style.display = "block";
             map.setView([latitude, longitude]);
         });
+
+
 
 
         // Recentrer carte quand clique sur titre

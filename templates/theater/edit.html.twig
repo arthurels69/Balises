@@ -20,7 +20,12 @@
             </div>
             <div class="col-sm-4">
 
-                <a href="{{ path('user_index',{'variable' : user.id} )}}"><button class="btn btn-secondary btn-sm">Retour Liste des Théâtres</button> </a>
+                <a href="{{ path('user_index' )}}"><button class="btn btn-secondary mb-5">Retour Liste des Théâtres</button> </a>
+            </div>
+        {% endif %}
+        {% if user.roles[0] == "ROLE_THEATER" %}
+            <div class="col-sm-4">
+                <a href="{{ path('theater_show',{'id' : theater.id} )}}"><button class="btn btn-secondary mb-5">Retour</button> </a>
             </div>
         {% endif %}
     </div>

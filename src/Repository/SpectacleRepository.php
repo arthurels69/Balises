@@ -20,15 +20,15 @@ class SpectacleRepository extends ServiceEntityRepository
         parent::__construct($registry, Spectacle::class);
     }
 
-    public function findbyDates($dateShow, $dateShowPlusOne) : array
+    public function findByShowDates($start, $end) : array
     {
         return $this->createQueryBuilder('s')
             ->select()
             ->innerJoin('s.showDates', 'd')
-            ->andWhere('d.dateShow > :val1')
-            ->andWhere('d.dateShow < :val2')
-            ->setParameter('val1', $dateShow)
-            ->setParameter('val2', $dateShowPlusOne)
+            ->andWhere('d.dateShow >= :start')
+            ->andWhere('d.dateShow < :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
             ->orderBy('d.dateShow')
             ->getQuery()
             ->getResult()
