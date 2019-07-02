@@ -49,6 +49,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
+            'id' => $request->request->get('id'),
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
@@ -83,11 +84,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
+
+
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-
-        //$id = $token->getUser()->getId()-1;
-
+        
+//        $id = $token->getUser()->getId()-1;
 
         $roles = $token->getRoles();
         $rolesTab = array_map(function ($role) {
@@ -102,8 +104,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
             $redirection = new RedirectResponse($this->urlGenerator
                                                      ->generate('theater_show', [
-                                                         //'id' => $id
-
+//                                                         'id' => $id
                                                      ]));
         }
 
