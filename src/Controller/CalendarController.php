@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /** Controls the Calendar Pages
  * Class CalendarController
  * @package App\Controller
