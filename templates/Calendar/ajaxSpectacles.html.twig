@@ -1,14 +1,15 @@
 <div id="display-spectacles">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
     {% if spectaclesOfTheDay is empty %}
-
-        <p>Pas de spectacles ce jour-là</p>
-
+        <div  class="row row-striped bg-white">
+            <p>Pas de spectacles ce jour-là</p>
+        </div>
     {% endif %}
     {% for spectacle in spectaclesOfTheDay%}
 
-        <div class="row row-striped">
+        <div  class="row row-striped bg-white">
             <div class="col-2 text-right">
+
                 <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
                 <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
             </div>
@@ -26,11 +27,16 @@
                 </ul>
                 <p>{{ spectacle.showId.description }}</p>
             </div>
+
+
         </div>
-
-
     {% endfor %}
+    <div class="row bg-white" id="plus-button">
+        <div class="col-1 offset-1 ">
+            <i class="fas fa-plus-circle fa-5x" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
+                date_modify('+ 1 day') | date('Y-m-d')
+            }) }}')"></i>
+        </div>
+    </div>
 
-    <button class="btn btn-outline-secondary" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today | date_modify('+ 1 day') | date('Y-m-d')
-    }) }}')">Jour suivant</a>
 </div>

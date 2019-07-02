@@ -7,14 +7,11 @@ use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
 use App\Service\CalendarService;
-use Mapado\RestClientSdk\SdkClient;
-use Mapado\RestClientSdk\Tests\Units\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 /** Controls the Calendar Pages
  * Class CalendarController
@@ -58,7 +55,6 @@ class CalendarController extends AbstractController
 
         $today = new \DateTime();
         $todayString = $today->format("Y-m-d");
-
         //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
             $todayString = $request->request->get('picked_date');
@@ -124,7 +120,7 @@ class CalendarController extends AbstractController
     {
         $selectedDay = $request->attributes->get('day');
 
-        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
+        $newSpectacles = $this->calendarService->selectSpectaclesNextDays($selectedDay);
 
         return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }

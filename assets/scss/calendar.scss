@@ -1,7 +1,24 @@
 @import "vars";
 @import "~bootstrap";
+@import "~datepicker/datepicker.min.scss";
 // Carousel with Date https://jsfiddle.net/w3a97zyh/
 
+#datePicker{
+  background-color: transparent;
+  border: none;
+}
+
+.bg-white{
+  background-color: rgba(222,226,230, 0.9)
+}
+
+.fa-plus-circle:hover{
+  color: yellow;
+}
+
+.fa-calendar-plus:hover{
+  color: yellow;
+}
 
 .month-day {
   height: 100%;

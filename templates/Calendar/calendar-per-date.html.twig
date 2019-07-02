@@ -1,27 +1,10 @@
 
 
-<h1>Date sélectionnée</h1>
-<!-- https://bootsnipp.com/snippets/VgzeR -->
-<div class="row">
-    <div class="col-5">
-        <form method="post" action="">
 
-            <div class="form-group row justify-content-center">
-                <div class="col-12 m-2">
-                    <button class="btn-success btn d-inline-block" type="submit" id="example-date-input">Rechercher par date</button>
-                </div>
-                <div class="col-12 m-2">
-                    <input class="form-control" type="date" name ="picked_date" id="example-date-input">
-                </div>
-            </div>
-
-        </form>
-    </div>
-</div>
 
 <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
-<div class="row justify-content-center">
-    <div class="col-10">
+<div class="row justify-content-center bg-white p-5">
+    <div class="col-7">
         <ul class="bxslider">
 
             <!-- display today's date and focus it with the active class -->
@@ -30,26 +13,35 @@
                     <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
                 </li>
             </a>
-                {% for oneDay in oneMoreDay %}
+            {% for oneDay in oneMoreDay %}
 
-                    <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
-                    }) }}')">
+                <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
+                }) }}')">
 
-                        <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
-                            <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
-                        </li>
+                    <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
+                        <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+                    </li>
 
-                    </a>
+                </a>
 
-                {% endfor %}
+            {% endfor %}
 
         </ul>
 
+    </div>
+    <div class="col-2">
+        <button id="datePicker"><i class="far fa-calendar-plus d-inline-block fa-5x"></i></button>
+    </div>
+    <div class="col-4 d-none" id="calendarDatePicker">
+
+        <form method="post" action="">
+
+            <div class="datepicker-here" data-language='fr'></div>
+
+        </form>
 
     </div>
-    <div class="col-2 align-items-center">
-        <i class="fas fa-calendar-plus fa-4x"></i>
-    </div>
+
 </div>
 
 
@@ -62,14 +54,15 @@
 <div id="display-spectacles">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
     {% if spectaclesOfTheDay is empty %}
-
-        <p>Pas de spectacles ce jour-là</p>
-
+        <div  class="row row-striped bg-white">
+            <p>Pas de spectacles ce jour-là</p>
+        </div>
     {% endif %}
     {% for spectacle in spectaclesOfTheDay%}
 
-        <div class="row row-striped">
+        <div  class="row row-striped bg-white">
             <div class="col-2 text-right">
+
                 <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
                 <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
             </div>
@@ -81,26 +74,29 @@
                         {{ spectacle.dateShow | date('D') }}</li>
                     <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
                         {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
-                        </li>
+                    </li>
                     <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
                         {{ spectacle.showId.theater.name }}</li>
                 </ul>
                 <p>{{ spectacle.showId.description }}</p>
             </div>
+
+
         </div>
-
-
     {% endfor %}
+    <div class="row bg-white" id="plus-button">
+        <div class="col-1 offset-1 ">
+            <i class="fas fa-plus-circle fa-5x" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
+                date_modify('+ 1 day') | date('Y-m-d')
+            }) }}')"></i>
+        </div>
+    </div>
 
-    <button class="btn btn-outline-secondary" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today | date_modify('+ 1 day') | date('Y-m-d')
-    }) }}')">Jour suivant</a>
 </div>
+    <div id="spectaclesNextDay" class="row row-striped bg-white">
 
+    </div>
 
-<div id="spectaclesNextDay">
+    {% block javascripts %}
 
-</div>
-
-{% block javascripts %}
-
-{% endblock %}
+    {% endblock %}
