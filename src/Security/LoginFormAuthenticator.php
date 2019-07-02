@@ -88,9 +88,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new CustomUserMessageAuthenticationException('Mot de passe incorrect.');
         }
 
-        return $validPassword ;
-        
-       
+        return $validPassword ;  
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
