@@ -23,10 +23,8 @@ class UserController extends AbstractController
 {
     /**
      *Create Index user
-
      * @Route("/index", name="user_index", methods={"GET"})
      * @Route("/index/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
-
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
@@ -38,6 +36,7 @@ class UserController extends AbstractController
         } else {
             $users = $userRepository->findAll();
         }
+
         return $this->render('user/index.html.twig', [
             'users' => $users
         ]);
@@ -89,14 +88,12 @@ class UserController extends AbstractController
      * @Route("/{id}", name="user_show", methods={"GET"})
      * @IsGranted("ROLE_THEATER")
      * @param User $user
-     * @param Theater $theater
      * @return Response
      */
-    public function show(User $user, Theater $theater): Response
+    public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'theater' => $theater
         ]);
     }
 
