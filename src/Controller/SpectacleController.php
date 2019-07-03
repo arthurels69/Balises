@@ -24,6 +24,7 @@ class SpectacleController extends AbstractController
     /**
      * @Route("/", name="spectacle_index", methods={"GET"})
      * @param SpectacleRepository $spectacleRepository
+     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function index(SpectacleRepository $spectacleRepository, TheaterRepository $theaterRepository): Response

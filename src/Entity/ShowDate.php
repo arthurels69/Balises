@@ -30,15 +30,10 @@ class ShowDate
      */
     private $showId;
 
-    /**
-     * Rate used if a date is concerned by a Balises offer
-     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="showDate", cascade={"persist", "remove"})
-     */
-    private $showRate;
 
     public function __construct()
     {
-        $this->showRate = new ArrayCollection();
+       // $this->showRate = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +65,7 @@ class ShowDate
         return $this;
     }
 
+    /*
     public function getShowRate(): ArrayCollection
     {
         return $this->showRate;
@@ -86,6 +82,8 @@ class ShowDate
 
         return $this;
     }
+    */
+
     /**
      * toString
      * @return string

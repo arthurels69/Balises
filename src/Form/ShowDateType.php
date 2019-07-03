@@ -4,27 +4,21 @@ namespace App\Form;
 
 use App\Entity\ShowDate;
 use App\Entity\ShowRate;
-use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Extensions\TextExtension;
 
 class ShowDateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateShow', DateType::class, [
-                'widget' => 'choice',
-
-            ])
-//            ->add('showRate', CollectionType::class, [
-//                'entry_type' => ShowRate::class,
-//                'entry_options' => ['label' => false],
-//                'allow_add'    => true,
-//            ])
+            ->add('dateShow')
+            //->add('showId')
+            //->add('showRate', EntityType::Class,['class'=> ShowRate::Class ])
         ;
     }
 
