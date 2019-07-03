@@ -30,6 +30,11 @@ class ShowDate
      */
     private $showId;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowRate", mappedBy="showDate", cascade={"persist", "remove"})
+     */
+    private $showRate;
+
 
     public function __construct()
     {
@@ -91,5 +96,23 @@ class ShowDate
     public function __toString()
     {
         return $this->getDateShow()->format('d/m/Y');
+    }
+
+    public function getShowRate(): ?ShowRate
+    {
+        return $this->showRate;
+    }
+
+    public function setShowRate(?ShowRate $showRate): self
+    {
+        $this->showRate = $showRate;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newShowDate = $showRate === null ? null : $this;
+        if ($newShowDate !== $showRate->getShowDate()) {
+            $showRate->setShowDate($newShowDate);
+        }
+
+        return $this;
     }
 }

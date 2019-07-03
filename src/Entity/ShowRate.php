@@ -29,6 +29,10 @@ class ShowRate
      */
     private $discountedRate;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowDate", inversedBy="showRate", cascade={"persist", "remove"})
+     */
+    private $showDate;
 
 
     public function getId(): ?int
@@ -56,6 +60,18 @@ class ShowRate
     public function setDiscountedRate(?int $discountedRate): self
     {
         $this->discountedRate = $discountedRate;
+
+        return $this;
+    }
+
+    public function getShowDate(): ?ShowDate
+    {
+        return $this->showDate;
+    }
+
+    public function setShowDate(?ShowDate $showDate): self
+    {
+        $this->showDate = $showDate;
 
         return $this;
     }

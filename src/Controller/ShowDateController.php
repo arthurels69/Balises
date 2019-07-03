@@ -122,7 +122,7 @@ class ShowDateController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('showDate_by_Spectacle', [
-                'id' => $showDate->getId(),
+                'id' => $showDate->getShowId(),
             ]);
         }
 
