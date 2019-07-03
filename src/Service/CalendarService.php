@@ -45,13 +45,28 @@ class CalendarService
         return $spectaclesOfTheDay;
     }
 
-    public function selectSpectaclesNextDays($selectedDate) : array
+    public function selectSpectacles3NextDays($selectedDate) : array
     {
 
         $start = new \DateTime($selectedDate);
         $end = new \DateTime($selectedDate);
 
         $end->add(\DateInterval::createFromDateString('+3 days'));
+
+        //Returns  today' spectacles.
+        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);
+
+        //Returns the content of today' sgit pectacles based on the IDs collected  above.
+
+        return $spectaclesOfTheDay;
+    }
+
+    public function selectSpectaclesNextWeek($selectedDate) : array
+    {
+        $start = new \DateTime($selectedDate);
+        $end = new \DateTime($selectedDate);
+
+        $end->add(\DateInterval::createFromDateString('+7 days'));
 
         //Returns  today' spectacles.
         $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);

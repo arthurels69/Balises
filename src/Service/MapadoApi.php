@@ -17,8 +17,14 @@ class MapadoApi
             'clientSecret'      => '5edoxd1i800008wsg08oswsc44sgo8kk44ogw8oosswo8ckg08',
         ]);
 
-        $this->token = $provider->getAccessToken('client_credentials', [
+       /* $this->token = $provider->getAccessToken('client_credentials', [
             'scope' => $scope,
+        ]);*/
+
+        $this->token = $provider->getAccessToken('password', [
+        'username' => 'wildcode@test.com',
+        'password' => 'wildcode',
+        'scope' => $scope
         ]);
 
         $this->client = new Client(['base_uri' => $this->uri]);
@@ -31,6 +37,7 @@ class MapadoApi
 
     public function createTicketing($uri, $body)
     {
+        dump($this->token->getToken());
         return $this->sendRequest('POST', $uri, $body);
 
         //return $this->sendRequest('POST', $uri, json_encode($body));
@@ -38,6 +45,7 @@ class MapadoApi
 
     private function sendRequest($method, $uri, $body = null)
     {
+
         $headers = [
             'Authorization' => 'Bearer ' . $this->token->getToken(),
             'Accept'        => 'application/json',

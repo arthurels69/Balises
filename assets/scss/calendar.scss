@@ -8,6 +8,32 @@
   border: none;
 }
 
+.timePill{
+  cursor : pointer;
+  height: 1.5em;
+  width: 8em;
+  font-size : 2em;
+  color: black;
+  vertical-align: center;
+  background-color: $baliseYellow;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  border: 1px solid #000;
+}
+.activeTimePill{
+  height: 1.5em;
+  width: 8em;
+  font-size : 2em;
+  color: $baliseYellow;
+  vertical-align: center;
+  background-color: black;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  border: 1px solid #000;
+}
+
 .bg-white{
   background-color: rgba(222,226,230, 0.9)
 }
@@ -18,6 +44,12 @@
 
 .fa-calendar-plus:hover{
   color: yellow;
+}
+
+.nav-pills-calendar{
+  color: $baliseYellow;
+  margin: auto;
+  text-align : center;
 }
 
 .month-day {
