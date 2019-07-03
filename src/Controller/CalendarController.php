@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
+use App\Repository\TheaterRepository;
 use App\Service\CalendarService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,8 +46,12 @@ class CalendarController extends AbstractController
      *      name="calendar_home",
      *     methods={"GET", "POST"})
      */
-    public function calendarHome(Request $request)
-    {
+    public function calendarHome(
+        Request $request,
+        TheaterRepository $theaterRepository,
+        SpectacleRepository $spectacleRepository,
+        ShowDateRepository $dateRepository
+    ) {
 
         $today = new \DateTime();
         $todayString = $today->format("Y-m-d");
@@ -109,14 +114,44 @@ class CalendarController extends AbstractController
     /**
      * @param Request $request
      * @return Response
-     * @Route("/calendar/{day}/asyncPlusOne", name="async_calendarPlusOne", methods={"GET", "POST"})
+     * @Route("/calendar/{day}/asyncPlusThree", name="async_calendarPlusOne", methods={"GET", "POST"})
      */
     public function asyncPlusOne(Request $request) : Response
     {
         $selectedDay = $request->attributes->get('day');
 
-        $newSpectacles = $this->calendarService->selectSpectaclesNextDays($selectedDay);
+        $newSpectacles = $this->calendarService->selectSpectacles3NextDays($selectedDay);
 
         return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
+    }
+
+    /**
+     * @return Response
+     * @throws \Exception
+     *  @Route("/calendar/{day}/asyncPlusThreePills", name="async_calendarPlusThreePills", methods={"GET", "POST"})
+     */
+    public function threeNextDays()
+    {
+        $selectedDay = new \DateTime();
+        $selectedDay = $selectedDay->format("Y-m-d");
+        return $this->render('Calendar/ajaxSpectacles.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectacles3NextDays($selectedDay)
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @throws \Exception
+     *  @Route("/calendar/{day}/asyncPlusWeekPills", name="async_calendarPlusWeek", methods={"GET", "POST"})
+     */
+    public function nextWeek()
+    {
+        $selectedDay = new \DateTime();
+        $selectedDay = $selectedDay->format("Y-m-d");
+        return $this->render('Calendar/ajaxSpectacles.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesNextWeek($selectedDay)
+        ]);
     }
 }

@@ -5,97 +5,293 @@
     <div class="row justify-content-center">
         <!-- Pills to select either a calendar per theater or per date from Bootstrap Website -->
         <ul class="nav nav-pills flex-column flex-sm-row nav-pills-calendar col-12" id="pills-tab" role="tablist">
-            <li class="nav-item col-12 col-md-6">
-                <a class="flex-sm-fill text-sm-center nav-link nav-pills-calendar"id="pills-date-tab" data-toggle="pill"
-                   href="#pills-date" role="tab" aria-controls="pills-date" aria-selected="true">Recherche par date</a>
-            </li>
-            <li class="nav-item col-12 col-md-6">
-                <a class="flex-sm-fill text-sm-center nav-link nav-pills-calendar" id="pills-theater-tab" data-toggle="pill"
-                   href="#pills-theater" role="tab" aria-controls="pills-theater" aria-selected="false">Recherche par théatre</a>
+            <li class="nav-item col-12 col-md-12 nav-pills-calendar">
+                Recherche par date
             </li>
         </ul>
-
-        <div class="tab-content col-9" id="pills-tabContent">
-
-            <div class="tab-pane fade show active" id="pills-date" role="tabpanel" aria-labelledby="pills-date-tab">
-                {% include '/Calendar/calendar-per-date.html.twig' %}
-            </div>
-
-            <div class="tab-pane fade" id="pills-theater" role="tabpanel" aria-labelledby="pills-theater-tab">
-
-                {% include '/Calendar/calendar-per-theater.html.twig' %}
-            </div>
-
-        </div>
     </div>
 
 
 
+    <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
+    <div class="row justify-content-center bg-white p-5">
+        <div class="col-6">
+            <a onclick="changeDateToday('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
+                <span class="d-inline-block timePill text-center activeTimePill">Aujourd'hui</span>
+            </a>
+            <a onclick="changeDate3days('{{ path('async_calendarPlusThreePills', {"day" : today | date('Y-m-d')}) }}')">
+                <span class="d-inline-block timePill text-center">3 jours</span>
+            </a>
+            <a onclick="changeDate1Week('{{ path('async_calendarPlusWeek', {"day" : today | date('Y-m-d')}) }}')">
+                <span class="d-inline-block timePill text-center">1 semaine</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center bg-white p-5">
+        <div class="col-7">
+            <ul class="bxslider">
+
+                <!-- display today's date and focus it with the active class -->
+                <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
+                    <li class="month-day active" onclick="active(0)" id="day0">
+                        <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
+                    </li>
+                </a>
+                {% for oneDay in oneMoreDay %}
+
+                    <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
+                    }) }}')">
+
+                        <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
+                            <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+                        </li>
+
+                    </a>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+        <div class="col-2">
+            <button id="datePicker"><i class="far fa-calendar-plus d-inline-block fa-5x"></i></button>
+        </div>
+        <div class="col-4 d-none" id="calendarDatePicker">
+
+            <form method="post" action="">
+
+                <div class="datepicker-here" data-language='fr'></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Div dedicated to ajax new spectacle -->
+    <div id="newSpectacles">
+
+    </div>
+
+
+    <div id="display-spectacles">
+        <!-- below the display of spectacles. Same as the ones in search by theater. -->
+        {% if spectaclesOfTheDay is empty %}
+            <div  class="row row-striped bg-white">
+                <p>Pas de spectacles ce jour-là</p>
+            </div>
+        {% endif %}
+        {% for spectacle in spectaclesOfTheDay%}
+
+            <div  class="row row-striped bg-white">
+                <div class="col-2 text-right">
+
+                    <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
+                    <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
+                </div>
+                <div class="col-10">
+                    <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
+                        </strong></h3>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                            {{ spectacle.dateShow | date('D') }}</li>
+                        <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                            {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
+                        </li>
+                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                            {{ spectacle.showId.theater.name }}</li>
+                    </ul>
+                    <p>{{ spectacle.showId.description }}</p>
+                </div>
+
+
+            </div>
+        {% endfor %}
+        <div class="row bg-white" id="plus-button">
+            <div class="col-1 offset-1 ">
+                <div onscroll="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
+                    date_modify('+ 1 day') | date('Y-m-d')
+                }) }}')"></div>
+            </div>
+        </div>
+
+    </div>
+    <div id="spectaclesNextDay" class="row row-striped bg-white">
+
+    </div>
+
+
+
+
+
+
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('calendar') }}
     <script>
-    function changeDate(date) {
-    fetch(date)
-    .then(response => response.text())
-    .then(text =>  {
-    let displaySpectacles = document.getElementById('display-spectacles');
-    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-    let newsspectacleDisplay = document.getElementById('newSpectacles');
+        //Cette fonction gère l'affichage des spectacles quand on clique dans le calendrier carousel
+        function changeDate(date) {
+            fetch(date)
+                .then(response => response.text())
+                .then(text =>  {
+                    let displaySpectacles = document.getElementById('display-spectacles');
+                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+                    let newsspectacleDisplay = document.getElementById('newSpectacles');
 
-    displaySpectacles.remove();
+                    displaySpectacles.remove();
 
-    spectaclesNextDay.innerHTML ='';
+                    spectaclesNextDay.innerHTML ='';
 
-    newSpectacles.innerHTML = text;
-    });
-    }
+                    newSpectacles.innerHTML = text;
+                });
+        }
+        /*les 3 fonctions ci-dessous gèrent l'affichage des spectacles quand on clique sur les pills (aujourd'hui, 3
+         jours, 1 semaine) */
+        function changeDateToday(date) {
+            fetch(date)
+                .then(response => response.text())
+                .then(text => {
+                    let displaySpectacles = document.getElementById('display-spectacles');
+                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+                    let newsspectacleDisplay = document.getElementById('newSpectacles');
+                    //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
+                    let day=[];
+                    for(let i = 0; i< 14; i++) {
 
-    function nextDay(date) {
-    fetch(date)
-    .then(response => response.text())
-    .then(text =>  {
-    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+                        day[i] = document.getElementById('day'+i);
+                        day[i].classList.remove('active');
+                    }
+                    //puis on ajoute un design indiquant la case selectionné sur le premier jour ici
+                    day[0].classList.add('active');
 
-    if(spectaclesNextDay.innerHTML !=null){
-    spectaclesNextDay.innerHTML = text;
-    }
-    else{
-    spectaclesNextDay.innerHTML = '';
-    spectaclesNextDay.innerHTML = text;
-    }
-    });
-    }
+                    displaySpectacles.remove();
+
+                    spectaclesNextDay.innerHTML ='';
+
+                    newSpectacles.innerHTML = text;
+
+                    let datePills = document.querySelectorAll('.timePill');
+
+                    datePills.forEach(function (value, index, datePills) {
+                        value.classList.remove('activeTimePill');
+                    });
+                    datePills[0].classList.add('activeTimePill');
+                });
+        }
+
+        function changeDate3days(date) {
+            fetch(date)
+                .then(response => response.text())
+                .then(text => {
+                    let displaySpectacles = document.getElementById('display-spectacles');
+                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+                    let newsspectacleDisplay = document.getElementById('newSpectacles');
+                    //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
+                    let day=[];
+                    for(let i = 0; i< 14; i++) {
+
+                        day[i] = document.getElementById('day'+i);
+                        day[i].classList.remove('active');
+                    }
+                    //puis on ajoute un design indiquant la case selectionné sur le premier jour ici
+                    day[0].classList.add('active');
+
+                    displaySpectacles.remove();
+
+                    spectaclesNextDay.innerHTML ='';
+
+                    newSpectacles.innerHTML = text;
+
+                    let datePills = document.querySelectorAll('.timePill');
+
+                    datePills.forEach(function (value, index, datePills) {
+                        value.classList.remove('activeTimePill');
+                    });
+                    datePills[1].classList.add('activeTimePill');
+                });
+        }
+
+        function changeDate1Week(date) {
+            fetch(date)
+                .then(response => response.text())
+                .then(text => {
+                    let displaySpectacles = document.getElementById('display-spectacles');
+                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+                    let newsspectacleDisplay = document.getElementById('newSpectacles');
+                    //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
+                    let day=[];
+                    for(let i = 0; i< 14; i++) {
+
+                        day[i] = document.getElementById('day'+i);
+                        day[i].classList.remove('active');
+                    }
+                    //puis on ajoute un design indiquant la case selectionné sur le premier jour ici
+                    day[0].classList.add('active');
+
+                    displaySpectacles.remove();
+
+                    spectaclesNextDay.innerHTML ='';
+
+                    newSpectacles.innerHTML = text;
+
+                    let datePills = document.querySelectorAll('.timePill');
+
+                    datePills.forEach(function (value, index, datePills) {
+                        value.classList.remove('activeTimePill');
+                    });
+                    datePills[2].classList.add('activeTimePill');
+                });
+        }
+
+        function nextDay(date) {
+            fetch(date)
+                .then(response => response.text())
+                .then(text =>  {
+                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
+
+                    if(spectaclesNextDay.innerHTML !=null){
+                        spectaclesNextDay.innerHTML = text;
+                    }
+                    else{
+                        spectaclesNextDay.innerHTML = '';
+                        spectaclesNextDay.innerHTML = text;
+                    }
+                });
+        }
 
 
-    function active(clickedPill) {
-    let day=[];
-    for(let i = 0; i< 14; i++) {
+        function active(clickedPill) {
+            //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
+            let day=[];
+            for(let i = 0; i< 14; i++) {
 
-    day[i] = document.getElementById('day'+i);
-    day[i].classList.remove('active');
-    }
-
-    day[clickedPill].classList.add('active');
-
-    }
-
-
-
-    (function() {
-        let datePickerButton = document.getElementById('datePicker');
-        let calendarDatePicker = document.getElementById('calendarDatePicker');
-        calendarDatePicker.className = 'd-none';
-        datePickerButton.addEventListener('click', function () {
-            if (calendarDatePicker.classList == 'd-none'){
-                console.log('aaaaaaaaaaa');
-                calendarDatePicker.classList.remove('d-none');
+                day[i] = document.getElementById('day'+i);
+                day[i].classList.remove('active');
             }
-            else{
-                console.log('bbbbbbbbbbb');
-                calendarDatePicker.className = 'd-none';
+            //puis on ajoute un design indiquant la case selectionné
+            day[clickedPill].classList.add('active');
+
+        }
+
+        (function() {
+            let datePickerButton = document.getElementById('datePicker');
+            let calendarDatePicker = document.getElementById('calendarDatePicker');
+            calendarDatePicker.className = 'd-none';
+            datePickerButton.addEventListener('click', function () {
+                if (calendarDatePicker.classList == 'd-none'){
+
+                    calendarDatePicker.classList.remove('d-none');
+                }
+                else{
+
+                    calendarDatePicker.className = 'd-none';
 
             }
         });
