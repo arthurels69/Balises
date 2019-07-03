@@ -287,4 +287,13 @@ class Spectacle
 
         return $this;
     }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getId());
+    }
 }

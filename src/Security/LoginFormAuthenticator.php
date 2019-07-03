@@ -49,7 +49,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'id' => $request->request->get('id'),
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
@@ -73,7 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email incorrect.');
+            throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
         return $user;
@@ -90,7 +89,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
         return $validPassword;
     }
-
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
