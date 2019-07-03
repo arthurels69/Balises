@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/non/balises/theater")
+ * @Route("/nonbalisestheater")
  */
 class NonBalisesTheaterController extends AbstractController
 {
