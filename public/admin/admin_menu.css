@@ -3,12 +3,11 @@
 .body_admin{
     background-color:#F4F3EF !important;
     font-family: 'Poppins', sans-serif!important;
+    font-size:0.9rem;
 }
 
 p {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
     line-height: 1.7rem;
     color: #999;
 }
@@ -21,8 +20,6 @@ a:focus {
     transition: all 0.3s !important;
 }
 
-
-
 .navbar {
     padding: 15px 10px;
     background:#f4d942 !important;
@@ -34,6 +31,7 @@ a:focus {
     right:0;
     width: calc(100% - 250px);
     z-index: 999;
+    
 }
 
 .navbar.active {
@@ -46,7 +44,10 @@ a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
+    
 }
+
+
 
 .line {
     width: 100%;
@@ -123,7 +124,7 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     display: block;
 }
 
@@ -155,19 +156,3 @@ a:focus {
 
 
 
-
-/* ---------------------------------------------------
-    TABLES
------------------------------------------------------ */
-
-.custab{
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin:0 auto;
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-    }
-.custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-    }
