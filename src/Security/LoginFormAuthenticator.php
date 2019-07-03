@@ -88,18 +88,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Mot de passe incorrect.');
         }
-
-        return $validPassword ;
-        
-       
+        return $validPassword;
     }
-
 
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        
-//        $id = $token->getUser()->getId()-1;
+
+   //     $id = $token->getUser()->getId()-1;
 
         $roles = $token->getRoles();
         $rolesTab = array_map(function ($role) {
@@ -114,7 +110,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
             $redirection = new RedirectResponse($this->urlGenerator
                                                      ->generate('theater_show', [
-//                                                         'id' => $id
+        //                                                 'id' => $id
                                                      ]));
         }
 
