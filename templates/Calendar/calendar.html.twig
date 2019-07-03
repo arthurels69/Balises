@@ -84,22 +84,22 @@
 
 
 
-        (function() {
-            let datePickerButton = document.getElementById('datePicker');
-            let calendarDatePicker = document.getElementById('calendarDatePicker');
-            calendarDatePicker.className = 'd-none';
-            datePickerButton.addEventListener('click', function () {
-                if (calendarDatePicker.classList == 'd-none'){
-                    console.log('aaaaaaaaaaa');
-                    calendarDatePicker.classList.remove('d-none');
-                }
-                else{
-                    console.log('bbbbbbbbbbb');
-                    calendarDatePicker.className = 'd-none';
+    (function() {
+        let datePickerButton = document.getElementById('datePicker');
+        let calendarDatePicker = document.getElementById('calendarDatePicker');
+        calendarDatePicker.className = 'd-none';
+        datePickerButton.addEventListener('click', function () {
+            if (calendarDatePicker.classList == 'd-none'){
+                console.log('aaaaaaaaaaa');
+                calendarDatePicker.classList.remove('d-none');
+            }
+            else{
+                console.log('bbbbbbbbbbb');
+                calendarDatePicker.className = 'd-none';
 
-                }
-            });
-        })();
+            }
+        });
+    })();
 
     </script>
 {% endblock %}
