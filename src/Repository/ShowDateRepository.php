@@ -30,4 +30,17 @@ class ShowDateRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+//    public function searchThreeDates():array
+//    {
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT *
+//                FROM App\Entity\ShowDate s
+//                WHERE s.dateShow > NOW()
+//                ORDER BY s.dateShow DESC LIMIT 3'
+//        );
+//            return $query->execute();
+//    }
 }
