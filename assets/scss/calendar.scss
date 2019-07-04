@@ -3,11 +3,6 @@
 @import "~datepicker/datepicker.min.scss";
 // Carousel with Date https://jsfiddle.net/w3a97zyh/
 
-#datePicker{
-  background-color: transparent;
-  border: none;
-}
-
 .timePill{
   cursor : pointer;
   height: 1.5em;
@@ -34,8 +29,8 @@
   border: 1px solid #000;
 }
 
-.bg-white{
-  background-color: rgba(222,226,230, 0.9)
+.bg-custom{
+  background-color: rgba(255,255,255,0.8);
 }
 
 .fa-plus-circle:hover{
@@ -73,12 +68,23 @@
   }
   .day-month {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 1em;
+  }
+
+  // manage the design of the event description in calendar
+
+  //display-4 is the box containing the day figures
+  .day-figure {
+    background-color: $black;
+  }
+
+  h1{
+    color: red;
   }
 
   &:hover, &.active {
-    background-color: #00aeef;
-    color: #fff;
+    background-color: $baliseYellow;
+    color: black;
     cursor: pointer;
   }
 }
@@ -170,7 +176,7 @@ ul.bxslider {
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
 .bx-wrapper .bx-pager.bx-default-pager a.active,
 .bx-wrapper .bx-pager.bx-default-pager a:focus {
-  background: #000;
+  background: $baliseYellow;
 }
 .bx-wrapper .bx-pager-item,
 .bx-wrapper .bx-controls-auto .bx-controls-auto-item {

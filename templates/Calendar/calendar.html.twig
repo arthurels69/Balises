@@ -1,7 +1,7 @@
 {% extends '/base.html.twig' %}
 
 {% block body %}
-
+<div class="container-fluid bg-custom">
     <div class="row justify-content-center">
         <!-- Pills to select either a calendar per theater or per date from Bootstrap Website -->
         <ul class="nav nav-pills flex-column flex-sm-row nav-pills-calendar col-12" id="pills-tab" role="tablist">
@@ -14,7 +14,7 @@
 
 
     <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
-    <div class="row justify-content-center bg-white p-5">
+    <div class="row justify-content-center bg-custom p-5">
         <div class="col-6">
             <a onclick="changeDateToday('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
                 <span class="d-inline-block timePill text-center activeTimePill">Aujourd'hui</span>
@@ -28,8 +28,8 @@
         </div>
     </div>
 
-    <div class="row justify-content-center bg-white p-5">
-        <div class="col-7">
+    <div class="row justify-content-center bg-custom p-5">
+        <div class="col-5">
             <ul class="bxslider">
 
                 <!-- display today's date and focus it with the active class -->
@@ -54,15 +54,16 @@
             </ul>
 
         </div>
-        <div class="col-2">
+        <div class="col-1">
             <button id="datePicker"><i class="far fa-calendar-plus d-inline-block fa-5x"></i></button>
         </div>
-        <div class="col-4 d-none" id="calendarDatePicker">
+        <div class="col-1 d-none" id="calendarDatePicker">
 
-            <form method="post" action="">
+            <form name="dateForm" id="dateForm" method="post" action="">
 
-                <div class="datepicker-here" data-language='fr'></div>
-
+                <input type="date" data-language='fr'"
+                     name="picked_date" id="datePickerCalendar">
+                <input type="submit">
             </form>
 
         </div>
@@ -73,24 +74,26 @@
 
 
     <!-- Div dedicated to ajax new spectacle -->
-    <div id="newSpectacles">
+    <div id="newSpectacles" class="bg-custom">
 
     </div>
 
 
-    <div id="display-spectacles">
+    <div id="display-spectacles" class="bg-custom">
         <!-- below the display of spectacles. Same as the ones in search by theater. -->
         {% if spectaclesOfTheDay is empty %}
-            <div  class="row row-striped bg-white">
-                <p>Pas de spectacles ce jour-là</p>
+            <div  class="row justify-content-center bg-custom">
+                <p class="text-danger">Pas de spectacles ce jour-là</p>
             </div>
         {% endif %}
         {% for spectacle in spectaclesOfTheDay%}
 
             <div  class="row row-striped bg-white">
-                <div class="col-2 text-right">
+                <div class="col-2 text-right dateDisplay">
 
-                    <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
+                    <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
+                                                style="background-color: red; color: red;">{{
+                            spectacle.dateShow | date('d')}}</span></h1>
                     <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
                 </div>
                 <div class="col-10">
@@ -111,7 +114,7 @@
 
             </div>
         {% endfor %}
-        <div class="row bg-white" id="plus-button">
+        <div class="row bg-custom" id="plus-button">
             <div class="col-1 offset-1 ">
                 <i class="fas fa-plus-circle fa-5x" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
                     date_modify('+ 1 day') | date('Y-m-d')
@@ -120,7 +123,7 @@
         </div>
 
     </div>
-    <div id="spectaclesNextDay" class="row row-striped bg-white">
+    <div id="spectaclesNextDay" class="row row-striped bg-custom">
 
     </div>
 
@@ -129,8 +132,8 @@
 
 
 
-    </div>
 
+</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -143,12 +146,12 @@
                 .then(text =>  {
                     let displaySpectacles = document.getElementById('display-spectacles');
                     let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-                    let newsspectacleDisplay = document.getElementById('newSpectacles');
+                    let newSpectacles = document.getElementById('newSpectacles');
 
                     displaySpectacles.remove();
 
                     spectaclesNextDay.innerHTML ='';
-
+                    console.log(newSpectacles);
                     newSpectacles.innerHTML = text;
                 });
         }
@@ -296,6 +299,7 @@
                 }
             });
         })();
+
 
     </script>
 {% endblock %}
