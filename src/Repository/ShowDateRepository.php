@@ -26,6 +26,7 @@ class ShowDateRepository extends ServiceEntityRepository
             ->andWhere('d.dateShow < :end')
             ->setParameter('start', $start)
             ->setParameter('end', $end)
+            ->orderBy('d.dateShow', 'ASC')
             ->getQuery()
             ->getResult()
             ;
