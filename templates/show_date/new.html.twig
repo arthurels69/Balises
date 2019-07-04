@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création Représentation{% endblock %}
+
+{% block body %}
+    <h1>Création Représentation</h1>
+
+   {{ include('show_date/_form.html.twig') }}
+    <div class="row">
+   {{ include('show_date/_showDateBySpectacle.html.twig') }}
+    </div>
+    <div class="row">
+    <a href="{{ path('spectacle_edit', {'id':spectacle.id}) }}"><button class="btn btn-secondary mb-5">Retour Spectacle</button></a>
+    </div>
+{% endblock %}

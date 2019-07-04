@@ -26,6 +26,7 @@ class SpectacleController extends AbstractController
     /**
      * @Route("/", name="spectacle_index", methods={"GET"})
      * @param SpectacleRepository $spectacleRepository
+     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function index(SpectacleRepository $spectacleRepository, TheaterRepository $theaterRepository): Response
@@ -35,7 +36,7 @@ class SpectacleController extends AbstractController
         $spectacle = $spectacleRepository->findBy(['theater'=>$theater]);
 
         return $this->render('spectacle/index.html.twig', [
-            'spectacles' => $spectacle ]);
+            'spectacles' => $spectacle, 'user' => $user, 'theater' => $theater ]);
         /*
         return $this->render('spectacle/index.html.twig', [
             'spectacles' => $spectacleRepository->findAll(),
@@ -63,6 +64,7 @@ class SpectacleController extends AbstractController
 
             /** @var UploadedFile $file */
             $fileImage = $request->files->get('spectacle')['image'];
+
             if ($fileImage) {
                 $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
                 try {
@@ -116,6 +118,7 @@ class SpectacleController extends AbstractController
 
             /** @var UploadedFile $file */
             $fileImage = $request->files->get('spectacle')['image'];
+
             if ($fileImage) {
                 $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
                 try {
