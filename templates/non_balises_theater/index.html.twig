@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NonBalisesTheater index{% endblock %}
+
+{% block body %}
+    <h1>NonBalisesTheater index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Website</th>
+                <th>PhoneNumber</th>
+                <th>Address</th>
+                <th>ZipCode</th>
+                <th>City</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for non_balises_theater in non_balises_theaters %}
+            <tr>
+                <td>{{ non_balises_theater.id }}</td>
+                <td>{{ non_balises_theater.name }}</td>
+                <td>{{ non_balises_theater.website }}</td>
+                <td>{{ non_balises_theater.phoneNumber }}</td>
+                <td>{{ non_balises_theater.address }}</td>
+                <td>{{ non_balises_theater.zipCode }}</td>
+                <td>{{ non_balises_theater.city }}</td>
+                <td>
+                    <a href="{{ path('non_balises_theater_show', {'id': non_balises_theater.id}) }}">show</a>
+                    <a href="{{ path('non_balises_theater_edit', {'id': non_balises_theater.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('non_balises_theater_new') }}">Create new</a>
+{% endblock %}

@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\NonBalisesTheaterRepository;
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
@@ -52,13 +53,13 @@ class ListController extends AbstractController
     public function theaterList(
         Request $request,
         TheaterRepository $theaterRepository,
-        SpectacleRepository $spectacleRepository,
-        ShowDateRepository $dateRepository
+        NonBalisesTheaterRepository $nonBalisesTheaterRepository
     ) {
 
 
         return $this->render('theater/list.html.twig', [
             'theaters' => $theaterRepository->findAll(),
+            'nonBalisesTheaters' => $nonBalisesTheaterRepository->findAll()
         ]);
     }
 }

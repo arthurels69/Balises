@@ -9,9 +9,15 @@
             {{ form_widget(form.dateShow) }}
         </div>
         <div class="col-sm-6 espSaisie">
-             {{ form_label(form.showRate, 'Offre Tarif') }}
-            {{ form_widget(form.showRate) }}
-           {# {{ form_widget(form) }}#}
+            {{ form_label(form.showRate, 'Offre Balise') }}
+            <div class="col-sm-6">
+                {{ form_label(form.showRate.freePlacesNumber, 'Nombre Places Offertes') }}
+                {{ form_widget(form.showRate.freePlacesNumber) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_label(form.showRate.freePlacesNumber, 'Tarif Réduit ') }}
+                {{ form_widget(form.showRate.discountedRate) }}
+            </div>
         </div>
     </div>
 
