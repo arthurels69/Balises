@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use App\Repository\TheaterRepository;
+use Exception;
 use GuzzleHttp\Client;
 use App\Entity\Theater;
 
@@ -35,11 +36,16 @@ class TheaterService
         $response = $client->request('GET', 'search.php?q='
             . urlencode($address)
             . '&format=json');
+
         $body = $response->getBody();
         $obj = json_decode($body->getContents(), true);
-        $latitude = $obj[0]['lat'];
-        $longitude = $obj[0]['lon'];
-        $theater->setLongitude($longitude)
-                ->setLat($latitude);
+        if (isset($obj[0])) {
+            $latitude = $obj[0]['lat'];
+            $longitude = $obj[0]['lon'];
+            $theater->setLongitude($longitude)
+                    ->setLat($latitude);
+        } else {
+            throw new Exception("L'adresse saisie est invalide, veuillez réessayer");
+        }
     }
 }

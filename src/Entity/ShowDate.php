@@ -38,7 +38,6 @@ class ShowDate
 
     public function __construct()
     {
-       // $this->showRate = new ArrayCollection();
     }
 
     public function getId(): ?int

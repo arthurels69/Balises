@@ -18,7 +18,9 @@ class ShowDateType extends AbstractType
         $builder
             ->add('dateShow')
             //->add('showId')
-            ->add('showRate', EntityType::Class, ['class'=> ShowRate::Class ])
+            ->add('showRate', EntityType::Class, ['class'=> ShowRate::Class,'required' => false,
+                'expanded' => true,
+                'multiple' => true, ])
         ;
     }
 

@@ -1,25 +1,28 @@
-<div class = 'container'>
-    <table class="table table-striped text-center">
-        <thead>
-        <tr>
-            <th scope="col" style="width:30%">Représentations</th>
-            <th scope="col" style="width:10%">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <div class="row">
-        {% for showDate in showDates %}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class = 'container'>
+        <table class="table table-striped text-center">
+            <thead>
             <tr>
-                <td>{{ showDate.dateShow ? showDate.dateShow|date('d-m-Y à H:i') : ''  }}</td>
-
-                <td>
-                    <a href="{{ path('show_date_edit', {'id': showDate.id}) }}"><i class="fas fa-edit" style="color : maroon"></i></a>
-                    <a href="{{ path('show_date_delete', {'id': showDate.id})}}"><i class="fas fa-trash-alt" style="color : maroon"></i></a>
-                </td>
+                <th scope="col-sm-6 " >Représentations</th>
+                <th scope="col-sm-6 " >Action</th>
             </tr>
+            </thead>
+            <tbody>
+            <div class="row">
+            {% for showDate in showDates %}
+                <tr>
+                    <td>{{ showDate.dateShow ? showDate.dateShow|date('d-m-Y à H:i') : ''  }}</td>
 
-        {% endfor %}
-        </div>
-        </tbody>
-    </table>
-</div>
+                    <td>
+                        <a href="{{ path('show_date_edit', {'id': showDate.id}) }}"><i class="fas fa-edit " style = "color : maroon" ></i></a>
+                        <a href="{{ path('show_date_delete', {'id': showDate.id})}}"><i class="fas fa-trash-alt " style = "color : maroon" ></i></a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </div>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

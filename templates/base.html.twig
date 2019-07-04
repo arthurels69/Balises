@@ -20,6 +20,13 @@
     </head>
 
     <body>
+        {% for category, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 
     <div class="container-fluid">
 
@@ -33,8 +40,8 @@
 
     </div>
 
-        {% block javascripts %}
              {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}
         {% endblock %}
     </body>
 </html>

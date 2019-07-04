@@ -5,9 +5,13 @@
 <div class = 'container'>
     <div class="row">
         <div class="col-sm-6 espSaisie">
-            {#           {{ form_label(form.dateShow, 'Date') }}
-                      {{ form_widget(form.dateShow|date('d-m-Y à H:i')) }} #}
-            {{ form_widget(form) }}
+            {{ form_label(form.dateShow, 'Date') }}
+            {{ form_widget(form.dateShow) }}
+        </div>
+        <div class="col-sm-6 espSaisie">
+             {{ form_label(form.showRate, 'Offre Tarif') }}
+            {{ form_widget(form.showRate) }}
+           {# {{ form_widget(form) }}#}
         </div>
     </div>
 
