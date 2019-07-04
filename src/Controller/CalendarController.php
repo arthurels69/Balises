@@ -53,10 +53,12 @@ class CalendarController extends AbstractController
         ShowDateRepository $dateRepository
     ) {
 
+
         $today = new \DateTime();
         $todayString = $today->format("Y-m-d");
         //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
+            dump($request->request->get('picked_date'));
             $todayString = $request->request->get('picked_date');
         }
 

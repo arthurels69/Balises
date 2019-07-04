@@ -32,6 +32,7 @@ class MapadoApi
 
     public function getTicketings()
     {
+        dump($this->token->getToken());
         return $this->sendRequest('GET', '/v1/ticketings?fields=@id,title,place,contract,city,wallet&itemsPerPage=15');
     }
 
