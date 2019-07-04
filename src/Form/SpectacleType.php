@@ -47,7 +47,7 @@ class SpectacleType extends AbstractType
             ->add(
                 'image',
                 FileType::class,
-                ['required'=>true,
+                ['required'=>false,
                     'help' => 'fichier photo au format : png',
                 'data_class' => null]
             )
@@ -72,5 +72,12 @@ class SpectacleType extends AbstractType
                 ['required'=>false]
             )
             ->add('baseRate', MoneyType::class, ['required'=>false]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Spectacle::class,
+        ]);
     }
 }
