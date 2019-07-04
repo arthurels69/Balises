@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New NonBalisesTheater{% endblock %}
+
+{% block body %}
+    <h1>Create new NonBalisesTheater</h1>
+
+    {{ include('non_balises_theater/_form.html.twig') }}
+
+    <a href="{{ path('non_balises_theater_index') }}">back to list</a>
+{% endblock %}
