@@ -12,11 +12,11 @@
             {{ form_label(form.showRate, 'Offre Balise') }}
             <div class="col-sm-6">
                 {{ form_label(form.showRate.freePlacesNumber, 'Nombre Places Offertes') }}
-                {{ form_widget(form.showRate.freePlacesNumber) }}
+                {{ form_widget(form.showRate.freePlacesNumber, {'attr': {'class': 'hold','placeholder': '99999'}}) }}
             </div>
             <div class="col-sm-6">
-                {{ form_label(form.showRate.freePlacesNumber, 'Tarif Réduit ') }}
-                {{ form_widget(form.showRate.discountedRate) }}
+                {{ form_label(form.showRate.freePlacesNumber, 'Tarif Réduit') }}
+                {{ form_widget(form.showRate.discountedRate, {'attr': {'class': 'hold','placeholder': '99999.99'}}) }}
             </div>
         </div>
     </div>
