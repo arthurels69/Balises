@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+<style>
+    .sidenav {display: none;}
+</style>
+<div class = 'container'>
+    <div class="row">
+        <div class="col-sm-6 espSaisie">
+            {{ form_label(form.dateShow, 'Date') }}
+            {{ form_widget(form.dateShow) }}
+        </div>
+        <div class="col-sm-6 espSaisie">
+             {{ form_label(form.showRate, 'Offre Tarif') }}
+            {{ form_widget(form.showRate) }}
+           {# {{ form_widget(form) }}#}
+        </div>
+    </div>
+
+    <button class="btn btn-secondary mb-5">{{ button_label|default('Création') }}</button>
+</div>
+{{ form_end(form) }}
