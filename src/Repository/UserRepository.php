@@ -24,7 +24,10 @@ class UserRepository extends ServiceEntityRepository
         $field = 'user.' . $champ;
         if ($champ == 'zipCode') {
             $field = 'theater.' . $champ;
+        } elseif ($champ == 'name') {
+            $field = 'theater.' . $champ;
         }
+
 
         return $this->createQueryBuilder('user')
             ->innerJoin('user.theater', 'theater')

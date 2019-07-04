@@ -5,21 +5,34 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+
+
+use GuzzleHttp\Exception\GuzzleException;
+
+use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/theater")
+ * @isGranted("ROLE_THEATER")
  */
 class TheaterController extends AbstractController
 {
     /**
      * @Route("/", name="theater_index", methods={"GET"})
+     * @isGranted("ROLE_ADMIN")
+     * @param TheaterRepository $theaterRepository
+     * @return Response
      */
     public function index(TheaterRepository $theaterRepository): Response
     {
@@ -30,9 +43,11 @@ class TheaterController extends AbstractController
 
 
     //* @IsGranted("ROLE_ADMIN")
-    /**
 
+    /**
      * @Route("/new", name="theater_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -40,9 +55,6 @@ class TheaterController extends AbstractController
         $theater = new Theater();
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
-
-
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -62,45 +74,67 @@ class TheaterController extends AbstractController
 
     /**
      * @Route("/{id}", name="theater_show", methods={"GET"})
+     * @param Theater $theater
+     * @return Response
      */
     public function show(Theater $theater): Response
     {
+        $user =  $this->getUser();
+        $userEmail = $user->getEmail();
+        $email = $theater->getEmail();
+
+        if ($email != $userEmail) {
+            throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
+        }
         return $this->render('theater/show.html.twig', [
             'theater' => $theater,
+            'user' => $user,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Theater $theater
+     * @return Response
      */
-    public function edit(Request $request, Theater $theater): Response
+    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
     {
+
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
+        $user =  $this->getUser();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $street = $theater->getAddress1();
-            $zipCode = $theater->getZipCode();
-            $city = $theater->getCity();
+            $theaterService->geocode($theater);
 
-            $address = $street . " " . $zipCode . " " . $city;
+            /** @var UploadedFile $file */
+            $fileLogo = $request->files->get('theater')['logo'];
+            if ($fileLogo) {
+                $fileName = md5(uniqid()) . '.' . $fileLogo->guessExtension();
+                try {
+                    $fileLogo->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $theater->setLogo($fileName);
+            }
 
-            $client = new Client([
-                    'base_uri' => 'https://nominatim.openstreetmap.org/',
-                ]);
+            $file = $request->files->get('theater')['picture'];
+            if ($file) {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                try {
+                    $file->move($this->getParameter('logo_directory'), $fileName);
+                } catch (FileException $e) {
+                    throw new FileException($e);
+                }
+                $theater->setPicture($fileName);
+            }
 
-            $response = $client->request('GET', 'search.php?q='
-                 . urlencode($address)
-                 . '&format=json');
-            $body = $response->getBody();
-            $obj = json_decode($body->getContents(), true);
-            $latitude = $obj[0]['lat'];
-            $longitude = $obj[0]['lon'];
-            $theater->setLongitude($longitude)
-                    ->setLat($latitude);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('theater_index', [
+            return $this->redirectToRoute('theater_show', [
                 'id' => $theater->getId(),
             ]);
         }
@@ -108,11 +142,15 @@ class TheaterController extends AbstractController
         return $this->render('theater/edit.html.twig', [
             'theater' => $theater,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 
     /**
      * @Route("/{id}", name="theater_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Theater $theater
+     * @return Response
      */
     public function delete(Request $request, Theater $theater): Response
     {

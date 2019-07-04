@@ -4,14 +4,14 @@
 <!-- https://bootsnipp.com/snippets/VgzeR -->
 <div class="row">
     <div class="col-5">
-    <form method="post">
+    <form method="post" action="">
 
         <div class="form-group row justify-content-center">
             <div class="col-12 m-2">
-                <button class="btn-success btn d-inline-block" type="submit" value="{{ today | date ('m-d-Y') }}" id="example-date-input">Rechercher par date</button>
+                <button class="btn-success btn d-inline-block" type="submit" id="example-date-input">Rechercher par date</button>
             </div>
                 <div class="col-12 m-2">
-                <input class="form-control" type="date" name ="picked_date" value="" id="example-date-input">
+                <input class="form-control" type="date" name ="picked_date" id="example-date-input">
             </div>
 
 
@@ -81,7 +81,7 @@
 <div class="row row-striped">
     <div class="col-2 text-right">
         <h1 class="display-4"><span class="badge badge-secondary day-figure">{% for date in spectacle.showDates  %}{{ date
-                .dateShow | date('d') }} {%              endfor %}</span></h1>
+                .dateShow | date('d') }} {% endfor %}</span></h1>
         <h2>{% for date in spectacle.showDates  %}{{ date.dateShow | date('M')}} {%endfor %}</h2>
     </div>
     <div class="col-10">
@@ -94,7 +94,7 @@
             <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {% for date in spectacle.showDates  %}{{ date
                 .dateShow | date('d.m.Y à H:i') }} - {{ date.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                 {% endfor %} </li>
-            <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theaterId.name }}</li>
+            <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ spectacle.theater.name }}</li>
         </ul>
         <p>{{ spectacle.description }}</p>
     </div>

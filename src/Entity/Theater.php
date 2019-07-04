@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -75,7 +76,6 @@ class Theater
 
 
     /**
-     * @Assert\File(mimeTypes={ "image/png"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
@@ -87,10 +87,10 @@ class Theater
     private $website;
 
 
-    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/
+    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/  /^[0-9]{1,}(\.|)[0-9]{0,2}$/g    /^[1-9][0-9]*\.[0-9]{2}$/
     /**
      *
-     * @Assert\Regex( "/^[1-9][0-9]*\.[0-9]{2}$/", message =" tarif non valide")
+     * @Assert\Regex( "/^[0-9]{1,}(\.|)[0-9]{0,2}$/", message =" tarif non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
@@ -102,7 +102,7 @@ class Theater
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater", orphanRemoval=true)
      */
     private $shows;
 
@@ -220,9 +220,11 @@ class Theater
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo($logo): self
     {
-        $this->logo = $logo;
+        if ($logo) {
+            $this->logo = $logo;
+        }
 
         return $this;
     }
@@ -275,7 +277,7 @@ class Theater
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
-            $show->setTheaterId($this);
+            $show->setTheater($this);
         }
 
         return $this;
@@ -286,8 +288,8 @@ class Theater
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
             // set the owning side to null (unless already changed)
-            if ($show->getTheaterId() === $this) {
-                $show->setTheaterId(null);
+            if ($show->getTheater() === $this) {
+                $show->setTheater(null);
             }
         }
 
@@ -325,7 +327,9 @@ class Theater
 
     public function setPicture(?string $picture): self
     {
-        $this->picture = $picture;
+        if ($picture) {
+            $this->picture = $picture;
+        }
 
         return $this;
     }

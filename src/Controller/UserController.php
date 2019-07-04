@@ -3,15 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationType;
 use App\Service\TriService;
 use App\Form\UserType;
 use App\Entity\Theater;
 use App\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -21,7 +23,11 @@ class UserController extends AbstractController
 {
     /**
      *Create Index user
-     * @Route("/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+
+     * @Route("/index", name="user_index", methods={"GET"})
+     * @Route("/index/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+
+     * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
      */
@@ -39,6 +45,7 @@ class UserController extends AbstractController
     /**
      * Create New user
      * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      * @param Request $request
      * @param ObjectManager $manager
      * @param UserPasswordEncoderInterface $encoder
@@ -48,7 +55,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $theater = new Theater();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,14 +68,14 @@ class UserController extends AbstractController
 
             $manager->persist($user);
 
+            $theater->setName($request->request->get('registration')['theater']['name']);
             $theater->setEmail($user->getEmail());
-
             $theater->setUser($user);
 
             $manager->persist($theater);
             $manager->flush();
 
-            return $this->redirectToRoute('user_index');
+             return $this->redirectToRoute('user_index');
         }
 
         return $this->render('user/new.html.twig', [
@@ -80,18 +87,23 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
+     * @IsGranted("ROLE_THEATER")
      * @param User $user
+     * @param Theater $theater
      * @return Response
      */
-    public function show(User $user): Response
+    public function show(User $user, Theater $theater): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'theater' => $theater
         ]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_THEATER")
      * @param Request $request
      * @param User $user
      * @return Response
@@ -117,6 +129,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      * @param Request $request
      * @param User $user
      * @return Response

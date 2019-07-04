@@ -30,11 +30,10 @@ class ShowRate
     private $discountedRate;
 
     /**
-     * Many to one relation to a show date since a date can be concerned by the Balises offer and an other might not be.
      * @ORM\OneToOne(targetEntity="App\Entity\ShowDate", inversedBy="showRate", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $showDate;
+
 
     public function getId(): ?int
     {
@@ -70,7 +69,7 @@ class ShowRate
         return $this->showDate;
     }
 
-    public function setShowDate(ShowDate $showDate): self
+    public function setShowDate(?ShowDate $showDate): self
     {
         $this->showDate = $showDate;
 
