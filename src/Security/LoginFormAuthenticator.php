@@ -91,7 +91,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
 
-        //$id = $token->getUser()->getId()-1;
+       // $id = $token->getUser()->getId()-1;
 
 
         $roles = $token->getRoles();
@@ -107,7 +107,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
             $redirection = new RedirectResponse($this->urlGenerator
                                                      ->generate('theater_show', [
-                                                         //'id' => $id
+                                                        // 'id' => $id
 
                                                      ]));
         }
