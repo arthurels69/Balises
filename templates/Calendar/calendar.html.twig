@@ -61,8 +61,7 @@
 
             <form name="dateForm" id="dateForm" method="post" action="">
 
-                <input type="date" data-language='fr'"
-                     name="picked_date" id="datePickerCalendar">
+                <input type="date" data-language='fr' name="picked_date" id="datePickerCalendar">
                 <input type="submit">
             </form>
 
@@ -106,7 +105,7 @@
                             {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                         </li>
                         <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
-                            {{ spectacle.showId.theater.name }}</li>
+                            {{ spectacle.showId.theater.name }} <img src="{{ spectacle.showId.theater.logo }}"> </li>
                     </ul>
                     <p>{{ spectacle.showId.description }}</p>
                 </div>

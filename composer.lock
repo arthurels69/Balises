@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e9353fea3deca71bd235502629119f2",
+    "content-hash": "eafc0322867385525c77f74c41115f7d",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
@@ -8407,8 +8407,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "assoconnect/mapbox-token": 20,
-        "mapado/league-oauth2-provider": 20,
-        "kartik-v/yii2-widget-datepicker": 20
+        "mapado/league-oauth2-provider": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

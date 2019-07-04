@@ -1,5 +1,4 @@
 @import "vars";
-@import "~bootstrap";
 @import "~datepicker/datepicker.min.scss";
 // Carousel with Date https://jsfiddle.net/w3a97zyh/
 
@@ -72,15 +71,10 @@
   }
 
   // manage the design of the event description in calendar
+#dayNumberSpectacle{
+  background-color: red;
+}
 
-  //display-4 is the box containing the day figures
-  .day-figure {
-    background-color: $black;
-  }
-
-  h1{
-    color: red;
-  }
 
   &:hover, &.active {
     background-color: $baliseYellow;
