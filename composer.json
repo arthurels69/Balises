@@ -36,7 +36,7 @@
         "symfony/web-link": "4.2.*",
         "symfony/webpack-encore-bundle": "^1.5",
         "symfony/yaml": "4.2.*",
-      "ext-json": "*"
+        "twig/extensions": "^1.5"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",

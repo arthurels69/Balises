@@ -2,13 +2,12 @@
 
 .body_admin{
     background-color:#F4F3EF !important;
-    font-family: 'Poppins', sans-serif!important;   
+    font-family: 'Poppins', sans-serif!important;
+    font-size:0.9rem;
 }
 
 p {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
     line-height: 1.7rem;
     color: #999;
 }
@@ -21,8 +20,6 @@ a:focus {
     transition: all 0.3s !important;
 }
 
-
-
 .navbar {
     padding: 15px 10px;
     background:#f4d942 !important;
@@ -34,6 +31,7 @@ a:focus {
     right:0;
     width: calc(100% - 250px);
     z-index: 999;
+    
 }
 
 .navbar.active {
@@ -46,7 +44,10 @@ a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
+    
 }
+
+
 
 .line {
     width: 100%;
@@ -79,13 +80,13 @@ a:focus {
     transition: all 0.3s;
 }
 
-#sidebar.active {   
+#sidebar.active {
     width:115px !important;
     text-align: center !important;
     margin-right: auto;
 }
 
-.img_admin.active{    
+.img_admin.active{
     display:none !important;
     padding: 0px;
 }
@@ -102,12 +103,12 @@ a:focus {
     outline-style:none;
 }
 
-#sidebar .sidebar-header {    
+#sidebar .sidebar-header {
     background: #212120;
-    border-bottom:1px solid #F4F3EF;   
+    border-bottom:1px solid #F4F3EF;
 }
 
-#sidebar ul.components {    
+#sidebar ul.components {
     border-bottom: 1px solid #47748b;
 }
 
@@ -123,7 +124,7 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     display: block;
 }
 
@@ -150,7 +151,7 @@ a:focus {
 }
 
 .content_admin{
-    margin-top:80px;    
+    margin-top:80px;
 }
 
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Spectacle{% endblock %}
 
@@ -7,10 +7,6 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ spectacle.id }}</td>
-            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ spectacle.title }}</td>
@@ -29,7 +25,7 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ spectacle.image }}</td>
+                <td><img src="{{ spectacle.image }}" alt=""></td>
             </tr>
             <tr>
                 <th>PhotoCredits</th>
@@ -54,6 +50,14 @@
             <tr>
                 <th>BaseRate</th>
                 <td>{{ spectacle.baseRate }}</td>
+            </tr>
+            <tr>
+                <th>Dates</th>
+                <td>{% for date in spectacle.showDates %}
+                   <ul>
+                  <li>  {{ date.dateShow | date('d/m/Y - H : i') }} </li>
+                   </ul>
+                    {% endfor %}</td>
             </tr>
         </tbody>
     </table>
