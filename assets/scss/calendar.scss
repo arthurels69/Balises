@@ -1,5 +1,4 @@
 @import "vars";
-@import "~bootstrap";
 @import "~datepicker/datepicker.min.scss";
 // Carousel with Date https://jsfiddle.net/w3a97zyh/
 
@@ -55,7 +54,7 @@
   position: relative;
   text-align: center;
   color: $baliseYellow;
-  font-family: "Cabin",sans-serif;
+  font-family: "Cabin", sans-serif;
   text-transform: uppercase;
   line-height: 20px;
   transition: 0.12s;
@@ -63,6 +62,13 @@
   -o-transition: 0.12s;
   -webkit-transition: 0.12s;
   -ms-transition: 0.12s;
+  border-radius: 50px;
+}
+
+.calendarBox {
+  background-color: red;
+  border-radius: 50px;
+}
   .week {
     font-size: 14px;
   }
@@ -72,26 +78,32 @@
   }
 
   // manage the design of the event description in calendar
+#dayNumberSpectacle{
+  background-color: $baliseYellow;
+  color: black;
+}
 
-  //display-4 is the box containing the day figures
-  .day-figure {
-    background-color: $black;
-  }
-
-  h1{
-    color: red;
-  }
-
-  &:hover, &.active {
+  .month-day:hover {
     background-color: $baliseYellow;
     color: black;
     cursor: pointer;
   }
+
+  .active{
+    background-color: $baliseYellow;
+    color: black;
+  }
+
+
+.titleShow{
+  letter-spacing: 0.4em;
+  font-weight: 800;
+  text-shadow: 1px 1px 1px #000;
 }
 
-.bx-wrapper {
-  border: 0;
-  box-shadow: none;
+.description{
+  letter-spacing: 0.1em;
+  line-height: 1.7em;
 }
 
 /** VARIABLES
@@ -105,7 +117,8 @@
   *zoom: 1;
   -ms-touch-action: pan-y;
   touch-action: pan-y;
-  background-color: $black;
+  background-color: transparent;
+  border-radius: 50px;
 }
 .bx-wrapper img {
   max-width: 100%;
@@ -129,11 +142,7 @@ ul.bxslider {
 /** THEME
 ===================================*/
 .bx-wrapper {
-  -moz-box-shadow: 0 0 5px #ccc;
-  -webkit-box-shadow: 0 0 5px #ccc;
-  box-shadow: 0 0 5px #ccc;
-  border: 1px solid #fff;
-  background: $black;
+  background: transparent;
 }
 .bx-wrapper .bx-pager,
 .bx-wrapper .bx-controls-auto {
