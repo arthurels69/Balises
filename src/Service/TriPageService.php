@@ -43,8 +43,7 @@ class TriPageService
          //Tableau de users dont le nombre de ligne = $ligne_page
          $off=($page_cours-1)*$ligne_page;
          
-         $limit=$ligne_page;
-         
+         $limit=$ligne_page;         
          
          return $this->userRepository->getPaginationOrderUsers($limit, $off, $champ, $sens);
     }

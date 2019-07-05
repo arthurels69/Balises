@@ -21,34 +21,36 @@ class UserRepository extends ServiceEntityRepository
     
     public function getPaginationOrderUsers($limit, $off, $champ, $order)
     {
-     
-        if ($champ!="" && $order!="") {
-            if ($champ == 'zipCode') {
-                $field = 'theater.' . $champ;
-            } elseif ($champ == 'name') {
-                $field = 'theater.' . $champ;
-            } else {
-                $field = 'user.' . $champ;
-            }
+        // var_dump($champ);
+        // var_dump($order); 
+        // die();
 
-            if ($order=='up') {
-                $order="ASC";
-            }
-            if ($order=='down') {
-                $order="DESC";
-            }
-        } else {
-            $field="";
+        switch ($champ) {
+            case "zipCode" :
+                $field = 'theater.zipCode';
+                break;
+            case "name" :
+                $field = 'theater.name';
+                break;
+            case "email" :
+                $field = 'user.email';
+                break;
+            default :
+                $field = 'theater.id';
         }
 
+        $order=='up' ? $order="DESC" : $order="ASC";
+
+        
         return $this->createQueryBuilder('user')
-            ->innerJoin('user.theater', 'theater')
-            //->orderBy($field, $order)
-            ->setFirstResult($off)
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
+        ->join('user.theater', 'theater')
+        ->orderBy($field, $order)
+        ->setMaxResults($limit)           
+        ->setFirstResult($off)           
+        ->getQuery()
+        ->getResult()
         ;
+
     }
 
     /*
