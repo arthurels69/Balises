@@ -22,10 +22,12 @@ class ContatController extends AbstractController
             $contactFormData = $form->getData();
 
             $message = (new \Swift_Message('You Got Mail from Symfony 4!'))
+
                 ->setFrom($contactFormData['Votre_Email'])
                 ->setTo('mariner.connor@gmail.com')
                 ->setBody(
                     $contactFormData['Votre_Message'],
+
                     'text/plain'
                 )
             ;

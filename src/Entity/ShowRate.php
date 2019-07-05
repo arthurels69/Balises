@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Float_;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**

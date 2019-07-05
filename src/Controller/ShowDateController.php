@@ -130,7 +130,8 @@ class ShowDateController extends AbstractController
         }
 
         return $this->render('show_date/edit.html.twig', [
-            'showDates' => $showDateRepository->findAll(),
+
+            'showDates' => $showDateRepository->findby(['showId' => $showDate->getShowId()]),
             'show_date' => $showDate,
             'form' => $form->createView(),
         ]);
