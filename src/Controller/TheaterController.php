@@ -94,6 +94,7 @@ class TheaterController extends AbstractController
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Theater $theater
+     * @param TheaterService $theaterService
      * @return Response
      */
     public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
