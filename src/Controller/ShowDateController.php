@@ -68,6 +68,9 @@ class ShowDateController extends AbstractController
     ): Response {
 
         $showDate = new ShowDate();
+        $spectacle = $spectacleRepository->findOneBy(['id'=>$id]);
+
+        //$showDate ->setBaseRate($spectacle->getBaseRate());
 
         $form = $this->createForm(ShowDateType::class, $showDate);
 

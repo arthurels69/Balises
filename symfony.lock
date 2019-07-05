@@ -153,6 +153,12 @@
     "justinrainbow/json-schema": {
         "version": "5.2.8"
     },
+    "kartik-v/yii2-krajee-base": {
+        "version": "v2.0.5"
+    },
+    "kartik-v/yii2-widget-datepicker": {
+        "version": "1.4.x-dev"
+    },
     "league/oauth2-client": {
         "version": "2.4.1"
     },
