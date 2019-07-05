@@ -65,10 +65,10 @@
   border-radius: 50px;
 }
 
-.calendarBox{
+.calendarBox {
   background-color: red;
   border-radius: 50px;
-
+}
   .week {
     font-size: 14px;
   }
@@ -79,18 +79,21 @@
 
   // manage the design of the event description in calendar
 #dayNumberSpectacle{
-  background-color: red;
+  background-color: $baliseYellow;
+  color: black;
 }
 
-.day-figure{
-  background-color: red;
-}
-  &:hover, &.active {
+  .month-day:hover {
     background-color: $baliseYellow;
     color: black;
     cursor: pointer;
   }
-}
+
+  .active{
+    background-color: $baliseYellow;
+    color: black;
+  }
+
 
 .titleShow{
   letter-spacing: 0.4em;
