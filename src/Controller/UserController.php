@@ -5,10 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Theater;
-use App\Service\TriService;
 use App\Form\RegistrationType;
+use App\Service\TriPageService;
 use App\Repository\UserRepository;
-use App\Service\PaginationService;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,23 +24,27 @@ class UserController extends AbstractController
     /**
      *Create Index user
      * @Route("/index", name="user_index", methods={"GET"})
-     * @Route("/index/{page}/{ligne}/{champ}/{sens}", name="user_index", 
-     * methods={"GET"}, defaults={"champ":"" , "sens":"", "page":1, "ligne":10})
+     * @Route("/index/{page_cours}/{ligne_page}/{champ}/{sens}",
+     * name="user_index", methods={"GET"},
+     * defaults={"champ":"" , "sens":"", "page_cours":1, "ligne_page":10})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(string $champ, string $sens, UserRepository $userRepository, 
-    TriService $tri ,$ligne,$page,PaginationService $pagination ): Response
-    {
-        $pagination->paginate($page,$ligne);
+    public function index(
+        string $champ,
+        string $sens,
+        UserRepository $userRepository,
+        TriPageService $triPage,
+        $page_cours,
+        $ligne_page
+    ): Response {
+        $users = $userRepository->findAll();
 
-        if ($champ != "") {
-            $users = $tri->tri($champ, $sens);
-        } else {
-            $users = $userRepository->findAll();
-        }
+        $users=$triPage->paginationTri($page_cours, $ligne_page, $champ, $sens);
 
+
+         /****************************VUE*******************************/
         return $this->render('user/index.html.twig', [
             'users' => $users
         ]);
