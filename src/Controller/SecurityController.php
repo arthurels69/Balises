@@ -53,14 +53,12 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgotten_password", name="app_forgotten_password")
      * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
      * @param Swift_Mailer $mailer
      * @param TokenGeneratorInterface $tokenGenerator
      * @return Response
      */
     public function forgottenPassword(
         Request $request,
-        UserPasswordEncoderInterface $encoder,
         Swift_Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ): Response {
@@ -95,7 +93,7 @@ class SecurityController extends AbstractController
                 ->setFrom('hkev67@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "blablabla voici le token pour reseter votre mot de passe : " . $url,
+                    "Voici le lien pour réinitialiser votre mot de passe : " . $url,
                     'text/html'
                 );
 
