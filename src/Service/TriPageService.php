@@ -41,10 +41,11 @@ class TriPageService
          $page_total=ceil($ligne_totale/$ligne_page);
  
          //Tableau de users dont le nombre de ligne = $ligne_page
-         $off=($page_cours-1)*$ligne_page;
+         $off_asc=($page_cours-1)*$ligne_page;
+         $off_desc=$ligne_totale-1-($ligne_page*$page_cours);
          
-         $limit=$ligne_page;         
+         $limit=$ligne_page;
          
-         return $this->userRepository->getPaginationOrderUsers($limit, $off, $champ, $sens);
+         return $this->userRepository->getPaginationOrderUsers($limit, $off_asc, $off_desc, $champ, $sens);
     }
 }

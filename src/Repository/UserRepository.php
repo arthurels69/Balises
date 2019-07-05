@@ -19,38 +19,40 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
     
-    public function getPaginationOrderUsers($limit, $off, $champ, $order)
+    public function getPaginationOrderUsers($limit, $off_asc, $off_desc, $champ, $order)
     {
-        // var_dump($champ);
-        // var_dump($order); 
-        // die();
-
+        
         switch ($champ) {
-            case "zipCode" :
+            case "zipCode":
                 $field = 'theater.zipCode';
                 break;
-            case "name" :
+            case "name":
                 $field = 'theater.name';
                 break;
-            case "email" :
+            case "email":
                 $field = 'user.email';
                 break;
-            default :
+            default:
                 $field = 'theater.id';
         }
 
-        $order=='up' ? $order="DESC" : $order="ASC";
+        if ($order == 'up') {
+            $order="DESC";
+            $off=$off_desc;
+        } else {
+            $order="ASC";
+            $off=$off_asc;
+        }
 
         
         return $this->createQueryBuilder('user')
         ->join('user.theater', 'theater')
+        ->setFirstResult($off)
+        ->setMaxResults($limit)
         ->orderBy($field, $order)
-        ->setMaxResults($limit)           
-        ->setFirstResult($off)           
         ->getQuery()
         ->getResult()
         ;
-
     }
 
     /*
