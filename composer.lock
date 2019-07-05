@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d32f55b405811f37c659b8752cc331c",
+    "content-hash": "bbf7ce41aa93ccdb812af9ff2fb704a6",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
@@ -5335,11 +5335,7 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2019-05-22T18:38:35+00:00"
-=======
             "time": "2019-06-26T06:46:55+00:00"
->>>>>>> US_mapView
         },
         {
             "name": "symfony/http-foundation",
