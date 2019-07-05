@@ -72,7 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email incorrect.');
+            throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
         return $user;
     }
@@ -90,9 +90,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-
-        //$id = $token->getUser()->getId()-1;
-
+        /** @var User $user */
+        $user = $token->getUser();
+        $id = $user->getId() - 1;
 
         $roles = $token->getRoles();
         $rolesTab = array_map(function ($role) {
@@ -106,10 +106,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         } else {
             // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
             $redirection = new RedirectResponse($this->urlGenerator
-                                                     ->generate('theater_show', [
-                                                         //'id' => $id
-
-                                                     ]));
+                ->generate('theater_show', [
+                    'id' => $id
+                ]));
         }
 
         return $redirection;
