@@ -10,6 +10,7 @@ services:
         tags:
             - { name: twig.extension }
 
+
     # Uncomment any lines below to activate that Twig extension
     #Twig\Extensions\ArrayExtension: ~
     #Twig\Extensions\DateExtension: ~
