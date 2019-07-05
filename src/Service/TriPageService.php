@@ -6,7 +6,7 @@ use App\Repository\UserRepository;
 /**
  * Classe pour trier un champ par ordre croissant ou decroissant
  */
-class TriService
+class TriPageService
 {
 
     private $userRepository;
@@ -30,12 +30,22 @@ class TriService
       * @return array
       */
 
-    public function tri(String $champ, String $sens) :array
+    public function paginationTri(int $page_cours, int $ligne_page, String $champ = "", String $sens = "") :array
     {
-        if ($sens == "up") {
-            return $this->userRepository->getOrderUsers($champ, 'ASC');
-        } else {
-            return $this->userRepository->getOrderUsers($champ, 'DESC');
-        }
+        $users = $this->userRepository->findAll();
+
+         //Nombre de ligne total
+         $ligne_totale=count($users);
+
+         //calcul du nombre de pages totales
+         $page_total=ceil($ligne_totale/$ligne_page);
+ 
+         //Tableau de users dont le nombre de ligne = $ligne_page
+         $off=($page_cours-1)*$ligne_page;
+         
+         $limit=$ligne_page;
+         
+         
+         return $this->userRepository->getPaginationOrderUsers($limit, $off, $champ, $sens);
     }
 }

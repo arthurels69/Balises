@@ -3,17 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
-use App\Service\TriService;
 use App\Form\UserType;
 use App\Entity\Theater;
+use App\Form\RegistrationType;
+use App\Service\TriPageService;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -24,19 +24,27 @@ class UserController extends AbstractController
     /**
      *Create Index user
      * @Route("/index", name="user_index", methods={"GET"})
-     * @Route("/index/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+     * @Route("/index/{page_cours}/{ligne_page}/{champ}/{sens}",
+     * name="user_index", methods={"GET"},
+     * defaults={"champ":"" , "sens":"", "page_cours":1, "ligne_page":10})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(string $champ, string $sens, UserRepository $userRepository, TriService $tri): Response
-    {
-        if ($champ != "") {
-            $users = $tri->tri($champ, $sens);
-        } else {
-            $users = $userRepository->findAll();
-        }
+    public function index(
+        string $champ,
+        string $sens,
+        UserRepository $userRepository,
+        TriPageService $triPage,
+        $page_cours,
+        $ligne_page
+    ): Response {
+        $users = $userRepository->findAll();
 
+        $users=$triPage->paginationTri($page_cours, $ligne_page, $champ, $sens);
+
+
+         /****************************VUE*******************************/
         return $this->render('user/index.html.twig', [
             'users' => $users
         ]);

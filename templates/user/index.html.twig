@@ -14,18 +14,39 @@
                     <thead>
                         <tr>
                             <th style="width:300px;" >
-                                <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                                <a href="/user/index/name/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                                <a href="{{ path('user_index',{'champ': "name", 'sens': "down"} ) }}">
+                                    <i class="fa fa-arrow-down text-dark" aria-hidden="true"></i>    
+                                </a>
+                                <a href="{{ path('user_index',{'champ': "name", 'sens': "up"} ) }}">
+                                    <i class="fa fa-arrow-up text-dark" aria-hidden="true"></i>    
+                                </a>
+    
+                                {# <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a> #}
+                                {# <a href="/user/index/name/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a> #}
                                 Théâtre
                             </th>
                             <th style="width:300px;">
-                                <a href="/user/index/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                                <a href="/user/index/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                                <a href="{{ path('user_index',{'champ': "email", 'sens': "down"} ) }}">
+                                    <i class="fa fa-arrow-down text-dark" aria-hidden="true"></i>    
+                                </a>
+                                <a href="{{ path('user_index',{'champ': "email", 'sens': "up"} ) }}">
+                                    <i class="fa fa-arrow-up text-dark" aria-hidden="true"></i>    
+                                </a>
+            
+                                {# <a href="/user/index/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
+                                <a href="/user/index/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a> #}
                                 Email
                             </th>
                             <th class="" style="width:200px;">
-                                <a href="/user/index/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                                <a href="/user/index/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                                    <a href="{{ path('user_index',{'champ': "zipCode", 'sens': "down"} ) }}">
+                                        <i class="fa fa-arrow-down text-dark" aria-hidden="true"></i>    
+                                    </a>
+                                    <a href="{{ path('user_index',{'champ': "zipCode", 'sens': "up"} ) }}">
+                                        <i class="fa fa-arrow-up text-dark" aria-hidden="true"></i>    
+                                    </a>
+            
+                                {# <a href="/user/index/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
+                                <a href="/user/index/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a> #}
                                 Postal
                             </th>
                             <th class="th_action text-center">Action</th>
