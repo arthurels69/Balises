@@ -33,14 +33,16 @@
             <ul class="bxslider">
 
                 <!-- display today's date and focus it with the active class -->
-                <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
+                <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')})
+                }}')">
                     <li class="month-day active" onclick="active(0)" id="day0">
                         <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
                     </li>
                 </a>
                 {% for oneDay in oneMoreDay %}
 
-                    <a onclick="changeDate('{{ path('async_calendar', {"day" : today | date_modify(oneDay) | date('Y-m-d')
+                    <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today |
+                        date_modify(oneDay) | date('Y-m-d')
                     }) }}')">
 
                         <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
@@ -88,16 +90,18 @@
         {% for spectacle in spectaclesOfTheDay%}
 
             <div  class="row row-striped bg-white">
-                <div class="col-2 text-right dateDisplay">
+                <div class="col-2 text-right">
 
                     <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
-                                                style="background-color: red; color: red;">{{
+                                                style="background-color: #FFEC02; color: black;">{{
                             spectacle.dateShow | date('d')}}</span></h1>
                     <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
                 </div>
                 <div class="col-10">
                     <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
                         </strong></h3>
+                    <img class="img-thumbnail" src="{{ spectacle.showId.theater.logo }}" style="height: 10em;
+                    display: inline; float:right">
                     <ul class="list-inline">
                         <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
                             {{ spectacle.dateShow | date('D') }}</li>
@@ -105,9 +109,9 @@
                             {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                         </li>
                         <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
-                            {{ spectacle.showId.theater.name }} <img src="{{ spectacle.showId.theater.logo }}"> </li>
+                            {{ spectacle.showId.theater.name }}  </li>
                     </ul>
-                    <p>{{ spectacle.showId.description }}</p>
+                    <p description>{{ spectacle.showId.description }}</p>
                 </div>
 
 

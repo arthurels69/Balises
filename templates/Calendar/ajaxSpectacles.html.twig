@@ -14,11 +14,10 @@
                 <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
             </div>
             <div class="col-10">
-                <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
-                    </strong></h3><img class="img-thumbnail" style="height: 10em; display: inline" src="{{ spectacle
-                .showId.theater
-                .logo
-                }}">
+                <h3 class="text-uppercase titleShow"><strong>{{ spectacle.showId.title }}
+                    </strong></h3>
+                <img class="img-thumbnail" style="height: 10em; display: inline; float:right" src="{{ spectacle
+                .showId.theater.logo }}">
                 <ul class="list-inline">
                     <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
                         {{ spectacle.dateShow | date('D') }}</li>
@@ -28,7 +27,7 @@
                     <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
                         {{ spectacle.showId.theater.name }}  </li>
                 </ul>
-                <p>{{ spectacle.showId.description }}</p>
+                <p class="description">{{ spectacle.showId.description }}</p>
             </div>
 
 
