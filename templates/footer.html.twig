@@ -1,4 +1,5 @@
 
+
     <footer class="footer" id="footer">
         <nav id="footer2" class="navbar navbar-expand-lg navbar" style="visibility: hidden;">
 
@@ -11,7 +12,7 @@
                         <a class="btn" href="#">Qui sommes-nous ?</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="btn" href="#">Théatres</a>
+                        <a class="btn" href="{{ path('theaters_list') }}">Théatres</a>
                     </li>
                     <li class="nav-item active">
                         <a class="btn" href="#">Initiatives</a>
@@ -19,6 +20,10 @@
                     <li class="nav-item active">
                         <a class="btn" href="#">Mentions Légales</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="btn" href="{{ path('contat') }}">Contact Us</a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -34,7 +39,7 @@
 
             background-color: black;
             border-radius: 10px;
-            width: 50%;
+            width: 60%;
             margin-left: auto;
             margin-right: auto;
 
@@ -43,6 +48,11 @@
         .btn
         {
             color: white;
+        }
+
+        .btn:hover
+        {
+            color : yellow;
         }
 
         ul {
