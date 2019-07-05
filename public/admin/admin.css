@@ -9,7 +9,7 @@
 }
 
 .card-header{
-    top:74px;
+    top:70px;
     position:sticky;
     background-color:   #d6dbdf  ;
     z-index: 15;
@@ -17,7 +17,7 @@
 }
 
 .card-body table thead th{
-    top:140px !important;
+    top:135px !important;
     position:sticky !important;
     background-color: white !important;
 }
