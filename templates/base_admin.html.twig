@@ -113,7 +113,15 @@
                         </nav><!-- navbar navbar-expand-lg -->
  <!-- BLOCK BODY -->
                         <div class="container-fluid content_admin p-0">
-
+                            {% if app.request.hasPreviousSession %}
+                                {% for category, messages in app.flashes %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ category }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
                         {% block body %}
                         {% endblock %}
                             

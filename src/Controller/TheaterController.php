@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use GuzzleHttp\Exception\GuzzleException;
 use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/theater")
@@ -95,17 +97,40 @@ class TheaterController extends AbstractController
      * @param Request $request
      * @param Theater $theater
      * @param TheaterService $theaterService
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
+     * @throws \Exception
      */
-    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
-    {
+    public function edit(
+        Request $request,
+        ObjectManager $manager,
+        Theater $theater,
+        TheaterService $theaterService,
+        UserPasswordEncoderInterface $encoder
+    ): Response {
 
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
         $user =  $this->getUser();
 
+        $request->request->get('newPassword');
+        $newPassword = $request->request->get('newPassword');
+        $request->request->get('confirmPassword');
+        $confirmPassword = $request->request->get('confirmPassword');
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($newPassword == $confirmPassword) {
+                $hash = $encoder->encodePassword($user, $newPassword);
+                $user->setPassword($hash);
+
+                $manager->persist($user);
+            } else {
+                $this->addFlash('danger', 'Les mot de passe ne correspondent pas');
+                return $this->redirectToRoute('theater_edit', [
+                    'id' => $theater->getId()
+                ]);
+            }
             $theaterService->geocode($theater);
 
             /** @var UploadedFile $file */
@@ -132,6 +157,13 @@ class TheaterController extends AbstractController
             }
 
             $this->getDoctrine()->getManager()->flush();
+
+            // Once the form is submitted, valid and the data inserted in database, you can define
+            // the success flash message
+            $this->addFlash(
+                'success',
+                'Vos changements ont bien été enregistrés !'
+            );
 
             return $this->redirectToRoute('theater_show', [
                 'id' => $theater->getId(),

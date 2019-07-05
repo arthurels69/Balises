@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Theater;
 use Exception;
 use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,7 +81,7 @@ class SecurityController extends AbstractController
                 $entityManager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('app_login');
             }
 
             $url = $this->generateUrl(
@@ -89,19 +90,21 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-                $message = (new \Swift_Message('Forgot Password'))
+                $message = (new \Swift_Message('Balises - Nouveau Mot de Passe'))
                 ->setFrom('hkev67@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "Voici le lien pour réinitialiser votre mot de passe : " . $url,
+                    $this->renderView('email/resetPassword.html.twig', [
+                        'url' => $url
+                    ]),
                     'text/html'
                 );
 
                 $mailer->send($message);
 
-                $this->addFlash('notice', 'Mail envoyé');
+                $this->addFlash('success', 'Mail envoyé');
 
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('app_login');
         }
 
         return $this->render('security/forgotten_password.html.twig');
@@ -125,7 +128,7 @@ class SecurityController extends AbstractController
 
             if ($user === null) {
                 $this->addFlash('danger', 'Token Inconnu');
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('app_login');
             }
 
             $user->setResetToken(null);
@@ -134,7 +137,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash('notice', 'Mot de passe mis à jour');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_login');
         } else {
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
