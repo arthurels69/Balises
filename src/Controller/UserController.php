@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
-use App\Service\TriService;
 use App\Form\UserType;
 use App\Entity\Theater;
+use App\Service\TriService;
+use App\Form\RegistrationType;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\PaginationService;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -24,13 +25,17 @@ class UserController extends AbstractController
     /**
      *Create Index user
      * @Route("/index", name="user_index", methods={"GET"})
-     * @Route("/index/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+     * @Route("/index/{page}/{ligne}/{champ}/{sens}", name="user_index", 
+     * methods={"GET"}, defaults={"champ":"" , "sens":"", "page":1, "ligne":10})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(string $champ, string $sens, UserRepository $userRepository, TriService $tri): Response
+    public function index(string $champ, string $sens, UserRepository $userRepository, 
+    TriService $tri ,$ligne,$page,PaginationService $pagination ): Response
     {
+        $pagination->paginate($page,$ligne);
+
         if ($champ != "") {
             $users = $tri->tri($champ, $sens);
         } else {
