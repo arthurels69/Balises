@@ -4,8 +4,6 @@ require('bootstrap/dist/js/bootstrap.js');
 require('jquery/dist/jquery.js');
 const $ = require('jquery');
 
-require('datepicker/datepicker.min.js');
-
 $(document).ready(function(){
     $('.bxslider').bxSlider({
         mode: 'horizontal',
@@ -21,8 +19,6 @@ $(document).ready(function(){
         shrinkItems: false
     });
 });
-
-
 
 /*function get_initialSlide(el){
     var initialSlide = $( ".month-day" ).index( el.find('.month-day.active') );
