@@ -22,8 +22,6 @@ final class Version20190705072235 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()
                                 ->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
-        $this->addSql('ALTER TABLE user DROP reset_token');
         $this->addSql('ALTER TABLE show_rate CHANGE discounted_rate discounted_rate DOUBLE PRECISION DEFAULT NULL');
     }
 
