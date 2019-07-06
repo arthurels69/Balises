@@ -48,4 +48,32 @@ class TriPageService
          
          return $this->userRepository->getPaginationOrderUsers($limit, $off_asc, $off_desc, $champ, $sens);
     }
+
+    public function indicePage(int $page_cours, int $ligne_page) : array
+    {
+
+        $indice_page=[];
+
+        $users = $this->userRepository->findAll();
+
+         //Nombre de ligne total
+         $ligne_totale=count($users);
+
+         //calcul du nombre de pages totales
+         $page_total=ceil($ligne_totale/$ligne_page);
+
+        $indiceInitial=intval((int)(($page_cours-1)/5)*5+1);
+
+        $indiceFinal=$indiceInitial+4;
+
+        if ($indiceFinal>$page_total) {
+            $indiceFinal=$page_total;
+        }
+
+        $indice_page[0]=$indiceInitial;
+        $indice_page[1]=$indiceFinal;
+
+
+        return $indice_page;
+    }
 }

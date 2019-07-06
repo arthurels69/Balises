@@ -31,19 +31,26 @@ class UserController extends AbstractController
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(string $champ,string $sens,UserRepository $userRepository,TriPageService $triPage,$page_cours,$ligne_page): Response 
-    {
+    public function index(
+        string $champ,
+        string $sens,
+        UserRepository $userRepository,
+        TriPageService $triPage,
+        $page_cours,
+        $ligne_page
+    ): Response {
         
-        $users = $userRepository->findAll();
-
         $users=$triPage->paginationTri($page_cours, $ligne_page, $champ, $sens);
 
-
+        /*AFFICHAGE BANDEAU PAGINATION PAR GROUPE DE 5 MAX */
+        $indice_page=$triPage->indicePage($page_cours, $ligne_page);
+                    
          /****************************VUE*******************************/
         return $this->render('user/index.html.twig', [
-            'users' => $users,
-            'page_cours' => $page_cours, 
-            'ligne_page' => $ligne_page
+            'users'         => $users,
+            'page_cours'    => $page_cours,
+            'ligne_page'    => $ligne_page,
+            'indice_page'   => $indice_page
 
         ]);
     }
