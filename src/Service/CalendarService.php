@@ -21,7 +21,7 @@ class CalendarService
     {
         // array of Strings applied in the twig date_modify filter
         $oneMoreDay = [];
-        for ($i = 1; $i < 14; $i++) {
+        for ($i = 1; $i < 31; $i++) {
             $oneMoreDay[$i] = "+$i day";
         }
 
@@ -35,7 +35,7 @@ class CalendarService
         $start = new \DateTime($selectedDate);
         $end = new \DateTime($selectedDate);
 
-        $end->add(\DateInterval::createFromDateString('+1 day'));
+        $end->add(\DateInterval::createFromDateString('+31 days'));
 
         //Returns  today' spectacles.
         $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);

@@ -1,8 +1,19 @@
 {% extends '/base.html.twig' %}
 
+{% block stylesheet %}
+<style>
+
+
+</style>
+{% endblock %}
+
 {% block body %}
-<div class="container-fluid bg-custom">
+
+
+<div class="container bg-custom h-100">
+
     <div class="row justify-content-center">
+
         <!-- Pills to select either a calendar per theater or per date from Bootstrap Website -->
         <ul class="nav nav-pills flex-column flex-sm-row nav-pills-calendar col-12" id="pills-tab" role="tablist">
             <li class="nav-item col-12 col-md-12 nav-pills-calendar">
@@ -11,128 +22,45 @@
         </ul>
     </div>
 
+        <h1 class="h1">La programmation Balise</h1>
+        <h4 class="h4">Saison {{ period.year }}</h4>
 
-    <div class="row justify-content-center bg-custom p-2">
-        <div class="col-2">
-            <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
-                >{{ period.full | date('M-Y')}}</span></h1>
 
-        </div>
+    <div class="row p-4">
+        {% for month in months %}
+            <div class="col-1">
 
-        <div class="col-8">
-            <p>
-                Vous trouverez sur cette page tous les spectacles des théatres soutenus par Balises pour les prochains jours,
-                semaines, ou mois...
-
-            </p>
-        </div>
-
-    </div>
-    <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
-    <div class="row justify-content-center bg-custom pt-5">
-
-        <div class="col-3">
-            <a onclick="changeDateToday('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
-                <span class="d-inline-block timePill text-center activeTimePill">Aujourd'hui</span>
-            </a>
-            <a onclick="changeDate3days('{{ path('async_calendarPlusThreePills', {"day" : today | date('Y-m-d')}) }}')">
-                <span class="d-inline-block timePill text-center">cette semaine</span>
-            </a>
-            <a onclick="changeDate1Week('{{ path('async_calendarPlusWeek', {"day" : today | date('Y-m-d')}) }}')">
-                <span class="d-inline-block timePill text-center">ce mois</span>
-            </a>
-        </div>
-
-    </div>
-
-    <div class="row justify-content-center bg-custom pt-2 pb-5">
-        <div class="col-5">
-            <ul class="bxslider">
-
-                <!-- display today's date and focus it with the active class -->
-                <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')})
+                <button class="calendarButton hvr-float-shadow" onclick="changeDate('{{ path('async_calendar', {"day"
+                    : period.year ~ "-" ~ loop.index ~ "-01"})
                 }}')">
-                    <li class="month-day active" onclick="active(0)" id="day0">
-                        <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
-                    </li>
-                </a>
-                {% for oneDay in oneMoreDay %}
-
-                    <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today |
-                        date_modify(oneDay) | date('Y-m-d')
-                    }) }}')">
-
-                        <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
-                            <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
-                        </li>
-
-                    </a>
-
-                {% endfor %}
-
-            </ul>
-
-        </div>
-
-        <div class="col-3" id="calendarDatePicker">
-
-            <form name="dateForm" id="dateForm" method="post" action="">
-                <div class="form-group">
-                    <label for="picked_date">Rechercher par mois : </label>
-                    <select id="picked_date" name="picked_date" class="custom-select">
-                        <option value="-01-01">Janvier</option>
-                        <option value="-02-01">Février</option>
-                        <option value="-03-01">Mars</option>
-                        <option value="-04-01">Avril</option>
-                        <option value="-05-01">Mai</option>
-                        <option value="-06-01">Juin</option>
-                        <option value="-07-01">Juillet</option>
-                        <option value="-08-01">Août</option>
-                        <option value="-09-01">Septembre</option>
-                        <option value="-10-01">Octobre</option>
-                        <option value="-11-01">Novembre</option>
-                        <option value="-12-01">Décembre</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="">ou par date: </label>
-                    <input type="date" class="form-control-md">
-                </div>
-                <button type="submit" class="btn btn-outline-secondary">eeee</button>
-            </form>
-        </div>
-
-    </div>
-
-
-
-
-    <!-- Div dedicated to ajax new spectacle -->
-    <div id="newSpectacles" class="bg-custom">
-
-    </div>
-
-
-    <div id="display-spectacles" class="bg-custom">
-        <!-- below the display of spectacles. Same as the ones in search by theater. -->
-        {% if spectaclesOfTheDay is empty %}
-            <div  class="row justify-content-center bg-custom">
-                <p class="text-danger">Pas de spectacles ce jour-là</p>
+                    {{ month }}</button>
             </div>
-        {% endif %}
+        {% endfor %}
+
+    </div>
+    <hr class="hr-dark">
+    <!-- Div dedicated to ajax new spectacle -->
+    <div id="newSpectacles">
+
+    </div>
+
+
+    <div id="display-spectacles">
+        <!-- below the display of spectacles. Same as the ones in search by theater. -->
+            <h4 class="h4">Au programme ce mois</h4>
+
+
         {% for spectacle in spectaclesOfTheDay%}
 
-            <div  class="row row-striped bg-white">
+            <div  class="row row-striped border-bottom p-4">
                 <div class="col-2 text-right">
 
                     <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
                                                 >{{
                             spectacle.dateShow | date('d')}}</span></h1>
-                    <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
+                    <h4 class="h4">{{ spectacle.dateShow | date('M')}}</h4>
                 </div>
-                <div class="col-10">
+                <div class="col-8">
                     <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
                         </strong></h3>
                     <img class="img-thumbnail" src="{{ spectacle.showId.theater.logo }}" style="height: 10em;
@@ -147,21 +75,26 @@
                             {{ spectacle.showId.theater.name }}  </li>
                     </ul>
                     <p description>{{ spectacle.showId.description }}</p>
+
                 </div>
-
-
+                <div class="col-2 m-auto">
+                    <small>Tarif de base : {{ spectacle.showId.baseRate }}</small>
+                    <button class="calendarButton hvr-float-shadow">Offre balise</button>
+                </div>
             </div>
         {% endfor %}
-        <div class="row bg-custom" id="plus-button">
+        <div class="row justify-content-center p-4" id="plus-button">
+            <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;" onclick="nextDay('{{ path
+                ('async_calendarPlusOne', {"day" : today |
+                date_modify('+ 1 day') | date('Y-m-d')
+            }) }}')"><i class="fas fa-plus"></i> Ce mois </h4>
             <div class="col-1 offset-1 ">
-                <div onscroll="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
-                    date_modify('+ 1 day') | date('Y-m-d')
-                }) }}')"></div>
+                <div ></div>
             </div>
         </div>
 
     </div>
-    <div id="spectaclesNextDay" class="row row-striped bg-custom">
+    <div id="spectaclesNextDay" class="row row-striped">
 
     </div>
 
@@ -323,4 +256,6 @@
 
 
     </script>
+
+</div>
 {% endblock %}
