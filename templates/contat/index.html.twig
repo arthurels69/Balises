@@ -4,24 +4,20 @@
 
 {% block body %}
 	<style>
+		body {background-color: white}
 		.sidenav {display: none;}
 	</style>
 	
+	<div class="container">
+	    <h2 class="text-center mt-5">Contactez Balises</h2>
+		    <div class="mt-5 text-center">
+		        {{ form_start(email_form) }}
+		        {{ form_widget(email_form) }}
 
-    <h2 class="text-center mt-5">Contactez Balises</h2>
-    <!-- <div class="row mt-5 justify-content-around"> -->
-	    <div class="mt-5 text-center">
-	        {{ form_start(email_form) }}
-	        {{ form_widget(email_form) }}
+		                <input type="submit" value="Send" class="btn btn-success"/>
 
-	        <!-- <div class="form-group row"> -->
-	            <!-- <div class="col-sm-10"> -->
-	                <input type="submit" value="Send" class="btn btn-success"/>
-	            <!-- </div> -->
-	        <!-- </div> -->
+		        {{ form_end(email_form) }}
 
-	        {{ form_end(email_form) }}
-
-	    </div>
-	<!-- </div> -->
+		    </div>
+	</div>
 {% endblock %}
