@@ -31,45 +31,42 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
-                <th>Description</th>
-                <th>Distribution</th>
-                <th>Informations Légales</th>
-                <th>Image</th>
-                <th>Crédits Photos</th>
-                <th>Informations Complémentaires</th>
+{#                <th>Description</th>#}
+{#                <th>Distribution</th>#}
+{#                <th>Informations Légales</th>#}
+{#                <th>Image</th>#}
+{#                <th>Crédits Photos</th>#}
+{#                <th>Informations Complémentaires</th>#}
                 <th>Enregistrement Balises</th>
                 <th>Type Offre</th>
-                <th>Lien Mapado</th>
                 <th>Tarif Base</th>
-                <th>actions</th>
+                <th class="text-center">actions</th>
             </tr>
             </thead>
             <tbody>
             {% for spectacle in spectacles %}
                 <tr>
-                    <td>{{ spectacle.id }}</td>
                     <td>{{ spectacle.title }}</td>
-                    <td>{{ spectacle.description }}</td>
-                    <td>{{ spectacle.distribution }}</td>
-                    <td>{{ spectacle.mandatoryInfos }}</td>
-                    <td>{{ spectacle.image }}</td>
-                    <td>{{ spectacle.photoCredits }}</td>
-                    <td>{{ spectacle.additionalInfos }}</td>
+{#                    <td>{{ spectacle.description }}</td>#}
+{#                    <td>{{ spectacle.distribution }}</td>#}
+{#                    <td>{{ spectacle.mandatoryInfos }}</td>#}
+{#                    <td>{{ spectacle.image }}</td>#}
+{#                    <td>{{ spectacle.photoCredits }}</td>#}
+{#                    <td>{{ spectacle.additionalInfos }}</td>#}
                     <td>{{ spectacle.isBalise ? 'Yes' : 'No' }}</td>
                     <td>{{ spectacle.offerType }}</td>
-                    <td>{{ spectacle.mapadoLink }}</td>
                     <td>{{ spectacle.baseRate }}</td>
                     <td>
+                        <div class="row justify-content-md-center">
                         <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}">
                             <button class="btn btn-secondary mb-3">Visualisation</button>
                         </a>
                         <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">
-                            <button class="btn
-                        btn-secondary">Modification
+                            <button class="btn btn-secondary ml-2">Modification
                             </button>
                         </a>
+                        </div>
                     </td>
                 </tr>
             {% else %}
