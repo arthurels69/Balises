@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Erreur 404{% endblock %}
+{% block body %}
+
+<style>
+    .sidenav {display: none;}
+</style>
+
+    <div class="container bg-custom h-100 d-flex justify-content-center" style="max-height:70%;">
+        <div class="card-transparent" style="width: 50vh;">
+            <img class="card-img-top" src="{{ asset('pics/404.png') }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center">Page Introuvable</h5>
+                <p class="card-text text-center">La page que vous souhaitez atteindre n'existe pas ou plus.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -5,6 +5,8 @@
 
 <style>
 
+
+
     .custom-link{
         text-decoration: none; 
         color: black;
@@ -33,10 +35,12 @@
         background-color: #555; /* Add a dark-grey background on hover */
     }
 
+    .sidenav {display: none;}
+
+
 </style>
 
-<div class="body">
-    <div class="container">
+    <div class="container bg-custom h-100">
         <div class="row justify-content-around mt-4">
             <h1>Théâtres Balises</h1>
         </div>
@@ -67,7 +71,7 @@
                 </li>
             {% endfor %}
         </div>
-        <hr style="color:red;">
+        <hr style="background-color:red" class="mt-5">
         <div class="row justify-content-around mt-5">
             <h1>Théâtres de l'agglomération</h1>
         </div>
@@ -93,7 +97,6 @@
 
 
     </div>
-</div>
 
 {% endblock %}
 
