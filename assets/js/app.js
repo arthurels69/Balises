@@ -9,7 +9,7 @@
 
 require('bootstrap/dist/js/bootstrap.js');
 require('../scss/app.scss');
-require('../scss/calendar.scss');
+require('../scss/page.scss');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 require('jquery/dist/jquery.js');
