@@ -201,7 +201,7 @@ class UserFixtures extends Fixture
 
         for ($j = 0; $j < mt_rand(5, 10); $j++) {
             $showDate1 = new ShowDate();
-            $showDate1->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
+            $showDate1->setDateShow($faker->dateTimeBetween('-1 week', '+ 2 months'));
             $showDate1->setShowId($show1);
             $manager->persist($showDate1);
             $showRate1 = new ShowRate();
@@ -213,7 +213,7 @@ class UserFixtures extends Fixture
 
         for ($j = 0; $j < mt_rand(4, 8); $j++) {
             $showDate2 = new ShowDate();
-            $showDate2->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
+            $showDate2->setDateShow($faker->dateTimeBetween('-1 week', '+ 2 months'));
             $showDate2->setShowId($show2);
             $manager->persist($showDate2);
             $showRate2 = new ShowRate();
@@ -225,7 +225,7 @@ class UserFixtures extends Fixture
 
         for ($j = 0; $j < mt_rand(8, 15); $j++) {
             $showDate3 = new ShowDate();
-            $showDate3->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
+            $showDate3->setDateShow($faker->dateTimeBetween('-1 week', '+ 2 months'));
             $showDate3->setShowId($show3);
             $manager->persist($showDate3);
             $showRate3 = new ShowRate();
