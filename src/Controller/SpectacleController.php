@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\ShowDate;
-use App\Entity\ShowRate;
 use App\Entity\Spectacle;
 use App\Form\SpectacleType;
 use App\Repository\SpectacleRepository;
-use App\Entity\Theater;
 use App\Repository\TheaterRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +13,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @Route("/spectacle")
@@ -44,7 +40,7 @@ class SpectacleController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="spectacle_new", methods={"GET","POST"})
+     * @Route("/new/Spectacle", name="spectacle_new", methods={"GET","POST"})
      * @param Request $request
      * @param ObjectManager $manager
      * @return Response

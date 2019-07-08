@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\ShowDate;
 use App\Entity\ShowRate;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,10 +19,7 @@ class ShowDateType extends AbstractType
         $builder
             ->add('dateShow')
             //->add('showId')
-            ->add('showRate', EntityType::Class, ['class'=> ShowRate::Class,'required' => false,
-                'expanded' => true,
-                'multiple' => true, ])
-        ;
+            ->add('showRate', ShowRateType::class) ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

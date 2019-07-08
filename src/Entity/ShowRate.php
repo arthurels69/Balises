@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Float_;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
@@ -25,7 +26,7 @@ class ShowRate
 
     /**
      * Display the discounted Rate for the show if this offer has been chosen.
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $discountedRate;
 
@@ -52,12 +53,12 @@ class ShowRate
         return $this;
     }
 
-    public function getDiscountedRate(): ?int
+    public function getDiscountedRate(): ?float
     {
         return $this->discountedRate;
     }
 
-    public function setDiscountedRate(?int $discountedRate): self
+    public function setDiscountedRate(?float $discountedRate): self
     {
         $this->discountedRate = $discountedRate;
 

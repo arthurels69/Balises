@@ -2,16 +2,17 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\NonBalisesTheater;
 use App\Entity\ShowDate;
 use App\Entity\ShowRate;
 use App\Entity\Spectacle;
 use App\Entity\Theater;
 use App\Entity\User;
 use App\Service\TheaterService;
-use Faker;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
@@ -196,6 +197,8 @@ class UserFixtures extends Fixture
 
         $manager->persist($show3);
 
+
+
         for ($j = 0; $j < mt_rand(5, 10); $j++) {
             $showDate1 = new ShowDate();
             $showDate1->setDateShow($faker->dateTimeBetween('now', '+ 2 weeks'));
@@ -231,6 +234,23 @@ class UserFixtures extends Fixture
             $showRate3->setShowDate($showDate3);
             $manager->persist($showRate3);
         }
+
+        for ($j = 0; $j < 20; $j++) {
+            $nbt = new NonBalisesTheater();
+            $nbt->setName($faker->name);
+            $nbt->setAddress($faker->address);
+            $nbt->setCity($faker->city);
+            $nbt->setZipCode(69007);
+            $nbt->setWebsite($faker->url);
+            $nbt->setPhoneNumber(0000000000);
+            $manager->persist($nbt);
+        }
+
+
+
+        
+
+
         $manager->flush();
     }
 }
