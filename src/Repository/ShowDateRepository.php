@@ -19,12 +19,14 @@ class ShowDateRepository extends ServiceEntityRepository
         parent::__construct($registry, ShowDate::class);
     }
 
-    public function spectaclePerDates($start, $end) : array
+    public function spectaclePerDates($start, $end, $today) : array
     {
         return $this->createQueryBuilder('d')
             ->where('d.dateShow >= :start')
+            ->andWhere('d.dateShow >= :today')
             ->andWhere('d.dateShow < :end')
             ->setParameter('start', $start)
+            ->setParameter('today', $today)
             ->setParameter('end', $end)
             ->orderBy('d.dateShow', 'ASC')
             ->getQuery()
