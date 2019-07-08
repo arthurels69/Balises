@@ -4,7 +4,35 @@
 
 
 .bg-custom{
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,1);
+}
+
+
+.show-info{
+  font-weight: bold;
+  padding: 1%;
+  margin-top: 1em;
+
+}
+
+.calendarLink{
+  font-weight: bolder;
+  color: darken(grey, 25%);
+  text-shadow: 1px 1px black;
+  letter-spacing: 0.3em;
+}
+
+.calendarLink:hover{
+  color: grey;
+  text-decoration: underline;
+}
+
+.show-title{
+  background-color: black;
+  color: $baliseYellow;
+  letter-spacing: 0.3em;
+  font-size : 1.1em;
+  padding: 1%;
 }
 
 .fa-plus-circle:hover{
@@ -54,19 +82,15 @@
 
   // manage the design of the event description in calendar
 #dayNumberSpectacle{
-  background-color: $baliseYellow;
-  color: black;
+  background-color: black;
+  color: $baliseYellow;
+  box-shadow: 1px 1px 1px 1px yellow;
 }
 
   .month-day:hover {
     background-color: $baliseYellow;
     color: black;
     cursor: pointer;
-  }
-
-  .active{
-    background-color: $baliseYellow;
-    color: black;
   }
 
 
@@ -105,7 +129,7 @@
   width: 90%;
   opacity: 0;
   background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(255, 236, 1, 1) 0%, rgba(255, 236, 1, 0) 80%);
   /* W3C */
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
@@ -113,6 +137,8 @@
   transition-property: transform, opacity;
 }
 .hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+  background-color: black;
+  color: $baliseYellow;
   -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   /* move the element up by 5px */
@@ -128,10 +154,11 @@
 .calendarButton{
   border: none;
   width: 100%;
-  border-radius: 10%;
-  box-shadow: 6px 2px 7px 8px $baliseYellow;
-  background-color: black;
-  color: $baliseYellow;
+  padding: 2%;
+  border-radius: 10px;
+  background-color: $baliseYellow;
+  color: black;
+  box-shadow: 1px 1px 1px 1px black;
   font-size: 1.1em;
   font-weight: bolder;
 }
@@ -140,6 +167,9 @@
   background-color: black;
 }
 
-.img-thumbnail{
-  width: 25em;
+
+.active{
+  box-shadow: 1px 1px 1px 1px $baliseYellow;
+  background-color: black;
+  color: $baliseYellow;
 }

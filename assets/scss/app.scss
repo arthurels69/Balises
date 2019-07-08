@@ -15,7 +15,9 @@ body {
    /* height: 100%;
     width: 100%; */
     margin: 0;
-    background-color: $baliseYellow;
+    //background-color: $baliseYellow;
+    background-image: url('../../public/uploads/Balises_background.png');
+    background-size: 100% ;
 }
 
 .container-fluid{
@@ -31,29 +33,6 @@ body {
 
 .link-homepage:hover{
     color: $lightblack;
-}
-
-// manage the design of the pulls of the top of calendar page
-.nav-pills-calendar{
-    font-weight: bold;
-    font-size: 1.5em;
-    background-color: $black;
-    border-radius: 0.2em;
-}
-
-.nav-pills-calendar a{
-  background-color: $black;
-  color : $baliseYellow;
-}
-
-.nav-pills-calendar a:active{
-  background-color: $lightblack;
-  color : $baliseYellow;
-}
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: $baliseYellow;
-  color : $black;
-  border : 1px solid $black;
 }
 
 

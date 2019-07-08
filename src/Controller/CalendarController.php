@@ -89,7 +89,6 @@ class CalendarController extends AbstractController
             'dec'
         ];
 
-
         return $this->render('Calendar/calendar2.html.twig', [
             'today' => $todayString['full'],
             'period' => $todayString,

@@ -5,16 +5,22 @@ namespace App\Service;
 
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CalendarService
 {
     private $showDateRepository;
     private $spectacleRepository;
+    private $entityManager;
 
-    public function __construct(ShowDateRepository $showDateRepository, SpectacleRepository $spectacleRepository)
-    {
+    public function __construct(
+        ShowDateRepository $showDateRepository,
+        SpectacleRepository $spectacleRepository,
+        EntityManagerInterface $entityManager
+    ) {
         $this->spectacleRepository = $spectacleRepository;
         $this->showDateRepository = $showDateRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function addMoreDays() : array
@@ -36,9 +42,9 @@ class CalendarService
         $end = new \DateTime($selectedDate);
 
         $end->add(\DateInterval::createFromDateString('+31 days'));
-
+        $today = new \DateTime();
         //Returns  today' spectacles.
-        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);
+        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end, $today);
 
         //Returns the content of today' sgit pectacles based on the IDs collected  above.
 
