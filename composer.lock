@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9718e0f4526a9622dedf85a591299d25",
+    "content-hash": "8cfa4c90fa38751976aaa9fe346bddf7",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
