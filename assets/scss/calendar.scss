@@ -1,12 +1,25 @@
 @import "vars";
-@import "calendarSlider";
+@import "~bootstrap";
 // Carousel with Date https://jsfiddle.net/w3a97zyh/
 
+
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background-size: cover;
+  background-image: url('../../public/uploads/Balises_background.png');
+}
 
 .bg-custom{
   background-color: rgba(255,255,255,1);
 }
 
+img{
+  max-width: 100%;
+  margin-top :-0.8em;
+}
 
 .show-info{
   font-weight: bold;
