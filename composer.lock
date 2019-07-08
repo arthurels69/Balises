@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e9353fea3deca71bd235502629119f2",
+    "content-hash": "8cfa4c90fa38751976aaa9fe346bddf7",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
@@ -1875,17 +1875,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "dc784032a3f6f4e7a4b882e272b771f6fe4c37cf"
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc784032a3f6f4e7a4b882e272b771f6fe4c37cf",
-                "reference": "dc784032a3f6f4e7a4b882e272b771f6fe4c37cf",
-
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
                 "shasum": ""
             },
             "require": {
@@ -1943,9 +1942,7 @@
                 "uri",
                 "url"
             ],
-
-            "time": "2019-06-30T00:37:05+00:00"
-
+            "time": "2019-07-01T23:21:34+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -7446,17 +7443,16 @@
         },
         {
             "name": "symfony/webpack-encore-bundle",
-            "version": "v1.6.1",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/webpack-encore-bundle.git",
-                "reference": "dcec167d30eb7a59eb60d3d17b22d6fd59cd75a6"
+                "reference": "5e1cab3d223f65933d59a5a95ea01a6ed2833db4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/dcec167d30eb7a59eb60d3d17b22d6fd59cd75a6",
-                "reference": "dcec167d30eb7a59eb60d3d17b22d6fd59cd75a6",
-
+                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/5e1cab3d223f65933d59a5a95ea01a6ed2833db4",
+                "reference": "5e1cab3d223f65933d59a5a95ea01a6ed2833db4",
                 "shasum": ""
             },
             "require": {
@@ -7499,9 +7495,7 @@
                 }
             ],
             "description": "Integration with your Symfony app & Webpack Encore!",
-
-            "time": "2019-07-01T15:47:39+00:00"
-
+            "time": "2019-07-03T00:30:37+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -8414,8 +8408,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "assoconnect/mapbox-token": 20,
-        "mapado/league-oauth2-provider": 20,
-        "kartik-v/yii2-widget-datepicker": 20
+        "mapado/league-oauth2-provider": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
