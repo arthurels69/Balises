@@ -5,7 +5,7 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block stylesheets %}
-        {{ encore_entry_link_tags('calendar') }}
+        {{ encore_entry_link_tags('page') }}
     {% endblock %}
 
     <!-- Scrollbar Custom CSS -->
@@ -43,7 +43,7 @@
 
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('calendar') }}
+    {{ encore_entry_script_tags('page') }}
 {% endblock %}
 
 </body>
