@@ -26,10 +26,10 @@
 
         #map
 
-           {
-               z-index: 0;
-               width:100%;
-           }
+        {
+            z-index: 0;
+            width:100%;
+        }
 
         #selectplacetitle
         {
@@ -106,7 +106,6 @@
             background-image: url("{{ asset('uploads/ticket-balises.png') }}");
             background-size: 100%;
             color: white;
-            border-radius: 10px;
 
         }
 
@@ -230,8 +229,8 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.logo )}}" style="max-height: 100px; display: block; margin-left: auto; margin-right: 5%; padding-bottom: 5%"></a>
-                            <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 17px" class="display-4">{{ theater.name }}</h1></a>
+                            <img src="{{ asset('uploads/'~ theater.logo )}}" alt="" style="max-height: 100px;display: block; margin-left: auto; margin-right: 5%; padding-bottom: 10%; margin-top: -15%">
+                            <h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 17px" class="display-4">{{ theater.name }}</h1>
                             <p class="lead" style="text-align: right; margin-right: 10%">{{ theater.address1 }}<br>{{  theater.zipcode }} {{ theater.city }}<br>{{ theater.phoneNumber }}</p>
                         </div>
 
@@ -265,9 +264,9 @@
                     </div>
 
                     <div class="col-5">
-                        <div class="bulleInfo4">
-                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.picture )}}" style="width: 250px; padding-bottom: 5%;float: right"></a>
-                        </div>
+{#                        <div class="bulleInfo4">#}
+{#                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.picture )}}" style="width: 250px; padding-bottom: 5%;float: right"></a>#}
+{#                        </div>#}
                     </div>
 
                     <div class="col-2">
@@ -283,11 +282,11 @@
                                 <h3 style="color : white; font-weight: bold; margin-left: 3%; text-align:center;" >SÉLÉCTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
 
 
-                                 {% for showdate in show.showDates %}
-                                     <div>
-                                    <input type="radio" name="radio" id="radio">
-                                     <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
-                                     </div>
+                                {% for showdate in show.showDates %}
+                                    <div>
+                                        <input type="radio" name="radio" id="radio">
+                                        <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
+                                    </div>
                                 {% endfor %}
                                 <a class="btn btn-dark" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width:200px; background-color: #171a1d; color: white; display: block; margin: auto; margin-top: 2%" href="{{ path('home') }}">Commander</a>
                             </div>
@@ -316,22 +315,6 @@
 
 
     <script>
-
-
-        var getParams = function (url) {
-            var params = {};
-            var parser = document.createElement('a');
-            parser.href = url;
-            var query = parser.search.substring(1);
-            var vars = query.split('&');
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split('=');
-                params[pair[0]] = decodeURIComponent(pair[1]);
-            }
-            return params;
-        };
-
-
         // Gestion des spectacles par théâtre
         function showDates(showId) {
             let currentShow = document.getElementsByClassName('currentShow');
@@ -397,23 +380,6 @@
                 map.setView([latitude, longitude]);
 
             });
-
-
-
-            window.addEventListener("load", function()
-            {
-                let theaterIdForPointer = '{"theater":"theater' + pointerId + '"}'
-                // console.log(JSON.stringify(getParams(window.location.href)))
-                // console.log(theaterIdForPointer)
-
-
-                if (JSON.stringify(getParams(window.location.href)) == theaterIdForPointer) 
-                {
-
-                    map.setView([latitude, longitude]);
-                }
-
-            }); 
         }
 
         // Fermer bulle info quand clic sur map
