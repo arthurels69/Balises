@@ -1,7 +1,7 @@
 {% extends '/basePage.html.twig' %}
 
 {% block stylesheet %}
-    {{ encore_entry_link_tags('calendar') }}
+
 {% endblock %}
 
 {% block body %}
@@ -124,7 +124,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('calendar') }}
+
     <script>
         //Cette fonction gère l'affichage des spectacles quand on clique dans le calendrier carousel
         function changeDate(date, clickedPill) {
