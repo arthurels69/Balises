@@ -13,19 +13,10 @@
             <!-- BOOT PAGINATION -->
               <nav class="nav_page" aria-label="Page navigation example ">           
                 <ul class="pagination justify-content-center mb-0">
-                    <form action="index.php" method='POST' id="id_du_formulaire" >   
-                        <!-- SELECT NB LIGNE PAGE -->
-                        <select id="pet-select" name="jojo">
-                            <option value="3" {% if ligne_page == 3 %}  "selected" {% endif %}>3</option> 
-                            <option value="5" {% if ligne_page == 5 %}  "selected" {% endif %}>5</option>
-                            <option value="8" {% if ligne_page == 8 %}  "selected" {% endif %}>8</option>
-                            <option value="10"{% if ligne_page == 10 %} "selected" {% endif %}>10</option>
-                        </select>
-                    </form>
             
                   <!-- PREVIOUS -->
                   <li class="page-item previous">     
-                      <a class="page-link previous-a text-dark" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>      
+                      <a class="page-link  text-dark" href="" tabindex="-1"><i class="fas fa-chevron-left"></i></a>      
                   </li>
             
                    {# {{ dump(indice_page) }}    #}
@@ -39,7 +30,7 @@
                   
                   <!-- NEXT -->       
                   <li class="page-item next">
-                    <a class="page-link text-dark" href="#"><i class="fas fa-chevron-right"></i></a>
+                    <a class="page-link text-dark"  href="" ><i class="fas fa-chevron-right"></i></a>
                   </li>
             
                 </ul>            
@@ -147,70 +138,33 @@ $(document).ready(function () {
     });
 
 /**********************PAGINATION NEXT PREVIOUS SELECTION ligne_page***************************/
-    
+    let total_page='{{ page_total }}';
+    let page_cours='{{ page_cours }}';
+
     //PREVIOUS
-    let prev=$('.previous').next().children();
-    prev=parseInt(prev[0].text);
-    if ( prev === 1) {
-      $('.previous').hide();
+    if ( page_cours == 1) {
+     $('.previous').hide();
     }
 
+    $('.previous').click(function(ev){
+        ev.preventDefault();
+        let a_prev=$('.previous').children();       
+        a_prev.attr('href','{{ path("user_index" , {"page_cours" : page_cours-1 ,"ligne_page" : ligne_page  }) }}');
+        window.location=a_prev.attr('href');
+    });
+
+
     //NEXT
-    /*let next=$('.next').prev().children();
-    next=parseInt(next[0].text);
-    if (<?= $nbPages ?> === tx) {
+    if ( page_cours === total_page) {
       $('.next').hide();
-    }*/
+    }
 
-    
-    $('.next').click(function(){
-
-        let url=window.location.href;
-        console.log('url', url);
-        
-        
-        fetch(url).then(function(response) {
-        console.log(response.ok);
-        console.log(response.status);
-        //console.log(response.text);
-        //console.log(response.body);
-        return response.text(function(text){
-            console.log(donnee);
-            let titre=$('h5').text;
-            console.log('titre', titre);
-            alert(titre);
-            
-
-
-        });
-
-        
-
-      
-
-          
-        });
-    });
-    
-
-    /*
-    $('.previous').click(function(){ 
-        //alert("bonjour");
-        let jo=$('.previous').prev();
-        console.log(jo);
-        window.location="http://localhost:8100/?p="+<?= $pageCours-1 ?>;         
-    });
-    */
-
-
-    /*
-    $('form select').on('change', function(){
-        $(this).closest('form').submit();
-        $('#pet-select').children('option').attr('selected');
-        let opt = $('#pet-select').children(); 
-    });//on change
-    */
-
+    $('.next').click(function(e){
+        e.preventDefault();
+        let a_next=$('.next').children();        
+        a_next.attr('href','{{ path("user_index" , {"page_cours" : page_cours+1 ,"ligne_page" : ligne_page  }) }}');
+        window.location=a_next.attr('href');
+    }); 
 });
 </script>
 {% endblock %}

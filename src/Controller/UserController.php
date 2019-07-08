@@ -42,6 +42,14 @@ class UserController extends AbstractController
         
         $users=$triPage->paginationTri($page_cours, $ligne_page, $champ, $sens);
 
+        $usersAll = $userRepository->findAll();
+
+        //Nombre de ligne total
+        $ligne_totale=count($usersAll);
+
+        //calcul du nombre de pages totales
+        $page_total=ceil($ligne_totale/$ligne_page);
+
         /*AFFICHAGE BANDEAU PAGINATION PAR GROUPE DE 5 MAX */
         $indice_page=$triPage->indicePage($page_cours, $ligne_page);
                     
@@ -50,7 +58,8 @@ class UserController extends AbstractController
             'users'         => $users,
             'page_cours'    => $page_cours,
             'ligne_page'    => $ligne_page,
-            'indice_page'   => $indice_page
+            'indice_page'   => $indice_page,
+            'page_total'    => $page_total
 
         ]);
     }
