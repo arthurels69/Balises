@@ -71,6 +71,25 @@ class ShowDate
         return $this;
     }
 
+    /*
+    public function getShowRate(): ArrayCollection
+    {
+        return $this->showRate;
+    }
+
+    public function setShowRate(ShowRate $showRate): self
+    {
+        $this->showRate = $showRate;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $showRate->getShowDate()) {
+            $showRate->setShowDate($this);
+        }
+
+        return $this;
+    }
+    */
+
 
     public function getShowRate(): ?ShowRate
     {

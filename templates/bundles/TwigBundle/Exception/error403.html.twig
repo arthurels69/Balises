@@ -1,0 +1,23 @@
+{% extends 'basePage.html.twig' %}
+{% block title %}Accès refusé{% endblock %}
+{% block body %}
+
+<style>
+    .sidenav {display: none;}
+</style>
+
+    <div class="container bg-custom h-100 d-flex justify-content-center" style="max-height:70%;">
+        <div class="card-transparent text-center" style="width: 50vh;">
+            <img class="card-img-top" src="{{ asset('pics/403.png') }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center">Accès refusé</h5>
+                <p class="card-text text-center">Vous n'avez pas le droit d'accéder à cette page.</p>
+                <p class="card-text text-center">Connectez-vous si vous êtes un théâtre</p>
+                <a href="{{ path('app_login') }}" class="btn btn-warning mt-3">Connexion</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -120,6 +120,8 @@ class ShowDateController extends AbstractController
      */
     public function edit(
         ShowDateRepository $showDateRepository,
+        SpectacleRepository $spectacleRepository,
+        ParamRepository $paramRepository,
         Request $request,
         ShowDate $showDate
     ): Response {
@@ -139,6 +141,8 @@ class ShowDateController extends AbstractController
 
             'showDates' => $showDateRepository->findby(['showId' => $showDate->getShowId()]),
             'show_date' => $showDate,
+            'spectacle' => $spectacleRepository->findOneBy(['id' => $showDate->getShowId()]),
+            'params' => $paramRepository->findOneBy([]),
             'form' => $form->createView(),
         ]);
     }

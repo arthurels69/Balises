@@ -1,9 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseMap.html.twig' %}
 
 
 {% block body %}
 
     <style>
+
 
         body
         {
@@ -62,46 +63,63 @@
             transform: scale(0.7, 0.7);
         }
 
+        .footer-bar
+        {
+            margin-top: 10%;
+        }
+
+
+
 
     </style>
 
 
 
-<div id="background_opacity"></div>
+    <div id="background_opacity"></div>
 
-<div class="row h-100 m-auto justify-content-between">
+    <div class="row h-auto m-auto justify-content-between">
 
-    <div class="col-12" id="IndexTitle" style="padding-top: 7%">
-        <h1 style="text-align: center; font-size: 450%; font-weight: bold">ET SI VOUS RETOURNIEZ<p> AU THÉÂTRE ?</h1>
+        <div class="col-12" id="IndexTitle" style="padding-top: 7%">
+            <h1 style="text-align: center; font-size: 450%; font-weight: bold; margin-bottom: 10%">ET SI VOUS RETOURNIEZ<p> AU THÉÂTRE ?</h1>
+        </div>
+
+        <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: -3%">
+            <a href="{{ path('map2') }}"><img src="{{ asset('uploads/jumelles.png') }}" style="max-height: 250px"></a>
+            <h1 style ="margin-top: 2%">A quel endroit ?</h1>
+        </div>
+
+        <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: -3%">
+            <a href="{{ path('calendar_home') }}""><img src="{{ asset('uploads/calendarindex.png') }}" style="max-height: 250px"></a>
+            <h1 style ="margin-top: 2%">A quel moment ?</h1>
+        </div>
+
+        <div id="logoonmap">
+            <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+        </div>
+
+        <div class="col-12 footer-bar">
+            {% include 'footer.html.twig' %}
+        </div>
     </div>
-
-    <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: -3%">
-        <a href="{{ path('map2') }}"><img src="{{ asset('uploads/jumelles.png') }}" style="max-height: 250px"></a>
-        <h1 style ="margin-top: 5%">A quel endroit ?</h1>
-    </div>
-
-    <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: -3%">
-        <a href="{{ path('calendar_home') }}""><img src="{{ asset('uploads/calendarindex.png') }}" style="max-height: 250px"></a>
-        <h1 style ="margin-top: 5%">A quel moment ?</h1>
-    </div>
-
-    <div id="logoonmap">
-        <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
-    </div>
-
-    <div class="LoginBtn">
-        <a class="btn btn-dark" href="{{ path('app_login') }}">Login</a>
-    </div>
-
-</div>
-
-
-
 
 {% endblock %}
+
 
 
 {% block javascripts %}
 
-{% endblock %}
+    <script>
 
+        let moveonfooter = document.getElementById('footer');
+        let moveonfooter2 = document.getElementById('footer2')
+        moveonfooter.addEventListener("mouseover", function()
+        {
+            moveonfooter2.style.visibility ="visible";
+        });
+        moveonfooter.addEventListener("mouseout", function()
+        {
+            moveonfooter2.style.visibility ="hidden";
+        });
+
+    </script>
+{% endblock %}

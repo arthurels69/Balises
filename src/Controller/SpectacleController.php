@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\ShowDate;
 use App\Entity\Spectacle;
 use App\Form\SpectacleType;
+use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -153,5 +156,35 @@ class SpectacleController extends AbstractController
         }
 
         return $this->redirectToRoute('spectacle_index');
+    }
+
+    /**
+     * @Route("/show/{id}", name="detailSpectacle", methods={"GET"})
+     * @param Spectacle $spectacle
+     * @return Response
+     */
+    public function detailSpectacle(Spectacle $spectacle, ShowDateRepository $showDateRepository): Response
+    {
+        $showDate = $showDateRepository->dateList($spectacle->getId());
+
+        return $this->render('spectacle/spectacle.html.twig', [
+            'spectacle' => $spectacle,
+            'showDate' => $showDate
+        ]);
+    }
+
+    /**
+     * @Route("/show/more/{id}", name="moreSpectacle", methods={"GET"})
+     * @param Spectacle $spectacle
+     * @return Response
+     */
+    public function moreSpectacleDates(Spectacle $spectacle, ShowDateRepository $showDateRepository) : Response
+    {
+        $showDate = $showDateRepository->moreDateList($spectacle->getId());
+
+        return $this->render('spectacle/moreSpectacle.html.twig', [
+            'spectacle' => $spectacle,
+            'showDate' => $showDate
+        ]);
     }
 }

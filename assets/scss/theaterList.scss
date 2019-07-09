@@ -20,11 +20,10 @@
 }
 
 #searchBar {
-  width: 100%;
+  width: 40vw;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
-  margin-bottom: 12px;
 }
 
 #theaterList {
@@ -33,3 +32,35 @@
   padding: 0;
   margin: 0;
 }
+
+
+
+.custom-link{
+    text-decoration: none; 
+    color: black;
+}
+
+.custom-link:hover{
+    color: darkgrey;
+}
+
+
+#topBtn {
+    display: none; 
+    position: fixed; 
+    bottom: 5vh; 
+    right: 5vw; 
+    z-index: 99; 
+    border: none; 
+    outline: none; 
+    background-color: black; 
+    color: #FFEC02; 
+    cursor: pointer; 
+    border-radius: 50%;
+}
+
+#topBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}
+
+.sidenav {display: none;}
