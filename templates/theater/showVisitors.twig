@@ -1,0 +1,53 @@
+{% extends 'basePage.html.twig' %}
+
+{% block title %}Theater Info{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row justify-content-center m-5">
+            <div class="col-lg-8">
+                <h1>{{ theater.name }}</h1>
+            </div>
+            <div class="col-lg-4">
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+
+            </div>
+            <div class="col-lg-4 justify-content-center">
+                <div class="row">
+                  <h3> Informations Pratiques : </h3>
+                </div>
+                <br>
+                <div class="row">
+                    <h3>{{ theater.email }}</h3>
+                </div>
+                <div class="row">
+                    <h3> {{ theater.address1 }}</h3>
+                </div>
+                <div class="row">
+                    <h3>{{ theater.address2 }}</h3>
+                </div>
+                <div class="row">
+                    <h3>{{ theater.zipCode }}</h3>
+                </div>
+                <div class="row">
+                    <h3>{{ theater.city }}</h3>
+                </div>
+                <div class="row">
+                    <h3>{{ theater.phoneNumber }}</h3>
+                </div>
+                <div class="row">
+                    <h3>{{ theater.website }}</h3>
+                </div>
+                <div class="row">
+                    <img class="img_logo img-thumbnail mt-3" src="{{ asset('uploads/' ~ theater.picture) }}" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
