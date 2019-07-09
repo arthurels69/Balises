@@ -106,7 +106,7 @@ class TheaterController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $theaterService->geocode($theater);
+                $theaterService->geocode($theater);
 
             /** @var UploadedFile $file */
             $fileLogo = $request->files->get('theater')['logo'];
