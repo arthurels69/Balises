@@ -19,7 +19,8 @@
             <div class="col-md-1">
                 <!--monthNumber gets the right value to send to the method async_calendar as a month date. -->
                 {% set monthNumber = loop.index+period.month-1 %}
-                <button class="calendarButton hvr-float-shadow" id="month{{ loop.index }}" onclick="changeDate('{{ path
+                <button class="calendarButton hvr-float-shadow py-1" id="month{{ loop.index }}" onclick="changeDate
+                        ('{{ path
                     ('async_calendar', {"day" : period.year ~ "-" ~ monthNumber ~ "-01"})}}', {{ loop.index }})">
                     {{ month }} {{ period.year |slice(2,2) }}</button>
             </div>
@@ -88,7 +89,8 @@
                            class="calendarLink">Voir plus</a>
                     </p>
 
-                    <button class="calendarButton hvr-float-shadow">Offre balise</button>
+                    <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">Offre
+                            balise</button></a>
 
 
                 </div>

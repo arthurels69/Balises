@@ -34,6 +34,29 @@ class ShowDateRepository extends ServiceEntityRepository
             ;
     }
 
+
+    public function dateList($spectacleId) :array
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.showId >= :spectacleId')
+            ->setParameter('spectacleId', $spectacleId)
+            ->orderBy('d.dateShow', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function moreDateList($spectacleId) :array
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.showId >= :spectacleId')
+            ->setParameter('spectacleId', $spectacleId)
+            ->orderBy('d.dateShow', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 //    public function searchThreeDates():array
 //    {
 //        $entityManager = $this->getEntityManager();
