@@ -35,11 +35,13 @@ class ShowDateRepository extends ServiceEntityRepository
     }
 
 
-    public function dateList($spectacleId) :array
+    public function dateList($spectacleId, $today) :array
     {
         return $this->createQueryBuilder('d')
             ->where('d.showId >= :spectacleId')
+            ->andWhere('d.dateShow >= :today')
             ->setParameter('spectacleId', $spectacleId)
+            ->setParameter('today', $today)
             ->orderBy('d.dateShow', 'ASC')
             ->setMaxResults(5)
             ->getQuery()
@@ -47,11 +49,13 @@ class ShowDateRepository extends ServiceEntityRepository
             ;
     }
 
-    public function moreDateList($spectacleId) :array
+    public function moreDateList($spectacleId, $today) :array
     {
         return $this->createQueryBuilder('d')
             ->where('d.showId >= :spectacleId')
+            ->andWhere('d.dateShow >= :today')
             ->setParameter('spectacleId', $spectacleId)
+            ->setParameter('today', $today)
             ->orderBy('d.dateShow', 'ASC')
             ->getQuery()
             ->getResult()

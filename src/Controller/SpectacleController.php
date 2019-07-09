@@ -165,7 +165,9 @@ class SpectacleController extends AbstractController
      */
     public function detailSpectacle(Spectacle $spectacle, ShowDateRepository $showDateRepository): Response
     {
-        $showDate = $showDateRepository->dateList($spectacle->getId());
+        $today = new \DateTime();
+
+        $showDate = $showDateRepository->dateList($spectacle->getId(), $today);
 
         return $this->render('spectacle/spectacle.html.twig', [
             'spectacle' => $spectacle,
@@ -180,7 +182,9 @@ class SpectacleController extends AbstractController
      */
     public function moreSpectacleDates(Spectacle $spectacle, ShowDateRepository $showDateRepository) : Response
     {
-        $showDate = $showDateRepository->moreDateList($spectacle->getId());
+        $today = new \DateTime();
+
+        $showDate = $showDateRepository->moreDateList($spectacle->getId(), $today);
 
         return $this->render('spectacle/moreSpectacle.html.twig', [
             'spectacle' => $spectacle,
