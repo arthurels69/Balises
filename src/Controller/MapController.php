@@ -34,7 +34,7 @@ class MapController extends AbstractController
 
 
     /**
-     * @Route("/spectacle/{id}", name="detailSpectacle", methods={"GET"})
+     * @Route("/spectacle/show/{id}", name="detailSpectacle", methods={"GET"})
      * @param Spectacle $spectacle
      * @return Response
      */
