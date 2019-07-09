@@ -39,6 +39,7 @@ class ShowDate
     public function __construct()
     {
        // $this->showRate = new ArrayCollection();
+        $this->dateShow = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -70,33 +71,6 @@ class ShowDate
         return $this;
     }
 
-    /*
-    public function getShowRate(): ArrayCollection
-    {
-        return $this->showRate;
-    }
-
-    public function setShowRate(ShowRate $showRate): self
-    {
-        $this->showRate = $showRate;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $showRate->getShowDate()) {
-            $showRate->setShowDate($this);
-        }
-
-        return $this;
-    }
-    */
-
-    /**
-     * toString
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getDateShow()->format('d/m/Y');
-    }
 
     public function getShowRate(): ?ShowRate
     {
@@ -114,5 +88,15 @@ class ShowDate
         }
 
         return $this;
+    }
+
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getDateShow()->format('d/m/Y');
     }
 }

@@ -8,7 +8,7 @@ use App\Entity\ShowRate;
 use App\Form\ShowDateType;
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
-use App\Repository\TheaterRepository;
+use App\Repository\ParamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +44,7 @@ class ShowDateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($showDate);
-            $entityManager->flush();
+              $entityManager->flush();
 
             return $this->redirectToRoute('show_date_index');
         }
@@ -63,6 +63,7 @@ class ShowDateController extends AbstractController
     public function indexBySpectacle(
         SpectacleRepository $spectacleRepository,
         ShowDateRepository $showDateRepository,
+        ParamRepository $paramRepository,
         Request $request,
         $id
     ): Response {
@@ -70,7 +71,11 @@ class ShowDateController extends AbstractController
         $showDate = new ShowDate();
         $spectacle = $spectacleRepository->findOneBy(['id'=>$id]);
 
-        //$showDate ->setBaseRate($spectacle->getBaseRate());
+        $showRate = new ShowRate();
+
+        $showRate->setDiscountedRate($spectacle->getBaseRate());
+
+        $showDate->setShowRate($showRate);
 
         $form = $this->createForm(ShowDateType::class, $showDate);
 
@@ -92,6 +97,7 @@ class ShowDateController extends AbstractController
             'showDates' => $showDateRepository->findby(['showId' => $id]),
             'spectacle' => $spectacleRepository->findOneBy(['id'=>$id]),
             'show_date' => $showDate,
+            'params' => $paramRepository->findOneBy([]),
             'form' => $form->createView()
 
         ]);
