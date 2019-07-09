@@ -13,8 +13,9 @@
 
     {{ include('theater/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
     <div class="row justify-content-md-center mt-3">
+
         <a href="{{ path('theater_show',{'id' : theater.id} ) }}">
-            <button class="btn btn-secondary">Retour</button>
+            <button class="btn btn-secondary btn-lg btn-block">Retour</button>
         </a>
     </div>
 

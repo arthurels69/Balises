@@ -19,7 +19,7 @@ class EmailService
 
     public function mailContactForm($from, $message, $name)
     {
-        $email = new \Swift_Message('Nouveau Mail formulaire de Contact Balises');
+        $email = new \Swift_Message('Nouveau Mail Contact de '. $from);
 
         $email->setFrom('balises@caramail.fr')
             ->setTo('balises@caramail.fr')
@@ -27,7 +27,7 @@ class EmailService
                 'message' => $message,
                 'from' => $from,
                 'name' => $name
-            ]));
+            ]), 'text/html');
 
         $this->mailer->send($email);
     }

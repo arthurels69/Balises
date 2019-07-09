@@ -1,0 +1,10 @@
+{% for seance in showDate |slice(5,100) %}
+    <div class="col-8">
+        <p>{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
+    </div>
+    <div class="col-3">
+        <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton">
+                commander
+            </button></a>
+    </div>
+{% endfor %}c

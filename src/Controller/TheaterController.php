@@ -139,7 +139,6 @@ class TheaterController extends AbstractController
             $theaterService->geocode($theater);
 
             /** @var UploadedFile $file */
-//            $fileLogo = $request->files->get('theater')['logo'];
             $fileLogo = $form['logo']->getData();
             if ($fileLogo) {
                 $fileLogoName = $fileUploader->upload($fileLogo);

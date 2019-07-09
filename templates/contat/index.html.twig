@@ -1,27 +1,28 @@
-{% extends 'baseMap.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}Contactez Balises{% endblock %}
 
 {% block body %}
-	<style>
-		.sidenav {display: none;}
-	</style>
 	
+	<div class="container bg-custom" style="height:100vh;">
+	    <h1 class="h1 text-center">Contactez Balises</h1>
+		    <div class="mt-5 text-center">
+		        {{ form_start(email_form) }}
+		        <div class="row mt-5">
+		        	<div class="col-1 mb-5"></div>
+			        {{ form_widget(email_form.Votre_Nom, {'attr': {'class': 'col-3','placeholder': 'Votre Nom'}}) }}
+			        <div class="col-1"></div>
+			        {{ form_widget(email_form.Votre_Email, {'attr': {'class': 'col-6','placeholder': 'Votre Email'}}) }}
+			    </div>
+			    <div class="row mt-5">
+				    <div class="col-1"></div>
+			        {{ form_widget(email_form.Votre_Message, {'attr': {'class': 'col-10','placeholder': 'Votre Message', 'rows': 7}}) }}
+			    </div>
 
-    <h2 class="text-center mt-5">Contactez Balises</h2>
-    <!-- <div class="row mt-5 justify-content-around"> -->
-	    <div class="mt-5 text-center">
-	        {{ form_start(email_form) }}
-	        {{ form_widget(email_form) }}
+                <input type="submit" value="Send" class="btn btn-warning mt-5 mb-5"/>
 
-	        <!-- <div class="form-group row"> -->
-	            <!-- <div class="col-sm-10"> -->
-	                <input type="submit" value="Send" class="btn btn-success"/>
-	            <!-- </div> -->
-	        <!-- </div> -->
+		        {{ form_end(email_form) }}
 
-	        {{ form_end(email_form) }}
-
-	    </div>
-	<!-- </div> -->
+		    </div>
+	</div>
 {% endblock %}

@@ -103,18 +103,20 @@
     <div class="row justify-content-sm-center">
         <br>
         <div class="">
-            <button class="btn btn-secondary btn-sm">{{ button_label|default('Création') }}</button>
+            <button class="btn btn-secondary btn-lg btn-block">{{ button_label|default('Création') }}</button>
         </div>
+    </div>
+    <div class="row justify-content-sm-center">
         {% if user.roles[0] == "ROLE_ADMIN" %}
-            <div class="col-sm-4">
+            <div class="mt-3">
                 {{ include('theater/_delete_form.html.twig') }}
             </div>
         {% endif %}
-
     </div>
-    {% if form_errors(form) != '' %}
-        {{ form_errors(form) }}
-    {% endif %}
+</div>
+{% if form_errors(form) != '' %}
+    {{ form_errors(form) }}
+{% endif %}
 
     {{ form_end(form) }}
 </div>
