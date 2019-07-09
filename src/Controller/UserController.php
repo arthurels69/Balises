@@ -8,10 +8,12 @@ use App\Entity\Theater;
 use App\Form\RegistrationType;
 use App\Service\TriPageService;
 use App\Repository\UserRepository;
+use App\Repository\ShowDateRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -107,7 +109,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("/{id}", 
+     * requirements={"id"="\d+"},   
+     * name="user_show", methods={"GET"})
      * @IsGranted("ROLE_THEATER")
      * @param User $user
      * @return Response
@@ -162,5 +166,38 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
+    }
+
+    /**
+     * @Route("/chart", name="user_chart", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
+     * 
+     */
+    public function showChart(ShowDateRepository $repo
+    ,SerializerInterface $serializer)
+    {   
+        $mois=$repo->findDateMois();
+        $years=$repo->findDateYear();
+
+       
+        $json_mois = $serializer->serialize(
+            $mois,
+            'json', ['groups' => 'group1']
+        );
+
+        $json_years = $serializer->serialize(
+            $years,
+            'json', ['groups' => 'group1']
+        );
+        
+        dump($json_mois);
+              
+        return $this->render('user/chart.html.twig',
+        [
+            'nbSpectacleMois' =>$json_mois,
+            'annee' =>$json_years
+
+        ]
+    );
     }
 }

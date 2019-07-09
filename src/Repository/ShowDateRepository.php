@@ -30,4 +30,39 @@ class ShowDateRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+
+    public function findDateMois()
+    
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql='SELECT COUNT(*) as nbSpectacle,MONTH(date_show) AS mois FROM show_date GROUP BY mois';
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+
+
+    }
+
+    public function findDateYear()
+    
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql='SELECT YEAR(date_show) as annee  FROM show_date  GROUP BY annee' ;
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+
+
+    }
 }

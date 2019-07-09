@@ -8,7 +8,7 @@
 }
 
 .card-header{
-    top:74px;
+    top:70px;
     position:sticky;
     background-color:   #d6dbdf  ;
     z-index: 15;
@@ -16,7 +16,7 @@
 }
 
 .card-body table thead th{
-    top:140px !important;
+    top:133px !important;
     position:sticky !important;
     background-color: white !important;
 }
@@ -31,12 +31,16 @@ h5 span{
 }
 
 h5.list{
-    width:25% !important;
+    width:190px !important;
+}
+
+h5.chart{
+    width:100% !important;
 }
 /*********************************PAGINATION*********************************************/
 
 .nav_page{
-    margin-right: 50px;
+    margin:auto;
 }
 
 #pet-select{
