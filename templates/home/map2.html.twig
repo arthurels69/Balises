@@ -97,14 +97,13 @@
 
         }
 
-        .jumbotron.bulleInfo1
+        .bulleInfo1
         {
-            margin-top: 50%;
-            height: 205px;
             background-color: rgba(0, 0, 0, 0);
             /*background-color: grey;*/
             background-image: url("{{ asset('uploads/ticket-balises.png') }}");
-            background-size: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
             color: white;
 
         }
@@ -229,7 +228,7 @@
 
                     <div class="col-5">
                         <div class="jumbotron bulleInfo1">
-                            <img src="{{ asset('uploads/'~ theater.logo )}}" alt="" style="max-height: 100px;display: block; margin-left: auto; margin-right: 5%; padding-bottom: 10%; margin-top: -15%">
+                            <img src="{{ asset('uploads/'~ theater.logo )}}" alt="" style="max-height: 80px;display: block; margin-left: auto; margin-right: 5%; padding-bottom: 1%; margin-top: 1%">
                             <h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 17px" class="display-4">{{ theater.name }}</h1>
                             <p class="lead" style="text-align: right; margin-right: 10%">{{ theater.address1 }}<br>{{  theater.zipcode }} {{ theater.city }}<br>{{ theater.phoneNumber }}</p>
                         </div>
