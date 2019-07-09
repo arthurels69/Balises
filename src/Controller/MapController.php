@@ -30,18 +30,4 @@ class MapController extends AbstractController
 
         ]);
     }
-
-
-
-    /**
-     * @Route("/spectacle/{id}", name="detailSpectacle", methods={"GET"})
-     * @param Spectacle $spectacle
-     * @return Response
-     */
-    public function detailSpectacle(Spectacle $spectacle): Response
-    {
-        return $this->render('home/spectacle.html.twig', [
-            'spectacle' => $spectacle,
-        ]);
-    }
 }

@@ -1,167 +1,118 @@
-{% extends '/baseMap.html.twig' %}
+{% extends '/basePage.html.twig' %}
+
+{% block stylesheet %}
+
+{% endblock %}
 
 {% block body %}
-<div class="container-fluid bg-custom">
-    <div class="row justify-content-center">
-        <!-- Pills to select either a calendar per theater or per date from Bootstrap Website -->
-        <ul class="nav nav-pills flex-column flex-sm-row nav-pills-calendar col-12" id="pills-tab" role="tablist">
-            <li class="nav-item col-12 col-md-12 nav-pills-calendar">
-                Votre prochain spectacle
-            </li>
-        </ul>
-    </div>
 
 
-    <div class="row justify-content-center bg-custom p-2">
-        <div class="col-2">
-            <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
-                >{{ period.full | date('M-Y')}}</span></h1>
-
-        </div>
-
-        <div class="col-8">
-            <p>
-                Vous trouverez sur cette page tous les spectacles des théatres soutenus par Balises pour les prochains jours,
-                semaines, ou mois...
-
-            </p>
-        </div>
-
-    </div>
-    <!-- the row below manages the date carousel. date_modify takes the "+X day" as parameter. Related JS and css in specific files. -->
-    <div class="row justify-content-center bg-custom pt-5">
-
-        <div class="col-3">
-            <a onclick="changeDateToday('{{ path('async_calendar', {"day" : today | date('Y-m-d')}) }}')">
-                <span class="d-inline-block timePill text-center activeTimePill">Aujourd'hui</span>
-            </a>
-            <a onclick="changeDate3days('{{ path('async_calendarPlusThreePills', {"day" : today | date('Y-m-d')}) }}')">
-                <span class="d-inline-block timePill text-center">cette semaine</span>
-            </a>
-            <a onclick="changeDate1Week('{{ path('async_calendarPlusWeek', {"day" : today | date('Y-m-d')}) }}')">
-                <span class="d-inline-block timePill text-center">ce mois</span>
-            </a>
-        </div>
-
-    </div>
-
-    <div class="row justify-content-center bg-custom pt-2 pb-5">
-        <div class="col-5">
-            <ul class="bxslider">
-
-                <!-- display today's date and focus it with the active class -->
-                <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')})
-                }}')">
-                    <li class="month-day active" onclick="active(0)" id="day0">
-                        <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
-                    </li>
-                </a>
-                {% for oneDay in oneMoreDay %}
-
-                    <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today |
-                        date_modify(oneDay) | date('Y-m-d')
-                    }) }}')">
-
-                        <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
-                            <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
-                        </li>
-
-                    </a>
-
-                {% endfor %}
-
-            </ul>
-
-        </div>
-
-        <div class="col-3" id="calendarDatePicker">
-
-            <form name="dateForm" id="dateForm" method="post" action="">
-                <div class="form-group">
-                    <label for="picked_date">Rechercher par mois : </label>
-                    <select id="picked_date" name="picked_date" class="custom-select">
-                        <option value="-01-01">Janvier</option>
-                        <option value="-02-01">Février</option>
-                        <option value="-03-01">Mars</option>
-                        <option value="-04-01">Avril</option>
-                        <option value="-05-01">Mai</option>
-                        <option value="-06-01">Juin</option>
-                        <option value="-07-01">Juillet</option>
-                        <option value="-08-01">Août</option>
-                        <option value="-09-01">Septembre</option>
-                        <option value="-10-01">Octobre</option>
-                        <option value="-11-01">Novembre</option>
-                        <option value="-12-01">Décembre</option>
-                    </select>
-                </div>
+<div class="container bg-custom h-100">
 
 
-                <div class="form-group">
-                    <label for="">ou par date: </label>
-                    <input type="date" class="form-control-md">
-                </div>
-                <button type="submit" class="btn btn-outline-secondary">eeee</button>
-            </form>
-        </div>
-
-    </div>
+        <h1 class="h1">La programmation Balise</h1>
+        <h4 class="h4">Saison {{ period.year }} - {{ period.year+1 }}</h4>
 
 
-
-
-    <!-- Div dedicated to ajax new spectacle -->
-    <div id="newSpectacles" class="bg-custom">
-
-    </div>
-
-
-    <div id="display-spectacles" class="bg-custom">
-        <!-- below the display of spectacles. Same as the ones in search by theater. -->
-        {% if spectaclesOfTheDay is empty %}
-            <div  class="row justify-content-center bg-custom">
-                <p class="text-danger">Pas de spectacles ce jour-là</p>
+    <div class="row p-4 border-top border-bottom bg-light">
+        {% for month in months |slice(period.month-1 ,12) %}
+            <div class="col-md-1">
+                <!--monthNumber gets the right value to send to the method async_calendar as a month date. -->
+                {% set monthNumber = loop.index+period.month-1 %}
+                <button class="calendarButton hvr-float-shadow py-1" id="month{{ loop.index }}" onclick="changeDate
+                        ('{{ path
+                    ('async_calendar', {"day" : period.year ~ "-" ~ monthNumber ~ "-01"})}}', {{ loop.index }})">
+                    {{ month }} {{ period.year |slice(2,2) }}</button>
             </div>
-        {% endif %}
+        {% endfor %}
+
+
+        {% for month in months |slice(0, period.month-1 ) %}
+            <div class="col-md-1">
+                <!--nextYear gets the right value to send to the method async_calendar as a year formatted(here it
+                must be year +1 -->
+                {% set nextYear = period.year+1 %}
+                <button class="calendarButton hvr-float-shadow" id="month{{ loop.index+period.month-1 }}" onclick="changeDate('{{ path
+                    ('async_calendar', {"day"
+                        : nextYear ~ "-" ~ loop.index ~ "-01"})
+                }}', {{ loop.index+period.month-1 }})">
+                    {{ month }} {{ nextYear |slice(2,2) }}</button>
+            </div>
+        {% endfor %}
+
+    </div>
+    <hr class="hr-dark">
+    <!-- Div dedicated to ajax new spectacle -->
+    <div id="newSpectacles">
+
+    </div>
+
+
+    <div id="display-spectacles">
+        <!-- below the display of spectacles. Same as the ones in search by theater. -->
+            <h4 class="h4">Au programme ce mois</h4>
+
+
         {% for spectacle in spectaclesOfTheDay%}
 
-            <div  class="row row-striped bg-white">
-                <div class="col-2 text-right">
+            <div  class="row row-striped border-bottom p-4">
+                <div class="col-12 col-md-1 text-right">
 
                     <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
                                                 >{{
                             spectacle.dateShow | date('d')}}</span></h1>
-                    <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
+                    <h4 class="h4">{{ spectacle.dateShow | date('M')}}</h4>
                 </div>
-                <div class="col-10">
-                    <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
-                        </strong></h3>
-                    <img class="img-thumbnail" src="{{ spectacle.showId.theater.logo }}" style="height: 10em;
-                    display: inline; float:right">
+                <div class="col-md-6">
+                    <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank">
+                        <h3 class="text-uppercase show-title">
+                            <strong>{{ spectacle.showId.title }}</strong>
+                        </h3>
+                    </a>
+                    <img class="img" src="{{ spectacle.showId.image }}">
+                </div>
+                <div class="col-12 col-md-5">
+
                     <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
-                            {{ spectacle.dateShow | date('D') }}</li>
-                        <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <li class="list-inline-item show-info"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                            {{ spectacle.dateShow | date('D') }}
                             {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                         </li>
-                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
-                            {{ spectacle.showId.theater.name }}  </li>
+                        <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}"><li
+                                    class="list-inline-item calendarLink"><i class="fa fa-location-arrow"
+                                                                             aria-hidden="true"></i>
+                                {{ spectacle.showId.theater.name }} </li></a>
                     </ul>
-                    <p description>{{ spectacle.showId.description }}</p>
+
+                    <p class="description">{{ spectacle.showId.description | truncate(400) }}
+                        <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank"
+                           class="calendarLink">Voir plus</a>
+                    </p>
+
+                    <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">Offre
+                            balise</button></a>
+
+
                 </div>
+                <!--
+                <div class="col-6 col-md-2 m-auto">
 
 
+                </div>-->
             </div>
         {% endfor %}
-        <div class="row bg-custom" id="plus-button">
+        <div class="row justify-content-center p-4" id="plus-button">
+            <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;" onclick="nextDay('{{ path
+                ('async_calendarPlusOne', {"day" : today |
+                date_modify('+ 1 day') | date('Y-m-d')
+            }) }}')"><i class="fas fa-plus"></i> Ce mois </h4>
             <div class="col-1 offset-1 ">
-                <div onscroll="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
-                    date_modify('+ 1 day') | date('Y-m-d')
-                }) }}')"></div>
+                <div ></div>
             </div>
         </div>
 
     </div>
-    <div id="spectaclesNextDay" class="row row-striped bg-custom">
+    <div id="spectaclesNextDay" class="row row-striped">
 
     </div>
 
@@ -175,10 +126,10 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('calendar') }}
+
     <script>
         //Cette fonction gère l'affichage des spectacles quand on clique dans le calendrier carousel
-        function changeDate(date) {
+        function changeDate(date, clickedPill) {
             fetch(date)
                 .then(response => response.text())
                 .then(text =>  {
@@ -189,9 +140,19 @@
                     displaySpectacles.remove();
 
                     spectaclesNextDay.innerHTML ='';
-                    console.log(newSpectacles);
+
                     newSpectacles.innerHTML = text;
                 });
+
+            let month=[];
+            for(let i = 1; i <= 12; i++) {
+
+                month[i] = document.getElementById('month'+i);
+                month[i].classList.remove('active');
+            }
+            //puis on ajoute un design indiquant la case selectionné
+            month[clickedPill].classList.add('active');
+            console.log(month[clickedPill]);
         }
         /*les 3 fonctions ci-dessous gèrent l'affichage des spectacles quand on clique sur les pills (aujourd'hui, 3
          jours, 1 semaine) */
@@ -310,17 +271,19 @@
 
         function active(clickedPill) {
             //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
-            let day=[];
-            for(let i = 0; i< 14; i++) {
+            let month=[];
+            for(let i = 1; i <= 12; i++) {
 
-                day[i] = document.getElementById('day'+i);
-                day[i].classList.remove('active');
+                month[i] = document.getElementById('month'+i);
+                month[i].classList.remove('active');
             }
             //puis on ajoute un design indiquant la case selectionné
-            day[clickedPill].classList.add('active');
+            month[clickedPill].classList.add('active');
 
         }
 
 
     </script>
+
+</div>
 {% endblock %}
