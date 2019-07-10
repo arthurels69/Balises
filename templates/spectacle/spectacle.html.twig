@@ -1,0 +1,95 @@
+{% extends 'basePage.html.twig' %}
+{% block title %}{{ spectacle.title }}{% endblock %}
+
+{% block body %}
+    <div class="container bg-custom h-100" xmlns="http://www.w3.org/1999/html">
+
+
+        <div class="row m-auto justify-content-between">
+
+            <div class="col-12 p-4">
+                <h1 class="h1">{{ spectacle.title }}</h1>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="col-12">
+                    <h2 class="h2">Description :</h2>
+                </div>
+                <p class="description">{{ spectacle.description }}</p>
+                <div class="col-12">
+                    <h2 class="h2">Distribution :</h2>
+                </div>
+                <p class="description">{{ spectacle.distribution }}</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <img src="{{ spectacle.image }}">
+                <p>Crédit photo : {{ spectacle.photoCredits }}</p>
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-12">
+                <h2 class="h2">Prochaines séances :</h2>
+            </div>
+            {% for seance in showDate %}
+            <div class="col-12 col-md-8 p-4">
+                <p class="description">{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
+            </div>
+            <div class="col-12 col-md-3">
+                <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton">
+                        commander
+                    </button></a>
+            </div>
+            {% endfor %}
+
+            <div class="col-12 p-4" id="plus-button">
+                <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;" onclick="moreDates('{{ path
+                ('moreSpectacle', {"id": spectacle.id}) }}')"><i
+                            class="fas fa-plus"></i> plus de dates </h4>
+            </div>
+            <div id="moreDates" class="row p-4"></div>
+
+
+
+        </div>
+        <div class="row p-4">
+            <div class="col-12">
+                <h2 class="h2">Information complémentaire :</h2>
+                <p>{{ spectacle.mandatoryInfos }}</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center p-4">
+            <div class="col-12 col-md-3" id="logoonmap">
+                <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+            </div>
+            <div class="col-12">
+                <a href="javascript:window.close();">Fermer la fenêtre</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+    //Cette fonction gère l'affichage des spectacles quand on clique dans le calendrier carousel
+    function moreDates(dates) {
+        fetch(dates)
+            .then(response => response.text())
+            .then(text =>  {
+                let moreDates = document.getElementById('moreDates');
+                if(moreDates.innerHTML != ''){
+                    moreDates.innerHTML ='';
+                }
+                else{
+                moreDates.innerHTML =text;
+                }
+            });
+    }
+</script>
+
+{% endblock %}
+

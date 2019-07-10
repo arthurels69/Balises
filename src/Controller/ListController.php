@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\NonBalisesTheaterRepository;
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
@@ -46,19 +47,19 @@ class ListController extends AbstractController
     /**
      * Displays the calendar at first visit on Calendar Page.
      * @Route("/theaters/",
-     *      name="/theaters_list",
+     *      name="theaters_list",
      *     methods={"GET", "POST"})
      */
     public function theaterList(
         Request $request,
         TheaterRepository $theaterRepository,
-        SpectacleRepository $spectacleRepository,
-        ShowDateRepository $dateRepository
+        NonBalisesTheaterRepository $nonBalisesTheaterRepository
     ) {
 
 
         return $this->render('theater/list.html.twig', [
             'theaters' => $theaterRepository->findAll(),
+            'nonBalisesTheaters' => $nonBalisesTheaterRepository->findAll()
         ]);
     }
 }

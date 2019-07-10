@@ -3,20 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\ShowDate;
-use App\Entity\ShowRate;
 use App\Entity\Spectacle;
 use App\Form\SpectacleType;
+use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
-use App\Entity\Theater;
 use App\Repository\TheaterRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @Route("/spectacle")
@@ -26,6 +25,7 @@ class SpectacleController extends AbstractController
     /**
      * @Route("/", name="spectacle_index", methods={"GET"})
      * @param SpectacleRepository $spectacleRepository
+     * @param TheaterRepository $theaterRepository
      * @return Response
      */
     public function index(SpectacleRepository $spectacleRepository, TheaterRepository $theaterRepository): Response
@@ -35,7 +35,7 @@ class SpectacleController extends AbstractController
         $spectacle = $spectacleRepository->findBy(['theater'=>$theater]);
 
         return $this->render('spectacle/index.html.twig', [
-            'spectacles' => $spectacle ]);
+            'spectacles' => $spectacle, 'user' => $user, 'theater' => $theater ]);
         /*
         return $this->render('spectacle/index.html.twig', [
             'spectacles' => $spectacleRepository->findAll(),
@@ -43,7 +43,7 @@ class SpectacleController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="spectacle_new", methods={"GET","POST"})
+     * @Route("/new/Spectacle", name="spectacle_new", methods={"GET","POST"})
      * @param Request $request
      * @param ObjectManager $manager
      * @return Response
@@ -63,6 +63,7 @@ class SpectacleController extends AbstractController
 
             /** @var UploadedFile $file */
             $fileImage = $request->files->get('spectacle')['image'];
+
             if ($fileImage) {
                 $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
                 try {
@@ -116,6 +117,7 @@ class SpectacleController extends AbstractController
 
             /** @var UploadedFile $file */
             $fileImage = $request->files->get('spectacle')['image'];
+
             if ($fileImage) {
                 $fileName = md5(uniqid()) . '.' . $fileImage->guessExtension();
                 try {
@@ -154,5 +156,39 @@ class SpectacleController extends AbstractController
         }
 
         return $this->redirectToRoute('spectacle_index');
+    }
+
+    /**
+     * @Route("/show/{id}", name="detailSpectacle", methods={"GET"})
+     * @param Spectacle $spectacle
+     * @return Response
+     */
+    public function detailSpectacle(Spectacle $spectacle, ShowDateRepository $showDateRepository): Response
+    {
+        $today = new \DateTime();
+
+        $showDate = $showDateRepository->dateList($spectacle->getId(), $today);
+
+        return $this->render('spectacle/spectacle.html.twig', [
+            'spectacle' => $spectacle,
+            'showDate' => $showDate
+        ]);
+    }
+
+    /**
+     * @Route("/show/more/{id}", name="moreSpectacle", methods={"GET"})
+     * @param Spectacle $spectacle
+     * @return Response
+     */
+    public function moreSpectacleDates(Spectacle $spectacle, ShowDateRepository $showDateRepository) : Response
+    {
+        $today = new \DateTime();
+
+        $showDate = $showDateRepository->moreDateList($spectacle->getId(), $today);
+
+        return $this->render('spectacle/moreSpectacle.html.twig', [
+            'spectacle' => $spectacle,
+            'showDate' => $showDate
+        ]);
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'baseMap.html.twig' %}
+
+{% block title %}Modification Représentation{% endblock %}
+
+{% block body %}
+    <h1>Modification Représentation</h1>
+
+    {{ include('show_date/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
+    {{ include('show_date/_showDateBySpectacle.html.twig') }}
+  <!--  <a href="{{ path('show_date_index') }}">Retour</a>-->
+
+    {{ include('show_date/_delete_form.html.twig') }}
+{% endblock %}

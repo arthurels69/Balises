@@ -39,10 +39,11 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
           - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/user$, roles: ROLE_ADMIN }
+          - { path: ^/nonbalisestheater, roles: ROLE_ADMIN }
           - { path: ^/user/, roles: ROLE_USER }
 
 
 
     role_hierarchy:
         ROLE_THEATER:    ROLE_USER
-        ROLE_ADMIN:      ROLE_ADMIN
+        ROLE_ADMIN:      ROLE_THEATER

@@ -1,15 +1,18 @@
-<div id="display-spectacles">
+<div id="display-spectacles" class="bg-white">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
     {% if spectaclesOfTheDay is empty %}
 
         <p>Pas de spectacles ce jour-là</p>
 
     {% endif %}
-    {% for spectacle in spectaclesOfTheDay%}
 
-        <div class="row row-striped">
+    {% for spectacle in spectaclesOfTheDay%}
+        <div class="row row-striped ">
+
             <div class="col-2 text-right">
-                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
+                <h1 class="display-4"><span class="badge badge-secondary day-figure"
+                    id="dayNumberSpectacle">{{
+                        spectacle.dateShow | date('d')}}</span></h1>
                 <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
             </div>
             <div class="col-10">

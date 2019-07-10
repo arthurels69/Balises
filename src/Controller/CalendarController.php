@@ -7,14 +7,11 @@ use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
 use App\Service\CalendarService;
-use Mapado\RestClientSdk\SdkClient;
-use Mapado\RestClientSdk\Tests\Units\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 /** Controls the Calendar Pages
  * Class CalendarController
@@ -56,52 +53,50 @@ class CalendarController extends AbstractController
         ShowDateRepository $dateRepository
     ) {
 
+
         $today = new \DateTime();
-        $todayString = $today->format("Y-m-d");
+        $todayString = [];
+        $todayString['full'] = $today->format("Y-m-d");
+        $todayString['year'] = substr($todayString['full'], 0, 4);
+        $todayString['month'] = substr($todayString['full'], 5, 2);
+
+        $selectedDate['monthAndDay'] = $request->request->get('picked_date');
+
+        $selectedDate['month'] = substr($selectedDate['monthAndDay'], 1, 2);
 
         //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
-            $todayString = $request->request->get('picked_date');
+            if ($todayString['month'] > $selectedDate['month']) {
+                $todayString['year']++;
+            }
+
+                $todayString['full'] = $todayString['year'] . $selectedDate['monthAndDay'];
+                $todayString['month'] = $selectedDate['month'];
         }
 
-        return $this->render('Calendar/calendar.html.twig', [
-            'today' => $todayString,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
+        $months = [
+            'jan',
+            'fev',
+            'mar',
+            'avr',
+            'mai',
+            'jui',
+            'jul',
+            'aou',
+            'sep',
+            'oct',
+            'nov',
+            'dec'
+        ];
+
+        return $this->render('Calendar/calendar2.html.twig', [
+            'today' => $todayString['full'],
+            'period' => $todayString,
+            'months' => $months,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString['full']),
             'oneMoreDay' => $this->calendarService->addMoreDays(),
-            'ajaxSpectacle' => 'aaa',
-            'theaters' => $theaterRepository->findAll(),
-            'spectacles' => $spectacleRepository->findAll(),
-            'showdates' =>$dateRepository->findAll(),
         ]);
     }
-
-    /**
-     * Display the calendar with the selected date as input.
-     * @param Request $request
-     * @return ResponseAlias
-     * @throws \Exception
-     * @Route("/calendar/{day}", name="calendar_select_day", methods={"GET", "POST"})
-     */
-    public function calendarSelectedDay(Request $request)
-    {
-
-        //Retrieves the date passed in URI.
-        $selectedDay = substr($request->getUri(), -10);
-
-        //IF INPUT used // Date transmitted by the "rechercher par date" formular
-        if ($request->request->get('picked_date')) {
-            $selectedDay = $request->request->get('picked_date');
-        }
-
-
-         return $this->render('Calendar/calendar.html.twig', [
-               'today' => $selectedDay,
-               'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
-               'oneMoreDay' => $this->calendarService->addMoreDays(),
-
-            ]);
-    }
-
 
     /**
      * @param Request $request
@@ -111,25 +106,55 @@ class CalendarController extends AbstractController
     public function asyncDate(Request $request) :Response
     {
 
-        $selectedDay = $request->attributes->get('day');
+        $selectedDay['full'] = $request->attributes->get('day');
 
         return $this->render('Calendar/ajaxSpectacles.html.twig', [
-            'today' => $selectedDay,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay)
+            'today' => $selectedDay['full'],
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay['full'])
         ]);
     }
 
     /**
      * @param Request $request
      * @return Response
-     * @Route("/calendar/{day}/asyncPlusOne", name="async_calendarPlusOne", methods={"GET", "POST"})
+     * @Route("/calendar/{day}/asyncPlusThree", name="async_calendarPlusOne", methods={"GET", "POST"})
      */
     public function asyncPlusOne(Request $request) : Response
     {
         $selectedDay = $request->attributes->get('day');
 
-        $newSpectacles = $this->calendarService->selectSpectaclesOfTheDay($selectedDay);
+        $newSpectacles = $this->calendarService->selectSpectacles3NextDays($selectedDay);
 
         return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
+    }
+
+    /**
+     * @return Response
+     * @throws \Exception
+     *  @Route("/calendar/{day}/asyncPlusThreePills", name="async_calendarPlusThreePills", methods={"GET", "POST"})
+     */
+    public function threeNextDays()
+    {
+        $selectedDay = new \DateTime();
+        $selectedDay = $selectedDay->format("Y-m-d");
+        return $this->render('Calendar/ajaxSpectacles.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectacles3NextDays($selectedDay)
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @throws \Exception
+     *  @Route("/calendar/{day}/asyncPlusWeekPills", name="async_calendarPlusWeek", methods={"GET", "POST"})
+     */
+    public function nextWeek()
+    {
+        $selectedDay = new \DateTime();
+        $selectedDay = $selectedDay->format("Y-m-d");
+        return $this->render('Calendar/ajaxSpectacles.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesNextWeek($selectedDay)
+        ]);
     }
 }

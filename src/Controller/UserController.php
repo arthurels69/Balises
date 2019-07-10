@@ -86,13 +86,13 @@ class UserController extends AbstractController
 
             // Set ROLE_THEATER for every new users
             $user->setRoles(['ROLE_THEATER']);
-
-            $manager->persist($user);
+            $user->setTheater($theater);
 
             $theater->setName($request->request->get('registration')['theater']['name']);
             $theater->setEmail($user->getEmail());
             $theater->setUser($user);
 
+            $manager->persist($user);
             $manager->persist($theater);
             $manager->flush();
 

@@ -29,9 +29,11 @@ class MapadoController extends AbstractController
         'place' => 'lyon'
         ];
 
+
+
         $payloadJson = \GuzzleHttp\json_encode($payload);
 
-        $result = $mapadoWrite->createTicketing('/v1/ticketings?timezone=Europe/Paris&wallet=1519', $payloadJson);
+        $result = $mapadoWrite->createTicketing('/v1/ticketings', $payloadJson);
 
         return $this->redirectToRoute("home");
     }

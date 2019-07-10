@@ -6,13 +6,31 @@
     <style>
         .sidenav {display: none;}
     </style>
-    <h1>Visualisation d'un Théâtre</h1>
+
+    <h1>Visualisation de {{ theater.name }}</h1>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
+        </div>
+        <div class="col-sm-6">
+            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+        </div>
+    </div>
+
     <table class="table">
         <tbody>
+            {#
+            <tr>
+                <th>Id</th>
+                <td>{{ theater.id }}</td>
+            </tr>
+
             <tr>
                 <th>Nom</th>
                 <td>{{ theater.name }}</td>
             </tr>
+             #}
             <tr>
                 <th>Email</th>
                 <td>{{ theater.email }}</td>
@@ -37,10 +55,12 @@
                 <th>Téléphone</th>
                 <td>{{ theater.phoneNumber }}</td>
             </tr>
+            {#
             <tr>
                 <th>Logo</th>
                 <td>{{ theater.logo }}</td>
-            </tr>
+
+            </tr>#}
             <tr>
                 <th>Web Site</th>
                 <td>{{ theater.website }}</td>
@@ -62,13 +82,13 @@
     <div class="row justify-content-md-center">
         {% if user.roles[0] == "ROLE_THEATER" %}
             <div class="col-md-4">
+                <a href="{{ path('spectacle_index') }}"><button class="btn btn-secondary mb-5">Liste Spectacles</button> </a>
+            </div>
+            <div class="col-md-4">
                 <a href="{{ path('spectacle_new') }}"><button class="btn btn-secondary mb-5">Nouveau Spectacle</button> </a>
             </div>
             <div class="col-md-4">
                 <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-secondary mb-5">Modification</button></a>
-            </div>
-            <div class="col-md-4">
-                <a href="{{ path('spectacle_index') }}"><button class="btn btn-secondary mb-5">Liste Spectacles</button> </a>
             </div>
         {% endif %}
         {% if user.roles[0] == "ROLE_ADMIN" %}
