@@ -3,17 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
-use App\Service\TriService;
 use App\Form\UserType;
 use App\Entity\Theater;
+use App\Form\RegistrationType;
+use App\Service\TriPageService;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -24,21 +24,43 @@ class UserController extends AbstractController
     /**
      *Create Index user
      * @Route("/index", name="user_index", methods={"GET"})
-     * @Route("/index/{champ}/{sens}", name="user_index", methods={"GET"}, defaults={"champ":"" , "sens":""})
+     * @Route("/index/{page_cours}/{ligne_page}/{champ}/{sens}",
+     * name="user_index", methods={"GET"},
+     * defaults={"champ":"" , "sens":"", "page_cours":1, "ligne_page":10})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(string $champ, string $sens, UserRepository $userRepository, TriService $tri): Response
-    {
-        if ($champ != "") {
-            $users = $tri->tri($champ, $sens);
-        } else {
-            $users = $userRepository->findAll();
-        }
+    public function index(
+        string $champ,
+        string $sens,
+        UserRepository $userRepository,
+        TriPageService $triPage,
+        $page_cours,
+        $ligne_page
+    ): Response {
+        
+        $users=$triPage->paginationTri($page_cours, $ligne_page, $champ, $sens);
 
+        $usersAll = $userRepository->findAll();
+
+        //Nombre de ligne total
+        $ligne_totale=count($usersAll);
+
+        //calcul du nombre de pages totales
+        $page_total=ceil($ligne_totale/$ligne_page);
+
+        /*AFFICHAGE BANDEAU PAGINATION PAR GROUPE DE 5 MAX */
+        $indice_page=$triPage->indicePage($page_cours, $ligne_page);
+                    
+         /****************************VUE*******************************/
         return $this->render('user/index.html.twig', [
-            'users' => $users
+            'users'         => $users,
+            'page_cours'    => $page_cours,
+            'ligne_page'    => $ligne_page,
+            'indice_page'   => $indice_page,
+            'page_total'    => $page_total
+
         ]);
     }
     /**
@@ -103,14 +125,17 @@ class UserController extends AbstractController
      * @IsGranted("ROLE_THEATER")
      * @param Request $request
      * @param User $user
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index', [

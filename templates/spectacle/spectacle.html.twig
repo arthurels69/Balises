@@ -5,21 +5,21 @@
     <div class="container bg-custom h-100" xmlns="http://www.w3.org/1999/html">
 
 
-
-        <div id="background_opacity"></div>
-
         <div class="row m-auto justify-content-between">
 
             <div class="col-12 p-4">
-                <h1>{{ spectacle.title }}</h1>
+                <h1 class="h1">{{ spectacle.title }}</h1>
             </div>
 
             <div class="col-12 col-md-6">
-                <h2>Description :</h2>
-                <p>{{ spectacle.description }}</p>
-
-                <h2>Distribution :</h2>
-                <p>{{ spectacle.distribution }}</p>
+                <div class="col-12">
+                    <h2 class="h2">Description :</h2>
+                </div>
+                <p class="description">{{ spectacle.description }}</p>
+                <div class="col-12">
+                    <h2 class="h2">Distribution :</h2>
+                </div>
+                <p class="description">{{ spectacle.distribution }}</p>
             </div>
             <div class="col-12 col-md-6">
                 <img src="{{ spectacle.image }}">
@@ -27,13 +27,15 @@
             </div>
         </div>
         <div class="row p-4">
-
+            <div class="col-12">
+                <h2 class="h2">Prochaines séances :</h2>
+            </div>
             {% for seance in showDate %}
             <div class="col-12 col-md-8 p-4">
-                <p>{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
+                <p class="description">{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
             </div>
             <div class="col-12 col-md-3">
-                <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton">
+                <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">
                         commander
                     </button></a>
             </div>
@@ -51,13 +53,8 @@
         </div>
         <div class="row p-4">
             <div class="col-12">
-                <h2>Information complémentaire :</h2>
+                <h2 class="h2">Information complémentaire :</h2>
                 <p>{{ spectacle.mandatoryInfos }}</p>
-            </div>
-
-
-            <div class="col-12">
-                <a href="javascript:window.close();">Fermer la fenêtre</a>
             </div>
         </div>
 
@@ -65,7 +62,9 @@
             <div class="col-12 col-md-3" id="logoonmap">
                 <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
             </div>
-
+            <div class="col-12">
+                <a href="javascript:window.close();">Fermer la fenêtre</a>
+            </div>
         </div>
     </div>
 

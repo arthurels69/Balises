@@ -1,6 +1,5 @@
 /****************************Liste des théâtres user/index.html.twig***********************/
 
-
 .card {
     max-width:900px  !important;
     min-width:900px  !important;
@@ -9,15 +8,15 @@
 }
 
 .card-header{
-    top:70px;
+    top:74px;
     position:sticky;
     background-color:   #d6dbdf  ;
     z-index: 15;
-    
+   
 }
 
 .card-body table thead th{
-    top:135px !important;
+    top:140px !important;
     position:sticky !important;
     background-color: white !important;
 }
@@ -31,6 +30,19 @@ h5 span{
     word-wrap: break-word;
 }
 
+h5.list{
+    width:25% !important;
+}
+/*********************************PAGINATION*********************************************/
+
+.nav_page{
+    margin-right: 50px;
+}
+
+#pet-select{
+    height: 40px;
+    margin-right: 20px;
+}
  
 /*****************************************************************************************/
 

@@ -20,13 +20,13 @@ class Param
      * Resale coefficient of tickets
      * @ORM\Column(type="float")
      */
-    private $resale_coeff;
+    private $resaleCoeff;
 
     /**
      * Redistributed coefficient for Balises
      * @ORM\Column(type="float")
      */
-    private $redistributed_coeff;
+    private $redistributedCoeff;
 
     public function getId(): ?int
     {
@@ -35,24 +35,24 @@ class Param
 
     public function getResaleCoeff(): ?float
     {
-        return $this->resale_coeff;
+        return $this->resaleCoeff;
     }
 
-    public function setResaleCoeff(float $resale_coeff): self
+    public function setResaleCoeff(float $resaleCoeff): self
     {
-        $this->resale_coeff = $resale_coeff;
+        $this->resaleCoeff = $resaleCoeff;
 
         return $this;
     }
 
     public function getRedistributedCoeff(): ?float
     {
-        return $this->redistributed_coeff;
+        return $this->redistributedCoeff;
     }
 
-    public function setRedistributedCoeff(float $redistributed_coeff): self
+    public function setRedistributedCoeff(float $redistributedCoeff): self
     {
-        $this->redistributed_coeff = $redistributed_coeff;
+        $this->redistributedCoeff = $redistributedCoeff;
 
         return $this;
     }

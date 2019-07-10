@@ -8,9 +8,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Extensions\TextExtension;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 class ShowDateType extends AbstractType
 {
@@ -19,7 +21,9 @@ class ShowDateType extends AbstractType
         $builder
             ->add('dateShow')
             //->add('showId')
-            ->add('showRate', ShowRateType::class) ;
+            ->add('showRate', ShowRateType::class)
+
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
