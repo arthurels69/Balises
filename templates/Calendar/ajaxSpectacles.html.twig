@@ -1,36 +1,61 @@
 <div id="display-spectacles">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
-    {% if spectaclesOfTheDay is empty %}
 
-        <p>Pas de spectacles ce jour-là</p>
+        <h4 class="h4">Au programme en {{ today |date('M') }}</h4>
 
-    {% endif %}
     {% for spectacle in spectaclesOfTheDay%}
 
-        <div class="row row-striped">
-            <div class="col-2 text-right">
-                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{ spectacle.dateShow | date('d')}}</span></h1>
-                <h2 class="month-display">{{ spectacle.dateShow | date('M')}}</h2>
+        <div  class="row row-striped border-bottom p-4">
+            <div class="col-12 col-md-1 text-right">
+
+                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
+                    >{{
+                        spectacle.dateShow | date('d')}}</span></h1>
+                <h4 class="h4">{{ spectacle.dateShow | date('M')}}</h4>
             </div>
-            <div class="col-10">
-                <h3 class="text-uppercase"><strong>{{ spectacle.showId.title }}
-                    </strong></h3>
+            <div class="col-12 col-md-6">
+                <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank">
+                    <h3 class="text-uppercase show-title">
+                        <strong>{{ spectacle.showId.title }}</strong>
+                    </h3>
+                </a>
+                <img class="img" src="{{ spectacle.showId.image }}">
+            </div>
+            <div class="col-6 col-md-5">
+
                 <ul class="list-inline">
-                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
-                        {{ spectacle.dateShow | date('D') }}</li>
-                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <li class="list-inline-item show-info"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{ spectacle.dateShow | date('D') }}
                         {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                     </li>
-                    <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
-                        {{ spectacle.showId.theater.name }}</li>
+                    <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}"><li
+                                class="list-inline-item calendarLink"><i class="fa fa-location-arrow"
+                                                                         aria-hidden="true"></i>
+                            {{ spectacle.showId.theater.name }} </li></a>
                 </ul>
-                <p>{{ spectacle.showId.description }}</p>
+
+                <p class="description">{{ spectacle.showId.description | truncate(400) }}
+                    <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank"
+                       class="calendarLink">Voir plus</a>
+                </p>
+
+                <button class="calendarButton hvr-float-shadow mt-5">Offre balise</button>
+
+
             </div>
+            <!--
+            <div class="col-6 col-md-2 m-auto">
+
+
+            </div>-->
         </div>
-
-
     {% endfor %}
+    <div class="row bg-custom" id="plus-button">
+        <div class="col-1 offset-1 ">
+            <div style="height: 20px" onfocus="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
+                date_modify('+ 1 day') | date('Y-m-d')
+            }) }}')"></div>
+        </div>
+    </div>
 
-    <button class="btn btn-outline-secondary" onclick="nextDay('{{ path('async_calendarPlusOne', {"day" : today | date_modify('+ 1 day') | date('Y-m-d')
-    }) }}')">Jour suivant</a>
 </div>

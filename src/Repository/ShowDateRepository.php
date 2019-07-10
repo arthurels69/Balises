@@ -19,13 +19,31 @@ class ShowDateRepository extends ServiceEntityRepository
         parent::__construct($registry, ShowDate::class);
     }
 
-    public function spectaclePerDates($start, $end) : array
+    public function spectaclePerDates($start, $end, $today) : array
     {
         return $this->createQueryBuilder('d')
             ->where('d.dateShow >= :start')
+            ->andWhere('d.dateShow >= :today')
             ->andWhere('d.dateShow < :end')
             ->setParameter('start', $start)
+            ->setParameter('today', $today)
             ->setParameter('end', $end)
+            ->orderBy('d.dateShow', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+    public function dateList($spectacleId, $today) :array
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.showId >= :spectacleId')
+            ->andWhere('d.dateShow >= :today')
+            ->setParameter('spectacleId', $spectacleId)
+            ->setParameter('today', $today)
+            ->orderBy('d.dateShow', 'ASC')
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
             ;
@@ -60,4 +78,29 @@ class ShowDateRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
+
+    public function moreDateList($spectacleId, $today) :array
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.showId >= :spectacleId')
+            ->andWhere('d.dateShow >= :today')
+            ->setParameter('spectacleId', $spectacleId)
+            ->setParameter('today', $today)
+            ->orderBy('d.dateShow', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+//    public function searchThreeDates():array
+//    {
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT *
+//                FROM App\Entity\ShowDate s
+//                WHERE s.dateShow > NOW()
+//                ORDER BY s.dateShow DESC LIMIT 3'
+//        );
+//            return $query->execute();
+//    }
 }

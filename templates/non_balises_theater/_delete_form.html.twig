@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('non_balises_theater_delete', {'id': non_balises_theater.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ non_balises_theater.id) }}">
+    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"  title="Suppression"><i class="far fa-trash-alt"></i></button>
+</form>
+

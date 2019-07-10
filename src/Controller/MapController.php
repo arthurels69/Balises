@@ -20,24 +20,14 @@ class MapController extends AbstractController
     public function map2(
         TheaterRepository $theaterRepository,
         SpectacleRepository $spectacleRepository,
-        ShowDateRepository $dateRepository
+        ShowDateRepository $dateRepository,
+        ShowDateRepository $showDateRepository
     ) {
         return $this->render('home/map2.html.twig', [
             'theaters' => $theaterRepository->findAll(),
             'spectacles' => $spectacleRepository->findAll(),
             'showdates' =>$dateRepository->findAll(),
-        ]);
-    }
 
-    /**
-     * @Route("/spectacle/{id}", name="detailSpectacle", methods={"GET"})
-     * @param Spectacle $spectacle
-     * @return Response
-     */
-    public function detailSpectacle(Spectacle $spectacle): Response
-    {
-        return $this->render('home/spectacle.html.twig', [
-            'spectacle' => $spectacle,
         ]);
     }
 }

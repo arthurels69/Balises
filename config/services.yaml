@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    mailer_transport: '%env(resolve:MAILER_URL)%'
 
     logo_directory: '../public/uploads/'
 

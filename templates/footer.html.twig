@@ -1,0 +1,59 @@
+
+{% block footer %}
+    <footer class="footer" id="footer">
+        <nav id="footer2" class="navbar navbar-expand-lg navbar">
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="btn btnfooter" href="#">Initiative</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btnfooter" href="#">À propos</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btnfooter" href="{{ path('theaters_list') }}">Théatres</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+    </footer>
+
+    <style>
+
+
+
+        #footer2
+        {
+
+            background-color: black;
+            border-radius: 10px;
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .btnfooter
+        {
+            color: white;
+        }
+
+        .btnfooter:hover
+        {
+            color : yellow;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+    </style>
+{% endblock %}

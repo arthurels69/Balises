@@ -1,19 +1,23 @@
 @import "vars";
 @import "~bootstrap";
-@import "calendar";
-@import 'theater.scss';
-@import 'theaterList.scss';
+
 
 html {
     height: 100%;
     width: 100%;
 }
 
+//h1{
+//    text-align: center;
+//}
+
 body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: $baliseYellow;
+    //background-color: $baliseYellow;
+    //background-image: url('../../public/uploads/Balises_background.png');
+    background-size: 100% ;
 }
 
 .container-fluid{
@@ -31,162 +35,134 @@ body {
     color: $lightblack;
 }
 
-// manage the design of the pulls of the top of calendar page
-.nav-pills-calendar{
-    font-weight: bold;
-    font-size: 1.5em;
-    background-color: $black;
-    border-radius: 0.2em;
-}
 
-.nav-pills-calendar a{
-  background-color: $black;
-  color : $baliseYellow;
-}
-
-.nav-pills-calendar a:active{
-  background-color: $lightblack;
-  color : $baliseYellow;
-}
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: $baliseYellow;
-  color : $black;
-  border : 1px solid $black;
-}
-
-// manage the design of the event description in calendar
-
-//display-4 is the box containing the day figures
-.day-figure {
-  background-color: $black;
-}
-
-// manage the map with title, logo, ...
-
-#map
-
-{
-    z-index: 0;
-    width:100%;
-}
-
-#selectplacetitle
-{
-    position: absolute;
-    top: 60%;
-    left: 7%;
-    z-index: 1;
-    color: black;
-    font-size: 80px;
-
-}
-
-
-#selectplacetitle h1
-{
-    font-size: 80%;
-    font-weight: bold;
-}
-
-#selectplacetitle span
-{
-    color: white;
-    font-weight: bold;
-}
-
-#logoonmap
-{
-    position: absolute;
-    bottom: 40px;
-    right: 2px;
-    z-index: 1;
-    transform: scale(0.7, 0.7);
-}
-
-
-
-.popupCustom .leaflet-popup-tip
-{
-    display: none;
-}
-
-.popupCustom .leaflet-popup-content-wrapper {
-    box-shadow : none;
-    background: none;
-    color: white;
-    height: 800px;
-    width: 800px;
-}
-
-.jumbotron
-{
-    padding: 2%;
-}
-
-.bulleInfo
-{
-    font-size: x-small;
-    background: none;
-    display: none;
-    z-index: 2;
-    position: fixed;
-    bottom: -50%;
-
-
-}
-
-.bulleInfo1
-{
-    margin-top: 50%;
-    background-color: grey;
-    color: white;
-}
-
-.bulleInfo2
-{
-
-}
-
-.bulleInfo3
-{
-    background-color: black;
-    color: white;
-    height: 250px;
-    overflow: auto;
-}
-
-.bulleInfo4
-{
-
-}
-
-.bulleInfo5
-{
-
-}
-
-.bulleInfo6
-{
-    background-color: grey;
-    color: white;
-    height: 250px;
-    overflow: auto;
-    margin-top: -50%;
-}
-
-.bulleInfo1Photo
-{
-    max-width: 100%;
-}
-
-.jumbotron h1
-{
-    font-size: 20px;
-}
-
-.jumbotron p
-{
-    font-size: 15px;
-}
+//
+//// manage the map with title, logo, ...
+//
+//#map
+//
+//{
+//    z-index: 0;
+//    width:100%;
+//}
+//
+//#selectplacetitle
+//{
+//    position: absolute;
+//    top: 60%;
+//    left: 7%;
+//    z-index: 1;
+//    color: black;
+//    font-size: 80px;
+//
+//}
+//
+//
+//#selectplacetitle h1
+//{
+//    font-size: 80%;
+//    font-weight: bold;
+//}
+//
+//#selectplacetitle span
+//{
+//    color: white;
+//    font-weight: bold;
+//}
+//
+//#logoonmap
+//{
+//    position: absolute;
+//    bottom: 40px;
+//    right: 2px;
+//    z-index: 1;
+//    transform: scale(0.7, 0.7);
+//}
+//
+//
+//
+//.popupCustom .leaflet-popup-tip
+//{
+//    display: none;
+//}
+//
+//.popupCustom .leaflet-popup-content-wrapper {
+//    box-shadow : none;
+//    background: none;
+//    color: white;
+//    height: 800px;
+//    width: 800px;
+//}
+//
+//.jumbotron
+//{
+//    padding: 2%;
+//}
+//
+//.bulleInfo
+//{
+//    font-size: x-small;
+//    background: none;
+//    display: none;
+//    z-index: 2;
+//    position: fixed;
+//    bottom: -50%;
+//
+//
+//}
+//
+//.bulleInfo1
+//{
+//    margin-top: 50%;
+//    background-color: grey;
+//    color: white;
+//}
+//
+//.bulleInfo2
+//{
+//
+//}
+//
+//.bulleInfo3
+//{
+//    background-color: black;
+//    color: white;
+//    height: 250px;
+//    overflow: auto;
+//}
+//
+//.bulleInfo4
+//{
+//
+//}
+//
+//.bulleInfo5
+//{
+//
+//}
+//
+//.bulleInfo6
+//{
+//    background-color: grey;
+//    color: white;
+//    height: 250px;
+//    overflow: auto;
+//    margin-top: -50%;
+//}
+//
+//.bulleInfo1Photo
+//{
+//    max-width: 100%;
+//}
+//
+//.jumbotron h1
+//{
+//    font-size: 20px;
+//}
+//
+//.jumbotron p
+//{
+//    font-size: 15px;
+//}
 
 
