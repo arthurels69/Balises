@@ -81,9 +81,9 @@ class TheaterController extends AbstractController
         $userEmail = $user->getEmail();
         $email = $theater->getEmail();
 
-        if ($email != $userEmail) {
-            throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
-        }
+        // if ($email != $userEmail ||) {
+        //     throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
+        // }
         return $this->render('theater/show.html.twig', [
             'theater' => $theater,
             'user' => $user,
@@ -133,8 +133,8 @@ class TheaterController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('theater_show', [
-                'id' => $theater->getId(),
+            return $this->redirectToRoute('user_show', [
+                'id' => $theater->getId()+1,
             ]);
         }
 
