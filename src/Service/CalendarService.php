@@ -27,7 +27,7 @@ class CalendarService
     {
         // array of Strings applied in the twig date_modify filter
         $oneMoreDay = [];
-        for ($i = 1; $i < 31; $i++) {
+        for ($i = 1; $i < 14; $i++) {
             $oneMoreDay[$i] = "+$i day";
         }
 

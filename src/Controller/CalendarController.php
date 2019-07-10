@@ -55,45 +55,17 @@ class CalendarController extends AbstractController
 
 
         $today = new \DateTime();
-        $todayString = [];
-        $todayString['full'] = $today->format("Y-m-d");
-        $todayString['year'] = substr($todayString['full'], 0, 4);
-        $todayString['month'] = substr($todayString['full'], 5, 2);
-
-        $selectedDate['monthAndDay'] = $request->request->get('picked_date');
-
-        $selectedDate['month'] = substr($selectedDate['monthAndDay'], 1, 2);
-
+        $todayString = $today->format("Y-m-d");
         //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
-            if ($todayString['month'] > $selectedDate['month']) {
-                $todayString['year']++;
-            }
-
-                $todayString['full'] = $todayString['year'] . $selectedDate['monthAndDay'];
-                $todayString['month'] = $selectedDate['month'];
+            dump($request->request->get('picked_date'));
+            $todayString = $request->request->get('picked_date');
         }
 
-        $months = [
-            'jan',
-            'fev',
-            'mar',
-            'avr',
-            'mai',
-            'jui',
-            'jul',
-            'aou',
-            'sep',
-            'oct',
-            'nov',
-            'dec'
-        ];
-
         return $this->render('Calendar/calendar2.html.twig', [
-            'today' => $todayString['full'],
+            'today' => $todayString,
             'period' => $todayString,
-            'months' => $months,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString['full']),
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
             'oneMoreDay' => $this->calendarService->addMoreDays(),
         ]);
     }
