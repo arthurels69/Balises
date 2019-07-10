@@ -213,10 +213,11 @@ input[type=radio] + label:before {
     height: 30px;
 }
 /* Affichage du bouton radio personnalisé quand il est sélectionné */
+
 input[type=radio]:checked + label:before {
-    background: #fb8819;
-    border-color: #fb8819;
-    box-shadow: inset 0px 0px 0px 2px #fff;
+    background: #fb8819 !important;
+    border-color: #fb8819 !important;
+    box-shadow: inset 0px 0px 0px 2px #fff !important;
 }
 
 label{
@@ -232,6 +233,10 @@ select{
 
 option{
     width:1.2rem !important;
+}
+
+#mois_radio{
+    
 }
 
 
