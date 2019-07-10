@@ -14,30 +14,30 @@
 
 
     <div class="row p-4 border-top border-bottom bg-light">
-        {% for month in months |slice(period.month-1 ,12) %}
-            <div class="col-md-1">
-                <!--monthNumber gets the right value to send to the method async_calendar as a month date. -->
-                {% set monthNumber = loop.index+period.month-1 %}
-                <button class="calendarButton hvr-float-shadow py-1" id="month{{ loop.index }}" onclick="changeDate
-                        ('{{ path
-                    ('async_calendar', {"day" : period.year ~ "-" ~ monthNumber ~ "-01"})}}', {{ loop.index }})">
-                    {{ month }} {{ period.year |slice(2,2) }}</button>
-            </div>
-        {% endfor %}
+        <ul class="bxslider">
 
+            <!-- display today's date and focus it with the active class -->
+            <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')})
+            }}')">
+                <li class="month-day active" onclick="active(0)" id="day0">
+                    <div class="week">{{ today | date('D') }}</div><div class="day-month">{{ today | date('d-M') }}</div>
+                </li>
+            </a>
+            {% for oneDay in oneMoreDay %}
 
-        {% for month in months |slice(0, period.month-1 ) %}
-            <div class="col-md-1">
-                <!--nextYear gets the right value to send to the method async_calendar as a year formatted(here it
-                must be year +1 -->
-                {% set nextYear = period.year+1 %}
-                <button class="calendarButton hvr-float-shadow" id="month{{ loop.index+period.month-1 }}" onclick="changeDate('{{ path
-                    ('async_calendar', {"day"
-                        : nextYear ~ "-" ~ loop.index ~ "-01"})
-                }}', {{ loop.index+period.month-1 }})">
-                    {{ month }} {{ nextYear |slice(2,2) }}</button>
-            </div>
-        {% endfor %}
+                <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today |
+                    date_modify(oneDay) | date('Y-m-d')
+                }) }}')">
+
+                    <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
+                        <div class="week">{{ today | date_modify(oneDay) | date('D') }}</div><div class="day-month">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+                    </li>
+
+                </a>
+
+            {% endfor %}
+
+        </ul>
 
     </div>
     <hr class="hr-dark">
