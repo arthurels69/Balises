@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Param index{% endblock %}
+
+{% block body %}
+    <h1>Param index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Resale_coeff</th>
+                <th>Redistributed_coeff</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for param in params %}
+            <tr>
+                <td>{{ param.id }}</td>
+                <td>{{ param.resaleCoeff }}</td>
+                <td>{{ param.redistributedCoeff }}</td>
+                <td>
+                    <a href="{{ path('param_show', {'id': param.id}) }}">show</a>
+                    <a href="{{ path('param_edit', {'id': param.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('param_new') }}">Create new</a>
+{% endblock %}
