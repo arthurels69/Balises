@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Theater;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
+use App\Service\FileUploader;
+use Doctrine\Common\Persistence\ObjectManager;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use App\Service\TheaterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use GuzzleHttp\Client;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/theater")
@@ -93,45 +97,69 @@ class TheaterController extends AbstractController
     /**
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
+     * @param ObjectManager $manager
      * @param Theater $theater
      * @param TheaterService $theaterService
+     * @param UserPasswordEncoderInterface $encoder
+     * @param FileUploader $fileUploader
      * @return Response
+     * @throws Exception
      */
-    public function edit(Request $request, Theater $theater, TheaterService $theaterService): Response
-    {
+    public function edit(
+        Request $request,
+        ObjectManager $manager,
+        Theater $theater,
+        TheaterService $theaterService,
+        UserPasswordEncoderInterface $encoder,
+        FileUploader $fileUploader
+    ): Response {
 
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
         $user =  $this->getUser();
 
+        $request->request->get('newPassword');
+        $newPassword = $request->request->get('newPassword');
+        $request->request->get('confirmPassword');
+        $confirmPassword = $request->request->get('confirmPassword');
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-                $theaterService->geocode($theater);
+            if ($newPassword == $confirmPassword) {
+                $hash = $encoder->encodePassword($user, $newPassword);
+                $user->setPassword($hash);
+
+                $manager->persist($user);
+            } else {
+                $this->addFlash('danger', 'Les mot de passe ne correspondent pas');
+                return $this->redirectToRoute('theater_edit', [
+                    'id' => $theater->getId()
+                ]);
+            }
+            $theaterService->geocode($theater);
 
             /** @var UploadedFile $file */
-            $fileLogo = $request->files->get('theater')['logo'];
+            $fileLogo = $form['logo']->getData();
             if ($fileLogo) {
-                $fileName = md5(uniqid()) . '.' . $fileLogo->guessExtension();
-                try {
-                    $fileLogo->move($this->getParameter('logo_directory'), $fileName);
-                } catch (FileException $e) {
-                    throw new FileException($e);
-                }
-                $theater->setLogo($fileName);
+                $fileLogoName = $fileUploader->upload($fileLogo);
+                $theater->setLogo($fileLogoName);
             }
 
-            $file = $request->files->get('theater')['picture'];
-            if ($file) {
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                try {
-                    $file->move($this->getParameter('logo_directory'), $fileName);
-                } catch (FileException $e) {
-                    throw new FileException($e);
-                }
-                $theater->setPicture($fileName);
+            /** @var UploadedFile $file */
+            $filePicture = $request->files->get('theater')['picture'];
+            if ($filePicture) {
+                $filePictureName = $fileUploader->upload($filePicture);
+                $theater->setPicture($filePictureName);
             }
 
             $this->getDoctrine()->getManager()->flush();
+
+            // Once the form is submitted, valid and the data inserted in database, you can define
+            // the success flash message
+            $this->addFlash(
+                'success',
+                'Vos changements ont bien été enregistrés !'
+            );
 
             return $this->redirectToRoute('theater_show', [
                 'id' => $theater->getId(),

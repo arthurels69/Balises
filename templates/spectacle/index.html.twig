@@ -1,12 +1,21 @@
+
 {% extends 'basePage.html.twig' %}
+
 
 {% block title %}Liste des Spectacles{% endblock %}
 
 {% block body %}
     <style>
-        .sidenav {display: none;}
+        .sidenav {
+            display: none;
+        }
     </style>
+    <div class="row justify-content-md-around mb-3">
     <h1>Liste des Spectacles</h1>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+
 
     <div class="container">
         <div class="row">
@@ -27,16 +36,15 @@
             <tr>
                 <th>Titre</th>
                 <th>Description</th>
-
                 <th>Image</th>
-                <th>Crédits Photos</th>
-                <th>Informations Complémentaires</th>
                 <th>Enregistrement Balises</th>
                 <th>Type Offre</th>
-
+                <th>Enregistrement Balises</th>
+                <th>Type Offre</th>
                 <th>Tarif Base</th>
-                <th>actions</th>
+                <th class="text-center">actions</th>
             </tr>
+
         </thead>
         <tbody>
         {% for spectacle in spectacles %}
@@ -45,8 +53,7 @@
                 <td>{{ spectacle.description | truncate(200) }}</td>
 
                 <td><img src="{{ asset('uploads/' ~ spectacle.image) }}" ></td>
-                <td>{{ spectacle.photoCredits }}</td>
-                <td>{{ spectacle.additionalInfos }}</td>
+                
                 <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
                 <td>{{ spectacle.offerType }}</td>
 
