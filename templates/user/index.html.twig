@@ -6,7 +6,37 @@
 
 <div class="card  container p-0 w-100">
     <div class="card-header d-flex w-100 justify-content-between">
-        <h5 class="my-0 mx-2 py-2" >Liste des Théâtres</h5>
+        <h5 class="my-0 mx-2 py-2 list" >Liste des Théâtres</h5>
+
+        {# ########################################################## #}
+        
+            <!-- BOOT PAGINATION -->
+              <nav class="nav_page" aria-label="Page navigation example ">           
+                <ul class="pagination justify-content-center mb-0">
+            
+                  <!-- PREVIOUS -->
+                  <li class="page-item previous">     
+                      <a class="page-link  text-dark" href="" tabindex="-1"><i class="fas fa-chevron-left"></i></a>      
+                  </li>
+            
+                   {# {{ dump(indice_page) }}    #}
+                   
+                   {% for i in indice_page[0]..indice_page[1] %} 
+                        <li class="page-item 
+                            {% if page_cours == i %} active {% endif %}" >
+                            <a class="page-link text-dark" href="{{ path('user_index',{'page_cours':i,'ligne_page':5}) }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                  
+                  <!-- NEXT -->       
+                  <li class="page-item next">
+                    <a class="page-link text-dark"  href="" ><i class="fas fa-chevron-right"></i></a>
+                  </li>
+            
+                </ul>            
+              </nav>
+
+        {# ########################################################## #}
         <a href="{{ path('user_new') }}" class="btn btn-info text-white"><b>+</b>Ajouter</a>
     </div>
     <div class="card-body p-0">
@@ -14,21 +44,37 @@
                     <thead>
                         <tr>
                             <th style="width:300px;" >
-                                <a href="/user/index/name/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                                <a href="/user/index/name/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                                <a href="{{ path('user_index',{'page_cours':page_cours,'ligne_page':ligne_page,'champ': "name", 'sens': "down"} ) }}">
+                                    <i class="fa fa-arrow-down text-dark" aria-hidden="true"></i>    
+                                </a>
+                                <a href="{{ path('user_index',{'page_cours':page_cours,'ligne_page':ligne_page,'champ': "name", 'sens': "up"} ) }}">
+                                    <i class="fa fa-arrow-up text-dark" aria-hidden="true"></i>    
+                                </a>
                                 Théâtre
                             </th>
+
                             <th style="width:300px;">
-                                <a href="/user/index/email/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                                <a href="/user/index/email/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                                <a href="{{ path('user_index',{'page_cours':page_cours,'ligne_page':ligne_page,'champ': "email", 'sens': "down"} ) }}">
+                                    <i class="fa fa-arrow-down text-dark" aria-hidden="true"></i>    
+                                </a>
+                                <a href="{{ path('user_index',{'page_cours':page_cours,'ligne_page':ligne_page,'champ': "email", 'sens': "up"} ) }}">
+                                    <i class="fa fa-arrow-up text-dark" aria-hidden="true"></i>    
+                                </a>
                                 Email
                             </th>
+
                             <th class="" style="width:200px;">
-                                <a href="/user/index/zipCode/down"><i class="fa fa-arrow-down text-dark" aria-hidden="true"></i></a>
-                                <a href="/user/index/zipCode/up"><i class="fa fa-arrow-up text-dark" aria-hidden="true"></i></a>
+                                    <a href="{{ path('user_index',{'page_cours':page_cours,'ligne_page':ligne_page,'champ': "zipCode", 'sens': "down"} ) }}">
+                                        <i class="fa fa-arrow-down text-dark" aria-hidden="true"></i>    
+                                    </a>
+                                    <a href="{{ path('user_index',{'page_cours':page_cours,'ligne_page':ligne_page,'champ': "zipCode", 'sens': "up"} ) }}">
+                                        <i class="fa fa-arrow-up text-dark" aria-hidden="true"></i>    
+                                    </a>
                                 Postal
                             </th>
+
                             <th class="th_action text-center">Action</th>
+
                         </tr>
                     </thead>
 
@@ -78,24 +124,47 @@
 <script type="text/javascript">
 $(document).ready(function () {
 
+/**********************DETAIL THEATRE***************************/
     $('.td_name,.td_email,.td_zipCode').on('click',function () {
 
         let tr_detail=$(this).parent().next();
-
         tr_detail.children().toggleClass('active');
-
         $(this).parent().toggleClass('active');
 
         tr_detail.on('click',function(){
-
             $(this).children().toggleClass('active');
-
-            //console.log($(this).children());
-
             $(this).prev().toggleClass('active');
-
         });
     });
+
+/**********************PAGINATION NEXT PREVIOUS SELECTION ligne_page***************************/
+    let total_page='{{ page_total }}';
+    let page_cours='{{ page_cours }}';
+
+    //PREVIOUS
+    if ( page_cours == 1) {
+     $('.previous').hide();
+    }
+
+    $('.previous').click(function(ev){
+        ev.preventDefault();
+        let a_prev=$('.previous').children();       
+        a_prev.attr('href','{{ path("user_index" , {"page_cours" : page_cours-1 ,"ligne_page" : ligne_page  }) }}');
+        window.location=a_prev.attr('href');
+    });
+
+
+    //NEXT
+    if ( page_cours === total_page) {
+      $('.next').hide();
+    }
+
+    $('.next').click(function(e){
+        e.preventDefault();
+        let a_next=$('.next').children();        
+        a_next.attr('href','{{ path("user_index" , {"page_cours" : page_cours+1 ,"ligne_page" : ligne_page  }) }}');
+        window.location=a_next.attr('href');
+    }); 
 });
 </script>
 {% endblock %}
