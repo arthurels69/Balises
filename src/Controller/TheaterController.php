@@ -85,9 +85,9 @@ class TheaterController extends AbstractController
         $userEmail = $user->getEmail();
         $email = $theater->getEmail();
 
-        if ($email != $userEmail) {
-            throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
-        }
+        // if ($email != $userEmail ||) {
+        //     throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
+        // }
         return $this->render('theater/show.html.twig', [
             'theater' => $theater,
             'user' => $user,
