@@ -28,7 +28,7 @@ class UserController extends AbstractController
      * @Route("/index", name="user_index", methods={"GET"})
      * @Route("/index/{page_cours}/{ligne_page}/{champ}/{sens}",
      * name="user_index", methods={"GET"},
-     * defaults={"champ":"" , "sens":"", "page_cours":1, "ligne_page":10})
+     * defaults={"champ":"" , "sens":"", "page_cours":1, "ligne_page":5})
      * @IsGranted("ROLE_ADMIN")
      * @param UserRepository $userRepository
      * @return Response
