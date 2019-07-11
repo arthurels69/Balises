@@ -15,6 +15,11 @@
                 <img src="{{ spectacle.image }}">
                 <p>Crédit photo : {{ spectacle.photoCredits }}</p>
             </div>
+            <div class="col-12">
+                <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">
+                        commander
+                    </button></a>
+            </div>
         </div>
         <div class="row m-auto justify-content-between">
             <div class="col-12">
@@ -40,11 +45,7 @@
             <div class="col-12 p-4">
                 <p class="description">{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
             </div>
-            <div class="col-12">
-                <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">
-                        commander
-                    </button></a>
-            </div>
+
             {% endfor %}
 
             <div class="col-12 p-4" id="plus-button">
@@ -79,19 +80,7 @@
 
 <script>
     //Cette fonction gère l'affichage des spectacles quand on clique dans le calendrier carousel
-    function moreDates(dates) {
-        fetch(dates)
-            .then(response => response.text())
-            .then(text =>  {
-                let moreDates = document.getElementById('moreDates');
-                if(moreDates.innerHTML != ''){
-                    moreDates.innerHTML ='';
-                }
-                else{
-                moreDates.innerHTML =text;
-                }
-            });
-    }
+
 
 
 

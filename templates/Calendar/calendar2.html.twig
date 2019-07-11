@@ -104,12 +104,13 @@
                             {{ spectacle.dateShow | date('D') }}
                             {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                         </li>
-                        <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}">
+
                             <li class="list-inline-item calendarLink">
-                                <i class="fa fa-location-arrow" aia-hidden="true"></i>
-                                {{ spectacle.showId.theater.name }}
+                                <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}"><i class="fa fa-location-arrow" aia-hidden="true"></i></a>
+                                <a href="{{ path('theater_show_visitors', {id:spectacle.showId.theater.id}) }}" class="calendarLink">
+                                    {{ spectacle.showId.theater.name }}</a>
                             </li>
-                        </a>
+
                     </ul>
 
                     <p class="description">{{ spectacle.showId.description | truncate(400) }}
@@ -245,6 +246,20 @@
                 presentationSpectacle.style.display = 'none'
             }, 1000);
 
+        }
+
+        function moreDates(dates) {
+            fetch(dates)
+                .then(response => response.text())
+                .then(text =>  {
+                    let moreDates = document.getElementById('moreDates');
+                    if(moreDates.innerHTML != ''){
+                        moreDates.innerHTML ='';
+                    }
+                    else{
+                        moreDates.innerHTML =text;
+                    }
+                });
         }
 
 
