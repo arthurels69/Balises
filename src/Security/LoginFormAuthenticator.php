@@ -93,9 +93,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         /** @var User $user */
         $user = $token->getUser();
 
-        
-
-
         $roles = $token->getRoles();
         $rolesTab = array_map(function ($role) {
             return $role->getRole();
@@ -107,7 +104,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             $redirection = new RedirectResponse($this->urlGenerator->generate('user_index'));
         } else {
             $id = $user->getTheater()->getId();
-            // c'est un utilisateur théâtre : on le rediriger vers sa page d'adminitsration
+
+            // c'est un utilisateur théâtre : on le redirige vers sa page d'adminitsration
+
             $redirection = new RedirectResponse($this->urlGenerator
                 ->generate('theater_show', [
                     'id' => $id

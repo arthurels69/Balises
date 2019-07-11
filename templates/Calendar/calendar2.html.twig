@@ -6,39 +6,67 @@
 
 {% block body %}
 
+    <div id="presentation_spectacle">
+    </div>
 
 <div class="container bg-custom h-100">
-
         <h1 class="h1">La programmation Balise</h1>
-        <h4 class="h4">Saison {{ period.year }} - {{ period.year+1 }}</h4>
+        <h4 class="h4">Saison {{ period| date('Y') }} - {{ period |date_modify('+1 year ')| date('Y') }}</h4>
 
 
     <div class="row p-4 border-top border-bottom bg-light">
-        {% for month in months |slice(period.month-1 ,12) %}
-            <div class="col-md-1">
-                <!--monthNumber gets the right value to send to the method async_calendar as a month date. -->
-                {% set monthNumber = loop.index+period.month-1 %}
-                <button class="calendarButton hvr-float-shadow py-1" id="month{{ loop.index }}" onclick="changeDate
-                        ('{{ path
-                    ('async_calendar', {"day" : period.year ~ "-" ~ monthNumber ~ "-01"})}}', {{ loop.index }})">
-                    {{ month }} {{ period.year |slice(2,2) }}</button>
+        <div class="col-12">
+            <h4 class="text-center monthMobile">{{ today | date('M') }}</h4>
+        </div>
+        <div class="col-12 col-md-8">
+        <ul class="bxslider">
+
+            <!-- display today's date and focus it with the active class -->
+
+            <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')})
+            }}')">
+                <li class="month-day active" onclick="active(0)" id="day0">
+                    <div class="week calendarLarge">{{ today | date('D') }}</div><div class="day-month calendarLarge">{{ today | date
+                            ('d-M')
+                        }}</div>
+                    <div class="day-month calendarMobile">{{ today | date('d') }}</div>
+                </li>
+            </a>
+            {% for oneDay in oneMoreDay %}
+
+                <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today |
+                    date_modify(oneDay) | date('Y-m-d')
+                }) }}')">
+
+                    <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
+                        <div class="week calendarLarge">{{ today | date_modify(oneDay) | date('D') }}</div><div
+                                class="day-month calendarLarge">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+                        <div class="day-month calendarMobile">{{ today | date_modify(oneDay) | date('d') }}</div>
+                    </li>
+
+                </a>
+
+            {% endfor %}
+
+        </ul>
+        </div>
+        <div class="col-12 col-md-3">
+        <form method="post">
+
+            <div class="form-group row justify-content-center">
+                <div class="col-12 m-2">
+                    <input class="form-control" type="date" name ="picked_date" value="" id="example-date-input">
+                </div>
+                <div class="col-12 m-2">
+                    <button class="calendarButton" type="submit" value="{{ today | date ('m-d-Y') }}"
+                            id="example-date-input">Rechercher par date</button>
+                </div>
+
+
             </div>
-        {% endfor %}
 
-
-        {% for month in months |slice(0, period.month-1 ) %}
-            <div class="col-md-1">
-                <!--nextYear gets the right value to send to the method async_calendar as a year formatted(here it
-                must be year +1 -->
-                {% set nextYear = period.year+1 %}
-                <button class="calendarButton hvr-float-shadow" id="month{{ loop.index+period.month-1 }}" onclick="changeDate('{{ path
-                    ('async_calendar', {"day"
-                        : nextYear ~ "-" ~ loop.index ~ "-01"})
-                }}', {{ loop.index+period.month-1 }})">
-                    {{ month }} {{ nextYear |slice(2,2) }}</button>
-            </div>
-        {% endfor %}
-
+        </form>
+        </div>
     </div>
     <hr class="hr-dark">
     <!-- Div dedicated to ajax new spectacle -->
@@ -49,7 +77,8 @@
 
     <div id="display-spectacles">
         <!-- below the display of spectacles. Same as the ones in search by theater. -->
-            <h4 class="h4">Au programme ce mois</h4>
+        <h4 class="h4">Au programme du {{ today | date('d M') }} au {{ today | date_modify('+5 days') | date('d M')
+            }}</h4>
 
 
         {% for spectacle in spectaclesOfTheDay%}
@@ -75,15 +104,17 @@
                             {{ spectacle.dateShow | date('D') }}
                             {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
                         </li>
-                        <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}"><li
-                                    class="list-inline-item calendarLink"><i class="fa fa-location-arrow"
-                                                                             aria-hidden="true"></i>
-                                {{ spectacle.showId.theater.name }} </li></a>
+                        <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}">
+                            <li class="list-inline-item calendarLink">
+                                <i class="fa fa-location-arrow" aia-hidden="true"></i>
+                                {{ spectacle.showId.theater.name }}
+                            </li>
+                        </a>
                     </ul>
 
                     <p class="description">{{ spectacle.showId.description | truncate(400) }}
-                        <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank"
-                           class="calendarLink">Voir plus</a>
+                        <a onclick="detailsSpectacles('{{ path('detailSpectacle', {"id": spectacle.showId.id})
+                        }}')" class="calendarLink">Voir plus</a>
                     </p>
 
                     <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">Offre
@@ -101,7 +132,7 @@
         <div class="row justify-content-center p-4" id="plus-button">
             <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;" onclick="nextDay('{{ path
                 ('async_calendarPlusOne', {"day" : today |
-                date_modify('+ 1 day') | date('Y-m-d')
+                date_modify('+ 5 days') | date('Y-m-d')
             }) }}')"><i class="fas fa-plus"></i> Ce mois </h4>
             <div class="col-1 offset-1 ">
                 <div ></div>
@@ -141,112 +172,15 @@
                     newSpectacles.innerHTML = text;
                 });
 
-            let month=[];
+            let day=[];
             for(let i = 1; i <= 12; i++) {
 
-                month[i] = document.getElementById('month'+i);
-                month[i].classList.remove('active');
+                day[i] = document.getElementById('day'+i);
+                day[i].classList.remove('active');
             }
             //puis on ajoute un design indiquant la case selectionné
             month[clickedPill].classList.add('active');
             console.log(month[clickedPill]);
-        }
-        /*les 3 fonctions ci-dessous gèrent l'affichage des spectacles quand on clique sur les pills (aujourd'hui, 3
-         jours, 1 semaine) */
-        function changeDateToday(date) {
-            fetch(date)
-                .then(response => response.text())
-                .then(text => {
-                    let displaySpectacles = document.getElementById('display-spectacles');
-                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-                    let newsspectacleDisplay = document.getElementById('newSpectacles');
-                    //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
-                    let day=[];
-                    for(let i = 0; i< 14; i++) {
-
-                        day[i] = document.getElementById('day'+i);
-                        day[i].classList.remove('active');
-                    }
-                    //puis on ajoute un design indiquant la case selectionné sur le premier jour ici
-                    day[0].classList.add('active');
-
-                    displaySpectacles.remove();
-
-                    spectaclesNextDay.innerHTML ='';
-
-                    newSpectacles.innerHTML = text;
-
-                    let datePills = document.querySelectorAll('.timePill');
-
-                    datePills.forEach(function (value, index, datePills) {
-                        value.classList.remove('activeTimePill');
-                    });
-                    datePills[0].classList.add('activeTimePill');
-                });
-        }
-
-        function changeDate3days(date) {
-            fetch(date)
-                .then(response => response.text())
-                .then(text => {
-                    let displaySpectacles = document.getElementById('display-spectacles');
-                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-                    let newsspectacleDisplay = document.getElementById('newSpectacles');
-                    //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
-                    let day=[];
-                    for(let i = 0; i< 14; i++) {
-
-                        day[i] = document.getElementById('day'+i);
-                        day[i].classList.remove('active');
-                    }
-                    //puis on ajoute un design indiquant la case selectionné sur le premier jour ici
-                    day[0].classList.add('active');
-
-                    displaySpectacles.remove();
-
-                    spectaclesNextDay.innerHTML ='';
-
-                    newSpectacles.innerHTML = text;
-
-                    let datePills = document.querySelectorAll('.timePill');
-
-                    datePills.forEach(function (value, index, datePills) {
-                        value.classList.remove('activeTimePill');
-                    });
-                    datePills[1].classList.add('activeTimePill');
-                });
-        }
-
-        function changeDate1Week(date) {
-            fetch(date)
-                .then(response => response.text())
-                .then(text => {
-                    let displaySpectacles = document.getElementById('display-spectacles');
-                    let spectaclesNextDay = document.getElementById('spectaclesNextDay');
-                    let newsspectacleDisplay = document.getElementById('newSpectacles');
-                    //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
-                    let day=[];
-                    for(let i = 0; i< 14; i++) {
-
-                        day[i] = document.getElementById('day'+i);
-                        day[i].classList.remove('active');
-                    }
-                    //puis on ajoute un design indiquant la case selectionné sur le premier jour ici
-                    day[0].classList.add('active');
-
-                    displaySpectacles.remove();
-
-                    spectaclesNextDay.innerHTML ='';
-
-                    newSpectacles.innerHTML = text;
-
-                    let datePills = document.querySelectorAll('.timePill');
-
-                    datePills.forEach(function (value, index, datePills) {
-                        value.classList.remove('activeTimePill');
-                    });
-                    datePills[2].classList.add('activeTimePill');
-                });
         }
 
         function nextDay(date) {
@@ -268,14 +202,41 @@
 
         function active(clickedPill) {
             //Remets toutes les cases dans le carousel en mode inactif, sans design particulier
-            let month=[];
-            for(let i = 1; i <= 12; i++) {
-
-                month[i] = document.getElementById('month'+i);
-                month[i].classList.remove('active');
+            let day=[];
+            for(let i = 1; i <= 14; i++) {
+                day[i] = document.getElementById('day'+i);
+                day[i].classList.remove('active');
             }
             //puis on ajoute un design indiquant la case selectionné
-            month[clickedPill].classList.add('active');
+            day[clickedPill].classList.add('active');
+        }
+
+
+        function detailsSpectacles(spectacle) {
+            fetch(spectacle)
+                .then(response => response.text())
+                .then(text =>  {
+                    let presentationSpectacle = document.getElementById('presentation_spectacle');
+
+                    presentationSpectacle.style.transform = 'translateX(0%)';
+                    presentationSpectacle.style.transition = '1000ms';
+                    window.scrollTo({top : 0, behavior:"smooth"});
+                    if(presentationSpectacle.innerHTML ==''){
+                        presentationSpectacle.innerHTML = text;
+                    }
+                    else{
+                        presentationSpectacle.innerHTML ='';
+                        presentationSpectacle.innerHTML = text;
+
+                    }
+                });
+        }
+
+        function closeSpectacleWindow() {
+            let presentationSpectacle = document.getElementById('presentation_spectacle');
+            presentationSpectacle.style.transform = 'translateX(100%)';
+            presentationSpectacle.style.transition = '1000ms';
+            document.location.reload();
 
         }
 
@@ -283,4 +244,6 @@
     </script>
 
 </div>
+
+
 {% endblock %}
