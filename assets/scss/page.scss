@@ -44,6 +44,7 @@ img{
   color: darken(grey, 25%);
   text-shadow: 1px 1px black;
   letter-spacing: 0.3em;
+  cursor: pointer;
 }
 
 .calendarLink:hover{
@@ -91,17 +92,6 @@ img{
   -ms-transition: 0.12s;
 }
 
-.calendarBox {
-  background-color: red;
-  border-radius: 50px;
-}
-  .week {
-    font-size: 14px;
-  }
-  .day-month {
-    font-weight: bold;
-    font-size: 1em;
-  }
 
   // manage the design of the event description in calendar
 #dayNumberSpectacle{
@@ -197,8 +187,47 @@ img{
   color: $baliseYellow;
 }
 
+@media screen and (max-width: 640px) {
+  #presentation_spectacle{
+    float: right;
+    width: 100%;
+    transform:translateX(100%);
+    z-index: 100;
+    position: absolute;
+    top: 0;
+  }
+}
+@media screen and (min-width: 640px){
+  #presentation_spectacle{
+    float: right;
+    width: 20%;
+    transform:translateX(100%);
+    position: absolute;
+    top: 0;
+    left: 80%;
+  }
+}
 
 
+.calendarMobile{
+  display: none;
+}
+
+.monthMobile{
+  display: none;
+}
+
+@media screen and (max-width: 640px){
+  .calendarMobile{
+    display: block;
+  }
+  .calendarLarge{
+    display: none;
+  }
+  .monthMobile{
+    display: block;
+  }
+}
 /** VARIABLES
 ===================================*/
 /** RESET AND LAYOUT

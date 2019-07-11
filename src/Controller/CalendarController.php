@@ -70,6 +70,27 @@ class CalendarController extends AbstractController
         ]);
     }
 
+    public function calendarSelectedDay(Request $request)
+    {
+
+        //Retrieves the date passed in URI.
+        $selectedDay = substr($request->getUri(), -10);
+
+        //IF INPUT used // Date transmitted by the "rechercher par date" formular
+        if ($request->request->get('picked_date')) {
+            $selectedDay = $request->request->get('picked_date');
+        }
+
+
+        return $this->render('Calendar/calendar.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
+            'oneMoreDay' => $this->calendarService->addMoreDays(),
+
+        ]);
+    }
+
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -78,11 +99,11 @@ class CalendarController extends AbstractController
     public function asyncDate(Request $request) :Response
     {
 
-        $selectedDay['full'] = $request->attributes->get('day');
+        $selectedDay = $request->attributes->get('day');
 
         return $this->render('Calendar/ajaxSpectacles.html.twig', [
-            'today' => $selectedDay['full'],
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay['full'])
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay)
         ]);
     }
 
@@ -95,10 +116,11 @@ class CalendarController extends AbstractController
     {
         $selectedDay = $request->attributes->get('day');
 
-        $newSpectacles = $this->calendarService->selectSpectacles3NextDays($selectedDay);
+        $newSpectacles = $this->calendarService->selectSpectacles5NextDays($selectedDay);
 
         return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }
+
 
     /**
      * @return Response

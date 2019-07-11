@@ -41,7 +41,7 @@ class CalendarService
         $start = new \DateTime($selectedDate);
         $end = new \DateTime($selectedDate);
 
-        $end->add(\DateInterval::createFromDateString('+31 days'));
+        $end->add(\DateInterval::createFromDateString('+5 days'));
         $today = new \DateTime();
         //Returns  today' spectacles.
         $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end, $today);
@@ -51,16 +51,16 @@ class CalendarService
         return $spectaclesOfTheDay;
     }
 
-    public function selectSpectacles3NextDays($selectedDate) : array
+    public function selectSpectacles5NextDays($selectedDate) : array
     {
-
+        $today = new \DateTime();
         $start = new \DateTime($selectedDate);
         $end = new \DateTime($selectedDate);
 
-        $end->add(\DateInterval::createFromDateString('+3 days'));
+        $end->add(\DateInterval::createFromDateString('+5 days'));
 
         //Returns  today' spectacles.
-        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end);
+        $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end, $today);
 
         //Returns the content of today' sgit pectacles based on the IDs collected  above.
 
