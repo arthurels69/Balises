@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/assoconnect/mapbox-token.git",
-                "reference": "a09df1cdcdea25ce47f63f1d2f90b1d6dacbae59"
+                "reference": "e9c83c739a50b23c7bcbf66cfdf9e5883372b1ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/assoconnect/mapbox-token/zipball/a09df1cdcdea25ce47f63f1d2f90b1d6dacbae59",
-                "reference": "a09df1cdcdea25ce47f63f1d2f90b1d6dacbae59",
+                "url": "https://api.github.com/repos/assoconnect/mapbox-token/zipball/e9c83c739a50b23c7bcbf66cfdf9e5883372b1ab",
+                "reference": "e9c83c739a50b23c7bcbf66cfdf9e5883372b1ab",
                 "shasum": ""
             },
             "require": {
@@ -37,7 +37,7 @@
                 "MIT"
             ],
             "description": "PHP client for Mapbox Token API",
-            "time": "2019-04-30T09:43:38+00:00"
+            "time": "2019-07-10T07:43:42+00:00"
         },
         {
             "name": "composer/ca-bundle",

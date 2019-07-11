@@ -1,4 +1,4 @@
-{% extends 'base_admin.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}Theater{% endblock %}
 
@@ -17,7 +17,11 @@
                 <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
             </div>
             <div class="col-sm-6">
-                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" width="150"></img>
+                {% else  %}
+                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+                {% endif %}
             </div>
         </div>
 
@@ -69,7 +73,7 @@
                 <td>{{ theater.website }}</td>
             </tr>
             <tr>
-                <th>Tarif Base</th>
+                <th>Plein Tarif</th>
                 <td>{{ theater.baseRate }}</td>
             </tr>
             <tr>

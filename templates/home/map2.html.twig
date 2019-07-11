@@ -87,7 +87,9 @@
         .bulleInfo
         {
             font-size: x-small;
+            width: 55%;
             background: none;
+            /*background: red;*/
             display: none;
             z-index: 2;
             position: fixed;
@@ -102,9 +104,11 @@
             background-color: rgba(0, 0, 0, 0);
             /*background-color: grey;*/
             background-image: url("{{ asset('uploads/ticket-balises.png') }}");
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
             color: white;
+            height: 30vh;
+            width: 32vw;
 
         }
 
@@ -118,13 +122,15 @@
 
             background-color: black;
             color: white;
-            height: 250px;
-            border-style: solid;
+
+            /*border-style: solid;*/
             border-color: black;
             overflow: scroll;
-            border-radius: 10px;
-            margin-top: 30%;
+            border-radius: 20px;
+            margin-top: 5%;
             font-size: 4px;
+            height: 30vh;
+            width: 32vw;
         }
 
         /* width */
@@ -226,22 +232,22 @@
 
 
 
-                    <div class="col-5">
+                    <div class="col-12">
                         <div class="jumbotron bulleInfo1">
-                            <img src="{{ asset('uploads/'~ theater.logo )}}" alt="" style="max-height: 80px;display: block; margin-left: auto; margin-right: 5%; padding-bottom: 1%; margin-top: 1%">
-                            <h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 17px" class="display-4">{{ theater.name }}</h1>
-                            <p class="lead" style="text-align: right; margin-right: 10%">{{ theater.address1 }}<br>{{  theater.zipcode }} {{ theater.city }}<br>{{ theater.phoneNumber }}</p>
+                            <img src="{{ asset('uploads/'~ theater.logo )}}" alt="" style="max-height: 120px;display: block; margin-left: auto; margin-right: 5%; padding-bottom: 5%; margin-top: 1%">
+                            <h1 style="color : Yellow; text-align: right; margin-right: 10%; line-height: 3%; font-size: 20px" class="display-4">{{ theater.name }}</h1>
+                            <p class="lead" style="text-align: right; margin-right: 10%; font-size: 20px">{{ theater.address1 }}<br>{{  theater.zipcode }} {{ theater.city }}<br>{{ theater.phoneNumber }}</p>
                         </div>
 
                     </div>
 
-                    <div class="col-2">
-                        <div class="bulleInfo2">
+{#                    <div class="col-2">#}
+{#                        <div class="bulleInfo2">#}
 
-                        </div>
-                    </div>
+{#                        </div>#}
+{#                    </div>#}
 
-                    <div class="col-5">
+                    <div class="col-12">
                         <div class="jumbotron bulleInfo3">
                             <a href="{{ theater.website }}" target="_blank" ><h1 style="color : Yellow; font-weight: bold" class="display-4">{{ theater.name }}</h1></a>
 
@@ -252,7 +258,7 @@
                                 {% if spectacle.theater == theater %}
                                     <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">
                                     <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank" for="checkbox" style="font-size: 20px; color: white">{{ spectacle.title }}</a>
-                                    <p style="margin-top: -2%">{{ spectacle.distribution }}</p>
+                                    <p style="margin-top: 0%">{{ spectacle.distribution }}</p>
 
 
                                 {% endif %}
@@ -262,19 +268,19 @@
                         </div>
                     </div>
 
-                    <div class="col-5">
-                        {#                        <div class="bulleInfo4">#}
-                        {#                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.picture )}}" style="width: 250px; padding-bottom: 5%;float: right"></a>#}
-                        {#                        </div>#}
-                    </div>
+{#                    <div class="col-5">#}
+{#                        #}{#                        <div class="bulleInfo4">#}
+{#                        #}{#                            <a href="{{ theater.website }}" target="_blank" ><img src="{{ asset('uploads/'~ theater.picture )}}" style="width: 250px; padding-bottom: 5%;float: right"></a>#}
+{#                        #}{#                        </div>#}
+{#                    </div>#}
 
-                    <div class="col-2">
-                        <div class="bulleInfo5">
+{#                    <div class="col-2">#}
+{#                        <div class="bulleInfo5">#}
 
-                        </div>
-                    </div>
+{#                        </div>#}
+{#                    </div>#}
 
-                    <div class="col-5">
+                    <div class="col-12">
                         {% for show in theater.shows %}
                             <div class="jumbotron bulleInfo6" id="{{ show.id }}" style="display: none">
 
@@ -314,6 +320,21 @@
 
 
     <script>
+
+        var getParams = function (url) {
+            var params = {};
+            var parser = document.createElement('a');
+            parser.href = url;
+            var query = parser.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                params[pair[0]] = decodeURIComponent(pair[1]);
+            }
+            return params;
+        };
+
+
         // Gestion des spectacles par théâtre
         function showDates(showId) {
             let currentShow = document.getElementsByClassName('currentShow');
@@ -379,7 +400,24 @@
                 map.setView([latitude, longitude]);
 
             });
+
+            window.addEventListener("load", function()
+            {
+                let theaterIdForPointer = '{"theater":"theater' + pointerId + '"}'
+                // console.log(JSON.stringify(getParams(window.location.href)))
+                // console.log(theaterIdForPointer)
+
+
+                if (JSON.stringify(getParams(window.location.href)) == theaterIdForPointer)
+                {
+
+                    map.setView([latitude, longitude], 16);
+                }
+
+            });
         }
+
+
 
         // Fermer bulle info quand clic sur map
         map.addEventListener("click", function ()
