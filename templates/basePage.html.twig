@@ -24,18 +24,18 @@
 
 <!-- DECONNEXION -->
 <div class = "container">
+
+            {% if app.user %}
     <div class="row" style = "padding-top : 30px">
         <nav>
-            {% if app.user %}
-
                 <a type="button" href="{{ path('app_logout') }}"
                    title="déconnexion"
                    class="btn btn-secondary mb-4"><i class="fas fa-sign-out-alt"></i>
                 </a>
-
-            {% endif %}
-    </nav>
+        </nav>
     </div>
+            {% endif %}
+
 </div>
 {% for category, messages in app.flashes %}
     {% for message in messages %}
