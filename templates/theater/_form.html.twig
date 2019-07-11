@@ -4,11 +4,12 @@
 </style>
 <div class='container'>
     <div class="row">
-        <div class="col-sm-6 espSaisie">
-            {{ form_label(form.name, 'Nom du Théâtre') }}
-            {{ form_widget(form.name) }}
-        </div>
-
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm-6 espSaisie">
+                {{ form_label(form.name, 'Nom du Théâtre') }}
+                {{ form_widget(form.name) }}
+            </div>
+        {% endif %}
         <div class="col-sm-4 espSaisie">
             {{ form_label(form.logo, 'Logo') }}
             {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'format : png'}}) }}
@@ -66,7 +67,11 @@
             {{ form_help(form.picture) }}
         </div>
         <div>
-            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+            {% if is_granted('ROLE_ADMIN') %}
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" width="150"></img>
+            {% else  %}
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+            {% endif %}
         </div>
 
     </div>
@@ -80,7 +85,7 @@
                 {{ form_widget(form.longitude, {'attr': {'class': 'longitude hold','placeholder': '99999.99'}}) }}
             </div>#}
         <div class="col-sm-2">
-            {{ form_label(form.baseRate, 'Tarif de Base') }}
+            {{ form_label(form.baseRate, 'Plein Tarif') }}
             {{ form_widget(form.baseRate, {'attr': {'class': 'hold zipCode','placeholder': '99999.99'}}) }}
         </div>
     </div>
@@ -102,7 +107,7 @@
     <div class="row justify-content-sm-center">
         <br>
         <div class="col-sm-4 espSaisie">
-            <button class="btn btn-dark btn_save_form">{{ button_label|default('Save') }}</button>
+            <button class="btn btn-secondary mb-5">{{ button_label|default('Enregistrer') }}</button>
         </div>
     </div>
     <!-- <div class="row justify-content-sm-center">
@@ -117,5 +122,5 @@
     {{ form_errors(form) }}
 {% endif %}
 
-    {{ form_end(form) }}
+{{ form_end(form) }}
 </div>

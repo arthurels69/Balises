@@ -1,4 +1,4 @@
-{% extends 'base_admin.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}Spectacle{% endblock %}
 
@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <th>IsBalise</th>
-                <td>{{ spectacle.isBalise ? 'Yes' : 'No' }}</td>
+                <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
             </tr>
             <tr>
                 <th>OfferType</th>
@@ -48,7 +48,7 @@
                 <td>{{ spectacle.mapadoLink }}</td>
             </tr>
             <tr>
-                <th>BaseRate</th>
+                <th>Plein Tarif</th>
                 <td>{{ spectacle.baseRate }}</td>
             </tr>
             <tr>
