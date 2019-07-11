@@ -178,6 +178,7 @@ class UserController extends AbstractController
     {   
         $mois=$repo->findDateMois();
         $years=$repo->findDateYear();
+        $nbSpectacleAn=$repo->findSpectacleYear();
 
        
         $json_mois = $serializer->serialize(
@@ -189,14 +190,17 @@ class UserController extends AbstractController
             $years,
             'json', ['groups' => 'group1']
         );
-        
-        dump($json_mois);
+
+        $json_nbSpectacleAn = $serializer->serialize(
+            $nbSpectacleAn,
+            'json', ['groups' => 'group1']
+        );
               
         return $this->render('user/chart.html.twig',
         [
             'nbSpectacleMois' =>$json_mois,
-            'annee' =>$json_years
-
+            'annee' =>$json_years,
+            'nbSpectacleAn'=> $json_nbSpectacleAn
         ]
     );
     }
