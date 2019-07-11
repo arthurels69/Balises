@@ -1,6 +1,10 @@
-{% extends 'base_admin.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'basePage.html.twig'
+%}
 
-{% block title %}Admin Edition Théâtre{% endblock %}
+
+{% block title %}Modification Théâtre{% endblock %}
 
 {% block body %}
 
@@ -8,21 +12,19 @@
 
             <div class="card-header d-flex w-100 justify-content-between">
 
-                <h5 class="my-0 mx-2 py-2" >Edition : <span class="d-inline-block">{{ theater.name }}</span></h5>
+                <h5 class="my-0 mx-2 py-2" >Modification : <span class="d-inline-block">{{ theater.name }}</span></h5>
 
                 <div class="btn_edit_new_crud ">
 
-                    <a type="button" href="#"
-                        data-toggle="tooltip" data-placement="top"  title="Save" 
-                        class="btn btn-success btn_save_edit"><i class="far fa-save"></i>
-                    </a>
-
-                    <a type="button" href="{{ path('user_index') }}"
-                        data-toggle="tooltip" data-placement="top"  title="List" 
-                        class="btn btn-info"><i class="far fa-list-alt"></i>
-                    </a>
-
                     {% if is_granted('ROLE_ADMIN') %}
+                        <a type="button" href="#"
+                           data-toggle="tooltip" data-placement="top"  title="Enregistrer"
+                           class="btn btn-success btn_save_edit"><i class="far fa-save"></i>
+                        </a>
+                        <a type="button" href="{{ path('user_index') }}"
+                            data-toggle="tooltip" data-placement="top"  title="Liste Théâtres"
+                            class="btn btn-info"><i class="far fa-list-alt"></i>
+                        </a>
 
                         <a type="button" href="{{ path('user_new') }}" 
                             data-toggle="tooltip" data-placement="top"  title="Ajouter" 
