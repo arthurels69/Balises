@@ -4,6 +4,12 @@
 </style>
 <div class='container'>
     <div class="row">
+        {% if is_granted('ROLE_THEATER') %}
+            <div class="col-sm-6 espSaisie " style="display: none">
+                {{ form_label(form.name, 'Nom du Théâtre') }}
+                {{ form_widget(form.name) }}
+            </div>
+        {% endif %}
         {% if is_granted('ROLE_ADMIN') %}
             <div class="col-sm-6 espSaisie">
                 {{ form_label(form.name, 'Nom du Théâtre') }}
@@ -104,7 +110,7 @@
     </div>
 
     <br>
-    <div class="row justify-content-sm-center">
+    <div class="row justify-content-sm-left">
         <br>
         <div class="col-sm-4 espSaisie">
             <button class="btn btn-secondary mb-5">{{ button_label|default('Enregistrer') }}</button>
@@ -123,4 +129,4 @@
 {% endif %}
 
 {{ form_end(form) }}
-</div>
+

@@ -201,11 +201,8 @@ img{
 @media screen and (min-width: 640px){
   #presentation_spectacle{
     float: right;
-    width: 20vw;
+    width: 30vw;
     transform:translateX(100%);
-    position: absolute;
-    top: 0;
-    left: 80%;
     z-index: 99;
   }
 }
