@@ -256,7 +256,7 @@
 
                             {% for spectacle in spectacles %}
                                 {% if spectacle.theater == theater %}
-                                    <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">
+{#                                    <input type="radio" name="checkbox" id="checkbox" onchange="showDates({{ spectacle.id }})">#}
                                     <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank" for="checkbox" style="font-size: 20px; color: white">{{ spectacle.title }}</a>
                                     <p style="margin-top: 0%">{{ spectacle.distribution }}</p>
 
@@ -280,24 +280,24 @@
 {#                        </div>#}
 {#                    </div>#}
 
-                    <div class="col-12">
-                        {% for show in theater.shows %}
-                            <div class="jumbotron bulleInfo6" id="{{ show.id }}" style="display: none">
+{#                    <div class="col-12">#}
+{#                        {% for show in theater.shows %}#}
+{#                            <div class="jumbotron bulleInfo6" id="{{ show.id }}" style="display: none">#}
 
-                                <h3 style="color : white; font-weight: bold; margin-left: 3%; text-align:center;" >SÉLÉCTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>
+{#                                <h3 style="color : white; font-weight: bold; margin-left: 3%; text-align:center;" >SÉLÉCTIONNEZ LA DATE DE VOTRE SPECTACLE</h3>#}
 
 
-                                {% for showdate in show.showDates %}
-                                    <div>
-                                        <input type="radio" name="radio" id="radio">
-                                        <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>
-                                    </div>
-                                {% endfor %}
-                                <a class="btn btn-dark" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width:200px; background-color: #171a1d; color: white; display: block; margin: auto; margin-top: 2%" href="{{ path('home') }}">Commander</a>
-                            </div>
-                        {% endfor %}
+{#                                {% for showdate in show.showDates %}#}
+{#                                    <div>#}
+{#                                        <input type="radio" name="radio" id="radio">#}
+{#                                        <label for="radio" class="lead">{{ showdate.dateShow |localizeddate('none', 'none', app.request.locale, null, 'EEEE d MMMM Y') }} à {{ showdate.dateShow |date("H") }}h{{ showdate.dateShow |date("m") }}</label>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+{#                                <a class="btn btn-dark" style="-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;width:200px; background-color: #171a1d; color: white; display: block; margin: auto; margin-top: 2%" href="{{ path('home') }}">Commander</a>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
 
-                    </div>
+{#                    </div>#}
 
                 </div>
             </div>
