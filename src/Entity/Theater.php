@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TheaterRepository")
@@ -20,19 +22,24 @@ class Theater
 
     /**
      * Name of the theater
+     * @Assert\NotBlank()
+
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * Email of the theater
+     * @Assert\NotBlank()
+
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
      * First address line, mandatory
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address1;
 
@@ -43,45 +50,76 @@ class Theater
     private $address2;
 
     /**
-     * Zip code (aka code postal)
-     * @ORM\Column(type="integer")
+     * @Assert\Regex("/^[0-9]{5}$/")
+     * @Assert\Length (
+     *      max = 5,
+     *      maxMessage = "code postal 5 chiffres maximum"
+     * )
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $zipCode;
 
     /**
-     * City
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
+
+    //pattern="/(0|\+33)[1-9]( *[0-9]{2}){4}/"  /(0|\\+33|0033)[1-9][0-9]{8}/
     /**
-     * PhoneNumber
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/(\+\d+(\s|-))?0\d(\s|-)?(\d{2}(\s|-)?){4}/",
+     *      message =" formats : +33 xx xx xx xx xx, +33xxxxxxxxxx, xxxxxxxxxx, xx-xx-xx-xx-xx")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phoneNumber;
 
+
     /**
-     * Logo
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
 
     /**
-     * Website
+     * @Assert\Regex("#https?://[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,4}(/\S*)?#")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
 
+
+    // /^[0-9]{1,}[.]{0,1}[0-9]{0,2}$/  /^[0-9]{1,}(\.|)[0-9]{0,2}$/g    /^[1-9][0-9]*\.[0-9]{2}$/
     /**
-     * Base Rate
-     * @ORM\Column(type="float")
+     *
+     * @Assert\Regex( "/^[0-9]{1,}(\.|)[0-9]{0,2}$/", message =" tarif non valide")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Show", mappedBy="theater")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="theater", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Spectacle", mappedBy="theater", orphanRemoval=true)
      */
     private $shows;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -182,9 +220,11 @@ class Theater
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo($logo): self
     {
-        $this->logo = $logo;
+        if ($logo) {
+            $this->logo = $logo;
+        }
 
         return $this;
     }
@@ -206,22 +246,34 @@ class Theater
         return $this->baseRate;
     }
 
-    public function setBaseRate(float $baseRate): self
+    public function setBaseRate(?float $baseRate): self
     {
         $this->baseRate = $baseRate;
 
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     /**
-     * @return Collection|Show[]
+     * @return Collection|Spectacle[]
      */
     public function getShows(): Collection
     {
         return $this->shows;
     }
 
-    public function addShow(Show $show): self
+    public function addShow(Spectacle $show): self
     {
         if (!$this->shows->contains($show)) {
             $this->shows[] = $show;
@@ -231,7 +283,7 @@ class Theater
         return $this;
     }
 
-    public function removeShow(Show $show): self
+    public function removeShow(Spectacle $show): self
     {
         if ($this->shows->contains($show)) {
             $this->shows->removeElement($show);
@@ -239,6 +291,44 @@ class Theater
             if ($show->getTheater() === $this) {
                 $show->setTheater(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        if ($picture) {
+            $this->picture = $picture;
         }
 
         return $this;

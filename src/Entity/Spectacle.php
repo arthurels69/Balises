@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ShowRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SpectacleRepository")
  */
-class Show
+class Spectacle
 {
     /**
      * @ORM\Id()
@@ -44,7 +45,7 @@ class Show
 
     /**
      * Visual for the show
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -73,13 +74,6 @@ class Show
     private $offerType;
 
     /**
-     * Many to one relation with the theater the show is linked to
-     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $theater;
-
-    /**
      * Link to the mapado page of the selected show
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -87,13 +81,23 @@ class Show
 
     /**
      * Base rate of the show to make calculations
+     * @Assert\Regex( "/^[0-9]{1,}(\.|)[0-9]{0,2}$/", message =" tarif non valide")
      * @ORM\Column(type="float", nullable=true)
      */
     private $baseRate;
 
     /**
+     * Many to one relation with the theater the show is linked to
+
+     * @ORM\ManyToOne(targetEntity="App\Entity\Theater", inversedBy="shows")
+
+     * @ORM\JoinColumn(nullable=false, name="theater_id_id")
+     */
+    private $theater;
+
+    /**
      * One to many relation to the many dates a show can have
-     * @ORM\OneToMany(targetEntity="App\Entity\ShowDate", mappedBy="show_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ShowDate", mappedBy="showId")
      */
     private $showDates;
 
@@ -160,9 +164,11 @@ class Show
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
-        $this->image = $image;
+        if ($image) {
+            $this->image = $image;
+        }
 
         return $this;
     }
@@ -215,18 +221,6 @@ class Show
         return $this;
     }
 
-    public function getTheater(): ?Theater
-    {
-        return $this->theater;
-    }
-
-    public function setTheater(?Theater $theater): self
-    {
-        $this->theater = $theater;
-
-        return $this;
-    }
-
     public function getMapadoLink(): ?string
     {
         return $this->mapadoLink;
@@ -247,6 +241,18 @@ class Show
     public function setBaseRate(?float $baseRate): self
     {
         $this->baseRate = $baseRate;
+
+        return $this;
+    }
+
+    public function getTheater(): ?Theater
+    {
+        return $this->theater;
+    }
+
+    public function setTheater(?Theater $theater): self
+    {
+        $this->theater = $theater;
 
         return $this;
     }
@@ -280,5 +286,14 @@ class Show
         }
 
         return $this;
+    }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->getId());
     }
 }

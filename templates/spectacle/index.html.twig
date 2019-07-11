@@ -1,0 +1,74 @@
+
+{% extends 'basePage.html.twig' %}
+
+
+{% block title %}Liste des Spectacles{% endblock %}
+
+{% block body %}
+    <style>
+        .sidenav {
+            display: none;
+        }
+    </style>
+    <div class="row justify-content-md-around mb-3">
+    <h1>Liste des Spectacles</h1>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+
+
+    <div class="container">
+        <div class="row">
+
+            {% if user.roles[0] == "ROLE_THEATER" %}
+                <div class="col-sm-2">
+                    <a href="{{ path('theater_show',{'id' : theater.id} )}}"><button class="btn btn-secondary mb-5">Retour</button> </a>
+                </div>
+            {% endif %}
+            <div class="col-sm-2">
+                <a href="{{ path('spectacle_new') }}"><button class="btn btn-secondary mb-5">Nouveau Spectacle</button> </a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Enregistrement Balises</th>
+                <th>Type Offre</th>
+                <th>Enregistrement Balises</th>
+                <th>Type Offre</th>
+                <th>Tarif Base</th>
+                <th class="text-center">actions</th>
+            </tr>
+
+        </thead>
+        <tbody>
+        {% for spectacle in spectacles %}
+            <tr>
+                <td>{{ spectacle.title }}</td>
+                <td>{{ spectacle.description | truncate(200) }}</td>
+
+                <td><img src="{{ asset('uploads/' ~ spectacle.image) }}" ></td>
+                
+                <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
+                <td>{{ spectacle.offerType }}</td>
+
+                <td>{{ spectacle.baseRate }}</td>
+                <td>
+                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}" class="text-black-50">Details</a>
+                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}" class="text-black-50">Modification</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Pas de Spectacles</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

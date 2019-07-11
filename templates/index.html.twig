@@ -1,22 +1,126 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseMap.html.twig' %}
 
 
 {% block body %}
 
-    <div class="row h-100 w-100 justify-content-between">
+    <style>
 
-        <div class="col-1 m-auto w-100">
-            <i class="fas fa-map-marked fa-10x m-auto"></i>
+
+        body
+        {
+            background-image: url({{ asset('/uploads/Balises_background.png') }});
+
+            background-size: cover;
+
+        }
+
+        .logoIndex, .sidenav, #logoonmap, .LoginBtn
+        {
+
+            animation:fadeIn 2s step-end;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+        }
+
+
+        #IndexTitle
+        {
+            animation: move 2s;
+        }
+
+        @keyframes move {
+            from { top: 300px;}
+            to { top: 0;}
+
+        }
+
+        #background_opacity {
+            position: fixed;
+            z-index: -10;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 236, 2, 0.85); /* L'opacite se regle ici */
+        }
+
+        .LoginBtn
+        {
+            position: absolute;
+            bottom: 80px;
+        }
+
+        #logoonmap
+        {
+            position: absolute;
+            bottom: 10px;
+            right: 2px;
+            z-index: 1;
+            transform: scale(0.7, 0.7);
+        }
+
+        .footer-bar
+        {
+            margin-top: 10%;
+        }
+
+
+
+
+    </style>
+
+
+
+    <div id="background_opacity"></div>
+
+    <div class="row h-auto m-auto justify-content-between">
+
+        <div class="col-12" id="IndexTitle" style="padding-top: 7%">
+            <h1 style="text-align: center; font-size: 450%; font-weight: bold; margin-bottom: 10%">ET SI VOUS RETOURNIEZ<p> AU THÉÂTRE ?</h1>
         </div>
 
-        <div class="col-1 m-auto">
-            <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="">
+        <div class="col-6 logoIndex" style="text-align: center; padding-left: 10%; margin-top: -3%">
+            <a href="{{ path('map2') }}"><img src="{{ asset('uploads/jumelles.png') }}" style="max-height: 250px"></a>
+            <h1 style ="margin-top: 2%">A quel endroit ?</h1>
         </div>
 
-        <div class="col-1 m-auto">
-            <i class="fas fa-calendar-alt fa-10x"></i>
+        <div class="col-6 logoIndex" style="text-align: center; padding-right: 10%; margin-top: -3%">
+            <h1 style ="margin-top: 2%">A quel moment ?</h1>
+            <a href="{{ path('calendar_home') }}""><img src="{{ asset('uploads/calendarindex.png') }}" style="max-height: 250px"></a>
+
         </div>
 
+        <div id="logoonmap">
+            <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+        </div>
+
+        <div class="col-12 footer-bar">
+            {% include 'footer.html.twig' %}
+        </div>
     </div>
 
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    <script>
+
+        let moveonfooter = document.getElementById('footer');
+        let moveonfooter2 = document.getElementById('footer2')
+        moveonfooter.addEventListener("mouseover", function()
+        {
+            moveonfooter2.style.visibility ="visible";
+        });
+        moveonfooter.addEventListener("mouseout", function()
+        {
+            moveonfooter2.style.visibility ="hidden";
+        });
+
+    </script>
 {% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Spectacle{% endblock %}
+
+{% block body %}
+    <h1>Spectacle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ spectacle.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ spectacle.description }}</td>
+            </tr>
+            <tr>
+                <th>Distribution</th>
+                <td>{{ spectacle.distribution }}</td>
+            </tr>
+            <tr>
+                <th>MandatoryInfos</th>
+                <td>{{ spectacle.mandatoryInfos }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ spectacle.image }}" alt=""></td>
+            </tr>
+            <tr>
+                <th>PhotoCredits</th>
+                <td>{{ spectacle.photoCredits }}</td>
+            </tr>
+            <tr>
+                <th>AdditionalInfos</th>
+                <td>{{ spectacle.additionalInfos }}</td>
+            </tr>
+            <tr>
+                <th>IsBalise</th>
+                <td>{{ spectacle.isBalise ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>OfferType</th>
+                <td>{{ spectacle.offerType }}</td>
+            </tr>
+            <tr>
+                <th>MapadoLink</th>
+                <td>{{ spectacle.mapadoLink }}</td>
+            </tr>
+            <tr>
+                <th>BaseRate</th>
+                <td>{{ spectacle.baseRate }}</td>
+            </tr>
+            <tr>
+                <th>Dates</th>
+                <td>{% for date in spectacle.showDates %}
+                   <ul>
+                  <li>  {{ date.dateShow | date('d/m/Y - H : i') }} </li>
+                   </ul>
+                    {% endfor %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('spectacle_index') }}">back to list</a>
+
+    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">edit</a>
+
+    {{ include('spectacle/_delete_form.html.twig') }}
+{% endblock %}

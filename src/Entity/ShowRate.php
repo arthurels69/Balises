@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Float_;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowRateRepository")
@@ -24,39 +26,46 @@ class ShowRate
 
     /**
      * Display the discounted Rate for the show if this offer has been chosen.
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $discountedRate;
 
     /**
-     * Many to one relation to a show date since a date can be concerned by the Balises offer and an other might not be.
-     * @ORM\ManyToOne(targetEntity="App\Entity\ShowDate", inversedBy="showRates")
+     * @ORM\OneToOne(targetEntity="App\Entity\ShowDate", inversedBy="showRate", cascade={"persist", "remove"})
      */
     private $showDate;
+
+    public function __construct()
+    {
+
+        $this->freePlacesNumber = 0;
+    }
+
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFreePlacesNumber(): ?int
+    public function getfreePlacesNumber(): ?int
     {
         return $this->freePlacesNumber;
     }
 
-    public function setFreePlacesNumber(?int $freePlacesNumber): self
+    public function setfreePlacesNumber(?int $freePlacesNumber): self
     {
         $this->freePlacesNumber = $freePlacesNumber;
 
         return $this;
     }
 
-    public function getDiscountedRate(): ?int
+    public function getDiscountedRate(): ?float
     {
         return $this->discountedRate;
     }
 
-    public function setDiscountedRate(?int $discountedRate): self
+    public function setDiscountedRate(?float $discountedRate): self
     {
         $this->discountedRate = $discountedRate;
 
