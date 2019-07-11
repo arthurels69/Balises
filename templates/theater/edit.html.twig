@@ -33,6 +33,12 @@
 
                         {{ include('user/_delete_form.html.twig') }}
                     {% endif %}
+                    {% if is_granted('ROLE_THEATER') %}
+                        <a type="button" href="{{ path('theater_show',{'id':theater.id}) }}"
+                           data-toggle="tooltip" data-placement="top"  title="Retour"
+                           class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
