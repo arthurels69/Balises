@@ -218,15 +218,20 @@
                 .then(text =>  {
                     let presentationSpectacle = document.getElementById('presentation_spectacle');
 
+
                     presentationSpectacle.style.transform = 'translateX(0%)';
                     presentationSpectacle.style.transition = '1000ms';
+                    presentationSpectacle.style.display = 'block';
                     window.scrollTo({top : 0, behavior:"smooth"});
+
                     if(presentationSpectacle.innerHTML ==''){
                         presentationSpectacle.innerHTML = text;
+
                     }
                     else{
                         presentationSpectacle.innerHTML ='';
                         presentationSpectacle.innerHTML = text;
+
 
                     }
                 });
@@ -236,7 +241,9 @@
             let presentationSpectacle = document.getElementById('presentation_spectacle');
             presentationSpectacle.style.transform = 'translateX(100%)';
             presentationSpectacle.style.transition = '1000ms';
-            document.location.reload();
+            setTimeout(function (){
+                presentationSpectacle.style.display = 'none'
+            }, 1000);
 
         }
 
