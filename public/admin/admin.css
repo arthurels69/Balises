@@ -8,7 +8,7 @@
 }
 
 .card-header{
-    top:74px;
+    top:70px;
     position:sticky;
     background-color:   #d6dbdf  ;
     z-index: 15;
@@ -16,7 +16,7 @@
 }
 
 .card-body table thead th{
-    top:140px !important;
+    top:133px !important;
     position:sticky !important;
     background-color: white !important;
 }
@@ -31,12 +31,16 @@ h5 span{
 }
 
 h5.list{
-    width:25% !important;
+    width:190px !important;
+}
+
+h5.chart{
+    width:100% !important;
 }
 /*********************************PAGINATION*********************************************/
 
 .nav_page{
-    margin-right: 50px;
+    margin:auto;
 }
 
 #pet-select{
@@ -186,4 +190,53 @@ td.detail.active  {
     display: block;
     margin-top: 10px;
 }
+/****************************CHART/chart.html.twig********************************/
+.option_chart{
+    background-color: #c2c4c5   !important;
+}
+
+/* Masquer le bouton radio d'origine */
+input[type=radio]{
+    display: none;
+}
+/* Affichage par défaut du bouton radio personnalisé */
+input[type=radio] + label:before {
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-top: -3px;
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    content: '';
+    width: 30px;
+    height: 30px;
+}
+/* Affichage du bouton radio personnalisé quand il est sélectionné */
+
+input[type=radio]:checked + label:before {
+    background: #fb8819 !important;
+    border-color: #fb8819 !important;
+    box-shadow: inset 0px 0px 0px 2px #fff !important;
+}
+
+label{
+    cursor:pointer;
+    font-size: 1.2rem;
+}
+
+select{
+    width:7rem!important;
+    font-size:1.2rem !important;
+    
+}
+
+option{
+    width:1.2rem !important;
+}
+
+#mois_radio{
+    
+}
+
 
