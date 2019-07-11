@@ -1,25 +1,32 @@
-{% extends 'base_admin.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}Theater{% endblock %}
 
 {% block body %}
     <style>
-        .sidenav {display: none;}
+        .sidenav {
+            display: none;
+        }
     </style>
-
-    <h1>Visualisation de {{ theater.name }}</h1>
-
-    <div class="row">
-        <div class="col-sm-6">
-            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
+    <div class="container">
+        <div class="row justify-content-center m-5">
+            <h1>{{ theater.name }}</h1>
         </div>
-        <div class="col-sm-6">
-            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+        <div class="row">
+            <div class="col-sm-6">
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
+            </div>
+            <div class="col-sm-6">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" width="150"></img>
+                {% else  %}
+                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+                {% endif %}
+            </div>
         </div>
-    </div>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             {#
             <tr>
                 <th>Id</th>
@@ -66,41 +73,51 @@
                 <td>{{ theater.website }}</td>
             </tr>
             <tr>
-                <th>Tarif Base</th>
+                <th>Plein Tarif</th>
                 <td>{{ theater.baseRate }}</td>
             </tr>
             <tr>
-              {#  <th>Latitude</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>
-            <tr>
-                <th>Longitude</th>
-                <td>{{ theater.baseRate }}</td>
-            </tr>#}
-        </tbody>
-    </table>
-    <div class="row justify-content-md-center">
-        {% if user.roles[0] == "ROLE_THEATER" %}
-            <div class="col-md-4">
-                <a href="{{ path('spectacle_index') }}"><button class="btn btn-secondary mb-5">Liste Spectacles</button> </a>
-            </div>
-            <div class="col-md-4">
-                <a href="{{ path('spectacle_new') }}"><button class="btn btn-secondary mb-5">Nouveau Spectacle</button> </a>
-            </div>
-            <div class="col-md-4">
-                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-secondary mb-5">Modification</button></a>
-            </div>
-        {% endif %}
-        {% if user.roles[0] == "ROLE_ADMIN" %}
+                {#  <th>Latitude</th>
+                  <td>{{ theater.baseRate }}</td>
+              </tr>
+              <tr>
+                  <th>Longitude</th>
+                  <td>{{ theater.baseRate }}</td>
+              </tr>#}
+            </tbody>
+        </table>
+        <div class="row justify-content-md-around">
+            {% if user.roles[0] == "ROLE_THEATER" %}
+                <div class="col-md-4">
+                    <a href="{{ path('spectacle_index') }}">
+                        <button class="btn btn-secondary mb-5">Liste Spectacles</button>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('spectacle_new') }}">
+                        <button class="btn btn-secondary mb-5">Nouveau Spectacle</button>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('theater_edit', {'id': theater.id}) }}">
+                        <button class="btn btn-secondary mb-5">Modification</button>
+                    </a>
+                </div>
+            {% endif %}
+            {% if user.roles[0] == "ROLE_ADMIN" %}
 
-            <div class="col-md-4">
-                <a href="{{ path('theater_edit', {'id': theater.id}) }}"><button class="btn btn-secondary mb-5">Modification</button></a>
-            </div>
-            <div class="col-md-4">
-                <a href="{{ path('theater_index') }}"><button class="btn btn-secondary mb-5">Liste Théâtres</button> </a>
-            </div>
-        {% endif %}
+                <div class="col-md-4">
+                    <a href="{{ path('theater_edit', {'id': theater.id}) }}">
+                        <button class="btn btn-secondary mb-5">Modification</button>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('theater_index') }}">
+                        <button class="btn btn-secondary mb-5">Liste Théâtres</button>
+                    </a>
+                </div>
+            {% endif %}
 
+        </div>
     </div>
-
 {% endblock %}

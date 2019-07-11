@@ -92,7 +92,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         /** @var User $user */
         $user = $token->getUser();
-        $id = $user->getId() - 1;
+        $id = $user->getTheater()->getId();
+
 
         $roles = $token->getRoles();
         $rolesTab = array_map(function ($role) {

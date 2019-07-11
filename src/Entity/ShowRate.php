@@ -35,6 +35,13 @@ class ShowRate
      */
     private $showDate;
 
+    public function __construct()
+    {
+
+        $this->freePlacesNumber = 0;
+    }
+
+
 
     public function getId(): ?int
     {

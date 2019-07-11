@@ -1,26 +1,36 @@
-{% extends 'baseMap.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
-{% block title %}ShowDate{% endblock %}
+{% block title %}Représentation{% endblock %}
 
 {% block body %}
-    <h1>ShowDate</h1>
+    <div class = 'container'>
+        <h1>Suppression Représentation</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ show_date.id }}</td>
-            </tr>
-            <tr>
-                <th>DateShow</th>
-                <td>{{ show_date.dateShow ? show_date.dateShow|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+               {# <tr>
+                    <th>Id</th>
+                    <td>{{ show_date.id }}</td>
+                </tr>#}
+                <tr>
+                    <th>Représentation du </th>
+                    <td>{{ show_date.dateShow ? show_date.dateShow|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            {{ include('show_date/_delete_form.html.twig') }}
+        </div>
+    {#    <a href="{{ path('show_date_index') }}">Retour</a>#}
+    {#    <a href="javascript:history.go(-1)">Retour</a>#}
+{#        <form> <input type ="button" class="btn btn-secondary" value="Retour" onclick="history.go(-1)"</form>#}
+        <a type="button" href="javascript:history.go(-1)"
+           data-toggle="tooltip" data-placement="top"  title="Retour"
+           class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+        </a>
 
-    <a href="{{ path('show_date_index') }}">back to list</a>
 
-    <a href="{{ path('show_date_edit', {'id': show_date.id}) }}">edit</a>
+    {#    <a href="{{ path('show_date_edit', {'id': show_date.id}) }}">edit</a>#}
 
-    {{ include('show_date/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

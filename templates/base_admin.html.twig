@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
         {% endblock %}
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,14 +102,27 @@
                         </nav><!-- navbar navbar-expand-lg -->
  <!-- BLOCK BODY -->
                         <div class="container-fluid content_admin p-0">
-
-                        {% block body %}
+                            {% if app.request.hasPreviousSession %}
+                                {% for category, messages in app.flashes %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ category }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                            <style>
+                                .sidenav {
+                                    display: none;
+                                }
+                            </style>
+                            {% block body %}
                         {% endblock %}
-                            
+
                         </div><!-- fin content_admin -->
                     </div>
                 </div>
-            
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -118,7 +132,7 @@
     <script type="text/javascript" src="/admin/admin_menu.js"></script>
                 
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+
        
     {% endblock %}
     </body>

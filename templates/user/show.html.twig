@@ -33,10 +33,7 @@
         <div class="card-body p-0">
                 <table class="table table_show table-striped table-bordered table-hover">
                     <tbody>
-                        <tr>
-                            <th>Email</th>
-                            <td>{{ user.email }}</td>
-                        </tr>
+
                         {% if user.theater.name is  defined %}
                             <tr>
                                 <th>Nom du Théâtre</th>
@@ -44,20 +41,8 @@
                             </tr>
                         {% endif %}
                         <tr>
-                            <th>Password</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ user.theater.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nom</th>
-                            <td>{{ user.theater.name }}</td>
-                        </tr>
-                        <tr>
                             <th>Email</th>
-                            <td>{{ user.theater.email }}</td>
+                            <td>{{ user.email }}</td>
                         </tr>
                         <tr>
                             <th>Adresse</th>
@@ -81,7 +66,11 @@
                         </tr>
                         <tr>
                             <th>Logo</th>
-                            <td>{{ user.theater.logo }}</td>
+                            <td><img src="{{ asset( user.theater.logo ) }}" alt=""> </td>
+                        </tr>
+                        <tr>
+                            <th>Image</th>
+                            <td><img src="{{ asset( user.theater.picture ) }}" alt=""> </td>
                         </tr>
                         <tr>
                             <th>Web Site</th>
@@ -89,14 +78,6 @@
                         </tr>
                         <tr>
                             <th>Tarif Base</th>
-                            <td>{{ user.theater.baseRate }}</td>
-                        </tr>
-                        <tr>
-                            <th>Latitude</th>
-                            <td>{{ user.theater.baseRate }}</td>
-                        </tr>
-                        <tr>
-                            <th>Longitude</th>
                             <td>{{ user.theater.baseRate }}</td>
                         </tr>
                     </tbody>   
