@@ -1,7 +1,8 @@
 <div id="display-spectacles">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
 
-        <h4 class="h4">Au programme en {{ today |date('M') }}</h4>
+    <h4 class="h4">Au programme du {{ today | date('d M') }} au {{ today | date_modify('+5 days') | date('d M')
+        }}</h4>
 
     {% for spectacle in spectaclesOfTheDay%}
 
@@ -35,8 +36,8 @@
                 </ul>
 
                 <p class="description">{{ spectacle.showId.description | truncate(400) }}
-                    <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank"
-                       class="calendarLink">Voir plus</a>
+                    <a onclick="detailsSpectacles('{{ path('detailSpectacle', {"id": spectacle.showId.id})
+                    }}')" class="calendarLink">Voir plus</a>
                 </p>
 
                 <button class="calendarButton hvr-float-shadow mt-5">Offre balise</button>
@@ -50,12 +51,16 @@
             </div>-->
         </div>
     {% endfor %}
-    <div class="row bg-custom" id="plus-button">
+    <div class="row justify-content-center p-4" id="plus-button">
+        <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;" onclick="nextDay('{{ path
+            ('async_calendarPlusOne', {"day" : today |
+                date_modify('+ 5 days') | date('Y-m-d')
+            }) }}')"><i class="fas fa-plus"></i> Ce mois </h4>
         <div class="col-1 offset-1 ">
-            <div style="height: 20px" onfocus="nextDay('{{ path('async_calendarPlusOne', {"day" : today |
-                date_modify('+ 1 day') | date('Y-m-d')
-            }) }}')"></div>
+            <div ></div>
         </div>
     </div>
 
 </div>
+
+
