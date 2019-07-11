@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cfa4c90fa38751976aaa9fe346bddf7",
+    "content-hash": "a4cc6149721905d09256c6712ae4739a",
     "packages": [
         {
             "name": "assoconnect/mapbox-token",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/assoconnect/mapbox-token.git",
-                "reference": "a09df1cdcdea25ce47f63f1d2f90b1d6dacbae59"
+                "reference": "e9c83c739a50b23c7bcbf66cfdf9e5883372b1ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/assoconnect/mapbox-token/zipball/a09df1cdcdea25ce47f63f1d2f90b1d6dacbae59",
-                "reference": "a09df1cdcdea25ce47f63f1d2f90b1d6dacbae59",
+                "url": "https://api.github.com/repos/assoconnect/mapbox-token/zipball/e9c83c739a50b23c7bcbf66cfdf9e5883372b1ab",
+                "reference": "e9c83c739a50b23c7bcbf66cfdf9e5883372b1ab",
                 "shasum": ""
             },
             "require": {
@@ -37,7 +37,7 @@
                 "MIT"
             ],
             "description": "PHP client for Mapbox Token API",
-            "time": "2019-04-30T09:43:38+00:00"
+            "time": "2019-07-10T07:43:42+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -7840,16 +7840,16 @@
     "packages-dev": [
         {
             "name": "doctrine/data-fixtures",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "3a1e2c3c600e615a2dffe56d4ca0875cc5233e0a"
+                "reference": "09b16943b27f3d80d63988d100ff256148c2f78b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/3a1e2c3c600e615a2dffe56d4ca0875cc5233e0a",
-                "reference": "3a1e2c3c600e615a2dffe56d4ca0875cc5233e0a",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/09b16943b27f3d80d63988d100ff256148c2f78b",
+                "reference": "09b16943b27f3d80d63988d100ff256148c2f78b",
                 "shasum": ""
             },
             "require": {
@@ -7896,7 +7896,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2018-03-20T09:06:36+00:00"
+            "time": "2019-07-10T18:30:35+00:00"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -8417,7 +8417,8 @@
     "platform": {
         "php": "^7.1.3",
         "ext-ctype": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }

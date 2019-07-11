@@ -10,8 +10,8 @@
             display: none;
         }
     </style>
-    <div class="row justify-content-md-around mb-3">
-    <h1>Liste des Spectacles</h1>
+    <div class="row justify-content-center m-5">
+        <h1>Liste des Spectacles</h1>
     </div>
     <div class="container">
         <div class="row justify-content-md-center">
@@ -39,9 +39,7 @@
                 <th>Image</th>
                 <th>Enregistrement Balises</th>
                 <th>Type Offre</th>
-                <th>Enregistrement Balises</th>
-                <th>Type Offre</th>
-                <th>Tarif Base</th>
+                <th>Plein Tarif</th>
                 <th class="text-center">actions</th>
             </tr>
 
@@ -59,8 +57,14 @@
 
                 <td>{{ spectacle.baseRate }}</td>
                 <td>
-                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}" class="text-black-50">Details</a>
-                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}" class="text-black-50">Modification</a>
+                    <a type="button" href="{{ path('spectacle_show', {'id': spectacle.id}) }}"
+                       data-toggle="tooltip" data-placement="top"  title="Détail"><i class="fas fa-file-alt" style = "color : maroon"></i>
+                    </a>
+                    <a type="button" href="{{ path('spectacle_edit', {'id': spectacle.id}) }}"
+                       data-toggle="tooltip" data-placement="top"  title="Modification"><i class="fas fa-edit" style = "color : maroon"></i>
+                    </a>
+{#                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}" class="text-black-50"><i class="fas fa-file-alt"></i>Details</a>#}
+{#                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}" class="text-black-50">Modification</a>#}
                 </td>
             </tr>
         {% else %}

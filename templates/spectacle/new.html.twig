@@ -1,4 +1,4 @@
-{% extends 'base_admin.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}Nouveau Spectacle{% endblock %}
 
@@ -7,7 +7,7 @@
 
     {{ include('spectacle/_form.html.twig') }}
 
-    <a href="{{ path('spectacle_index') }}">Retour</a>
+{#    <a href="{{ path('spectacle_index') }}">Retour</a>#}
 
 {% endblock %}
 

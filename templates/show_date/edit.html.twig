@@ -3,10 +3,13 @@
 {% block title %}Modification Représentation{% endblock %}
 
 {% block body %}
-    <h1>Modification Représentation</h1>
+    <div class = 'container'>
+        <h1>Modification Représentation</h1>
 
-    {{ include('show_date/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
-    {{ include('show_date/_showDateBySpectacle.html.twig') }}
+        {{ include('show_date/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
+        {{ include('show_date/_showDateBySpectacle.html.twig') }}
 
-    {{ include('show_date/_delete_form.html.twig') }}
+    {#    {{ include('show_date/_delete_form.html.twig') }}#}
+
+    </div>
 {% endblock %}

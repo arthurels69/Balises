@@ -17,9 +17,30 @@
                         {{ form_widget(form.showRate.freePlacesNumber, {'attr': {'class': 'hold','placeholder': '99999'}}) }}
                     </div>
                     <div class="col-sm-6 " style="display: none">
-                        {{ form_label(form.showRate.freePlacesNumber, 'Tarif de Base') }}
+                        {{ form_label(form.showRate.freePlacesNumber, 'Tarif') }}
                         {{ form_widget(form.showRate.discountedRate, {'attr': {'id': 'hold','placeholder': '99999.99'}}) }}
                     </div>
+
+                    <button id = "PlacesBalises" data-toggle="tooltip" data-placement="top"  title="Actualiser"
+                            class="btn btn-secondary mb-2"><i class="fas fa-sync-alt"></i></button>
+                    <table class="table table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th scope="col-sm-6 " >Total Réservable</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div class="row">
+                            <tr>
+                                <td id="totalPlace"></td>
+
+                            </tr>
+
+
+                        </div>
+                        </tbody>
+                    </table>
+
                 {% endif %}
                 {% if spectacle.offerType == 2 %}
                     <div class="col-sm-6">
@@ -27,10 +48,11 @@
                         {{ form_widget(form.showRate.freePlacesNumber, {'attr': {'class': 'hold','placeholder': '99999'}}) }}
                     </div>
                     <div class="col-sm-6">
-                        {{ form_label(form.showRate.discountedRate, 'Tarif de Base') }}
+                        {{ form_label(form.showRate.discountedRate, 'Tarif') }}
                         <a id="reduit">{{ form_widget(form.showRate.discountedRate) }}</a>
                     </div>
-                    <button id = "actualiser">Actualiser</button>
+                    <button id = "actualiser" data-toggle="tooltip" data-placement="top"  title="Actualiser"
+                            class="btn btn-secondary mb-2"><i class="fas fa-sync-alt"></i></button>
                     <table class="table table-striped text-center">
                         <thead>
                         <tr>
@@ -50,8 +72,6 @@
                                 <td id="totalReduit"></td>
                                 <td id="totalRev"></td>
 
-
-
                             </tr>
 
 
@@ -62,8 +82,15 @@
 
         {% endif %}
     </div>
+    <a type="button" href="{{ path('spectacle_edit', {'id':spectacle.id}) }}"
+       data-toggle="tooltip" data-placement="top"  title="Retour"
+       class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+    </a>
+    <button class="btn btn-secondary mb-2">{{ button_label|default('Création') }}</button>
 
-    <button class="btn btn-secondary mb-5">{{ button_label|default('Création') }}</button>
+
+
+
 </div>
 {{ form_end(form) }}
 {% block javascripts %}
@@ -102,12 +129,12 @@
 
     let actualiser = document.getElementById('actualiser');
 
-        actualiser.addEventListener("click", function(event){
-            let totalRev = finalprice * CoeffRevente;
-            let totalReduit = finalprice * CoeffReduit;
-            document.getElementById('totalRev').innerHTML=totalRev;
-            document.getElementById('totalReduit').innerHTML=totalReduit;
-            event.preventDefault();
+    actualiser.addEventListener("click", function(event){
+        let totalRev = finalprice * CoeffRevente;
+        let totalReduit = finalprice * CoeffReduit;
+        document.getElementById('totalRev').innerHTML=totalRev;
+        document.getElementById('totalReduit').innerHTML=totalReduit;
+        event.preventDefault();
 
     });
 

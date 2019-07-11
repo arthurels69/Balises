@@ -6,7 +6,7 @@
 
 <div class="card  container p-0 w-100">
     <div class="card-header d-flex w-100 justify-content-between">
-        <h5 class="my-0 mx-2 py-2 list" >Liste des Théâtres</h5>
+        <h5 class="my-0 mx-0 py-2 list" >Liste des Théâtres</h5>
 
         {# ########################################################## #}
         
@@ -93,7 +93,7 @@
                                 <td class="text-center btn_crud_index">
 
                                     <a type="button" class="btn  btn-info btn-xs" data-toggle="tooltip" title="Détail" 
-                                        href="{{ path('user_show', {'id': user.id}) }}">
+                                        href="{{ path('theater_show', {'id': user.id -1}) }}">
                                         <i class="far fa-eye"></i>
                                     </a>
 

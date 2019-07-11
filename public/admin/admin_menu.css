@@ -38,17 +38,12 @@ a:focus {
     width:calc(100% - 115px) !important;
     color:red !important;
 }
-    
-
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
     border: none;
     
 }
-
-
-
 .line {
     width: 100%;
     height: 1px;

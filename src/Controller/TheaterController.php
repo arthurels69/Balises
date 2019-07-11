@@ -82,11 +82,12 @@ class TheaterController extends AbstractController
     public function show(Theater $theater): Response
     {
         $user =  $this->getUser();
+        $role = $user->getRoles();
         $userEmail = $user->getEmail();
         $email = $theater->getEmail();
 
-        if ($email != $userEmail) {
-            throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
+        if ($email != $userEmail && $role ==['ROLE_THEATER']) {
+             throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
         }
         return $this->render('theater/show.html.twig', [
             'theater' => $theater,

@@ -1,0 +1,303 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Chart
+{% endblock %}
+
+{% block body %}
+
+    <div class="card  container p-0 w-100 ">
+
+        <div class="card-body p-0">
+
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+        </div>
+        {# Card body #}
+        
+        <div class="option_chart d-flex justify-content-around ">
+            <select  id="select" class="my-auto"></select>
+            <div class="element my-auto">
+                <input type="radio"  id="mois_radio" name="optradio" checked="checked">
+                <label for="mois_radio" class="my-auto">Mois</label>
+             </div>
+             <div class="element my-auto">
+                <input type="radio" id="trimestre_radio" name="optradio">
+                <label for="trimestre_radio" class="my-auto">Trimestre</label>
+             </div>
+             <div class="element my-auto">
+                <input type="radio" id="annee_radio" name="optradio">
+                <label for="annee_radio" class="my-auto">Année</label>
+             </div>
+        </div>
+    </div>
+    {# Card #}
+
+    <div id="mois" data-is-mois="{{ nbSpectacleMois }}"></div>
+    <div id="annee" data-is-annee="{{ annee }}"></div>
+    <div id="nbAnnee" data-is-nbannee="{{ nbSpectacleAn }}"></div> 
+   
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        // GRAPHIQUE NOMBRE DE SPECTACLES
+
+        window.onload = function () {
+            CanvasJS.addCultureInfo("fr", {
+                months: 
+                [
+                "Janvier","Février","Mars","Avril",
+                "Mai","Juin","Juillet","Aout",
+                "Septembre","Octobre","Novembre", "Décembre"
+                ]
+            });
+            
+//----------Récupération données db-------------------------------------// 
+
+            let annee= $('#annee').data("isAnnee");
+            let nbSpectacleMois = $('#mois').data("isMois");
+            let nbSpectacleAn = $('#nbAnnee').data("isNbannee");            
+            let len = nbSpectacleMois.length;
+            let lenAn = nbSpectacleAn.length;
+
+
+//----------Création du menu select contenant les années------------------//
+
+            $.each(annee, function( index, value ) {
+                if(index==0){
+                    $('#select').append("<option value="+value.annee+" selected='selected'>"+value.annee+"</option>");
+                }else{
+                    $('#select').append("<option value="+value.annee+" >"+value.annee+"</option>");
+                }                
+            });
+
+//----------Sélection d'une année----------------------------------------------------------//
+
+            let anneeSelect=parseInt(annee[0].annee);
+            let sel=document.getElementById('select');
+            sel.addEventListener('change',function(){
+            anneeSelect=parseInt(event.target.value);
+            });
+
+//----------Appel du graphique chart au premier chargement de la page----------------------//
+
+            chartMois(nbSpectacleMois,len,"Nombre de spectacles par MOIS en "+anneeSelect,anneeSelect);
+            
+//----------CHOIX DE L'ANNEE POUR LE NOMBRE DE SPECTACLES------------------------------------------//
+
+            $('#select').change(function(){
+                if($('#mois_radio').is(':checked')){ 
+                    chartMois(nbSpectacleMois,len,"Nombre de spectacles par MOIS en "+anneeSelect,anneeSelect); 
+                }
+                else if($('#trimestre_radio').is(':checked')){
+                    chartTrimestre(nbSpectacleMois,len,"Nombre de spectacles par TRIMESTRE en "+anneeSelect,anneeSelect); 
+                }
+                else if($('#annee_radio').is(':checked')){
+                    chartAn(nbSpectacleAn,lenAn,"Nombre de spectacles par AN ",anneeSelect); 
+                }
+            });
+
+//----------SPECTACLE PAR MOIS----------------------------------//
+
+            $('#mois_radio').click(function(){
+                $('select').show();
+                chartMois(nbSpectacleMois,len,"Nombre de spectacles par MOIS en "+anneeSelect,anneeSelect); 
+            });
+ 
+//----------SPECTACLE PAR TRIMESTRE----------------------------------//
+                    
+            $('#trimestre_radio').click(function(){
+                   let anneeSelect=parseInt(sel.value);
+                   $('select').show();
+                   chartTrimestre(nbSpectacleMois,len,"Nombre de spectacles par TRIMESTRE en "+anneeSelect,anneeSelect); 
+            });
+
+//----------SPECTACLE PAR AN----------------------------------//
+                    
+            $('#annee_radio').click(function(){
+                   let anneeSelect=parseInt(sel.value);
+                   $('select').hide();
+                   $('.option_chart').height(40);
+                   chartAn(nbSpectacleAn,lenAn,"Nombre de spectacles par AN",anneeSelect); 
+            });
+
+//----------FONCTION CHART MOIS-------------------------------//
+
+            function chartMois(nbSpectacleMois,len,titre,anneeSelect){
+
+                dataPoints=[];
+                
+                for (let i = 0; i < len; i++) {
+                
+                let nbSpectacle = parseInt(nbSpectacleMois[i].nbSpectacle);
+                let mois = parseInt(nbSpectacleMois[i].mois);
+                let annee = parseInt(nbSpectacleMois[i].annee);
+                
+                if(annee == anneeSelect){
+                for (let j = 0; j < 12; j++) {            
+                    if ((j + 1) == mois) {
+                        dataPoints.push({
+                            x: new Date(anneeSelect, j),
+                            y: nbSpectacle
+                        });
+                    } 
+                    else {
+                        dataPoints.push({
+                            x: new Date(anneeSelect, j),
+                            y: 0
+                        });
+                    }// else de j
+                  }  //fin for j mois
+                } //if annee
+            }//fin for i mois
+
+            let chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                culture: "fr",
+                title: {
+                    text: titre,
+                    fontColor: "#2f4f4f",
+                    fontSize: 20,
+                    padding: 15,
+                    margin: 15,
+                    backgroundColor: "#c2c4c5",
+                    fontWeight: "bold",                   
+                },
+                axisX: {
+                    valueFormatString: "MMMM",
+                    labelAngle: -50,
+                    labelFontSize: 17,                    
+                },
+                axisY: {                   
+                    labelFontSize: 15,                    
+                }, 
+                data: [{
+                        type: "column",                        
+                        indexLabel: "{y}",
+                        indexLabelPlacement: "inside",  
+                        indexLabelOrientation: "horizontal",
+                        indexLabelFontSize: 20,
+                        dataPoints: dataPoints
+                    }]                
+            });// chart = new CanvasJS.Chart
+            chart.render();           
+        }//chartFonct
+
+//------FONCTION CHART TRIMESTRE------------------------------------------//
+
+        function chartTrimestre(nbSpectacleMois,len,titre,anneeSelect){
+            let totaltrimestre=[0,0,0,0];
+            dataPoints = [];
+
+            for (let i = 0; i < len; i++) {
+                if(anneeSelect == nbSpectacleMois[i].annee){
+                    let nbSpectacle = parseInt(nbSpectacleMois[i].nbSpectacle);
+                    let mois = parseInt(nbSpectacleMois[i].mois);
+                    if(mois<=3 && mois>=1){totaltrimestre[0]+=parseInt(nbSpectacle);}            
+                    if(mois<=6 && mois>=4){totaltrimestre[1]+=parseInt(nbSpectacle);}
+                    if(mois<=9 && mois>=7){totaltrimestre[2]+=parseInt(nbSpectacle);}            
+                    if(mois<=12 && mois>=10){totaltrimestre[3]+=parseInt(nbSpectacle);}
+                }//fin if annee
+            }//fin for i mois
+            
+            dataPoints.push({
+                x: new Date(anneeSelect, 1),
+                y: totaltrimestre[0]
+            });
+            dataPoints.push({
+                x: new Date(anneeSelect, 4),
+                y: totaltrimestre[1]
+            });
+            dataPoints.push({
+                x: new Date(anneeSelect, 7),
+                y: totaltrimestre[2]
+            });
+            dataPoints.push({
+                x: new Date(anneeSelect, 10),
+                y: totaltrimestre[3]
+            });
+
+            let chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                culture: "fr",
+                title: {
+                    text: titre,
+                    fontColor: "#2f4f4f",
+                    fontSize: 20,
+                    padding: 15,
+                    margin: 15,
+                    backgroundColor: "#c2c4c5",
+                    fontWeight: "bold",                   
+                },
+                axisX: {
+                    valueFormatString: "MMMM",
+                    labelAngle: -50,
+                    labelFontSize: 17,                    
+                },
+                axisY: {                   
+                    labelFontSize: 15,                    
+                }, 
+                data: [{
+                        type: "column",                        
+                        indexLabel: "{y}",
+                        indexLabelPlacement: "inside",  
+                        indexLabelOrientation: "horizontal",
+                        indexLabelFontSize: 20,
+                        dataPoints: dataPoints
+                    }]                
+            });// chart = new CanvasJS.Chart
+            chart.render();            
+        }// fin chartTrimestre
+
+//----------FONCTION CHART AN-------------------------------//
+
+            function chartAn(nbSpectacleAn,lenAn,titre,anneeSelect){
+
+                dataPoints=[]; 
+                
+                for (let i = 0; i < lenAn; i++) {
+                
+                let nbSpectacle = parseInt(nbSpectacleAn[i].nbSpectacleAn);
+                let year = parseInt(nbSpectacleAn[i].annee);
+                let label=year+"->"+nbSpectacle;
+                
+                dataPoints.push({y:nbSpectacle,indexLabel:label});
+                
+                }//fin for i mois
+
+                let chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    culture: "fr",
+                    title: {
+                        text: titre,
+                        fontColor: "#2f4f4f",
+                        fontSize: 20,
+                        padding: 15,
+                        margin: 15,
+                        backgroundColor: "#c2c4c5",
+                        fontWeight: "bold",                   
+                    },
+
+                    data: [{
+                        type: "pie",                        
+                        //indexLabel: "{y}",
+                        indexLabelPlacement: "outside",  
+                        indexLabelOrientation: "horizontal",
+                        indexLabelFontSize: 20,
+                        indexLabelFontColor:"#000000",
+                        dataPoints: dataPoints
+                    }]                
+            });// chart = new CanvasJS.Chart
+            chart.render();           
+        }//chartFonct
+}//window onload 
+</script>
+
+
+{% endblock %}
+

@@ -80,7 +80,8 @@ class ShowJamFixtures extends Fixture
 
 
                 $showDate = new ShowDate();
-                $showDate->setDateShow($faker->dateTimeBetween('now', '+ 3 months'));
+                //$showDate->setDateShow($faker->dateTimeBetween('now', '+ 3 months'));
+                $showDate->setDateShow($faker->dateTimeInInterval($startDate = '-2 years', $interval = '+ 24 months', $timezone = null));
                 $showDate->setShowId($show);
                 $manager->persist($showDate);
                 $showRate = new ShowRate();
