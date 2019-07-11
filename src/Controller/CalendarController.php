@@ -55,48 +55,41 @@ class CalendarController extends AbstractController
 
 
         $today = new \DateTime();
-        $todayString = [];
-        $todayString['full'] = $today->format("Y-m-d");
-        $todayString['year'] = substr($todayString['full'], 0, 4);
-        $todayString['month'] = substr($todayString['full'], 5, 2);
-
-        $selectedDate['monthAndDay'] = $request->request->get('picked_date');
-
-        $selectedDate['month'] = substr($selectedDate['monthAndDay'], 1, 2);
-
+        $todayString = $today->format("Y-m-d");
         //IF INPUT used // Date transmitted by the "rechercher par date" formular
         if ($request->request->get('picked_date')) {
-            if ($todayString['month'] > $selectedDate['month']) {
-                $todayString['year']++;
-            }
-
-                $todayString['full'] = $todayString['year'] . $selectedDate['monthAndDay'];
-                $todayString['month'] = $selectedDate['month'];
+            dump($request->request->get('picked_date'));
+            $todayString = $request->request->get('picked_date');
         }
 
-        $months = [
-            'jan',
-            'fev',
-            'mar',
-            'avr',
-            'mai',
-            'jui',
-            'jul',
-            'aou',
-            'sep',
-            'oct',
-            'nov',
-            'dec'
-        ];
-
         return $this->render('Calendar/calendar2.html.twig', [
-            'today' => $todayString['full'],
+            'today' => $todayString,
             'period' => $todayString,
-            'months' => $months,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString['full']),
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
             'oneMoreDay' => $this->calendarService->addMoreDays(),
         ]);
     }
+
+    public function calendarSelectedDay(Request $request)
+    {
+
+        //Retrieves the date passed in URI.
+        $selectedDay = substr($request->getUri(), -10);
+
+        //IF INPUT used // Date transmitted by the "rechercher par date" formular
+        if ($request->request->get('picked_date')) {
+            $selectedDay = $request->request->get('picked_date');
+        }
+
+
+        return $this->render('Calendar/calendar.html.twig', [
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay),
+            'oneMoreDay' => $this->calendarService->addMoreDays(),
+
+        ]);
+    }
+
 
     /**
      * @param Request $request
@@ -106,11 +99,11 @@ class CalendarController extends AbstractController
     public function asyncDate(Request $request) :Response
     {
 
-        $selectedDay['full'] = $request->attributes->get('day');
+        $selectedDay = $request->attributes->get('day');
 
         return $this->render('Calendar/ajaxSpectacles.html.twig', [
-            'today' => $selectedDay['full'],
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay['full'])
+            'today' => $selectedDay,
+            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($selectedDay)
         ]);
     }
 
@@ -123,10 +116,11 @@ class CalendarController extends AbstractController
     {
         $selectedDay = $request->attributes->get('day');
 
-        $newSpectacles = $this->calendarService->selectSpectacles3NextDays($selectedDay);
+        $newSpectacles = $this->calendarService->selectSpectacles5NextDays($selectedDay);
 
         return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
     }
+
 
     /**
      * @return Response
