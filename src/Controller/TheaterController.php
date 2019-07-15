@@ -112,6 +112,13 @@ class TheaterController extends AbstractController
         FileUploader $fileUploader
     ): Response {
 
+        // Empêche un théâtre d'acceder au compte d'un autre théâtre
+        $userId = $this->getUser()->getId()-1;
+        $theaterId = $theater->getId();
+        if ($userId != $theaterId && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Acces denied ! Vous n'avez pas les droits");
+        }
+
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
         $user = $this->getUser();
