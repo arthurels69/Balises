@@ -10,6 +10,14 @@
         </div>
         {% if spectacle.isBalise %}
             <div class="col-sm-6 espSaisie">
+                <table>
+                    <tr style = "display:none">
+                        <td id = "CoeffReduit">{{ params.redistributedCoeff }}</td>
+                        <td id = "CoeffRevente">{{ params.resaleCoeff }}</td>
+                        <td id = "TypeOffre">{{ spectacle.offerType }}</td>
+
+                    </tr>
+                </table>
                 {{ form_label(form.showRate, 'Offre Choisie') }}
                 {% if spectacle.offerType == 1 %}
                     <div class="col-sm-6">
@@ -21,7 +29,7 @@
                         {{ form_widget(form.showRate.discountedRate, {'attr': {'id': 'hold','placeholder': '99999.99'}}) }}
                     </div>
 
-                    <button id = "PlacesBalises" data-toggle="tooltip" data-placement="top"  title="Actualiser"
+                    <button id = "actualiserPlace" data-toggle="tooltip" data-placement="top"  title="Actualiser"
                             class="btn btn-secondary mb-2"><i class="fas fa-sync-alt"></i></button>
                     <table class="table table-striped text-center">
                         <thead>
@@ -32,7 +40,7 @@
                         <tbody>
                         <div class="row">
                             <tr>
-                                <td id="totalPlace"></td>
+                                <td id="totalPlaces"></td>
 
                             </tr>
 
@@ -63,11 +71,6 @@
                         <tbody>
                         <div class="row">
 
-                                <tr style = "display:none">
-                                    <td id = "CoeffReduit">{{ params.redistributedCoeff }}</td>
-                                    <td id = "CoeffRevente">{{ params.resaleCoeff }}</td>
-
-                                </tr>
                             <tr>
                                 <td id="totalReduit"></td>
                                 <td id="totalRev"></td>
@@ -96,47 +99,66 @@
 {% block javascripts %}
 <script type="text/javascript">
 
-    // let reduit = document.getElementsByClassName("reduit");
-    // let CoeffReduit = document.getElementById("CoeffReduit");
-    // let CoeffRevente = document.getElementById("CoeffRevente");
 
-    // let resultReduit = reduit * CoeffReduit;
-    // let resultVente = reduit * CoeffRevente;
-
-
+    // calcul tarif réduit
      let CoeffReduit = {{ params.redistributedCoeff | json_encode | raw }};
      let CoeffRevente = {{ params.resaleCoeff | json_encode | raw }};
+     let TypeOffre = {{ spectacle.offerType | json_encode | raw }};
 
-     // console.log(CoeffReduit);
-     // console.log(CoeffRevente);
 
 
      let finalprice = document.getElementById('show_date_showRate_discountedRate').value;
-        finalprice = parseFloat(finalprice);
+     finalprice = parseFloat(finalprice);
 
-     let modif = document.getElementById('show_date_showRate_discountedRate');
+     let modifPrice = document.getElementById('show_date_showRate_discountedRate');
 
-
-
-
-        modif.addEventListener("change", function(){
+    modifPrice.addEventListener("change", function(){
             let price = document.getElementById('show_date_showRate_discountedRate').value;
             finalprice = parseFloat(price);
 
      });
 
+     // calcul places total réservable
+    let CoeffPlace = 2;
+    let finalPlaces = document.getElementById('show_date_showRate_freePlacesNumber').value;
+    finalPlaces = parseInt(finalPlaces);
 
-
-    let actualiser = document.getElementById('actualiser');
-
-    actualiser.addEventListener("click", function(event){
-        let totalRev = finalprice * CoeffRevente;
-        let totalReduit = finalprice * CoeffReduit;
-        document.getElementById('totalRev').innerHTML=totalRev;
-        document.getElementById('totalReduit').innerHTML=totalReduit;
-        event.preventDefault();
+    let modifPlace = document.getElementById('show_date_showRate_freePlacesNumber');
+    modifPlace.addEventListener("change", function(){
+        let places = document.getElementById('show_date_showRate_freePlacesNumber').value;
+        finalPlaces = parseInt(places);
 
     });
+
+    if (TypeOffre == 2) {
+        let actualiser = document.getElementById('actualiser');
+        actualiser.addEventListener("click", function(event){
+
+            let totalRev = finalprice * CoeffRevente;
+            let totalReduit = finalprice * CoeffReduit;
+            document.getElementById('totalRev').innerHTML = totalRev;
+            document.getElementById('totalReduit').innerHTML = totalReduit;
+
+            event.preventDefault();
+
+        });
+    };
+    if (TypeOffre == 1) {
+        let actualiserPlace = document.getElementById('actualiserPlace');
+        actualiserPlace.addEventListener("click", function(event){
+
+            let totalPlaces = finalPlaces * CoeffPlace;
+            console.log(totalPlaces);
+            document.getElementById('totalPlaces').innerHTML = totalPlaces;
+
+            event.preventDefault();
+
+        });
+    };
+
+
+
+
 
 
 
