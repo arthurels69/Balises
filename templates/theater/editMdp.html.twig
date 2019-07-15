@@ -1,0 +1,19 @@
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'basePage.html.twig' %}
+
+{% block title %}Modification Mdp{% endblock %}
+
+{% block body %}
+
+    <div class="card card-edit-new w-100 container p-0">
+
+    {{ include('theater/_formMdp.html.twig') }}
+
+        <div class="row justify-content-md-center mb-5">
+            <a href="{{ path('theater_edit', {id: theater.id-1}) }}">
+                <button class="btn btn-secondary">Retour</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
