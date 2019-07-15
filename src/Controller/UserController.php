@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\MdpType;
 use App\Form\UserType;
 use App\Entity\Theater;
 use App\Form\RegistrationType;
 use App\Service\TriPageService;
 use App\Repository\UserRepository;
 use App\Repository\ShowDateRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,8 +111,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", 
-     * requirements={"id"="\d+"},   
+     * @Route("/{id}",
+     * requirements={"id"="\d+"},
      * name="user_show", methods={"GET"})
      * @IsGranted("ROLE_THEATER")
      * @param User $user
@@ -154,6 +156,47 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/edit_mdp", name="theater_edit_mdp", methods={"GET","POST"})
+     * @param Request $request
+     * @param Theater $theater
+     * @param User $user
+     * @param UserPasswordEncoderInterface $encoder
+     * @return RedirectResponse|Response
+     */
+    public function editMdp(
+        Request $request,
+        Theater $theater,
+        User $user,
+        UserPasswordEncoderInterface $encoder
+    ) {
+
+        $form = $this->createForm(MdpType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Mdp changé !');
+
+            return $this->redirectToRoute('theater_edit', [
+                'id' => $theater->getId() -1
+            ]);
+//        } else {
+//            $this->addFlash('danger', 'Les mot de passe ne correspondent pas');
+//            return $this->redirectToRoute('theater_edit_mdp', [
+//                'id' => $user->getId()
+//            ]);
+//        }
+        }
+        return $this->render('theater/editMdp.html.twig', [
+            'form' => $form->createView(),
+            'theater' => $theater,
+            'user' => $user
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
      * @IsGranted("ROLE_ADMIN")
      * @param Request $request
@@ -174,11 +217,10 @@ class UserController extends AbstractController
     /**
      * @Route("/chart", name="user_chart", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
-     * 
+     *
      */
-    public function showChart(ShowDateRepository $repo
-    ,SerializerInterface $serializer)
-    {   
+    public function showChart(ShowDateRepository $repo, SerializerInterface $serializer)
+    {
         $mois=$repo->findDateMois();
         $years=$repo->findDateYear();
         $nbSpectacleAn=$repo->findSpectacleYear();
@@ -186,25 +228,29 @@ class UserController extends AbstractController
        
         $json_mois = $serializer->serialize(
             $mois,
-            'json', ['groups' => 'group1']
+            'json',
+            ['groups' => 'group1']
         );
 
         $json_years = $serializer->serialize(
             $years,
-            'json', ['groups' => 'group1']
+            'json',
+            ['groups' => 'group1']
         );
 
         $json_nbSpectacleAn = $serializer->serialize(
             $nbSpectacleAn,
-            'json', ['groups' => 'group1']
+            'json',
+            ['groups' => 'group1']
         );
               
-        return $this->render('user/chart.html.twig',
-        [
+        return $this->render(
+            'user/chart.html.twig',
+            [
             'nbSpectacleMois' =>$json_mois,
             'annee' =>$json_years,
             'nbSpectacleAn'=> $json_nbSpectacleAn
-        ]
-    );
+            ]
+        );
     }
 }
