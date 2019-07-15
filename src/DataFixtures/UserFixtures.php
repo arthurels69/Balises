@@ -8,6 +8,7 @@ use App\Entity\ShowRate;
 use App\Entity\Spectacle;
 use App\Entity\Theater;
 use App\Entity\User;
+use App\Entity\Param;
 use App\Service\TheaterService;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -30,6 +31,12 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
+
+        // création enreg dans table param
+        $param = new Param();
+        $param-> setResaleCoeff(0.50);
+        $param-> setRedistributedCoeff(0.75);
+        $manager->persist($param);
 
         // Création de l'admin Balise
         $admin = new User();
