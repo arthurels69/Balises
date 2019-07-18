@@ -15,7 +15,7 @@ class MapController extends AbstractController
 {
 
     /**
-     * @Route("/map2", name="map2")
+     * @Route("/map", name="map2")
      */
     public function map2(
         TheaterRepository $theaterRepository,
