@@ -65,7 +65,7 @@ a:focus {
 }
 
 #sidebar {
-    width: 115px;
+    width: 10vw;
     position: fixed;
     top: 0;
     left: 0;
@@ -144,6 +144,9 @@ a:focus {
 
 .content_admin{
     margin-top:80px;
+    margin-right: 15vw !important;
+    z-index: 1000 !important;
+
 }
 
 
