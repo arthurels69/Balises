@@ -15,9 +15,10 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
-    //background-color: $baliseYellow;
-    //background-image: url('../../public/uploads/Balises_background.png');
-    background-size: 100% ;
+    background-color: $baliseYellow;
+    background-image: url('../../public/uploads/Balises_background.png');
+    background-size: cover;
+
 }
 
 .container-fluid{
@@ -463,10 +464,8 @@ body {
 //style navSocial
 
 .sidenav {
-  width: auto;
   position: fixed;
   z-index: 1;
-  top: 40%;
 
 
   padding: 8px 0;

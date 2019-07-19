@@ -13,7 +13,7 @@
 
         <h5 class="my-0 mx-2 py-2">Modification : <span class="d-inline-block">{{ theater.name }}</span></h5>
 
-        <div class="btn_edit_new_crud ">
+        <div class="btn_edit_new_crud">
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a type="button" href="#"
@@ -36,7 +36,7 @@
             {% if is_granted('ROLE_THEATER') %}
                 <a type="button" href="{{ path('theater_show',{'id':theater.id}) }}"
                    data-toggle="tooltip" data-placement="top" title="Retour"
-                   class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+                   class="btn btn-secondary mt-2 ml-2 mb-2"><i class="fas fa-reply"></i>
                 </a>
 
             {% endif %}
