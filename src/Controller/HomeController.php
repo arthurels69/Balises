@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * contact form in the home page
      * @Route("/", name="home")
      */
     public function index(Request $request, \Swift_Mailer $mailer, EmailService $emailService)

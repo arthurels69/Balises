@@ -45,7 +45,7 @@ class ListController extends AbstractController
     }
 
     /**
-     * Displays the calendar at first visit on Calendar Page.
+     * Displays the list of theaters.
      * @Route("/theaters/",
      *      name="theaters_list",
      *     methods={"GET", "POST"})
