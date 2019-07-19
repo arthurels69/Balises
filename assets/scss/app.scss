@@ -12,13 +12,13 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
-    //background-color: $baliseYellow;
     background-image: url('../../public/uploads/Balises_background.png');
-    background-size: 100% ;
+    background-size: cover ;
 }
 
 .container-fluid{
   height : 100%;
+  margin: auto;
 }
 
 
@@ -130,17 +130,6 @@ body {
   color: white;
   font-weight: bold;
 }
-
-#logoonmap
-{
-  position: absolute;
-  bottom: 40px;
-  right: 2px;
-  z-index: 1;
-  transform: scale(0.7, 0.7);
-}
-
-
 
 .popupCustom .leaflet-popup-tip
 {
@@ -311,15 +300,6 @@ body {
 {
   position: absolute;
   bottom: 80px;
-}
-
-#logoonmap
-{
-  position: absolute;
-  bottom: 10px;
-  right: 2px;
-  z-index: 1;
-  transform: scale(0.7, 0.7);
 }
 
 .footer-bar

@@ -5,29 +5,30 @@
 
     <div id="background_opacity"></div>
 
-    <div class="row h-auto m-auto justify-content-between">
+<div class="container-fluid h-100">
+    <div class="row h-100 justify-content-around">
 
-        <div class="col-12" id="IndexTitle">
+        <div class="col-12 m-auto" id="IndexTitle">
             <h1 class="text-center">ET SI VOUS RETOURNIEZ AU THÉÂTRE ?</h1>
         </div>
 
-        <div class="col-6 logoIndex">
+        <div class="col-5 col-md-2 m-auto logoIndex">
 
             <a href="{{ path('map2') }}"><img src="{{ asset('uploads/jumelles.png') }}"></a>
-            <h1>A quel endroit ?</h1>
+            <!--<h1>A quel endroit ?</h1>-->
         </div>
 
-        <div class="col-6 logoIndex">
+        <div class="col-5 col-md-2 m-auto logoIndex">
 
-            <h1>A quel moment ?</h1>
+            <!--<h1>A quel moment ?</h1>-->
             <a href="{{ path('calendar_home') }}""><img src="{{ asset('uploads/calendarindex.png') }}"></a>
 
         </div>
 
-        <div id="logoonmap">
+        <div class="col-4 col-md-1 offset-md-11 pt-4" id="logoonmap">
             <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
         </div>
-
+    </div>
         
 
         <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -64,11 +65,8 @@
           </div>
         </div>
 
-        <div class="col-12 footer-bar">
-            {% include 'footer.html.twig' %}
-        </div>
-    </div>
 
+    </div>
 {% endblock %}
 
 
