@@ -7,7 +7,8 @@
 
 
         <div class="row m-auto justify-content-between">
-            <i class="fas fa-times calendarLink" id="closeSpectacle" onclick="closeSpectacleWindow()"></i>
+            <i class="fas fa-times fa-3x closeX" id="closeSpectacle"
+               onclick="closeSpectacleWindow()"></i>
             <div class="col-12 p-4">
                 <h1 class="h1">{{ spectacle.title }}</h1>
             </div>
@@ -58,16 +59,18 @@
 
 
         </div>
+            {% if spectacle.mandatoryInfos != '' %}
         <div class="row p-4">
             <div class="col-12">
                 <h2 class="h2">Information complémentaire :</h2>
                 <p>{{ spectacle.mandatoryInfos }}</p>
             </div>
         </div>
-
-        <div class="row justify-content-center p-4">
-            <div class="col-12 col-md-3" id="logoonmap">
-                <a href="{{ path('home') }}"><img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"/></a>
+            {% endif %}
+        <div class="row justify-content-end p-4">
+            <div class="col-3">
+                <i class="fas fa-times fa-3x closeX" style="color: white" id="closeSpectacle"
+                   onclick="closeSpectacleWindow()"></i>
             </div>
         </div>
     </div>

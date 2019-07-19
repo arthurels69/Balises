@@ -30,19 +30,7 @@ class HomeController extends AbstractController
                 $contactFormData['Votre_Message'],
                 $contactFormData['Votre_Nom']
             );
-            /*$message = (new \Swift_Message('You Got Mail from Symfony 4!'))
 
-                ->setFrom($contactFormData['Votre_Email'])
-                ->setTo('mariner.connor@gmail.com')
-                ->setBody(
-                    $contactFormData['Votre_Message'],
-
-                    'text/plain'
-                )
-            ;
-
-            $mailer->send($message);
-            */
             $this->addFlash('success', 'Votre message a bien été envoyé');
             dump($contactFormData);
             return $this->redirectToRoute('home');
