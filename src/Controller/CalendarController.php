@@ -62,7 +62,7 @@ class CalendarController extends AbstractController
             $todayString = $request->request->get('picked_date');
         }
 
-        return $this->render('Calendar/calendar2.html.twig', [
+        return $this->render('Calendar/calendar.html.twig', [
             'today' => $todayString,
             'period' => $todayString,
             'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
@@ -119,36 +119,5 @@ class CalendarController extends AbstractController
         $newSpectacles = $this->calendarService->selectSpectacles5NextDays($selectedDay);
 
         return $this->render('Calendar/ajaxSpectaclesNextDay.html.twig', ['spectaclesOfTheDay' => $newSpectacles]);
-    }
-
-
-    /**
-     * @return Response
-     * @throws \Exception
-     *  @Route("/calendar/{day}/asyncPlusThreePills", name="async_calendarPlusThreePills", methods={"GET", "POST"})
-     */
-    public function threeNextDays()
-    {
-        $selectedDay = new \DateTime();
-        $selectedDay = $selectedDay->format("Y-m-d");
-        return $this->render('Calendar/ajaxSpectacles.html.twig', [
-            'today' => $selectedDay,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectacles3NextDays($selectedDay)
-        ]);
-    }
-
-    /**
-     * @return Response
-     * @throws \Exception
-     *  @Route("/calendar/{day}/asyncPlusWeekPills", name="async_calendarPlusWeek", methods={"GET", "POST"})
-     */
-    public function nextWeek()
-    {
-        $selectedDay = new \DateTime();
-        $selectedDay = $selectedDay->format("Y-m-d");
-        return $this->render('Calendar/ajaxSpectacles.html.twig', [
-            'today' => $selectedDay,
-            'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesNextWeek($selectedDay)
-        ]);
     }
 }
