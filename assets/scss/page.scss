@@ -83,13 +83,10 @@ img{
   text-align: center;
   color: $baliseYellow;
   font-family: "Cabin", sans-serif;
+  font-weight: bolder;
   text-transform: uppercase;
   line-height: 20px;
   transition: 0.12s;
-  -moz-transition: 0.12s;
-  -o-transition: 0.12s;
-  -webkit-transition: 0.12s;
-  -ms-transition: 0.12s;
 }
 
 
@@ -196,6 +193,8 @@ img{
     top: 0;
 
   }
+
+
 }
 @media screen and (min-width: 640px){
   #presentation_spectacle{
