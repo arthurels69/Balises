@@ -1,4 +1,6 @@
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'basePage.html.twig' %}
 
 {% block title %}Nouveau Spectacle{% endblock %}
 
@@ -9,5 +11,15 @@
         {{ include('spectacle/_form.html.twig') }}
     </div>
 
+    <div class="card card-edit-new w-100 container p-0">
+        <div class="card-header d-flex w-100 justify-content-center">
+
+            <h1>Création Spectacle</h1>
+        </div>
+        <div class="container">
+            {{ include('spectacle/_form.html.twig') }}
+        </div>
+        {#    <a href="{{ path('spectacle_index') }}">Retour</a>#}
+    </div>
 {% endblock %}
 
