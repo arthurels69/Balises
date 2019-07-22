@@ -3,30 +3,39 @@
 {% block title %}Param{% endblock %}
 
 {% block body %}
-<div class="container bg-custom">
-    <h1>Param</h1>
+    <div class="card card-edit-new w-100 container p-0">
+        <div class="card-header d-flex w-100 justify-content-center">
+            <h1>Visualisation Coefficients</h1>
+        </div>
 
     <table class="table">
         <tbody>
-            <tr>
+{#            <tr>
                 <th>Id</th>
                 <td>{{ param.id }}</td>
-            </tr>
+            </tr>#}
             <tr>
-                <th>Resale_coeff</th>
+                <th>Coeff. Revente</th>
                 <td>{{ param.resaleCoeff }}</td>
             </tr>
             <tr>
-                <th>Redistributed_coeff</th>
+                <th>Coeff. Cession</th>
                 <td>{{ param.redistributedCoeff }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('param_index') }}">back to list</a>
-
-    <a href="{{ path('param_edit', {'id': param.id}) }}">edit</a>
-
+    <div class="col-md-3">
+    <a type="button"  href="{{ path('param_index') }}"
+       data-toggle="tooltip" data-placement="top"  title="Retour"
+       class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+    </a>
+    </div>
+    <div class="col-md-3">
+    <a href="{{ path('param_edit', {'id': param.id}) }}">
+        <button class="btn btn-secondary mb-5">Modification</button>
+    </a>
+    </div>
     {{ include('param/_delete_form.html.twig') }}
 </div>
 {% endblock %}
