@@ -170,6 +170,13 @@ class UserController extends AbstractController
         UserPasswordEncoderInterface $encoder
     ) {
 
+        // Empêche un théâtre d'acceder au compte d'un autre théâtre
+        $user1 = $this->getUser()->getId();
+        $userId = $user->getId();
+        if ($user1 != $userId && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Acces denied ! Vous n'avez pas les droits");
+        }
+
         $form = $this->createForm(MdpType::class, $user);
         $form->handleRequest($request);
 

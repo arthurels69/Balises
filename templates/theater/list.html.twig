@@ -43,7 +43,7 @@
 
                 <ul class="list-group text-center mt-5">
             {% for nonBalisesTheater in nonBalisesTheaters %}
-                    <li class="list-group-item"><a data-toggle="collapse" href="#collapse-nonBalises-{{ nonBalisesTheater.id }}" class="alert-link custom-link">{{ nonBalisesTheater.name}}</a>
+                    <li class="list-group-item" data-aos="zoom-in"><a data-toggle="collapse" href="#collapse-nonBalises-{{ nonBalisesTheater.id }}" class="alert-link custom-link">{{ nonBalisesTheater.name}}</a>
                         <div class="collapse" id="collapse-nonBalises-{{ nonBalisesTheater.id }}">
                             <p>{{ nonBalisesTheater.address}}</p>
                             <p>{{ nonBalisesTheater.zipCode}} {{ nonBalisesTheater.city}}</p>

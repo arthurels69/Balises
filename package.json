@@ -7,7 +7,6 @@
         "jquery": "^3.4.1",
         "mdbootstrap": "^4.8.2",
         "popper.js": "^1.15.0",
-        "webpack": "^4.35.2",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",

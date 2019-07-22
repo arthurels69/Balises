@@ -81,7 +81,8 @@ class UserFixtures extends Fixture
         $t1->setWebsite('www.elysee.com');
         $t1->setPhoneNumber('0478588825');
         $t1->setBaseRate(12);
-        $t1->setLogo('https://via.placeholder.com/150');
+        $t1->setLogo('elyseeLogojpeg');
+        $t1->setPicture('ELYSEEphoto.jpg');
         $t1->setUser($user1);
         $this->theaterService->geocode($t1);
 
@@ -98,7 +99,8 @@ class UserFixtures extends Fixture
         $t2->setWebsite('www.renaissance.com');
         $t2->setPhoneNumber('0472397491');
         $t2->setBaseRate(25);
-        $t2->setLogo('https://via.placeholder.com/150');
+        $t2->setLogo('logo-la-renaissance.png');
+        $t2->setPicture('Renaissance.jpg');
         $t2->setUser($user2);
         $this->theaterService->geocode($t2);
 
@@ -115,7 +117,8 @@ class UserFixtures extends Fixture
         $t3->setWebsite('www.clochards-celestes.com');
         $t3->setPhoneNumber('0478283443');
         $t3->setBaseRate(12);
-        $t3->setLogo('https://via.placeholder.com/150');
+        $t3->setLogo('theatre-des-clochards-celestes-logo.png');
+        $t3->setPicture('clochards-ceilestes.jpg');
         $t3->setUser($user3);
         $this->theaterService->geocode($t3);
 
