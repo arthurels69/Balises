@@ -1,13 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}Edit Param{% endblock %}
 
 {% block body %}
-    <h1>Edit Param</h1>
+    <div class="container bg-custom">
+        <h1>Edit Param</h1>
 
-    {{ include('param/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('param/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('param_index') }}">back to list</a>
+        <a href="{{ path('param_index') }}">back to list</a>
 
-    {{ include('param/_delete_form.html.twig') }}
+        {{ include('param/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}

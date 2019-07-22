@@ -2,33 +2,36 @@
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
     {% for spectacle in spectaclesOfTheDay%}
 
-        <div  class="row row-striped border-bottom p-4">
-            <div class="col-12 col-md-1 text-right">
+        <div  class="row row-striped border-bottom p-4" data-aos="{{ loop.index != 1 ? 'zoom-in': ' ' }}">
+            <div class="col-12 col-md-1 text-right" >
 
-                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle"
-                    >{{
+                <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{
                         spectacle.dateShow | date('d')}}</span></h1>
-                <h4 class="h4">{{ spectacle.dateShow | date('M')}}</h4>
+                <h4 class="h4">{{ spectacle.dateShow |localizeddate('full', 'none', 'fr',
+                        'Europe/Paris','MMM')}}</h4>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-md-5">
                 <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank">
                     <h3 class="text-uppercase show-title">
-                        <strong>{{ spectacle.showId.title }}</strong>
-                    </h3>
-                </a>
+                        <strong>{{ spectacle.showId.title }}</strong></h3></a>
                 <img class="img" src="{{ spectacle.showId.image }}">
             </div>
-            <div class="col-6 col-md-5">
+            <div class="col-12 col-md-5">
 
                 <ul class="list-inline">
                     <li class="list-inline-item show-info"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                        {{ spectacle.dateShow | date('D') }}
-                        {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
+                        {{ spectacle.dateShow |localizeddate('full', 'none', 'fr',
+                            'Europe/Paris','EEEE d MMM H:m')}} -
+                        {{ spectacle.dateShow |date_modify('+ 3 hours') |
+                        date  ('H:i')}}
                     </li>
-                    <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}"><li
-                                class="list-inline-item calendarLink"><i class="fa fa-location-arrow"
-                                                                         aria-hidden="true"></i>
-                            {{ spectacle.showId.theater.name }} </li></a>
+
+                    <li class="list-inline-item calendarLink">
+                        <a href="{{ path('map2') }}?theater=theater{{ spectacle.showId.theater.id }}"><i class="fa fa-location-arrow" aia-hidden="true"></i></a>
+                        <a href="{{ path('theater_show_visitors', {id:spectacle.showId.theater.id}) }}" class="calendarLink">
+                            {{ spectacle.showId.theater.name }}</a>
+                    </li>
+
                 </ul>
 
                 <p class="description">{{ spectacle.showId.description | truncate(400) }}
@@ -36,15 +39,12 @@
                     }}')" class="calendarLink">Voir plus</a>
                 </p>
 
-                <button class="calendarButton hvr-float-shadow mt-5">Offre balise</button>
+                <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">Offre
+                        balise</button></a>
 
 
             </div>
-            <!--
-            <div class="col-6 col-md-2 m-auto">
 
-
-            </div>-->
         </div>
     {% endfor %}
 

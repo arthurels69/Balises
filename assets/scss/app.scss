@@ -15,13 +15,26 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
-    //background-color: $baliseYellow;
-    //background-image: url('../../public/uploads/Balises_background.png');
-    background-size: 100% ;
+    background-image: url('../../public/uploads/Balises_background.png');
+    background-size: cover ;
 }
 
 .container-fluid{
   height : 100%;
+  margin: auto;
+}
+
+@media screen and (max-width: 640px) {
+  .endroit-moment{
+    display: none;
+  }
+
+
+}
+@media screen and (min-width: 640px){
+  .endroit-moment{
+    display: block;
+  }
 }
 
 
@@ -34,136 +47,6 @@ body {
 .link-homepage:hover{
     color: $lightblack;
 }
-
-
-//
-//// manage the map with title, logo, ...
-//
-//#map
-//
-//{
-//    z-index: 0;
-//    width:100%;
-//}
-//
-//#selectplacetitle
-//{
-//    position: absolute;
-//    top: 60%;
-//    left: 7%;
-//    z-index: 1;
-//    color: black;
-//    font-size: 80px;
-//
-//}
-//
-//
-//#selectplacetitle h1
-//{
-//    font-size: 80%;
-//    font-weight: bold;
-//}
-//
-//#selectplacetitle span
-//{
-//    color: white;
-//    font-weight: bold;
-//}
-//
-//#logoonmap
-//{
-//    position: absolute;
-//    bottom: 40px;
-//    right: 2px;
-//    z-index: 1;
-//    transform: scale(0.7, 0.7);
-//}
-//
-//
-//
-//.popupCustom .leaflet-popup-tip
-//{
-//    display: none;
-//}
-//
-//.popupCustom .leaflet-popup-content-wrapper {
-//    box-shadow : none;
-//    background: none;
-//    color: white;
-//    height: 800px;
-//    width: 800px;
-//}
-//
-//.jumbotron
-//{
-//    padding: 2%;
-//}
-//
-//.bulleInfo
-//{
-//    font-size: x-small;
-//    background: none;
-//    display: none;
-//    z-index: 2;
-//    position: fixed;
-//    bottom: -50%;
-//
-//
-//}
-//
-//.bulleInfo1
-//{
-//    margin-top: 50%;
-//    background-color: grey;
-//    color: white;
-//}
-//
-//.bulleInfo2
-//{
-//
-//}
-//
-//.bulleInfo3
-//{
-//    background-color: black;
-//    color: white;
-//    height: 250px;
-//    overflow: auto;
-//}
-//
-//.bulleInfo4
-//{
-//
-//}
-//
-//.bulleInfo5
-//{
-//
-//}
-//
-//.bulleInfo6
-//{
-//    background-color: grey;
-//    color: white;
-//    height: 250px;
-//    overflow: auto;
-//    margin-top: -50%;
-//}
-//
-//.bulleInfo1Photo
-//{
-//    max-width: 100%;
-//}
-//
-//.jumbotron h1
-//{
-//    font-size: 20px;
-//}
-//
-//.jumbotron p
-//{
-//    font-size: 15px;
-//}
 
 
 .calendarButton{
@@ -220,4 +103,287 @@ body {
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+#map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+  height: 100%;
+}
+
+.sidenav
+{
+  background-color: #FFEC02;
+}
+
+
+
+#map
+
+{
+  z-index: 0;
+  width:100%;
+}
+
+#selectplacetitle
+{
+  position: absolute;
+  top: 60%;
+  left: 7%;
+  z-index: 1;
+  color: black;
+  font-size: 80px;
+
+}
+
+
+#selectplacetitle h1
+{
+  font-size: 80%;
+  font-weight: bold;
+}
+
+#selectplacetitle span
+{
+  color: white;
+  font-weight: bold;
+}
+
+.popupCustom .leaflet-popup-tip
+{
+  display: none;
+}
+
+.popupCustom .leaflet-popup-content-wrapper {
+  box-shadow : none;
+  background: none;
+  color: white;
+  height: 800px;
+  width: 1000px;
+}
+
+.jumbotron
+{
+  padding: 2%;
+}
+
+.bulleInfo
+{
+  font-size: x-small;
+  width: 55%;
+  background: none;
+  /*background: red;*/
+  display: none;
+  z-index: 2;
+  position: fixed;
+  bottom: -50%;
+
+
+
+}
+
+.bulleInfo1
+{
+  background-color: rgba(0, 0, 0, 0);
+  /*background-color: grey;*/
+  background-image: url("{{ asset('uploads/ticket-balises.png') }}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  height: 30vh;
+  width: 32vw;
+
+}
+
+.bulleInfo2
+{
+
+}
+
+.bulleInfo3
+{
+
+  background-color: black;
+  color: white;
+
+  /*border-style: solid;*/
+  border-color: black;
+  overflow: scroll;
+  border-radius: 20px;
+  margin-top: 5%;
+  font-size: 4px;
+  height: 30vh;
+  width: 32vw;
+}
+
+/* width */
+.bulleInfo3::-webkit-scrollbar
+{
+  width: 20px;
+}
+
+/* Handle */
+.bulleInfo3::-webkit-scrollbar-thumb {
+  background: yellow;
+  border-radius: 10px;
+
+}
+
+
+.bulleInfo4
+{
+
+}
+
+.bulleInfo5
+{
+
+}
+
+.bulleInfo6 {
+  background-color: grey;
+  color: white;
+  height: 250px;
+
+  overflow: scroll;
+  border-radius: 10px;
+}
+/* width */
+.bulleInfo6::-webkit-scrollbar
+{
+  width: 20px;
+}
+
+/* Handle */
+.bulleInfo6::-webkit-scrollbar-thumb {
+  background: yellow;
+  border-radius: 10px;
+}
+
+
+.bulleInfo1Photo
+{
+  max-width: 100%;
+}
+
+.jumbotron h1
+{
+  font-size: 20px;
+}
+
+.jumbotron p
+{
+  font-size: 15px;
+}
+
+//style from index
+
+
+
+.logoIndex, .sidenav, #logoonmap, .LoginBtn
+{
+
+  animation:fadeIn 2s step-end;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+
+#IndexTitle
+{
+  animation: move 2s;
+
+}
+
+#IndexTitle h1
+{
+  font-weight: bolder;
+}
+
+@keyframes move {
+  from { top: 300px;}
+  to { top: 0;}
+
+}
+
+#background_opacity {
+  position: fixed;
+  z-index: -10;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 236, 2, 0.85); /* L'opacite se regle ici */
+}
+
+.LoginBtn
+{
+  position: absolute;
+  bottom: 80px;
+}
+
+.footer-bar
+{
+  margin-top: 10%;
+}
+
+//style navSocial
+
+.sidenav {
+  width: auto;
+  position: fixed;
+  z-index: 1;
+  top: 40%;
+
+
+  padding: 8px 0;
+  border-style: solid;
+  border-width: 1px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #2196F3;
+  display: block;
+  opacity: 0.5;
+}
+
+.sidenav a:hover {
+  opacity: 1;
+}
+
+//footer style
+
+#footer2
+{
+
+  background-color: black;
+  border-radius: 10px;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.btnfooter
+{
+  color: white;
+}
+
+.btnfooter:hover
+{
+  color : yellow;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -31,7 +31,7 @@ a:focus {
     right:0;
     width: calc(100% - 250px);
     z-index: 999;
-    
+
 }
 
 .navbar.active {
@@ -42,7 +42,7 @@ a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
-    
+
 }
 .line {
     width: 100%;
@@ -64,7 +64,7 @@ a:focus {
 }
 
 #sidebar {
-    width: 250px;
+    width: 220px;
     position: fixed;
     top: 0;
     left: 0;
@@ -108,8 +108,8 @@ a:focus {
 }
 
 #sidebar ul .list-unstyled a {
-	padding-left: 0 !important;
-	list-style: none !important;
+    padding-left: 0 !important;
+    list-style: none !important;
 }
 
 #sidebar ul p {
@@ -148,6 +148,5 @@ a:focus {
 .content_admin{
     margin-top:80px;
 }
-
 
 

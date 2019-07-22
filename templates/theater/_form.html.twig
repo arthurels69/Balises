@@ -1,132 +1,123 @@
 {{ form_start(form) }}
 <style>
-    .sidenav {display: none;}
+    .sidenav {
+        display: none;
+    }
 </style>
 <div class='container'>
-    <div class="row">
+    <div class="row mb-3">
         {% if is_granted('ROLE_THEATER') %}
-            <div class="col-sm-6 espSaisie " style="display: none">
+            <div class="col-sm-4 espSaisie ">
                 {{ form_label(form.name, 'Nom du Théâtre') }}
+            </div>
+            <div class="col-sm-8 espSaisie">
                 {{ form_widget(form.name) }}
             </div>
+        {% else %}
+            <div class="col-sm-4 espSaisie">
+                {{ form_label(form.name, 'Nom du Théâtre') }}
+            </div>
+            <div class="col-sm-8 espSaisie">
+                {{ form_row(form.name) }}
+            </div>
         {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-6">
             <div class="col-sm-6 espSaisie">
-                {{ form_label(form.name, 'Nom du Théâtre') }}
-                {{ form_widget(form.name) }}
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}" alt="">
             </div>
-        {% endif %}
-        <div class="col-sm-4 espSaisie">
-            {{ form_label(form.logo, 'Logo') }}
-            {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'format : png'}}) }}
-            {{ form_help(form.logo) }}
-        </div>
-        <div>
-            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
-        </div>
-
-
-    </div>
-    <div class="row">
-        <div class="col-sm-6 espSaisie">
-            {{ form_label(form.address1, 'Adresse') }}
-            {{ form_widget(form.address1) }}
-        </div>
-
-        <div class="col-sm-6">
-            {{ form_label(form.address2, 'Complément d\'Adresse') }}
-            {{ form_widget(form.address2) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 espSaisie">
-            {{ form_label(form.zipCode, 'Code Postal') }}
-            {{ form_widget(form.zipCode, {'attr': {'class': 'hold zipCode','placeholder': '99999'}}) }}
-        </div>
-
-        <div class="col-sm-6 espSaisie">
-            {{ form_label(form.city, 'Ville') }}
-            {{ form_widget(form.city) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 espSaisie">
-            {{ form_label(form.phoneNumber, 'Téléphone') }}
-            {{ form_widget(form.phoneNumber, {'attr': {'class': 'phone hold','placeholder':
-                '+330102030405 +33 01 02 03 04 05  0102030405, 01-02-03-04-05'}}) }}
-            {{ form_help(form.phoneNumber) }}
+            <div class="col-sm-10 espSaisie">
+                {{ form_label(form.logo, 'Logo') }}
+                {{ form_widget(form.logo, {'attr': {'class': 'hold','placeholder': 'format : png'}}) }}
+                {{ form_help(form.logo) }}
+            </div>
         </div>
         <div class="col-sm-6">
-            {{ form_label(form.email, 'Courriel') }}
-            {{ form_widget(form.email, {'attr':{'class': 'hold','placeholder': 'email@email.fr'}}) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 espSaisie">
-            {{ form_label(form.website, 'Site Web') }}
-            {{ form_widget(form.website, {'attr': {'class': 'hold','placeholder': 'commençant par http:// ou https://'}}) }}
-            {{ form_help(form.website) }}
-        </div>
-        <div class="col-sm-4 espSaisie">
-            {{ form_label(form.picture, 'Photo') }}
-            {{ form_widget(form.picture, {'attr': {'class': 'hold','placeholder': 'format : png,jpg'}}) }}
-            {{ form_help(form.picture) }}
-        </div>
-        <div>
-            {% if is_granted('ROLE_ADMIN') %}
-                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" width="150"></img>
-            {% else  %}
-                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
-            {% endif %}
-        </div>
-
-    </div>
-    <div class="row justify-content-md-center mb-3">
-        {#    <div class="col-sm-2">
-                {{ form_label(form.lat, 'Latitude') }}
-                {{ form_widget(form.lat, {'attr': {'class': 'latitude hold','placeholder': '99999.99'}}) }}
+            <div class="col-sm-10 espSaisie">
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" alt=""/>
             </div>
-            <div class="col-sm-2">
-                {{ form_label(form.longitude, 'Longitude') }}
-                {{ form_widget(form.longitude, {'attr': {'class': 'longitude hold','placeholder': '99999.99'}}) }}
-            </div>#}
-        <div class="col-sm-2">
-            {{ form_label(form.baseRate, 'Plein Tarif') }}
-            {{ form_widget(form.baseRate, {'attr': {'class': 'hold zipCode','placeholder': '99999.99'}}) }}
+            <div class="col-sm-10 espSaisie">
+                {{ form_label(form.picture, 'Photo') }}
+                {{ form_widget(form.picture, {'attr': {'class': 'hold','placeholder': 'format : png,jpg'}}) }}
+                {{ form_help(form.picture) }}
+            </div>
         </div>
     </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-6 espSaisie">
+                {{ form_label(form.address1, 'Adresse') }}
+                {{ form_widget(form.address1) }}
+            </div>
 
-    <div class="row">
-        <div class="col-sm-6 espSaisie">
-            <label for="inputNewPassword">Nouveau Mot de passe</label>
-            <input type="password" name="newPassword" id="inputNewPassword" class="form-control input-text"
-                   placeholder="Tapez votre nouveau Mot de Passe">
+            <div class="col-sm-6">
+                {{ form_label(form.address2, 'Complément d\'Adresse') }}
+                {{ form_widget(form.address2) }}
+            </div>
         </div>
-        <div class="col-sm-6 espSaisie">
-            <label for="inputConfirmPassword">Confirmation du nouveau Mot de passe</label>
-            <input type="password" name="confirmPassword" id="inputConfirmPassword" class="form-control input-text"
-                   placeholder="Retaper votre Mot de Passe">
+        <div class="row">
+            <div class="col-sm-6 espSaisie">
+                {{ form_label(form.zipCode, 'Code Postal') }}
+                {{ form_widget(form.zipCode, {'attr': {'class': 'hold zipCode','placeholder': '99999'}}) }}
+            </div>
+
+            <div class="col-sm-6 espSaisie">
+                {{ form_label(form.city, 'Ville') }}
+                {{ form_widget(form.city) }}
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-sm-6 espSaisie">
+                {{ form_label(form.phoneNumber, 'Téléphone') }}
+                {{ form_widget(form.phoneNumber, {'attr': {'class': 'phone hold','placeholder':
+                    '+330102030405 +33 01 02 03 04 05  0102030405, 01-02-03-04-05'}}) }}
+                {{ form_help(form.phoneNumber) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_label(form.email, 'Courriel') }}
+                {{ form_widget(form.email, {'attr':{'class': 'hold','placeholder': 'email@email.fr'}}) }}
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8 espSaisie">
+                {{ form_label(form.website, 'Site Web') }}
+                {{ form_widget(form.website, {'attr': {'class': 'hold','placeholder': 'commençant par http:// ou https://'}}) }}
+                {{ form_help(form.website) }}
+            </div>
+
+            {#    <div class="col-sm-2">
+                    {{ form_label(form.lat, 'Latitude') }}
+                    {{ form_widget(form.lat, {'attr': {'class': 'latitude hold','placeholder': '99999.99'}}) }}
+                </div>
+                <div class="col-sm-2">
+                    {{ form_label(form.longitude, 'Longitude') }}
+                    {{ form_widget(form.longitude, {'attr': {'class': 'longitude hold','placeholder': '99999.99'}}) }}
+                </div>#}
+            <div class="col-sm-4">
+                {{ form_label(form.baseRate, 'Plein Tarif') }}
+                {{ form_widget(form.baseRate, {'attr': {'class': 'hold zipCode','placeholder': '99999.99'}}) }}
+            </div>
         </div>
     </div>
-
     <br>
-    <div class="row justify-content-sm-left">
+    <div class="row justify-content-center">
         <br>
-        <div class="col-sm-4 espSaisie">
-            <button class="btn btn-secondary mb-5">{{ button_label|default('Enregistrer') }}</button>
+        <div class="col-sm-4 espSaisie text-center">
+            <button class="btn btn-secondary">{{ button_label|default('Enregistrer') }}</button>
         </div>
     </div>
-    <!-- <div class="row justify-content-sm-center">
+</div>
+<!-- <div class="row justify-content-sm-center">
         {% if user.roles[0] == "ROLE_ADMIN" %}
             <div class="mt-3">
                 {{ include('user/_delete_form.html.twig') }}
             </div>
         {% endif %}
     </div> -->
-</div>
+
 {% if form_errors(form) != '' %}
     {{ form_errors(form) }}
 {% endif %}
 
-{{ form_end(form) }}
+    {{ form_end(form) }}
 

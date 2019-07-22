@@ -30,21 +30,17 @@
 {% endfor %}
 
     <!--<div class="container-fluid">-->
-
+        {% include 'navSocial.html.twig' %}
 
             {% block body %}
 
             {% endblock %}
 
 
-            {% include 'navSocial.html.twig' %}
-
-
-
     <!--</div>-->
 
 
-{#             {{ encore_entry_script_tags('app') }}#}
+             {{ encore_entry_script_tags('app') }}
         {% block javascripts %}
         {% endblock %}
     </body>

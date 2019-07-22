@@ -1,13 +1,25 @@
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'basePage.html.twig' %}
 
 {% block title %}Nouveau Spectacle{% endblock %}
 
 {% block body %}
-    <h1>Création Spectacle</h1>
+    <div class="container bg-custom">
+        <h1>Création Spectacle</h1>
 
-    {{ include('spectacle/_form.html.twig') }}
+        {{ include('spectacle/_form.html.twig') }}
+    </div>
 
-{#    <a href="{{ path('spectacle_index') }}">Retour</a>#}
+    <div class="card card-edit-new w-100 container p-0">
+        <div class="card-header d-flex w-100 justify-content-center">
 
+            <h1>Création Spectacle</h1>
+        </div>
+        <div class="container">
+            {{ include('spectacle/_form.html.twig') }}
+        </div>
+        {#    <a href="{{ path('spectacle_index') }}">Retour</a>#}
+    </div>
 {% endblock %}
 

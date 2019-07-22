@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Theater;
+use App\Form\MdpType;
 use App\Form\TheaterType;
 use App\Repository\TheaterRepository;
 use App\Service\FileUploader;
@@ -81,13 +82,13 @@ class TheaterController extends AbstractController
      */
     public function show(Theater $theater): Response
     {
-        $user =  $this->getUser();
+        $user = $this->getUser();
         $role = $user->getRoles();
         $userEmail = $user->getEmail();
         $email = $theater->getEmail();
 
-        if ($email != $userEmail && $role ==['ROLE_THEATER']) {
-             throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
+        if ($email != $userEmail && $role == ['ROLE_THEATER']) {
+            throw $this->createAccessDeniedException("Accès refusé ! Vous n'êtes pas le théâtre logué !!");
         }
         return $this->render('theater/show.html.twig', [
             'theater' => $theater,
@@ -98,45 +99,32 @@ class TheaterController extends AbstractController
     /**
      * @Route("/{id}/edit", name="theater_edit", methods={"GET","POST"})
      * @param Request $request
-     * @param ObjectManager $manager
      * @param Theater $theater
      * @param TheaterService $theaterService
-     * @param UserPasswordEncoderInterface $encoder
      * @param FileUploader $fileUploader
      * @return Response
      * @throws Exception
      */
     public function edit(
         Request $request,
-        ObjectManager $manager,
         Theater $theater,
         TheaterService $theaterService,
-        UserPasswordEncoderInterface $encoder,
         FileUploader $fileUploader
     ): Response {
 
+        // Empêche un théâtre d'acceder au compte d'un autre théâtre
+        $userId = $this->getUser()->getId()-1;
+        $theaterId = $theater->getId();
+        if ($userId != $theaterId && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Acces denied ! Vous n'avez pas les droits");
+        }
+
         $form = $this->createForm(TheaterType::class, $theater);
         $form->handleRequest($request);
-        $user =  $this->getUser();
-
-        $request->request->get('newPassword');
-        $newPassword = $request->request->get('newPassword');
-        $request->request->get('confirmPassword');
-        $confirmPassword = $request->request->get('confirmPassword');
+        $user = $this->getUser();
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($newPassword == $confirmPassword) {
-                $hash = $encoder->encodePassword($user, $newPassword);
-                $user->setPassword($hash);
-
-                $manager->persist($user);
-            } else {
-                $this->addFlash('danger', 'Les mot de passe ne correspondent pas');
-                return $this->redirectToRoute('theater_edit', [
-                    'id' => $theater->getId()
-                ]);
-            }
             $theaterService->geocode($theater);
 
             /** @var UploadedFile $file */
@@ -182,7 +170,7 @@ class TheaterController extends AbstractController
      */
     public function delete(Request $request, Theater $theater): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$theater->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $theater->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($theater);
             $entityManager->flush();

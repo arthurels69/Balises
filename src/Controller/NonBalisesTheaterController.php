@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * crud for non Balises Theater
  * @Route("/nonbalisestheater")
  */
 class NonBalisesTheaterController extends AbstractController

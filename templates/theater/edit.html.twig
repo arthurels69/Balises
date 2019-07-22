@@ -1,7 +1,6 @@
 {% extends is_granted('ROLE_ADMIN')
     ? 'base_admin.html.twig'
-    : 'basePage.html.twig'
-%}
+    : 'basePage.html.twig' %}
 
 
 {% block title %}Modification Théâtre{% endblock %}
@@ -10,60 +9,82 @@
 
     <div class="card card-edit-new w-100 container p-0">
 
-            <div class="card-header d-flex w-100 justify-content-between">
+    <div class="card-header d-flex w-100 justify-content-between">
 
-                <h5 class="my-0 mx-2 py-2" >Modification : <span class="d-inline-block">{{ theater.name }}</span></h5>
+        <h5 class="my-0 mx-2 py-2">Modification : <span class="d-inline-block">{{ theater.name }}</span></h5>
 
-                <div class="btn_edit_new_crud ">
+        <div class="btn_edit_new_crud">
 
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a type="button" href="#"
-                           data-toggle="tooltip" data-placement="top"  title="Enregistrer"
-                           class="btn btn-success btn_save_edit"><i class="far fa-save"></i>
-                        </a>
-                        <a type="button" href="{{ path('user_index') }}"
-                            data-toggle="tooltip" data-placement="top"  title="Liste Théâtres"
-                            class="btn btn-info"><i class="far fa-list-alt"></i>
-                        </a>
-
-                        <a type="button" href="{{ path('user_new') }}" 
-                            data-toggle="tooltip" data-placement="top"  title="Ajouter" 
-                            class="btn btn-info"><i class="far fa-plus-square"></i>
-                        </a>
-
-                        {{ include('user/_delete_form.html.twig') }}
-                    {% endif %}
-                    {% if is_granted('ROLE_THEATER') %}
-                        <a type="button" href="{{ path('theater_show',{'id':theater.id}) }}"
-                           data-toggle="tooltip" data-placement="top"  title="Retour"
-                           class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a type="button" href="#"
+                   data-toggle="tooltip" data-placement="top" title="Enregistrer"
+                   class="btn btn-success btn_save_edit"><i class="far fa-save"></i>
+                </a>
+                <a type="button" href="{{ path('user_index') }}"
+                   data-toggle="tooltip" data-placement="top" title="Liste Théâtres"
+                   class="btn btn-info"><i class="far fa-list-alt"></i>
+                </a>
 
 
-            <div class="card-body p-3 ">
-                    <table class="table table_show table-striped table-bordered table-hover">
-                        <tbody>
-                                {{ include('theater/_form.html.twig') }}
-                        </tbody>
-                    </table>
-            </div>{# Card body #}
-        </div>{# Card #}
+                {{ include('user/_delete_form.html.twig') }}
+            {% endif %}
+            {% if is_granted('ROLE_THEATER') %}
+                <a type="button" href="{{ path('theater_show',{'id':theater.id}) }}"
+                   data-toggle="tooltip" data-placement="top" title="Retour"
+                   class="btn btn-secondary mt-2 ml-2 mb-2"><i class="fas fa-reply"></i>
+                </a>
+
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="card-body p-3 ">
+
+    <table class="table table_show table-striped table-bordered table-hover">
+        <tbody>
+        {{ include('theater/_form.html.twig') }}
+        </tbody>
+    </table>
+    <div class="row justify-content-center mb-4">
+        <div class="col-sm-4 text-center">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('theater_edit_mdp', {'id':user.id +1}) }}">
+                    <button class="btn btn-secondary">Changement
+                        de Mot de Passe
+                    </button>
+                </a>
+            {% else %}
+                <a href="{{ path('theater_edit_mdp', {'id':user.id}) }}">
+                    <button class="btn btn-secondary">Changement
+                        de Mot de Passe
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-4 text-center">
+            <a href="{{ path('theater_show', {id: theater.id} ) }}">
+                <button class="btn btn-secondary">Retour</button>
+            </a>
+        </div>
+    </div>
+    </div>{# Card body #}
+    </div>{# Card #}
 
 {% endblock %}
 
 {% block javascripts %}
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-$(document).ready(function () {
+        $(document).ready(function () {
 
-    $('.btn_save_edit').on('click',function(e){
-        $('.btn_save_form').click();
-    });
-});
+            $('.btn_save_edit').on('click', function (e) {
+                $('.btn_save_form').click();
+            });
+        });
 
-</script>
+    </script>
 {% endblock %}

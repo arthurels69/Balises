@@ -1,11 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'basePage.html.twig' %}
 
 {% block title %}New Param{% endblock %}
 
 {% block body %}
+<div class="container bg-custom">
     <h1>Create new Param</h1>
 
     {{ include('param/_form.html.twig') }}
 
     <a href="{{ path('param_index') }}">back to list</a>
+</div>
 {% endblock %}
