@@ -21,7 +21,7 @@ a:focus {
 }
 
 .navbar {
-    /*padding: 15px 10px;*/
+    padding: 15px 10px;
     background:#f4d942 !important;
     border: none;
     border-radius: 0;
@@ -29,21 +29,20 @@ a:focus {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     position: fixed;
     right:0;
-    width: 100%;
-    /*width: calc(100% - 250px);*/
-    z-index: 998;
-    
+    width: calc(100% - 250px);
+    z-index: 999;
+
 }
 
 .navbar.active {
-    /*width:calc(100% - 115px) !important;*/
-    color:blue !important;
+    width:calc(100% - 115px) !important;
+    color:red !important;
 }
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
     border: none;
-    
+
 }
 .line {
     width: 100%;
@@ -65,7 +64,7 @@ a:focus {
 }
 
 #sidebar {
-    width: 10vw;
+    width: 220px;
     position: fixed;
     top: 0;
     left: 0;
@@ -109,8 +108,8 @@ a:focus {
 }
 
 #sidebar ul .list-unstyled a {
-	padding-left: 0 !important;
-	list-style: none !important;
+    padding-left: 0 !important;
+    list-style: none !important;
 }
 
 #sidebar ul p {
@@ -133,6 +132,7 @@ a:focus {
 ----------------------------------------------------- */
 
 #content {
+    width: calc(100% - 250px);
     padding:0px 0px;
     min-height: 100vh;
     transition: all 0.3s;
@@ -141,13 +141,12 @@ a:focus {
     right: 0;
 }
 
+#content.active {
+    width:calc(100% - 115px) !important;
+}
 
 .content_admin{
     margin-top:80px;
-    margin-right: 15vw !important;
-    z-index: 1000 !important;
-
 }
-
 
 

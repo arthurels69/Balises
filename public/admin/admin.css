@@ -1,8 +1,8 @@
 /****************************Liste des théâtres user/index.html.twig***********************/
 
 .card {
-    max-width:900px  !important;
-    min-width:900px  !important;
+    max-width:1050px  !important;
+    min-width:1050px  !important;
     margin:auto !important;
     box-shadow: 0px 0px 5px 2px #888888 !important;
 }
@@ -12,7 +12,7 @@
     position:sticky;
     background-color:   #d6dbdf  ;
     z-index: 15;
-   
+
 }
 
 .card-body table thead th{
@@ -21,7 +21,7 @@
     background-color: white !important;
 }
 
-h5{   
+h5{
     width:600px;
 }
 
@@ -47,7 +47,7 @@ h5.chart{
     height: 40px;
     margin-right: 20px;
 }
- 
+
 /*****************************************************************************************/
 
 .th_action{
@@ -228,7 +228,7 @@ label{
 select{
     width:7rem!important;
     font-size:1.2rem !important;
-    
+
 }
 
 option{
@@ -236,7 +236,6 @@ option{
 }
 
 #mois_radio{
-    
-}
 
+}
 
