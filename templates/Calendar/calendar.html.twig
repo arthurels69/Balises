@@ -17,7 +17,8 @@
 
         <div class="row p-4 border-top border-bottom bg-light">
             <div class="col-12">
-                <h4 class="text-center monthMobile">{{ today | date('M') }}</h4>
+                <h4 class="text-center monthMobile">{{ today |localizeddate('full', 'none', 'fr',
+                        'Europe/Paris','d-MMM') }}</h4>
             </div>
             <div class="col-12 col-md-7">
                 <ul class="bxslider">
@@ -27,13 +28,15 @@
                     <a class="calendarBox" onclick="changeDate('{{ path('async_calendar', {"day" : today | date('Y-m-d')})
                     }}')">
                         <li class="month-day active" onclick="active(0)" id="day0">
-                            <div class="week calendarLarge">{{ today | date('D') |localizeddate('full', 'none', 'fr')
+                            <div class="week calendarLarge">{{ today|localizeddate('full', 'none', 'fr',
+                                    'Europe/Paris','eee' )
                                 }}</div><div
                                     class="day-month
-                            calendarLarge">{{ today | date
-                                    ('d-M')
+                            calendarLarge">{{ today |localizeddate('full', 'none', 'fr',
+                                    'Europe/Paris','d MMM')
                                 }}</div>
-                            <div class="day-month calendarMobile">{{ today | date('d') }}</div>
+                            <div class="day-month calendarMobile">{{ today |localizeddate('full', 'none', 'fr',
+                                'Europe/Paris','d')  }}</div>
                         </li>
                     </a>
                     {% for oneDay in oneMoreDay %}
@@ -43,8 +46,10 @@
                         }) }}')">
 
                             <li class="month-day" onclick="active({{ loop.index }})" id="day{{ loop.index }}">
-                                <div class="week calendarLarge">{{ today | date_modify(oneDay) | date('D') }}</div><div
-                                        class="day-month calendarLarge">{{ today | date_modify(oneDay)  | date('d-M') }}</div>
+                                <div class="week calendarLarge">{{ today | date_modify(oneDay) |localizeddate('full', 'none', 'fr',
+                                        'Europe/Paris','eee')}}</div><div
+                                        class="day-month calendarLarge">{{ today | date_modify(oneDay)  |localizeddate('full', 'none', 'fr',
+                                        'Europe/Paris','d MMM')}}</div>
                                 <div class="day-month calendarMobile">{{ today | date_modify(oneDay) | date('d') }}</div>
                             </li>
 
@@ -81,7 +86,9 @@
 
         <div id="display-spectacles">
             <!-- below the display of spectacles. Same as the ones in search by theater. -->
-            <h4 class="h4">Au programme du {{ today | date('d M') }} au {{ today | date_modify('+5 days') | date('d M')
+            <h4 class="h4">Au programme du {{ today |localizeddate('full', 'none', 'fr',
+                    'Europe/Paris','d-MMM') }} au {{ today | date_modify('+5 days') |localizeddate('full', 'none', 'fr',
+                    'Europe/Paris','d-MMM')
                 }}</h4>
 
 
@@ -92,7 +99,8 @@
 
                         <h1 class="display-4"><span class="badge badge-secondary day-figure" id="dayNumberSpectacle">{{
                                 spectacle.dateShow | date('d')}}</span></h1>
-                        <h4 class="h4">{{ spectacle.dateShow | date('M')}}</h4>
+                        <h4 class="h4">{{ spectacle.dateShow |localizeddate('full', 'none', 'fr',
+                                'Europe/Paris','MMM')}}</h4>
                     </div>
                     <div class="col-md-5">
                         <a href="{{ path('detailSpectacle', {"id": spectacle.showId.id}) }}" target="_blank">
@@ -104,8 +112,10 @@
 
                         <ul class="list-inline">
                             <li class="list-inline-item show-info"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                                {{ spectacle.dateShow | date('D') }}
-                                {{ spectacle.dateShow | date('d.m.Y à H:i') }} - {{ spectacle.dateShow |date_modify('+ 3 hours') | date('H:i')}}
+                                {{ spectacle.dateShow |localizeddate('full', 'none', 'fr',
+                                    'Europe/Paris','EEEE d MMM H:m')}} -
+                                {{ spectacle.dateShow |date_modify('+ 3 hours') |
+                                date  ('H:i')}}
                             </li>
 
                             <li class="list-inline-item calendarLink">
