@@ -21,6 +21,19 @@ body {
   margin: auto;
 }
 
+@media screen and (max-width: 640px) {
+  .endroit-moment{
+    display: none;
+  }
+
+
+}
+@media screen and (min-width: 640px){
+  .endroit-moment{
+    display: block;
+  }
+}
+
 
 
 // remove the color and link behavior from the calendar and map buttons on homepage
@@ -281,6 +294,12 @@ body {
 #IndexTitle
 {
   animation: move 2s;
+
+}
+
+#IndexTitle h1
+{
+  font-weight: bolder;
 }
 
 @keyframes move {
