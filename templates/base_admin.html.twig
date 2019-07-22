@@ -35,12 +35,9 @@
 <!-- MENU SIDEBAR -->
                     <nav id="sidebar">
 
-                        <div class="sidebar-header">
-                            <img class="mr-2" src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="logo_admin" height=80 width=80>
+                        <div class="sidebar-header d-flex justify-content-center">
+                            <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" alt="logo_admin" height=80 width=80>
 
-                            <a id="sidebarCollapse" href="#">
-                                <i id="arrow" class="fas fa-chevron-left ml-3 " style="font-size:2rem;"></i>
-                            </a>
 
                         </div>
 
@@ -57,21 +54,21 @@
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{ path('user_index') }}">
                                     <i class="fas fa-home"></i>
-                                    <span>Théâtre</span>
+                                    <span>Théâtres</span>
                                 </a>
                             </li>
 
-<!-- MENU SPECTACLE -->
+<!-- MENU THÉÂTRES NON BALISES -->
                             <li class="nav-item ">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ path('non_balises_theater_index') }}">
                                     <i class="fas fa-film"></i>
-                                    <span>Spectacles et Places</span>
+                                    <span>Théâtres non balises</span>
                                 </a>
                             </li>
 
 <!-- MENU COEFFICIENT -->
                              <li class="nav-item ">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ path('param_index') }}">
                                     <i class="fas fa-tag"></i>
                                     <span>Coefficients</span>
                                 </a>
@@ -80,47 +77,45 @@
                     </nav>
             
 <!-- PAGE CONTENT -->
-                    <div id="content">
-<!-- NAVBAR TOP PRINCIPAL -->
-                        <nav class="navbar navbar-expand-sm navbar-light bg-light m-0 p-0">
-<!-- BOUTON COLLAPSE HAMBURGER ASIDE -->
-                            <button class="btn btn-dark d-inline-block d-sm-none m-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <i class="fas fa-align-justify"></i>
-                            </button>
-                            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarSupportedContent">
-<!-- DECONNEXION -->            <nav>
-                                {% if app.user %}
-                                    <a href="{{ path('app_logout') }}" class="nav-link text-right">
-                                        <button type="button" id="deconnexion" class="btn btn-danger  my-sm-2 d-block w-sm-100">
-                                            <span>Déconnexion</span>
-                                        </button>
-                                    </a>
-                               {% endif %}
-                                </nav>
-                            </div> <!-- collapse navbar div   -->
-                        </nav><!-- navbar navbar-expand-lg -->
- <!-- BLOCK BODY -->
-                        <div class="container-fluid content_admin p-0">
-                            {% if app.request.hasPreviousSession %}
-                                {% for category, messages in app.flashes %}
-                                    {% for message in messages %}
-                                        <div class="alert alert-{{ category }}">
-                                            {{ message }}
-                                        </div>
+                    <div class="container">
+                        <div id="content">
+    <!-- NAVBAR TOP PRINCIPAL -->
+                            <nav class="navbar navbar-expand-sm navbar-light bg-light m-0 p-0 d-flex justify-content-center">
+    <!-- BOUTON COLLAPSE HAMBURGER ASIDE -->
+                                <button class="btn btn-dark d-inline-block d-sm-none m-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <i class="fas fa-align-justify"></i>
+                                </button>
+                                <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarSupportedContent">
+    <!-- DECONNEXION -->            <nav>
+                                    {% if app.user %}
+                                        <a href="{{ path('app_logout') }}" class="nav-link text-right">
+                                            <button type="button" id="deconnexion" class="btn btn-danger  my-sm-2 d-block w-sm-100">
+                                                <span>Déconnexion</span>
+                                            </button>
+                                        </a>
+                                   {% endif %}
+                                    </nav>
+                                </div> <!-- collapse navbar div   -->
+                            </nav><!-- navbar navbar-expand-lg -->
+     <!-- BLOCK BODY -->
+                            <div class="container-fluid content_admin p-0 mr-5">
+                                {% if app.request.hasPreviousSession %}
+                                    {% for category, messages in app.flashes %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ category }}">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
                                     {% endfor %}
-                                {% endfor %}
-                            {% endif %}
-                            <style>
-                                .sidenav {
-                                    display: none;
-                                }
-                            </style>
-                            {% block body %}
-                        {% endblock %}
+                                {% endif %}
 
-                        </div><!-- fin content_admin -->
+                                {% block body %}
+                            {% endblock %}
+
+                            </div><!-- fin content_admin -->
+                        </div>
                     </div>
-                </div>
+            </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

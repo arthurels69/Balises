@@ -7,6 +7,9 @@ html {
     width: 100%;
 }
 
+//h1{
+//    text-align: center;
+//}
 
 body {
     height: 100%;
@@ -329,8 +332,10 @@ body {
 //style navSocial
 
 .sidenav {
+  width: auto;
   position: fixed;
   z-index: 1;
+  top: 40%;
 
 
   padding: 8px 0;
