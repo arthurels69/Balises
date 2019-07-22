@@ -2,7 +2,7 @@
 <style>
     .sidenav {display: none;}
 </style>
-<div class = 'container'>
+<div class = container>
     <div class="row">
         <div class="col-sm-6 espSaisie">
             {{ form_label(form.title, 'Titre') }}
@@ -14,7 +14,7 @@
             {{ form_help(form.image) }}
         </div>
         <div>
-            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ spectacle.image) }}" width="150"></img>
+            <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ spectacle.image) }}" width="150" alt="">
         </div>
 
     </div>
