@@ -16,7 +16,28 @@
                 <img src="{{ spectacle.image }}">
                 <p>Crédit photo : {{ spectacle.photoCredits }}</p>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-md-6">
+
+                    <h2 class="h2">Représentations</h2>
+
+                {% for seance in showDate %}
+
+                        <p class="description">{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
+
+                {% endfor %}
+
+                <div class="col-12 p-4" id="plus-button">
+                    <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;"
+                        onclick="moreDates('{{ path
+                        ('moreSpectacle', {"id": spectacle.id}) }}')">
+                        <i class="fas fa-plus"></i> plus de dates </h4>
+                </div>
+                <div id="moreDates" class="row p-4"></div>
+
+            </div>
+
+
+            <div class="col-12 p-4">
                 <a href="https://54yzsyel.mapado.com/en/"><button class="calendarButton hvr-float-shadow">
                         commander
                     </button></a>
@@ -39,22 +60,7 @@
 
         </div>
         <div class="row p-4">
-            <div class="col-12">
-                <h2 class="h2">Représentations</h2>
-            </div>
-            {% for seance in showDate %}
-            <div class="col-12 p-4">
-                <p class="description">{{ seance.dateShow | date('d.m.Y à H:i') }}</p>
-            </div>
 
-            {% endfor %}
-
-            <div class="col-12 p-4" id="plus-button">
-                <h4 class="h4 hvr-float-shadow" style="opacity: 0.8; cursor: pointer;" onclick="moreDates('{{ path
-                ('moreSpectacle', {"id": spectacle.id}) }}')"><i
-                            class="fas fa-plus"></i> plus de dates </h4>
-            </div>
-            <div id="moreDates" class="row p-4"></div>
 
 
 

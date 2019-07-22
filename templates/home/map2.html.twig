@@ -17,7 +17,8 @@
 {% block body %}
 
 
-
+    <div id="presentation_spectacle">
+    </div>
 
     <div class="popupCustom" id="map">
     </div>
@@ -67,7 +68,10 @@
 
                             {% for spectacle in spectacles %}
                                 {% if spectacle.theater == theater %}
-                                    <a href="{{ path('detailSpectacle', {"id": spectacle.id}) }}" target="_blank" for="checkbox" style="font-size: 20px; color: white">{{ spectacle.title }}</a>
+                                    <a onclick="detailsSpectacles('{{ path('detailSpectacle', {"id": spectacle.id})
+                                    }}')" for="checkbox" style="font-size: 20px; color:
+                                    white; cursor: pointer">{{ spectacle.title
+                                        }}</a>
                                     <p style="margin-top: 0%">{{ spectacle.distribution }}</p>
 
 
@@ -230,6 +234,57 @@
             this.children[0].style.visibility ="visible";
             this.children[1].innerHTML = maintitle;
         })
+
+
+        function detailsSpectacles(spectacle) {
+            fetch(spectacle)
+                .then(response => response.text())
+                .then(text =>  {
+                    let presentationSpectacle = document.getElementById('presentation_spectacle');
+
+
+                    presentationSpectacle.style.transform = 'translateX(0%)';
+                    presentationSpectacle.style.transition = '1000ms';
+                    presentationSpectacle.style.display = 'block';
+                    window.scrollTo({top : 0, behavior:"smooth"});
+
+                    if(presentationSpectacle.innerHTML ==''){
+                        presentationSpectacle.innerHTML = text;
+
+                    }
+                    else{
+                        presentationSpectacle.innerHTML ='';
+                        presentationSpectacle.innerHTML = text;
+
+
+                    }
+                });
+        }
+
+        function closeSpectacleWindow() {
+            let presentationSpectacle = document.getElementById('presentation_spectacle');
+            presentationSpectacle.style.transform = 'translateX(100%)';
+            presentationSpectacle.style.transition = '1000ms';
+            setTimeout(function (){
+                presentationSpectacle.style.display = 'none'
+            }, 1000);
+
+        }
+
+        function moreDates(dates) {
+            fetch(dates)
+                .then(response => response.text())
+                .then(text =>  {
+                    let moreDates = document.getElementById('moreDates');
+                    if(moreDates.innerHTML != ''){
+                        moreDates.innerHTML ='';
+                    }
+                    else{
+                        moreDates.innerHTML =text;
+                    }
+                });
+        }
+
 
     </script>
 
