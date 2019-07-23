@@ -372,3 +372,22 @@ padding: 10px;
   height: 100%;
   overflow: scroll;
 }
+
+.sidenav{
+  position: fixed;
+  top : 25%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.6;
+  background-color: rgba(224,224,224,.4);
+  border-radius: 10px;
+}
+
+.sidenav a{
+  padding: 20%;
+}
+
+.sidenav a img{
+  height: 4em;
+
+}
