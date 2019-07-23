@@ -10,13 +10,13 @@
         <div class="homepage1">
             <div class="row justify-content-around py-5 my-5">
 
-                <div class="col-12 m-auto" id="IndexTitle">
-                    <h1 class="text-center">ET SI VOUS RETOURNIEZ AU THÉÂTRE ?</h1>
+                <div class="col-12 m-auto text-center" id="IndexTitle">
+                    <h1 class="hometitle text-center">ET SI VOUS RETOURNIEZ AU THÉÂTRE ?</h1>
                 </div>
             </div>
-            <div class="row justify-content-start endroit-moment">
-                <div class="col-5 col-md-4 offset-2   logoIndex">
-                    <h1>A quel endroit ?</h1>
+            <div class="row justify-content-center endroit-moment">
+                <div class="col-5 col-md-4 offset-2 logoIndex">
+                    <h1 class="hometext">A QUEL ENDROIT ?</h1>
                 </div>
             </div>
 
@@ -32,101 +32,89 @@
                 </div>
             </div>
 
-            <div class="row justify-content-start endroit-moment">
+            <div class="row justify-content-center endroit-moment">
                 <div class="col-5 col-md-4 offset-md-8 logoIndex">
-                    <h1>A quel moment ?</h1>
+                    <h1 class="hometext">A QUEL MOMENT ?</h1>
+                </div>
+            </div>
+            <br>
+            <div class="row logoIndex ongletRow justify-content-center text-center p-4">
+                <div class="col-12 col-lg-3 p-1">
+                    <a href="#" class="badge onglet w-100">
+                        <button class="btn btn-dark homepageButton"> A Propos de Balises
+                        </button>
+                    </a>
+                </div>
+                <div class="col-12 col-lg-3 p-1">
+                    <a href="{{ path('theaters_list') }}" class="badge onglet w-100">
+                        <button class="btn btn-dark homepageButton">Liste des Théâtres</button>
+                    </a>
+                </div>
+                <div class="col-12 col-lg-3 p-1">
+                    <a href="#" class="badge onglet w-100">
+                        <button class="btn btn-dark homepageButton">Initiatives</button>
+                    </a>
                 </div>
             </div>
 
-        </div>
-        <footer id="myFooter" class="logoIndex">
-                <div class="row mt-3">
-                    <div class="col-sm-2 offset-sm-1">
-                        <a href="{{ path('home') }}"><img src="{{ asset('pics/Logo_balises_rond.png') }}"
-                         id="logoonmap" alt=""></a>
-                    </div>
-                    <div class="col-sm-3">
-                        <h5>Navigation</h5>
-                        <ul>
-                            <li><a href="{{ path('home') }}">Home</a></li>
-                            <li><a href="{{ path('app_login') }}">Connexion</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <h5>A Propos</h5>
-                        <ul>
-                            <li><a href="#">A Propos de Balises</a></li>
-                            <li><a data-toggle="modal" href="#contactModal">Contactez Nous</a></li>
-                            <li><a href="#">Mentions Légales</a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <h5>Théâtre</h5>
-                        <ul>
-                            <li><a href="{{ path('theaters_list') }}">Liste des Théâtres</a></li>
-                            <li><a href="#">Initiatives</a> </li>
-                        </ul>
+
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title" id="exampleModalLabel">Contactez Balises</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ form_start(email_form) }}
+                            <div class="row mt-5">
+                                <div class="col-1 mb-5"></div>
+                                {{ form_widget(email_form.Votre_Nom, {'attr': {'class': 'col-3','placeholder': 'Votre Nom'}}) }}
+                                <div class="col-1"></div>
+                                {{ form_widget(email_form.Votre_Email, {'attr': {'class': 'col-6','placeholder': 'Votre Email'}}) }}
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-1"></div>
+                                {{ form_widget(email_form.Votre_Message, {'attr': {'class': 'col-10','placeholder': 'Votre Message', 'rows': 7}}) }}
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="calendarButton hvr-float-shadow mt-3 mb-3"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                            <input type="submit" value="Send" class="calendarButton hvr-float-shadow mt-3 mb-3"/>
+                            {{ form_end(email_form) }}
+                        </div>
                     </div>
                 </div>
-            <div class="footer-copyright">
-                <p>© 2016 Copyright Text </p>
             </div>
-        </footer>
+
+
+            {% include 'footer.html.twig' %}
+
     </div>
-
-    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Contactez Balises</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(email_form) }}
-                    <div class="row mt-5">
-                        <div class="col-1 mb-5"></div>
-                        {{ form_widget(email_form.Votre_Nom, {'attr': {'class': 'col-3','placeholder': 'Votre Nom'}}) }}
-                        <div class="col-1"></div>
-                        {{ form_widget(email_form.Votre_Email, {'attr': {'class': 'col-6','placeholder': 'Votre Email'}}) }}
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-1"></div>
-                        {{ form_widget(email_form.Votre_Message, {'attr': {'class': 'col-10','placeholder': 'Votre Message', 'rows': 7}}) }}
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="calendarButton hvr-float-shadow mt-3 mb-3" data-dismiss="modal">
-                        Close
-                    </button>
-                    <input type="submit" value="Send" class="calendarButton hvr-float-shadow mt-3 mb-3"/>
-                    {{ form_end(email_form) }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 {% endblock %}
 
 
 
-{% block javascripts %}
+    {% block javascripts %}
 
-    <script>
+        <script>
 
-        let moveonfooter = document.getElementById('footer');
-        let moveonfooter2 = document.getElementById('footer2');
-        moveonfooter.addEventListener("mouseover", function () {
-            moveonfooter2.style.visibility = "visible";
-        });
-        moveonfooter.addEventListener("mouseout", function () {
-            moveonfooter2.style.visibility = "hidden";
-        });
+            let moveonfooter = document.getElementById('footer');
+            let moveonfooter2 = document.getElementById('footer2');
+            moveonfooter.addEventListener("mouseover", function () {
+                moveonfooter2.style.visibility = "visible";
+            });
+            moveonfooter.addEventListener("mouseout", function () {
+                moveonfooter2.style.visibility = "hidden";
+            });
 
-    </script>
-{% endblock %}
+        </script>
+    {% endblock %}

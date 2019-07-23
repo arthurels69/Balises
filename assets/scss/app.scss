@@ -1,5 +1,9 @@
 @import "vars";
 @import "~bootstrap";
+@font-face {
+  font-family: "Helvetica";
+  src: local("../police/texgyreheros-bold.otf");
+}
 
 
 html {
@@ -9,16 +13,28 @@ html {
 
 
 body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background-image: url('../../public/uploads/Balises_background.png');
-    background-size: cover ;
-
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-image: url('../../public/uploads/Balises_background.png');
+  background-size: cover;
+  font-weight: 500;
+  font-family: "Helvetica", serif;
 }
 
-h3{
-  color : white;
+.hometitle {
+  text-shadow: yellow 2px 2px, yellow -2px 2px, yellow -2px -2px, yellow 2px -2px;
+  font-size: 4em;
+}
+@media only screen and (max-width: 320px) {
+  .hometitle {
+    font-size: 2.5em;
+  }
+}
+
+.hometext {
+  text-shadow: yellow 2px 2px, yellow -2px 2px, yellow -2px -2px, yellow 2px -2px;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
@@ -26,13 +42,51 @@ h3{
   color : $baliseYellow;
   font-weight: bold;
   font-size: 4em;
+  font-style: italic;
 }
+
 .homepage1 {
   height: 45em;
 }
+@media only screen and (max-width: 320px) {
+  .homestyle {
+      padding: 0;
+      margin: 0;
+  }
+}
+
 .container-fluid{
   height : 100%;
   margin: auto;
+}
+
+.homepageButton{
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: black;
+  color: #FFEA05;
+  font-size: 1rem;
+  font-weight: bolder;
+  width: 100%;
+}
+
+ .onglet {
+  font-size: 1.5rem;
+   background-color: #FFEA05;
+   color: yellow;
+   border-radius: 30px;
+   border: 2px solid black;
+   box-shadow: 2px 2px 3px #2B2B2B;
+ }
+
+.btnO {
+  background-color: black;
+}
+
+.logoHome {
+  border: 2px solid yellow;
+  border-radius: 100px;
+  width: 150px;
 }
 
 @media screen and (max-width: 640px) {
@@ -107,7 +161,6 @@ h3{
   height: 10px;
   width: 90%;
   opacity: 0;
-  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
   background: radial-gradient(ellipse at center, rgba(255, 236, 1, 1) 0%, rgba(255, 236, 1, 0) 80%);
   /* W3C */
   -webkit-transition-duration: 0.3s;
@@ -375,9 +428,9 @@ h3{
 
   background-color: black;
   border-radius: 10px;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  border: 30px solid black;
+  bottom: 0;
 }
 
 .btnfooter
@@ -400,7 +453,7 @@ ul {
 #myFooter {
   background-color: black;
   color: white;
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 #myFooter .footer-copyright {
@@ -408,20 +461,24 @@ ul {
   padding-top: 3px;
   padding-bottom: 3px;
   text-align: center;
+  border-top: 2px solid yellow;
+  border-left: 2px solid yellow;
+  border-right: 2px solid yellow;
 }
 
 #myFooter .row {
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 #myFooter .navbar-brand {
   margin-top: 45px;
-  height: 65px;
+  //height: 65px;
 }
 
 #myFooter .footer-copyright p {
   margin: 10px;
   color: #ccc;
+
 }
 
 #myFooter ul {
@@ -502,28 +559,6 @@ ul {
 }
 
 
-/* CSS used for positioning the footers at the bottom of the page. */
-/* You can remove this. */
-
-
-body{
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  -webkit-flex-direction: column;
-  height: 100%;
-}
-
-.content{
-  flex: 1 0 auto;
-  -webkit-flex: 1 0 auto;
-  min-height: 200px;
-}
-
-#myFooter{
-  flex: 0 0 auto;
-  -webkit-flex: 0 0 auto;
-}
 
 .spectacleContainer{
   max-height: 100%;

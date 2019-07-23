@@ -1,3 +1,7 @@
+.sidenav {
+    display: none;
+}
+
 #background_opacity {
     position: fixed;
     z-index: -10;
