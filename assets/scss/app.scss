@@ -24,29 +24,37 @@ body {
 
 .hometitle {
   text-shadow: yellow 2px 2px, yellow -2px 2px, yellow -2px -2px, yellow 2px -2px;
-  font-size: 3rem;
+  font-size: 4em;
+}
+@media only screen and (max-width: 320px) {
+  .hometitle {
+    font-size: 2.5em;
+  }
 }
 
 .hometext {
   text-shadow: yellow 2px 2px, yellow -2px 2px, yellow -2px -2px, yellow 2px -2px;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
-//h3{
-//  color : white;
-//  font-weight: bold;
-//}
-//
-//h1{
-//  color : $baliseYellow;
-//  font-weight: bold;
-//  font-size: 4em;
-//}
-
+.h1-map{
+  color : $baliseYellow;
+  font-weight: bold;
+  font-size: 4em;
+  font-style: italic;
+}
 
 .homepage1 {
   height: 45em;
 }
+@media only screen and (max-width: 320px) {
+  .homestyle {
+      padding: 0;
+      margin: 0;
+  }
+}
+
 .container-fluid{
   height : 100%;
   margin: auto;
@@ -412,6 +420,7 @@ body {
   border-radius: 10px;
   width: 100%;
   border: 30px solid black;
+  bottom: 0;
 }
 
 .btnfooter

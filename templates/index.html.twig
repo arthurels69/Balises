@@ -6,16 +6,15 @@
     <div id="background_opacity"></div>
 
     <div class="container-fluid h-100">
-        <div class="homepage1">
             <div class="row justify-content-around py-5 my-5">
 
-                <div class="col-12 m-auto" id="IndexTitle">
+                <div class="col-12 m-auto text-center" id="IndexTitle">
                     <h1 class="hometitle text-center">ET SI VOUS RETOURNIEZ AU THÉÂTRE ?</h1>
                 </div>
             </div>
-            <div class="row justify-content-start endroit-moment">
-                <div class="col-5 col-md-4 offset-2   logoIndex">
-                    <h1 class="hometitle">A quel endroit ?</h1>
+            <div class="row justify-content-center endroit-moment">
+                <div class="col-5 col-md-4 offset-2 logoIndex">
+                    <h1 class="hometext">A QUEL ENDROIT ?</h1>
                 </div>
             </div>
 
@@ -31,9 +30,9 @@
                 </div>
             </div>
 
-            <div class="row justify-content-start endroit-moment">
+            <div class="row justify-content-center endroit-moment">
                 <div class="col-5 col-md-4 offset-md-8 logoIndex">
-                    <h1 class="hometitle">A quel moment ?</h1>
+                    <h1 class="hometext">A QUEL MOMENT ?</h1>
                 </div>
             </div>
             <br>
@@ -93,12 +92,11 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         {{ include('navSocial.html.twig') }}
-        <div>
+
             {% include 'footer.html.twig' %}
-        </div>
+
     </div>
 {% endblock %}
 
