@@ -6,11 +6,11 @@
 
 {% block body %}
 
-    <div class="container bg-custom">
-        <div class="row justify-content-center m-5">
+    <div class="card card-edit-new w-100 container p-0">
+        <div class="card-header d-flex w-100 justify-content-center">
             <h1>{{ theater.name }}</h1>
         </div>
-        <div class="row">
+        <div class="row positionLogo">
             <div class="col-sm-6">
                 <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
             </div>
