@@ -3,11 +3,17 @@
 {% block title %}New Param{% endblock %}
 
 {% block body %}
-<div class="container bg-custom">
-    <h1>Create new Param</h1>
 
-    {{ include('param/_form.html.twig') }}
 
-    <a href="{{ path('param_index') }}">back to list</a>
+    <div class="card card-edit-new w-100 container p-0">
+        <div class="card-header d-flex w-100 justify-content-center">
+
+            <h1>Création Coefficients</h1>
+        </div>
+        <div class="container">
+            {{ include('param/_form.html.twig') }}
+        </div>
+        {#    <a href="{{ path('param_index') }}">Retour</a>#}
+    </div>
 </div>
 {% endblock %}
