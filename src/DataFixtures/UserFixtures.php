@@ -81,7 +81,7 @@ class UserFixtures extends Fixture
         $t1->setWebsite('www.elysee.com');
         $t1->setPhoneNumber('0478588825');
         $t1->setBaseRate(12);
-        $t1->setLogo('elyseeLogojpeg');
+        $t1->setLogo('elyseeLogo.jpeg');
         $t1->setPicture('ELYSEEphoto.jpg');
         $t1->setUser($user1);
         $this->theaterService->geocode($t1);
