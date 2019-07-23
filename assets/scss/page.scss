@@ -3,6 +3,10 @@
 
 @import "theater";
 @import "theaterList";
+@font-face {
+  font-family: "Helvetica";
+  src: url("../police/texgyreheros-bold.otf");
+}
 
 // Carousel with Date https://jsfiddle.net/w3a97zyh/
 
@@ -14,6 +18,7 @@ html {
 body {
   background-size: cover;
   background-image: url('../../public/uploads/Balises_background.png');
+  font-family: "Helvetica", serif;
 }
 
 #background_opacity {
