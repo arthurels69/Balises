@@ -19,6 +19,17 @@ body {
     background-size: cover ;
 
 }
+
+h3{
+  color : white;
+  font-weight: bold;
+}
+
+h1{
+  color : $baliseYellow;
+  font-weight: bold;
+  font-size: 4em;
+}
 .homepage1 {
   height: 45em;
 }
@@ -54,13 +65,12 @@ body {
 
 .calendarButton{
   border: none;
-  /*width: 1  00%;*/
   padding: 2%;
   border-radius: 10px;
   background-color: $baliseYellow;
   color: black;
   box-shadow: 1px 1px 1px 1px black;
-  font-size: 1.1em;
+  font-size: 4rem;
   font-weight: bolder;
 }
 
@@ -124,6 +134,7 @@ body {
 {
   z-index: 0;
   width:100%;
+
 }
 
 #selectplacetitle
@@ -131,9 +142,8 @@ body {
   position: absolute;
   top: 60%;
   left: 7%;
-  z-index: 1;
   color: black;
-  font-size: 80px;
+  font-size: 4em;
 
 }
 
@@ -178,21 +188,21 @@ body {
   z-index: 2;
   position: fixed;
   bottom: -50%;
+}
 
-
-
+#jumelles{
+  width: 2em;
 }
 
 .bulleInfo1
 {
-  background-color: rgba(0, 0, 0, 0);
-  /*background-color: grey;*/
-  background-image: url("{{ asset('uploads/ticket-balises.png') }}");
+
+  background-image: url("../../public/uploads/ticket-balises.png");
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
-  height: 30vh;
-  width: 32vw;
+  height: 15vw;
+  width: 30vw;
 
 }
 
@@ -230,16 +240,6 @@ body {
 
 }
 
-
-.bulleInfo4
-{
-
-}
-
-.bulleInfo5
-{
-
-}
 
 .bulleInfo6 {
   background-color: grey;
