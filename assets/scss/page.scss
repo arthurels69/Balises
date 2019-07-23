@@ -198,13 +198,14 @@ img{
 }
 @media screen and (min-width: 640px){
   #presentation_spectacle{
-
+    height: 100%;
     width: 30vw;
     transform:translateX(100%);
     z-index: 99;
     position : absolute;
     top : 0;
     left: 70%;
+    overflow: auto;
   }
 }
 
@@ -365,4 +366,9 @@ padding: 10px;
 
 .h2{
   font-size: 2vh;
+}
+
+.spectacleContainer{
+  height: 100%;
+  overflow: scroll;
 }

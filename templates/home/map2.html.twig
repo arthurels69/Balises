@@ -29,7 +29,7 @@
         <img id="jumelles" src="{{ asset('uploads/jumelles.png') }}">
         <h1>SÉLECTIONNER<br>VOTRE <span>LIEU</span></h1>
         <a href="{{ path('home') }}">
-            <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" width="100"/></a>
+                <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png" width="100"/></a>
     </div>
 
 
@@ -60,19 +60,24 @@
 
             <div class="col-12">
                 <div class="bulleInfo3">
-                    <a href="{{ theater.website }}" target="_blank" ><h1 class="h1-map">{{ theater.name }}</h1></a>
+                    <a href="http://{{ theater.website }}" target="_blank" >
+                        <h1 class="h1-map">{{ theater.name }}</h1></a>
                     <hr style="background-color : white">
                     <h3>CHOIX DE VOTRE SPECTACLE</h3>
 
                     {% for spectacle in spectacles %}
                         {% if spectacle.theater == theater %}
+                             <div class="col-12">
                             <a onclick="detailsSpectacles('{{ path('detailSpectacle', {"id": spectacle.id})
                             }}')" for="checkbox" style="font-size: 6em; color:
                                     white; cursor: pointer">{{ spectacle.title
                                 }}</a>
-                            <button class="calendarButton m-2"
+                             </div>
+                            <div class="col-12">
+                            <button class="More-Info-Button m-2"
                                     onclick="detailsSpectacles('{{ path('detailSpectacle', {"id": spectacle.id})
                         }}')" >Plus d'info</button>
+                            </div>
                             <p>{{ spectacle.distribution }}</p>
                         {% endif %}
                     {% endfor %}

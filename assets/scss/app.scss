@@ -60,15 +60,29 @@ h3{
 }
 
 
-.calendarButton{
+.More-Info-Button{
   border: none;
-  padding: 2%;
+  padding: 1%;
   border-radius: 10px;
   background-color: $baliseYellow;
   color: black;
   box-shadow: 1px 1px 1px 1px black;
-  font-size: 4rem;
+  font-size: 4em;
   font-weight: bolder;
+  min-width: 50%;
+}
+
+
+.More-Info-Button:hover{
+  border: none;
+  padding: 1%;
+  border-radius: 10px;
+  background-color: lighten($baliseYellow, 25%);
+  color: black;
+  box-shadow: 1px 1px 1px 1px black;
+  font-size: 4em;
+  font-weight: bolder;
+  min-width: 50%;
 }
 
 .hvr-float-shadow {
@@ -513,4 +527,35 @@ body{
 #myFooter{
   flex: 0 0 auto;
   -webkit-flex: 0 0 auto;
+}
+
+.spectacleContainer{
+  max-height: 100%;
+  overflow: scroll;
+}
+
+
+@media screen and (max-width: 640px) {
+  #presentation_spectacle{
+    width: 100%;
+    transform:translateX(100%);
+    z-index: 100;
+    position: absolute;
+    top: 0;
+
+  }
+
+
+}
+@media screen and (min-width: 640px){
+  #presentation_spectacle{
+    height: 100%;
+    width: 30vw;
+    transform:translateX(100%);
+    z-index: 99;
+    position : absolute;
+    top : 0;
+    left: 70%;
+    overflow: auto;
+  }
 }
