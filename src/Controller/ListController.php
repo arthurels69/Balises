@@ -17,8 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 
-/** Controls the Calendar Pages
- * Class CalendarController
+/**
  * @package App\Controller
  */
 class ListController extends AbstractController
