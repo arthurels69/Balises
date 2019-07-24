@@ -50,7 +50,7 @@
     <div class="row justify-content-center mb-4">
         <div class="col-sm-4 text-center">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('theater_edit_mdp', {'id':user.id +1}) }}">
+                <a href="{{ path('theater_edit_mdp', {'id':theater.id+1}) }}">
                     <button class="btn btn-secondary">Changement
                         de Mot de Passe
                     </button>

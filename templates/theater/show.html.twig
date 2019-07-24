@@ -16,7 +16,8 @@
             </div>
             <div class="col-sm-6">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" width="150"></img>
+                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"
+                         width="400"></img>
                 {% else  %}
                     <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
                 {% endif %}

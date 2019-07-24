@@ -25,11 +25,11 @@
 <div class = "container">
 
     {% if app.user %}
-        <div class="row" style = "padding-top : 30px">
+        <div class="row justify-content-center" style = "padding-top : 30px">
             <nav>
-                    <a type="button" href="{{ path('app_logout') }}"
+                    <a  href="{{ path('app_logout') }}"
                        title="déconnexion"
-                       class="btn btn-secondary mb-4"><i class="fas fa-sign-out-alt"></i>
+                        class="btn btn-secondary mb-4"><button class="btn btn-secondary ">Deconnexion</button>
                     </a>
             </nav>
         </div>

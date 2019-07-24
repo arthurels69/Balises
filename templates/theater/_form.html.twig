@@ -35,7 +35,8 @@
         </div>
         <div class="col-sm-6">
             <div class="col-sm-10 espSaisie">
-                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" alt=""/>
+                <img class="img_picture img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" alt=""
+                     style="width: 400px">
             </div>
             <div class="col-sm-10 espSaisie">
                 {{ form_label(form.picture, 'Photo') }}
