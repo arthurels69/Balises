@@ -41,7 +41,7 @@ class CalendarService
         $start = new \DateTime($selectedDate);
         $end = new \DateTime($selectedDate);
 
-        $end->add(\DateInterval::createFromDateString('+5 days'));
+        $end->add(\DateInterval::createFromDateString('+1 days'));
         $today = new \DateTime();
         //Returns  today' spectacles.
         $spectaclesOfTheDay = $this->showDateRepository->spectaclePerDates($start, $end, $today);
