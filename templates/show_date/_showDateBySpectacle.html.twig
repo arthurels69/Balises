@@ -15,8 +15,10 @@
                     <td>{{ showDate.dateShow ? showDate.dateShow|date('d-m-Y à H:i') : ''  }}</td>
 
                     <td>
-                        <a href="{{ path('show_date_edit', {'id': showDate.id}) }}"><i class="fas fa-edit " style = "color : maroon" ></i></a>
-                        <a href="{{ path('show_date_delete', {'id': showDate.id})}}"><i class="fas fa-trash-alt " style = "color : maroon" ></i></a>
+                        <a type="button" class='btn btn-info btn-xs' href="{{ path('show_date_edit', {'id': showDate.id}) }}">
+                            <i class="fas fa-edit"></i></a>
+                        <a type="button" class="btn btn-danger" href="{{ path('show_date_delete', {'id': showDate
+                            .id})}}"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
 

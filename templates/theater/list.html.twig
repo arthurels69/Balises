@@ -1,4 +1,6 @@
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'baseAdminTheater.html.twig' %}
 {% block title %}Liste des théâtres{% endblock %}
 
 {% block body %}

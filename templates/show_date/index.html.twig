@@ -1,35 +1,40 @@
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'baseAdminTheater.html.twig' %}
 
 {% block title %}ShowDate index{% endblock %}
 
 {% block body %}
-    <h1>ShowDate index</h1>
+    <div class="card justify-content-left p-0 w-100">
 
-    <table class="table">
-        <thead>
+        <h1>ShowDate index</h1>
+
+        <table class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>DateShow</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for show_date in show_dates %}
-            <tr>
-                <td>{{ show_date.id }}</td>
-                <td>{{ show_date.dateShow ? show_date.dateShow|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('show_date_show', {'id': show_date.id}) }}">show</a>
-                    <a href="{{ path('show_date_edit', {'id': show_date.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for show_date in show_dates %}
+                <tr>
+                    <td>{{ show_date.id }}</td>
+                    <td>{{ show_date.dateShow ? show_date.dateShow|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('show_date_show', {'id': show_date.id}) }}">show</a>
+                        <a href="{{ path('show_date_edit', {'id': show_date.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('show_date_new') }}">Create new</a>
+        <a href="{{ path('show_date_new') }}">Create new</a>
+    </div>
 {% endblock %}

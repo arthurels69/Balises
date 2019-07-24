@@ -1,9 +1,11 @@
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'baseAdminTheater.html.twig' %}
 
 {% block title %}Création Représentation{% endblock %}
 
 {% block body %}
-    <div class="container bg-custom">
+    <div class="card justify-content-left p-0 w-100">
 
         <h1>Création Représentation</h1>
 
