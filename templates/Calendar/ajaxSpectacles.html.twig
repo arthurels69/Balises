@@ -1,9 +1,9 @@
 <div id="display-spectacles">
     <!-- below the display of spectacles. Same as the ones in search by theater. -->
-    <h4 class="h4">Au programme du {{ today |localizeddate('full', 'none', 'fr',
-            'Europe/Paris','d-MMM') }} au {{ today | date_modify('+5 days') |localizeddate('full', 'none', 'fr',
-            'Europe/Paris','d-MMM')
-        }}</h4>
+
+    <h4 class="h4">Au programme le {{ today |localizeddate('full', 'none', 'fr',
+            'Europe/Paris','d-MMM') }} </h4>
+
 
     {% if spectaclesOfTheDay is empty %}
         <p class="description">pas de spectacles ce jour!</p>

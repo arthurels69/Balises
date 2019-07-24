@@ -169,6 +169,11 @@
 {% block javascripts %}
 
     <script>
+
+       /* window.onload(function () {
+            let presentationSpectacle = document.getElementById('presentation_spectacle');
+            presentationSpectacle.style.display = 'block';
+        }); */
         //Cette fonction gère l'affichage des spectacles quand on clique dans le calendrier carousel
         function changeDate(date, clickedPill) {
             fetch(date)
@@ -231,16 +236,17 @@
                 .then(text =>  {
                     let presentationSpectacle = document.getElementById('presentation_spectacle');
 
-
-                    presentationSpectacle.style.transform = 'translateX(0%)';
-                    presentationSpectacle.style.transition = '1000ms';
                     presentationSpectacle.style.display = 'block';
+                    setTimeout(function (){
+                        presentationSpectacle.style.transform = 'translateX(0%)';
+                        presentationSpectacle.style.transition = '1000ms';
+                    }, 100);
+
                     window.scrollTo({top : 0, behavior:"smooth"});
 
                     if(presentationSpectacle.innerHTML ==''){
 
                         presentationSpectacle.innerHTML = text;
-
                     }
                     else{
                         presentationSpectacle.innerHTML ='';
