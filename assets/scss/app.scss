@@ -1,5 +1,9 @@
 @import "vars";
 @import "~bootstrap";
+@font-face {
+  font-family: "Helvetica";
+  src: url("../police/texgyreheros-bold.otf");
+}
 
 
 html {
@@ -7,24 +11,82 @@ html {
     width: 100%;
 }
 
-//h1{
-//    text-align: center;
-//}
 
 body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background-image: url('../../public/uploads/Balises_background.png');
-    background-size: cover ;
-
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-image: url('../../public/uploads/Balises_background.png');
+  background-size: cover;
+  font-weight: 500;
+  font-family: "Helvetica", serif;
 }
+
+.hometitle {
+  text-shadow: yellow 2px 2px, yellow -2px 2px, yellow -2px -2px, yellow 2px -2px;
+  font-size: 4em;
+}
+@media only screen and (max-width: 320px) {
+  .hometitle {
+    font-size: 2.5em;
+  }
+}
+
+.hometext {
+  text-shadow: yellow 2px 2px, yellow -2px 2px, yellow -2px -2px, yellow 2px -2px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.h1-map{
+  color : $baliseYellow;
+  font-weight: bold;
+  font-size: 4em;
+  font-style: italic;
+}
+
 .homepage1 {
   height: 45em;
 }
+@media only screen and (max-width: 320px) {
+  .homestyle {
+      padding: 0;
+      margin: 0;
+  }
+}
+
 .container-fluid{
   height : 100%;
   margin: auto;
+}
+
+.homepageButton{
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: black;
+  color: #FFEA05;
+  font-size: 1rem;
+  font-weight: bolder;
+  width: 100%;
+}
+
+ .onglet {
+  font-size: 1.5rem;
+   background-color: #FFEA05;
+   color: yellow;
+   border-radius: 30px;
+   border: 2px solid black;
+   box-shadow: 2px 2px 3px #2B2B2B;
+ }
+
+.btnO {
+  background-color: black;
+}
+
+.logoHome {
+  border: 2px solid yellow;
+  border-radius: 100px;
+  width: 150px;
 }
 
 @media screen and (max-width: 640px) {
@@ -52,16 +114,29 @@ body {
 }
 
 
-.calendarButton{
+.More-Info-Button{
   border: none;
-  /*width: 1  00%;*/
-  padding: 2%;
+  padding: 1%;
   border-radius: 10px;
   background-color: $baliseYellow;
   color: black;
   box-shadow: 1px 1px 1px 1px black;
-  font-size: 1.1em;
+  font-size: 4em;
   font-weight: bolder;
+  min-width: 50%;
+}
+
+
+.More-Info-Button:hover{
+  border: none;
+  padding: 1%;
+  border-radius: 10px;
+  background-color: lighten($baliseYellow, 25%);
+  color: black;
+  box-shadow: 1px 1px 1px 1px black;
+  font-size: 4em;
+  font-weight: bolder;
+  min-width: 50%;
 }
 
 .hvr-float-shadow {
@@ -86,7 +161,6 @@ body {
   height: 10px;
   width: 90%;
   opacity: 0;
-  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
   background: radial-gradient(ellipse at center, rgba(255, 236, 1, 1) 0%, rgba(255, 236, 1, 0) 80%);
   /* W3C */
   -webkit-transition-duration: 0.3s;
@@ -112,18 +186,13 @@ body {
   height: 100%;
 }
 
-.sidenav
-{
-  background-color: #FFEC02;
-}
-
-
 
 #map
 
 {
   z-index: 0;
   width:100%;
+
 }
 
 #selectplacetitle
@@ -131,9 +200,8 @@ body {
   position: absolute;
   top: 60%;
   left: 7%;
-  z-index: 1;
   color: black;
-  font-size: 80px;
+  font-size: 4em;
 
 }
 
@@ -178,21 +246,21 @@ body {
   z-index: 2;
   position: fixed;
   bottom: -50%;
+}
 
-
-
+#jumelles{
+  width: 2em;
 }
 
 .bulleInfo1
 {
-  background-color: rgba(0, 0, 0, 0);
-  /*background-color: grey;*/
-  background-image: url("{{ asset('uploads/ticket-balises.png') }}");
+
+  background-image: url("../../public/uploads/ticket-balises.png");
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
-  height: 30vh;
-  width: 32vw;
+  height: 15vw;
+  width: 30vw;
 
 }
 
@@ -230,16 +298,6 @@ body {
 
 }
 
-
-.bulleInfo4
-{
-
-}
-
-.bulleInfo5
-{
-
-}
 
 .bulleInfo6 {
   background-color: grey;
@@ -279,7 +337,34 @@ body {
 
 //style from index
 
+.sidenav{
+  position: fixed;
+  top : 25%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.6;
+  background-color: rgba(224,224,224,.4);
+  border-radius: 10px;
+  z-index: 10;
+}
 
+.sidenav a{
+  padding: 20%;
+}
+
+.sidenav a img{
+  height: 4em;
+
+}
+
+
+@media screen and (max-width: 750px)
+{
+  .sidenav
+  {
+    display: none;
+  }
+}
 
 .logoIndex, .sidenav, #logoonmap, .LoginBtn
 {
@@ -334,32 +419,7 @@ body {
 
 //style navSocial
 
-.sidenav {
-  width: auto;
-  position: fixed;
-  z-index: 1;
-  top: 40%;
 
-
-  padding: 8px 0;
-  border-style: solid;
-  border-width: 1px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #2196F3;
-  display: block;
-  opacity: 0.5;
-}
-
-.sidenav a:hover {
-  opacity: 1;
-}
 
 //footer style
 
@@ -368,9 +428,9 @@ body {
 
   background-color: black;
   border-radius: 10px;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  border: 30px solid black;
+  bottom: 0;
 }
 
 .btnfooter
@@ -393,7 +453,7 @@ ul {
 #myFooter {
   background-color: black;
   color: white;
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 #myFooter .footer-copyright {
@@ -401,20 +461,24 @@ ul {
   padding-top: 3px;
   padding-bottom: 3px;
   text-align: center;
+  border-top: 2px solid yellow;
+  border-left: 2px solid yellow;
+  border-right: 2px solid yellow;
 }
 
 #myFooter .row {
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 #myFooter .navbar-brand {
   margin-top: 45px;
-  height: 65px;
+  //height: 65px;
 }
 
 #myFooter .footer-copyright p {
   margin: 10px;
   color: #ccc;
+
 }
 
 #myFooter ul {
@@ -495,25 +559,34 @@ ul {
 }
 
 
-/* CSS used for positioning the footers at the bottom of the page. */
-/* You can remove this. */
 
-
-body{
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  -webkit-flex-direction: column;
-  height: 100%;
+.spectacleContainer{
+  max-height: 100%;
+  overflow: scroll;
 }
 
-.content{
-  flex: 1 0 auto;
-  -webkit-flex: 1 0 auto;
-  min-height: 200px;
-}
 
-#myFooter{
-  flex: 0 0 auto;
-  -webkit-flex: 0 0 auto;
+@media screen and (max-width: 640px) {
+  #presentation_spectacle{
+    width: 100%;
+    transform:translateX(100%);
+    z-index: 100;
+    position: absolute;
+    top: 0;
+
+  }
+
+
+}
+@media screen and (min-width: 640px){
+  #presentation_spectacle{
+    height: 100%;
+    width: 30vw;
+    transform:translateX(100%);
+    z-index: 99;
+    position : absolute;
+    top : 0;
+    left: 70%;
+    overflow: auto;
+  }
 }
