@@ -53,7 +53,7 @@
             <div class="col-12">
                 <div class="bulleInfo3">
                     <a href="http://{{ theater.website }}" target="_blank" >
-                        <h1 class="h1-map">{{ theater.name }}</h1></a>
+                        <h1 class="h1-map pl-2">{{ theater.name }}</h1></a>
                     <hr style="background-color : white">
                     <h3>CHOIX DE VOTRE SPECTACLE</h3>
 
@@ -225,15 +225,16 @@
                 .then(text =>  {
                     let presentationSpectacle = document.getElementById('presentation_spectacle');
 
-
-                    presentationSpectacle.style.transform = 'translateX(0%)';
-                    presentationSpectacle.style.transition = '1000ms';
                     presentationSpectacle.style.display = 'block';
+                    setTimeout(function (){
+                        presentationSpectacle.style.transform = 'translateX(0%)';
+                        presentationSpectacle.style.transition = '1000ms';
+                    }, 100);
+
                     window.scrollTo({top : 0, behavior:"smooth"});
 
                     if(presentationSpectacle.innerHTML ==''){
                         presentationSpectacle.innerHTML = text;
-
                     }
                     else{
                         presentationSpectacle.innerHTML ='';

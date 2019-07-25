@@ -3,10 +3,12 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use App\Repository\ShowDateRepository;
 use App\Repository\SpectacleRepository;
 use App\Repository\TheaterRepository;
 use App\Service\CalendarService;
+use App\Service\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
@@ -50,8 +52,28 @@ class CalendarController extends AbstractController
         Request $request,
         TheaterRepository $theaterRepository,
         SpectacleRepository $spectacleRepository,
-        ShowDateRepository $dateRepository
+        ShowDateRepository $dateRepository,
+        EmailService $emailService
     ) {
+
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+
+            $emailService->mailContactForm(
+                $contactFormData['Votre_Email'],
+                $contactFormData['Votre_Message'],
+                $contactFormData['Votre_Nom']
+            );
+
+            $this->addFlash('success', 'Votre message a bien été envoyé');
+            dump($contactFormData);
+            return $this->redirectToRoute('calendar');
+        }
+
+
 
 
         $today = new \DateTime();
@@ -67,6 +89,7 @@ class CalendarController extends AbstractController
             'period' => $todayString,
             'spectaclesOfTheDay' => $this->calendarService->selectSpectaclesOfTheDay($todayString),
             'oneMoreDay' => $this->calendarService->addMoreDays(),
+            'email_form' => $form->createView(),
         ]);
     }
 
