@@ -44,11 +44,10 @@
 
         <div class="sidebar-header d-flex justify-content-center">
             <a href="{{ path('home') }}"> <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"
-                                               alt="logo_admin"  height=80 width=80></a>
+                                               alt="logo_admin" height=80 width=80></a>
 
 
         </div>
-        {% if is_granted('ROLE_ADMIN') %}
         <ul class="list-unstyled components navbar-primary-menu">
             <!-- MENU DASHBOARD -->
             <li class="nav-item">
@@ -141,8 +140,7 @@
 <script type="text/javascript" src="/admin/admin_menu.js"></script>
 
 {% block javascripts %}
-
-
 {% endblock %}
+
 </body>
 </html>
