@@ -1,36 +1,39 @@
-
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'baseAdminTheater.html.twig' %}
 
 
 {% block title %}Liste des Spectacles{% endblock %}
 
 {% block body %}
 
-<div class="container bg-custom">
+    <div class="card justify-content-left p-0 w-100">
 
         <div class="row justify-content-center m-5">
             <h1>Liste des Spectacles</h1>
         </div>
-        <div class="container">
-            <div class="row justify-content-md-center">
 
 
-        <div class="container">
-            <div class="row">
+        <div class="row justify-content-center">
 
-                {% if user.roles[0] == "ROLE_THEATER" %}
-                    <div class="col-sm-2">
-                        <a href="{{ path('theater_show',{'id' : theater.id} )}}"><button class="btn btn-secondary mb-5">Retour</button> </a>
-                    </div>
-                {% endif %}
-                <div class="col-sm-2">
-                    <a href="{{ path('spectacle_new') }}"><button class="btn btn-secondary mb-5">Nouveau Spectacle</button> </a>
+                <div class="col-sm-3">
+                    <a href="{{ path('theater_show',{'id' : theater.id} ) }}">
+                        <button class="btn btn-secondary
+                        mb-5">Retour
+                        </button>
+                    </a>
                 </div>
+
+            <div class="col-sm-3">
+                <a href="{{ path('spectacle_new') }}">
+                    <button class="btn btn-secondary mb-5">Nouveau Spectacle</button>
+                </a>
             </div>
         </div>
+
         <div class="container">
-        <table class="table">
-            <thead>
+            <table class="table">
+                <thead>
                 <tr>
                     <th>Titre</th>
                     <th>Description</th>
@@ -41,36 +44,49 @@
                     <th class="text-center">actions</th>
                 </tr>
 
-            </thead>
-            <tbody>
-            {% for spectacle in spectacles %}
-                <tr>
-                    <td>{{ spectacle.title }}</td>
-                    <td>{{ spectacle.description | truncate(200) }}</td>
+                </thead>
+                <tbody>
+                {% for spectacle in spectacles %}
+                    <tr>
+                        <td>{{ spectacle.title }}</td>
+                        <td>{{ spectacle.description | truncate(200) }}</td>
 
-                    <td><img src="{{ asset('uploads/' ~ spectacle.image) }}" ></td>
+                        <td><img class="img-thumbnail" src="{{ spectacle.image }}" style="width: 500px;"></td>
 
-                    <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
-                    <td>{{ spectacle.offerType }}</td>
+                        <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
+                        <td>{{ spectacle.offerType }}</td>
 
-                    <td>{{ spectacle.baseRate }}</td>
-                    <td>
-                        <a type="button" href="{{ path('spectacle_show', {'id': spectacle.id}) }}"
-                           data-toggle="tooltip" data-placement="top"  title="Détail"><i class="fas fa-file-alt" style = "color : maroon"></i>
-                        </a>
-                        <a type="button" href="{{ path('spectacle_edit', {'id': spectacle.id}) }}"
-                           data-toggle="tooltip" data-placement="top"  title="Modification"><i class="fas fa-edit" style = "color : maroon"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="13">Pas de Spectacles</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                        <td>{{ spectacle.baseRate }}</td>
+                        <td>
+                            <div class="row justify-content-center mb-1">
+                                <div class="col-12">
+                                    <a type="button" class="btn  btn-info btn-xs"
+                                       href="{{ path('spectacle_show', {'id':spectacle.id}) }}"
+                                       data-toggle="tooltip" data-placement="top" title="Détail"><i
+                                                class="far fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-1">
+
+                                <div class="col-12">
+                                    <a type="button" class='btn btn-info btn-xs'
+                                       href="{{ path('spectacle_edit', {'id': spectacle.id}) }}"
+                                       data-toggle="tooltip" data-placement="top" title="Modification"><i
+                                                class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="13">Pas de Spectacles</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
         </div>
-
+    </div>
 {% endblock %}

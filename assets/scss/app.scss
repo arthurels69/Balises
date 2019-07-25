@@ -10,6 +10,8 @@
 html {
     height: 100%;
     width: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 
@@ -48,6 +50,7 @@ body {
 
 .homepage1 {
   height: 45em;
+
 }
 @media only screen and (max-width: 320px) {
   .homestyle {
@@ -255,7 +258,7 @@ body {
 
 .bulleInfo1
 {
-
+  padding: 2%;
   background-image: url("../../public/uploads/ticket-balises.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -272,7 +275,7 @@ body {
 
 .bulleInfo3
 {
-
+  padding: 2%;
   background-color: black;
   color: white;
 
@@ -424,13 +427,14 @@ body {
 
 //footer style
 
-#footer2
+#footer
 {
 
   background-color: black;
   border-radius: 10px;
   width: 100%;
   border: 30px solid black;
+  z-index: -9999;
   bottom: 0;
 }
 
@@ -445,16 +449,15 @@ body {
 }
 
 ul {
-  margin: 0;
   padding: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 #myFooter {
   background-color: black;
   color: white;
   padding-top: 20px;
+  bottom: 0;
 }
 
 #myFooter .footer-copyright {
@@ -548,8 +551,7 @@ ul {
   border: none;
   width: 150px;
   display: block;
-  margin: 0 auto;
-  margin-top: 10px;
+  margin: 10px auto 0;
   line-height: 25px;
 }
 

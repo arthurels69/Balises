@@ -43,45 +43,18 @@
     <nav id="sidebar">
 
         <div class="sidebar-header d-flex justify-content-center">
-            <a href="{{ path('home') }}"> <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"
-                                               alt="logo_admin" height=80 width=80></a>
-
+        <a href="{{ path('home') }}"> <img src="http://www.balises-theatres.com/img/Logo_balises_rond.png"
+                                           alt="logo_admin"  height=80 width=80></a>
 
         </div>
+
+
         <ul class="list-unstyled components navbar-primary-menu">
             <!-- MENU DASHBOARD -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('user_chart') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
 
-            <!-- MENU THEATRE -->
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ path('user_index') }}">
-                    <i class="fas fa-home"></i>
-                    <span>Théâtres</span>
-                </a>
-            </li>
-
-            <!-- MENU THÉÂTRES NON BALISES -->
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ path('non_balises_theater_index') }}">
-                    <i class="fas fa-film"></i>
-                    <span>Théâtres non balises</span>
-                </a>
-            </li>
-
-            <!-- MENU COEFFICIENT -->
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ path('param_index') }}">
-                    <i class="fas fa-tag"></i>
-                    <span>Coefficients</span>
-                </a>
-            </li>
         </ul>
     </nav>
+
     <!-- PAGE CONTENT -->
     <div class="container">
         <div id="content">
@@ -140,7 +113,8 @@
 <script type="text/javascript" src="/admin/admin_menu.js"></script>
 
 {% block javascripts %}
-{% endblock %}
 
+
+{% endblock %}
 </body>
 </html>

@@ -1,70 +1,85 @@
-{% extends 'basePage.html.twig' %}
+{% extends is_granted('ROLE_ADMIN')
+    ? 'base_admin.html.twig'
+    : 'baseAdminTheater.html.twig' %}
 
 {% block title %}Spectacle{% endblock %}
 
 {% block body %}
+<div class="card justify-content-left p-0 w-100">
+
     <h1>Spectacle</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{{ spectacle.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ spectacle.description }}</td>
-            </tr>
-            <tr>
-                <th>Distribution</th>
-                <td>{{ spectacle.distribution }}</td>
-            </tr>
-            <tr>
-                <th>MandatoryInfos</th>
-                <td>{{ spectacle.mandatoryInfos }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><img src="{{ spectacle.image }}" alt=""></td>
-            </tr>
-            <tr>
-                <th>PhotoCredits</th>
-                <td>{{ spectacle.photoCredits }}</td>
-            </tr>
-            <tr>
-                <th>AdditionalInfos</th>
-                <td>{{ spectacle.additionalInfos }}</td>
-            </tr>
-            <tr>
-                <th>IsBalise</th>
-                <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
-                <th>OfferType</th>
-                <td>{{ spectacle.offerType }}</td>
-            </tr>
-            <tr>
-                <th>MapadoLink</th>
-                <td>{{ spectacle.mapadoLink }}</td>
-            </tr>
-            <tr>
-                <th>Plein Tarif</th>
-                <td>{{ spectacle.baseRate }}</td>
-            </tr>
-            <tr>
-                <th>Dates</th>
-                <td>{% for date in spectacle.showDates %}
-                   <ul>
-                  <li>  {{ date.dateShow | date('d/m/Y - H : i') }} </li>
-                   </ul>
-                    {% endfor %}</td>
-            </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ spectacle.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ spectacle.description }}</td>
+        </tr>
+        <tr>
+            <th>Distribution</th>
+            <td>{{ spectacle.distribution }}</td>
+        </tr>
+        <tr>
+            <th>Mentions Légales</th>
+            <td>{{ spectacle.mandatoryInfos }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><img src="{{ spectacle.image }}" alt=""></td>
+        </tr>
+        <tr>
+            <th>Crédit Photo</th>
+            <td>{{ spectacle.photoCredits }}</td>
+        </tr>
+        <tr>
+            <th>Infos Additionnels</th>
+            <td>{{ spectacle.additionalInfos }}</td>
+        </tr>
+        <tr>
+            <th>IsBalise</th>
+            <td>{{ spectacle.isBalise ? 'Oui' : 'Non' }}</td>
+        </tr>
+        <tr>
+            <th>OfferType</th>
+            <td>{{ spectacle.offerType }}</td>
+        </tr>
+        <tr>
+            <th>MapadoLink</th>
+            <td>{{ spectacle.mapadoLink }}</td>
+        </tr>
+        <tr>
+            <th>Plein Tarif</th>
+            <td>{{ spectacle.baseRate }}</td>
+        </tr>
+        <tr>
+            <th>Dates</th>
+            <td>{% for date in spectacle.showDates %}
+                    <ul>
+                        <li>  {{ date.dateShow | date('d/m/Y - H : i') }} </li>
+                    </ul>
+                {% endfor %}</td>
+        </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('spectacle_index') }}">back to list</a>
-
-    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">edit</a>
-
-    {{ include('spectacle/_delete_form.html.twig') }}
-{% endblock %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-3">
+            <a href="{{ path('spectacle_index') }}">
+                <button class="btn btn-secondary mb-5">Retour à la liste</button>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">
+                <button class="btn btn-secondary
+        mb-5">Edition
+                </button>
+            </a>
+        </div>
+        <div class="col-md-3">
+            {{ include('spectacle/_delete_form.html.twig') }}
+        </div>
+    </div>
+    {% endblock %}

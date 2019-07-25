@@ -159,6 +159,7 @@ class TheaterController extends AbstractController
             'theater' => $theater,
             'form' => $form->createView(),
             'user' => $user,
+            'id' => $theaterId
         ]);
     }
 
