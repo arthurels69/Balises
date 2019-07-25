@@ -41,7 +41,6 @@ security:
           - { path: ^/user$, roles: ROLE_ADMIN }
           - { path: ^/nonbalisestheater, roles: ROLE_ADMIN }
           - { path: ^/user/, roles: ROLE_THEATER }
-          - { path: ^/spectacle/, roles: ROLE_THEATER }
           - { path: ^/theater/, roles: ROLE_THEATER }
           - { path: ^/show/, roles: ROLE_THEATER }
 
