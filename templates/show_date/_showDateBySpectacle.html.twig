@@ -1,6 +1,6 @@
 
 {% block body %}
-    <div class = 'container'>
+    <div class ="container">
         <table class="table table-striped text-center">
             <thead>
             <tr>
@@ -9,7 +9,7 @@
             </tr>
             </thead>
             <tbody>
-            <div class="row">
+            <tr>
             {% for showDate in showDates %}
                 <tr>
                     <td>{{ showDate.dateShow ? showDate.dateShow|date('d-m-Y à H:i') : ''  }}</td>
@@ -20,10 +20,10 @@
                         <a type="button" class="btn btn-danger" href="{{ path('show_date_delete', {'id': showDate
                             .id})}}"><i class="far fa-trash-alt"></i></a>
                     </td>
-                </tr>
+
 
             {% endfor %}
-            </div>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -5,12 +5,13 @@
 {% block title %}Modification Spectacle{% endblock %}
 
 {% block body %}
-    <div class="card justify-content-left p-0 w-100">
+    <div class="card justify-content-left p-0 w-100 text-center">
         <h1>Modification Spectacle</h1>
 
-        <a href="{{ path('showDate_by_Spectacle',{'id':spectacle.id}) }}">
-            <button class="btn btn-secondary mb-5"> Gestion des Représentations </button> </a>
         {{ include('spectacle/_form.html.twig', {'button_label': 'Mise à Jour'}) }}
+
+        <a href="{{ path('showDate_by_Spectacle',{'id':spectacle.id}) }}">
+            <button class="btn btn-secondary mb-3"> Gestion des Représentations </button> </a>
 
 {#        <a href="{{ path('spectacle_index') }}"><button class="btn btn-secondary mb-5">Retour</button></a>#}
         {{ include('spectacle/_delete_form.html.twig') }}
