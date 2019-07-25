@@ -21,21 +21,7 @@
 
 <body>
 
-<!-- DECONNEXION -->
-<div class = "container">
 
-    {% if app.user %}
-        <div class="row justify-content-center" style = "padding-top : 30px">
-            <nav>
-                    <a  href="{{ path('app_logout') }}"
-                       title="déconnexion"
-                        class="btn btn-secondary mb-4"><button class="btn btn-secondary ">Deconnexion</button>
-                    </a>
-            </nav>
-        </div>
-    {% endif %}
-
-</div>
 {% for category, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert alert-{{ category }}">

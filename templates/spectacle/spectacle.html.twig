@@ -1,6 +1,4 @@
-{% extends is_granted('ROLE_ADMIN')
-    ? 'base_admin.html.twig'
-    : 'baseAdminTheater.html.twig' %}
+{% extends 'baseSpectacle.html.twig' %}
 
 {% block title %}{{ spectacle.title }}{% endblock %}
 
