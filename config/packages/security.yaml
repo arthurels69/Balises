@@ -40,7 +40,9 @@ security:
           - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/user$, roles: ROLE_ADMIN }
           - { path: ^/nonbalisestheater, roles: ROLE_ADMIN }
-          - { path: ^/user/, roles: ROLE_USER }
+          - { path: ^/user/, roles: ROLE_THEATER }
+          - { path: ^/theater/, roles: ROLE_THEATER }
+          - { path: ^/show/, roles: ROLE_THEATER }
 
 
 

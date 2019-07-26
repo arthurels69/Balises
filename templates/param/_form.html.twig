@@ -1,4 +1,36 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<style>
+    .sidenav {
+        display: none;
+    }
+</style>
+<div class='container'>
+    <div class="row ">
+        <div class="col-sm-2 ">
+            {{ form_label(form.resale_coeff, 'Coeff. Revente') }}
+        </div>
+        <div class="col-sm-2 ">
+            {{ form_widget(form.resale_coeff) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 ">
+            {{ form_label(form.redistributed_coeff, 'Coeff. Cession') }}
+        </div>
+        <div class="col-sm-2 ">
+            {{ form_widget(form.redistributed_coeff) }}
+        </div>
+    </div>
+
+    <a type="button" href="{{ path('param_index') }}"
+       data-toggle="tooltip" data-placement="top"  title="Retour"
+       class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+    </a>
+
+    <button class="btn btn-secondary">{{ button_label|default('Enregistrer') }}</button>
+
+
+</div>
+
 {{ form_end(form) }}

@@ -1,38 +1,32 @@
 
 {% block footer %}
-    <footer class="footer" id="footer">
-        <nav id="footer2" class="navbar navbar-expand-lg navbar">
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="btn btnfooter" href="#">Initiative</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn btnfooter" href="#">À propos</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn btnfooter" href="{{ path('theaters_list') }}">Théatres</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn btnfooter" data-toggle="modal" href="#contactModal">Contact</a>
-                    </li>
-                  
-                </ul>
-
+    <footer id="myFooter" class="logoIndex "  style="padding-left: 10%; padding-right: 10%;">
+        <div class="row mt-3 justify-content-center text-center">
+            <div class="col-sm-3">
+                <a href="{{ path('home') }}"><img src="{{ asset('pics/Logo_balises_rond.png') }}" class="logoHome"
+                                                  alt=""></a>
             </div>
-        </nav>
+            <div class="col-sm-4">
+                <h5>Navigation</h5>
+                <ul>
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <h5>A Propos</h5>
+                <ul>
+                    <li><a data-toggle="modal" href="#contactModal">Contactez Nous</a></li>
+                    <li><a href="#">Mentions Légales</a> </li>
+                    <li><a href="#">Partenaires</a> </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="footer-copyright">
+            <p>Balises </p>
+        </div>
     </footer>
 
-    
-
-    <style>
-
-
-
-
-
-
-
-    </style>
 {% endblock %}

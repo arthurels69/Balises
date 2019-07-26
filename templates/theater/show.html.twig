@@ -1,24 +1,26 @@
 {% extends is_granted('ROLE_ADMIN')
     ? 'base_admin.html.twig'
-    : 'basePage.html.twig' %}
+    : 'baseAdminTheater.html.twig' %}
 
 {% block title %}Theater{% endblock %}
 
 {% block body %}
 
-    <div class="container bg-custom">
-        <div class="row justify-content-center m-5">
+    <div class="card card-edit-new w-100 container p-0">
+        <div class="card-header d-flex w-100 justify-content-center">
             <h1>{{ theater.name }}</h1>
         </div>
-        <div class="row">
+        <div class="row positionLogo">
             <div class="col-sm-6">
-                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}"></img>
+                <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.logo) }}" alt="">
             </div>
             <div class="col-sm-6">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" width="150"></img>
+                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" alt=""
+                         width="400">
                 {% else  %}
-                    <img class="img_logo img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}"></img>
+                    <img class="img_picture img-thumbnail" src="{{ asset('uploads/' ~ theater.picture) }}" alt=""
+                         width="400">
                 {% endif %}
             </div>
         </div>

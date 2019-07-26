@@ -1,15 +1,11 @@
 {% extends is_granted('ROLE_ADMIN')
     ? 'base_admin.html.twig'
-    : 'basePage.html.twig' %}
+    : 'baseAdminTheater.html.twig' %}
 
 {% block title %}Nouveau Spectacle{% endblock %}
 
 {% block body %}
-    <div class="container bg-custom">
-        <h1>Création Spectacle</h1>
 
-        {{ include('spectacle/_form.html.twig') }}
-    </div>
 
     <div class="card card-edit-new w-100 container p-0">
         <div class="card-header d-flex w-100 justify-content-center">

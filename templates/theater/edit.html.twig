@@ -1,17 +1,18 @@
 {% extends is_granted('ROLE_ADMIN')
     ? 'base_admin.html.twig'
-    : 'basePage.html.twig' %}
+    : 'baseAdminTheater.html.twig' %}
 
 
 {% block title %}Modification Théâtre{% endblock %}
 
 {% block body %}
 
+
     <div class="card card-edit-new w-100 container p-0">
 
     <div class="card-header d-flex w-100 justify-content-between">
 
-        <h5 class="my-0 mx-2 py-2">Modification : <span class="d-inline-block">{{ theater.name }}</span></h5>
+        <h1 class="my-0 mx-2 py-2">Modification : <span class="d-inline-block">{{ theater.name }}</span></h1>
 
         <div class="btn_edit_new_crud">
 
@@ -49,7 +50,7 @@
     <div class="row justify-content-center mb-4">
         <div class="col-sm-4 text-center">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('theater_edit_mdp', {'id':user.id +1}) }}">
+                <a href="{{ path('theater_edit_mdp', {'id':theater.id+1}) }}">
                     <button class="btn btn-secondary">Changement
                         de Mot de Passe
                     </button>

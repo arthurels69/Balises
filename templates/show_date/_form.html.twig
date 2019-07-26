@@ -4,7 +4,7 @@
 </style>
 <div class = 'container'>
     <div class="row">
-        <div class="col-sm-6 espSaisie">
+        <div class="col-sm-4 espSaisie m-2">
             {{ form_label(form.dateShow, 'Date') }}
             {{ form_widget(form.dateShow) }}
         </div>
@@ -28,9 +28,10 @@
                         {{ form_label(form.showRate.freePlacesNumber, 'Tarif') }}
                         {{ form_widget(form.showRate.discountedRate, {'attr': {'id': 'hold','placeholder': '99999.99'}}) }}
                     </div>
-
+                <div class="col-sm-12">
                     <button id = "actualiserPlace" data-toggle="tooltip" data-placement="top"  title="Actualiser"
                             class="btn btn-secondary mb-2"><i class="fas fa-sync-alt"></i></button>
+                </div>
                     <table class="table table-striped text-center">
                         <thead>
                         <tr>
@@ -87,7 +88,7 @@
     </div>
     <a type="button" href="{{ path('spectacle_edit', {'id':spectacle.id}) }}"
        data-toggle="tooltip" data-placement="top"  title="Retour"
-       class="btn btn-secondary mb-2"><i class="fas fa-reply"></i>
+       class="btn btn-secondary mb-2 mr-2"><i class="fas fa-reply"></i>
     </a>
     <button class="btn btn-secondary mb-2">{{ button_label|default('Création') }}</button>
 

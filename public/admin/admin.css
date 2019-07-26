@@ -1,8 +1,8 @@
 /****************************Liste des théâtres user/index.html.twig***********************/
 
 .card {
-    max-width:1050px  !important;
-    min-width:1050px  !important;
+    max-width:1250px  !important;
+    min-width:1250px  !important;
     margin:auto !important;
     box-shadow: 0px 0px 5px 2px #888888 !important;
 }

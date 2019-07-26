@@ -3,6 +3,9 @@
 {% block title %}{{ theater.name }}{% endblock %}
 
 {% block body %}
+    <div id="presentation_spectacle">
+    </div>
+
     <div class="container bg-custom h-100" xmlns="http://www.w3.org/1999/html">
 
         <div class="container p-4">
@@ -17,8 +20,9 @@
             <div class="row justify-content-start p-4">
                 <div class="col-lg-8">
                     <h2 class="h2">Liste des Spectacles en cours :</h2>
-                {% for spectacle in theater.shows %}
-                   <a href="{{ path('detailSpectacle', {id: spectacle.id}) }}" class="text-black-50">{{ spectacle.title }}</a>
+                    {% for spectacle in theater.shows %}
+                        <a onclick="detailsSpectacles('{{ path('detailSpectacle', {"id": spectacle.id})}}')"
+                           class="text-black-50" style="cursor: pointer">{{ spectacle.title }}</a>
                     {% endfor %}
                 </div>
                 <div class="col-lg-4 justify-content-center text-center">
@@ -46,7 +50,7 @@
                             <a href=" {{ theater.website }}"><button class="calendarButton mt-3"> Site Web</button></a>
                         </div>
                         <div class="col-12">
-                            <img class="img_logo img-thumbnail mt-5" src="{{ asset('uploads/' ~ theater.picture) }}"
+                            <img class="img_picture img-thumbnail mt-5" src="{{ asset('uploads/' ~ theater.picture) }}"
                                  alt="">
                         </div>
                     </div>
@@ -60,4 +64,74 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script>
+        function detailsSpectacles(spectacle) {
+            fetch(spectacle)
+                .then(response => response.text())
+                .then(text =>  {
+                    let presentationSpectacle = document.getElementById('presentation_spectacle');
+
+                    presentationSpectacle.style.display = 'block';
+                    setTimeout(function (){
+                        presentationSpectacle.style.transform = 'translateX(0%)';
+                        presentationSpectacle.style.transition = '1000ms';
+                    }, 100);
+
+                    window.scrollTo({top : 0, behavior:"smooth"});
+
+                    if(presentationSpectacle.innerHTML ==''){
+
+                        presentationSpectacle.innerHTML = text;
+                    }
+                    else{
+                        presentationSpectacle.innerHTML ='';
+                        presentationSpectacle.innerHTML = text;
+
+
+                    }
+                });
+        }
+
+        function closeSpectacleWindow() {
+            let presentationSpectacle = document.getElementById('presentation_spectacle');
+            presentationSpectacle.style.transform = 'translateX(100%)';
+            presentationSpectacle.style.transition = '1000ms';
+            setTimeout(function (){
+                presentationSpectacle.style.display = 'none'
+            }, 1000);
+
+        }
+
+        function moreDates(dates) {
+            fetch(dates)
+                .then(response => response.text())
+                .then(text =>  {
+                    let moreDates = document.getElementById('moreDates');
+                    if(moreDates.innerHTML != ''){
+                        moreDates.innerHTML ='';
+                    }
+                    else{
+                        moreDates.innerHTML =text;
+                    }
+                });
+        }
+
+
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("topBtn").style.display = "block";
+            } else {
+                document.getElementById("topBtn").style.display = "none";
+            }
+        }
+
+    </script>
 {% endblock %}
