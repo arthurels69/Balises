@@ -13,6 +13,9 @@
 2. Run `composer install`
 3. Run `yarn install`
 4. Run `yarn encore dev`
+5. Run ``php bin/console make:migrations``
+5. Run ``php bin/console doctrine:migrations:migrate``
+
 
 ### Working
 
