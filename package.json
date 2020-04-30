@@ -4,7 +4,7 @@
         "bootstrap": "^4.3.1",
         "copy-webpack-plugin": "^5.0.3",
         "core-js": "^3.1.4",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "mdbootstrap": "^4.8.2",
         "popper.js": "^1.15.0",
         "webpack-notifier": "^1.6.0"
